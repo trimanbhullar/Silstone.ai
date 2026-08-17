@@ -31,13 +31,18 @@ jobs:
       - name: Build the static site
         run: python build-site.py
 
-      - name: Publish dist/ to the main branch (Hostinger deploys from main)
+      - name: Publish dist/ to the main branch (fast-forward, so Hostinger's pull works)
         run: |
-          cd dist
-          rm -rf .git .gitignore
-          git init -b main
+          REPO="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          rm -rf out
+          git clone --depth 1 --branch main "$REPO" out
+          # replace all tracked files with the fresh build, keeping main's .git history
+          find out -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          cp -a dist/. out/
+          cd out
           git config user.name "silstone-bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A
+          if git diff --cached --quiet; then echo "No changes to deploy"; exit 0; fi
           git commit -m "Deploy from source@${GITHUB_SHA::7}"
-          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" main
+          git push origin main
