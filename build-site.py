@@ -398,23 +398,32 @@ def blogposting_jsonld(post: dict, url: str) -> str:
     )
 
 
+def _blog_card(p: dict, featured: bool = False) -> str:
+    title = _html.escape(p["title"])
+    desc = _html.escape(p.get("description", ""))
+    wrap_cls = "sil-blog-featured-img" if featured else "sil-blog-thumb"
+    heading = "h2" if featured else "h3"
+    return (
+        f'<a class="{"sil-blog-featured" if featured else "sil-blog-card"}" '
+        f'href="/blog/{p["slug"]}" target="_top">'
+        f'<span class="{wrap_cls}"><img src="{p.get("image","")}" alt="{title}" loading="lazy"></span>'
+        f'<div class="sil-blog-card-body">'
+        f'<span class="sil-blog-date">{fmt_date(p.get("date",""))}</span>'
+        f"<{heading}>{title}</{heading}><p>{desc}</p>"
+        f'<span class="sil-blog-more">Read article &rarr;</span>'
+        f"</div></a>"
+    )
+
+
 def blog_cards_html(posts: list) -> str:
-    cards = []
-    for p in posts:
-        title = _html.escape(p["title"])
-        desc = _html.escape(p.get("description", ""))
-        cards.append(
-            f'<a class="sil-blog-card" href="/blog/{p["slug"]}" target="_top">'
-            f'<img src="{p.get("image","")}" alt="{title}" loading="lazy" width="1440" height="756">'
-            f'<div class="sil-blog-card-body">'
-            f'<span class="sil-blog-date">{fmt_date(p.get("date",""))}</span>'
-            f"<h3>{title}</h3><p>{desc}</p>"
-            f'<span class="sil-blog-more">Read article &rarr;</span>'
-            f"</div></a>"
-        )
+    if not posts:
+        return ""
+    featured = _blog_card(posts[0], featured=True)
+    rest = "".join(_blog_card(p) for p in posts[1:])
+    grid = f'<div class="sil-blog-grid">{rest}</div>' if rest else ""
     return (
         '<div class="sil-root"><section class="sil-blog-wrap">'
-        '<div class="sil-blog-grid">' + "".join(cards) + "</div></section></div>"
+        + featured + grid + "</section></div>"
     )
 
 
