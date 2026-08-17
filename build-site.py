@@ -329,9 +329,12 @@ def load_posts() -> list:
 
 def _md_inline(text: str) -> str:
     text = _html.escape(text, quote=False)
+    text = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)",
+                  r'<img src="\2" alt="\1" loading="lazy">', text)  # images before links
     text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', text)
     text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"(?<!\w)_([^_]+)_(?!\w)", r"<em>\1</em>", text)
+    text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
     return text
 
 
@@ -357,10 +360,16 @@ def md_to_html(md: str) -> str:
                 txt = re.sub(r"^\d+\.\s", "", l.strip())
                 lis.append(f"<li>{_md_inline(txt)}</li>")
             out.append("<ol>" + "".join(lis) + "</ol>")
-        elif b.startswith("### "):
-            out.append(f"<h3>{_md_inline(b[4:].strip())}</h3>")
-        elif b.startswith("## "):
-            out.append(f"<h2>{_md_inline(b[3:].strip())}</h2>")
+        elif re.match(r"^#{1,6}\s+", b):
+            mh = re.match(r"^(#{1,6})\s+(.*)$", b, re.DOTALL)
+            level = len(mh.group(1))
+            tag = "h2" if level <= 2 else ("h3" if level == 3 else "h4")
+            out.append(f"<{tag}>{_md_inline(mh.group(2).strip())}</{tag}>")
+        elif all(l.strip().startswith(">") for l in lines):
+            inner = " ".join(_md_inline(l.strip().lstrip(">").strip()) for l in lines)
+            out.append(f"<blockquote>{inner}</blockquote>")
+        elif re.fullmatch(r"(-{3,}|\*{3,}|_{3,})", b.strip()):
+            out.append("<hr>")
         else:
             out.append(f"<p>{_md_inline(b.replace(chr(10), ' '))}</p>")
     return "\n".join(out)

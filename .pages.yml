@@ -1,0 +1,49 @@
+# Pages CMS configuration (https://pagescms.org)
+# Lets a non-technical editor write blog posts in a visual editor at
+# app.pagescms.org. Saving a post commits Markdown to this (source) branch,
+# which triggers the GitHub Action that rebuilds and deploys the site.
+
+media:
+  input: assets/blog          # where uploaded images are stored in the repo
+  output: /assets/blog        # the public path written into posts
+
+content:
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: blog/posts
+    format: yaml-frontmatter
+    filename: "{primary}.md"   # slugified title, e.g. "My New Post" -> my-new-post.md
+    view:
+      primary: title
+      sort:
+        - date
+        - title
+      fields:
+        - title
+        - date
+        - draft
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: SEO description
+        type: text
+        description: One sentence shown in Google results and social previews (aim for ~155 characters).
+      - name: date
+        label: Publish date
+        type: date
+        required: true
+      - name: image
+        label: Hero image
+        type: image
+        description: Wide image (1440x756 works best) shown at the top of the post and in link previews.
+      - name: draft
+        label: Draft (hide from the live site)
+        type: boolean
+        default: false
+      - name: body
+        label: Body
+        type: rich-text
