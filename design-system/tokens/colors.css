@@ -1,0 +1,57 @@
+/* Silstone.AI — Color tokens
+   Sampled directly from brand assets (logo mark + hero still) at
+   assets/logo-mark.png and assets/hero-still.jpg.
+   Brand is dark-mode-first: near-black canvas, single teal accent, white type. */
+
+:root {
+  /* ---- Base palette ---- */
+  --teal-50:  #E9FCFA;
+  --teal-100: #C9F7F2;
+  --teal-200: #93EFE6;
+  --teal-300: #5FE6D9;
+  --teal-400: #3BDECE;
+  --teal-500: #2DD9D3; /* primary brand teal — sampled from logo + .AI wordmark */
+  --teal-600: #21B4AF;
+  --teal-700: #178C88;
+  --teal-800: #0F6663;
+  --teal-900: #0A4644;
+
+  --black:     #000000; /* true-black hero/section background, as sampled */
+  --ink-900:   #0A0A0B; /* app canvas — near-black, slightly warmer than pure black */
+  --ink-800:   #141416;
+  --ink-700:   #1D1D20;
+  --ink-600:   #2A2A2E;
+  --ink-500:   #3D3D42;
+  --ink-400:   #5C5C63;
+  --ink-300:   #85858C;
+  --ink-200:   #B4B4B9;
+  --ink-100:   #DEDEE0;
+
+  --white:     #FFFFFF;
+
+  /* ---- Semantic aliases ---- */
+  --bg-canvas:        var(--ink-900);
+  --bg-canvas-true-black: var(--black);
+  --bg-surface:       var(--ink-800);
+  --bg-surface-raised: var(--ink-700);
+  --bg-inverse:       var(--white);
+
+  --border-subtle:    var(--ink-600);
+  --border-default:   var(--ink-500);
+  --border-accent:    var(--teal-500);
+
+  --text-primary:     var(--white);
+  --text-secondary:   var(--ink-200);
+  --text-tertiary:    var(--ink-300);
+  --text-accent:      var(--teal-500);
+  --text-on-accent:   var(--black);
+  --text-inverse:     var(--ink-900);
+
+  --accent:           var(--teal-500);
+  --accent-hover:     var(--teal-400);
+  --accent-active:    var(--teal-600);
+  --accent-soft:      color-mix(in oklch, var(--teal-500) 14%, transparent);
+  --accent-soft-border: color-mix(in oklch, var(--teal-500) 35%, transparent);
+
+  --focus-ring:       var(--teal-500);
+}

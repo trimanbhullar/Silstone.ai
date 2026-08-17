@@ -1,0 +1,1035 @@
+<!-- SIL:GLOBAL START -- generated from assets/ by build-embeds.py. Everything between these markers is baked in; edit assets/silstone.css or assets/silstone.js and re-run, not here. -->
+<style>
+/* ===========================================================================
+   1. FONTS
+   Poppins/Inter are the design system's documented SUBSTITUTES; real brand font
+   files were never supplied. Swap this @import for @font-face and the rest of
+   the system follows automatically.
+   =========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ===========================================================================
+   2. PALETTE
+   =========================================================================== */
+:root {
+  /* ---- Canvas & surfaces ---- */
+  --bg-canvas:      #08080B;
+  --bg-canvas-alt:  #0C0C12;   /* the alternating section tone */
+  --bg-surface:     #101014;
+  --bg-surface-raised: #16161D;
+  --bg-surface-3:   #1C1C25;
+
+  /* ---- Lines ---- */
+  --border-subtle:  rgba(255,255,255,0.07);
+  --border-default: rgba(255,255,255,0.12);
+  --border-strong:  rgba(255,255,255,0.18);
+
+  /* ---- Type ---- */
+  --text-primary:    #F6F6F8;
+  --text-secondary:  #9B9BA6;
+  --text-tertiary:   #8B8B95;
+  /* Lifted from the original #6A6A75, which measured 3.7:1 on the canvas.
+     #7A7A86 reaches 4.7:1 and still reads as a quiet label colour. */
+  --text-quaternary: #7A7A86;
+
+  /* ---- Violet: the lead ---- */
+  --violet-100: #E4DEFF;
+  --violet-200: #C2B6FF;
+  --violet-300: #A594FF;
+  --violet-400: #8B7CF6;
+  --violet-500: #7C6BF0;
+  --violet-600: #6E56CF;
+  --violet-700: #5B44B8;
+
+  /* ---- Warm ---- */
+  --coral-200: #FFD8C6;
+  --coral-300: #FFC0A6;
+  --coral-400: #FF9E7A;
+  --coral-500: #F0855E;
+  --amber-200: #F7E3BE;
+  --amber-300: #F5D9A8;
+  --amber-400: #EFC178;
+  --amber-500: #E0A855;
+
+  /* ---- Cool ---- */
+  --mint-300: #93EFD0;
+  --mint-400: #5EE0A8;
+  --mint-500: #3FC48C;
+
+  /* ---- Brand teal ----
+     Threaded through in small doses so the wordmark belongs: nav active state,
+     the LIVE pill, the "Built on Claude" chip, footer badges, one stop in the
+     headline gradient, and the whole Trust & security page. Never the lead. */
+  --teal-300: #5FE6D9;
+  --teal-400: #3BDECE;
+  --teal-500: #2DD9D3;
+  --teal-600: #21B4AF;
+  --teal-700: #178C88;
+  --teal-soft:        rgba(45,217,211,0.10);
+  --teal-soft-border: rgba(45,217,211,0.28);
+
+  /* ---- Semantic ---- */
+  --accent:         var(--violet-600);   /* solid CTA: 5.3:1 against white */
+  --accent-hover:   #7A62DE;             /* still 4.5:1 against white      */
+  --accent-active:  var(--violet-700);
+  --text-accent:    var(--violet-300);   /* 7.8:1 on the canvas            */
+  --text-on-accent: #FFFFFF;
+  --focus-ring:     var(--violet-300);
+
+  --accent-soft:        rgba(124,107,240,0.11);
+  --accent-soft-border: rgba(124,107,240,0.28);
+
+  /* ---- Gradients ---- */
+  --grad-primary: linear-gradient(120deg, #7A62DE 0%, #5B44B8 100%);
+  --grad-vivid:   linear-gradient(120deg, var(--violet-400) 0%, var(--violet-600) 55%, #4E3AA6 100%);
+  /* The teal stop is what ties the wordmark to the rest of the page: headline
+     gradients sweep violet -> teal -> coral, so the logo reads as part of the
+     system rather than a leftover. */
+  --grad-text:    linear-gradient(100deg, var(--violet-200) 0%, var(--violet-400) 26%, var(--teal-300) 52%, var(--coral-300) 78%, var(--violet-200) 100%);
+  --grad-line:    linear-gradient(90deg, transparent, var(--violet-500), var(--coral-400), transparent);
+  --grad-warm:    linear-gradient(120deg, var(--coral-400) 0%, var(--amber-400) 100%);
+
+  /* ---- Type scale ---- */
+  --font-display:'Poppins',-apple-system,sans-serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono','SFMono-Regular',Menlo,monospace;
+
+  --text-display-xl-size:4rem;    --text-display-xl-weight:700; --text-display-xl-leading:1.05;
+  --text-display-l-size:3rem;     --text-display-l-weight:700;  --text-display-l-leading:1.1;
+  --text-display-m-size:2.25rem;  --text-display-m-weight:600;  --text-display-m-leading:1.15;
+  --text-display-s-size:1.5rem;   --text-display-s-weight:600;  --text-display-s-leading:1.25;
+
+  --text-body-l-size:1.25rem;    --text-body-l-leading:1.6;
+  --text-body-m-size:1.0625rem;  --text-body-m-leading:1.6;
+  --text-body-s-size:0.9375rem;  --text-body-s-leading:1.55;
+  --text-caption-size:0.8125rem; --text-caption-leading:1.4;
+
+  --tracking-tight:-0.02em; --tracking-normal:0em;
+  --tracking-wide:0.04em;   --tracking-widest:0.18em;
+
+  --font-weight-regular:400; --font-weight-medium:500;
+  --font-weight-semibold:600; --font-weight-bold:700;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1:4px;  --space-2:8px;  --space-3:12px; --space-4:16px;
+  --space-5:20px; --space-6:24px; --space-8:32px; --space-10:40px;
+  --space-12:48px; --space-16:64px; --space-20:80px; --space-24:96px; --space-32:128px;
+
+  /* ---- Radius ---- */
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-xl:24px; --radius-pill:999px;
+
+  /* ---- Shadow ---- */
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.45);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.5);
+
+  /* ---- Motion ---- */
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --duration-fast:120ms; --duration-base:200ms; --duration-slow:360ms;
+
+  /* ---- Layout ---- */
+  --container-max:1200px;
+  --container-pad:clamp(20px,5vw,80px);
+}
+
+/* ===========================================================================
+   3. PER-SECTION ACCENT
+   Put one of these classes on a .sil-section and everything inside re-tints.
+   A single card can override too: style="--sec-rgb:255,158,122".
+   =========================================================================== */
+.sil-section, .sil-root {
+  --sec-rgb: 124,107,240;              /* violet, the default            */
+  --sec-text: var(--violet-300);       /* legible tint for small type    */
+}
+.sil-section.acc-peri  { --sec-rgb: 165,148,255; --sec-text: var(--violet-200); }
+.sil-section.acc-coral { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-section.acc-amber { --sec-rgb: 239,193,120; --sec-text: var(--amber-300);  }
+.sil-section.acc-mint  { --sec-rgb:  94,224,168; --sec-text: var(--mint-300);   }
+.sil-section.acc-teal  { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* Each accent also gets its own ambient-mesh trio, so a warm section drifts
+   warm rather than sitting under a violet haze. */
+.sil-section.acc-coral { --m1: var(--coral-400); --m2: var(--violet-600); --m3: var(--amber-400); }
+.sil-section.acc-amber { --m1: var(--amber-400); --m2: var(--violet-700); --m3: var(--coral-400); }
+.sil-section.acc-mint  { --m1: var(--mint-400);  --m2: var(--violet-600); --m3: var(--teal-500);  }
+.sil-section.acc-peri  { --m1: var(--violet-300);--m2: var(--violet-600); --m3: var(--coral-400); }
+
+/* ---- Trios -------------------------------------------------------------
+   A group of three reads better as a set than as one colour repeated. Put
+   .sil-trio on the container and its three children cycle violet / coral /
+   teal, each re-deriving --sec-* from its own hue.
+
+   Use .sil-trio-1 / -2 / -3 directly on the items instead when something sits
+   between them in the DOM (the How it works steps have connector arrows), or
+   when you want to pick the order by hand.
+   ---------------------------------------------------------------------- */
+.sil-trio > *:nth-child(1), .sil-trio-1 { --sec-rgb: 124,107,240; --sec-text: var(--violet-300); }
+.sil-trio > *:nth-child(2), .sil-trio-2 { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-trio > *:nth-child(3), .sil-trio-3 { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* ---- Sequences ---------------------------------------------------------
+   Longer runs (the six-step engagement timeline) walk the full palette
+   cool -> warm -> cool, so each step is distinct and the row reads as
+   progress rather than repetition. Repeats every six items.
+   ---------------------------------------------------------------------- */
+.sil-seq > *:nth-child(6n+1) { --sec-rgb: 124,107,240; --sec-text: var(--violet-300); }
+.sil-seq > *:nth-child(6n+2) { --sec-rgb: 165,148,255; --sec-text: var(--violet-200); }
+.sil-seq > *:nth-child(6n+3) { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-seq > *:nth-child(6n+4) { --sec-rgb: 239,193,120; --sec-text: var(--amber-300);  }
+.sil-seq > *:nth-child(6n+5) { --sec-rgb:  94,224,168; --sec-text: var(--mint-300);   }
+.sil-seq > *:nth-child(6n+6) { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* Derived once, for every accent scope, so components never repeat an rgba()
+   literal. Whatever sets --sec-rgb above (section class, trio slot, seq slot,
+   or an inline style="--sec-rgb:...") flows through these. */
+.sil-section, .sil-root,
+.sil-trio > *, .sil-trio-1, .sil-trio-2, .sil-trio-3,
+.sil-seq > * {
+  --sec:        rgb(var(--sec-rgb));
+  --sec-soft:   rgba(var(--sec-rgb), 0.10);
+  --sec-softer: rgba(var(--sec-rgb), 0.05);
+  --sec-border: rgba(var(--sec-rgb), 0.26);
+  --sec-glow:   0 0 30px rgba(var(--sec-rgb), 0.20);
+}
+
+/* ===========================================================================
+   4. BASE  (scoped to .sil-root so Hostinger's own chrome is untouched)
+   =========================================================================== */
+.sil-root, .sil-root * { box-sizing: border-box; }
+.sil-root {
+  font-family: var(--font-body);
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-leading);
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  position: relative; overflow-x: clip;
+  /* Fill the section container edge to edge. Hostinger caps its grid container
+     width by default; lifting that cap is a one-time snippet in Settings >
+     Integrations (see README > "Full-width sections in Hostinger"). Once the
+     container is uncapped this fills it; .sil-container re-centres the content. */
+  width: 100%;
+}
+.sil-root img, .sil-root svg, .sil-root canvas { display: block; max-width: 100%; }
+.sil-root p { margin: 0; }
+.sil-root h1, .sil-root h2, .sil-root h3, .sil-root h4 { margin: 0; font-family: var(--font-display); }
+.sil-root ul, .sil-root ol { margin: 0; padding: 0; list-style: none; }
+.sil-root a { color: var(--text-accent); text-decoration: none; transition: color var(--duration-base) var(--ease-standard); }
+.sil-root a:hover { color: var(--violet-200); }
+.sil-root button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+.sil-root ::selection { background: var(--violet-500); color: #fff; }
+
+.sil-root input, .sil-root textarea, .sil-root select {
+  font-family: var(--font-body); font-size: var(--text-body-s-size);
+  color: var(--text-primary); width: 100%;
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 12px 16px; outline: none;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-root input:focus, .sil-root textarea:focus, .sil-root select:focus {
+  border-color: var(--sec); box-shadow: 0 0 0 3px var(--sec-soft);
+}
+.sil-root input::placeholder, .sil-root textarea::placeholder { color: var(--text-quaternary); }
+
+/* ===========================================================================
+   5. LAYOUT
+   =========================================================================== */
+.sil-section {
+  position: relative; width: 100%;
+  padding: var(--space-24) 0;
+  background: var(--bg-canvas); overflow: hidden;
+}
+.sil-section.is-alt   { background: var(--bg-canvas-alt); }
+.sil-section.is-tight { padding: var(--space-12) 0; }
+.sil-section.is-flush { padding: 0; }
+.sil-section.has-top    { border-top: 1px solid var(--border-subtle); }
+.sil-section.has-bottom { border-bottom: 1px solid var(--border-subtle); }
+
+/* A very faint wash of the section's own accent. Subtle by design: it should
+   read as a change of temperature, not as a coloured panel. */
+.sil-section.has-tint::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 88% 54% at 50% 0%, rgba(var(--sec-rgb), 0.03), transparent 66%);
+}
+
+.sil-container {
+  width: 100%; max-width: var(--container-max);
+  margin: 0 auto; padding: 0 var(--container-pad);
+  position: relative; z-index: 2;
+}
+.sil-container.is-narrow { max-width: 860px; }
+
+.sil-grid { display: grid; gap: var(--space-6); }
+.sil-grid.c2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.sil-grid.c3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.sil-grid.c4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.sil-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center; }
+
+.sil-center { text-align: center; }
+/* Scoped to .sil-root (0,2,0) on purpose: the element resets above
+   (`.sil-root p/ul/ol/h1-4 { margin: 0 }`, 0,1,1) would otherwise outrank a bare
+   `.sil-mt-*` (0,1,0) and silently zero it on every paragraph, list and heading.
+   Still below the compound rhythm rules (section 15, also 0,2,0) in source order,
+   so those keep priority where they apply -- utilities remain the floor. */
+.sil-root .sil-mt-2{margin-top:var(--space-2);}   .sil-root .sil-mt-3{margin-top:var(--space-3);}
+.sil-root .sil-mt-4{margin-top:var(--space-4);}   .sil-root .sil-mt-5{margin-top:var(--space-5);}
+.sil-root .sil-mt-6{margin-top:var(--space-6);}   .sil-root .sil-mt-8{margin-top:var(--space-8);}
+.sil-root .sil-mt-10{margin-top:var(--space-10);} .sil-root .sil-mt-12{margin-top:var(--space-12);}
+.sil-root .sil-mt-16{margin-top:var(--space-16);} .sil-root .sil-mt-20{margin-top:var(--space-20);}
+
+/* ===========================================================================
+   6. TYPOGRAPHY
+   =========================================================================== */
+.sil-display-xl,.sil-display-l,.sil-display-m,.sil-display-s {
+  font-family: var(--font-display); letter-spacing: var(--tracking-tight); color: var(--text-primary);
+}
+.sil-display-xl{font-size:var(--text-display-xl-size);font-weight:var(--text-display-xl-weight);line-height:var(--text-display-xl-leading);}
+.sil-display-l {font-size:var(--text-display-l-size); font-weight:var(--text-display-l-weight); line-height:var(--text-display-l-leading);}
+.sil-display-m {font-size:var(--text-display-m-size); font-weight:var(--text-display-m-weight); line-height:var(--text-display-m-leading);}
+.sil-display-s {font-size:var(--text-display-s-size); font-weight:var(--text-display-s-weight); line-height:var(--text-display-s-leading);}
+
+.sil-body-l{font-size:var(--text-body-l-size);line-height:var(--text-body-l-leading);color:var(--text-secondary);}
+.sil-body-m{font-size:var(--text-body-m-size);line-height:var(--text-body-m-leading);color:var(--text-secondary);}
+.sil-body-s{font-size:var(--text-body-s-size);line-height:var(--text-body-s-leading);color:var(--text-secondary);}
+.sil-caption{font-size:var(--text-caption-size);line-height:var(--text-caption-leading);color:var(--text-tertiary);}
+.sil-mono{font-family:var(--font-mono);font-size:var(--text-caption-size);letter-spacing:var(--tracking-wide);color:var(--text-quaternary);}
+.sil-measure{max-width:65ch;}
+
+.sil-root strong, .sil-em { font-weight: var(--font-weight-bold); color: var(--text-primary); }
+.sil-em-accent { color: var(--sec-text); font-weight: var(--font-weight-bold); }
+
+.sil-gt {
+  background: var(--grad-text); background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: silGradShift 13s ease-in-out infinite;
+}
+@keyframes silGradShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+
+.sil-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 5px 13px; border-radius: var(--radius-pill);
+  font-family: var(--font-body); font-size: var(--text-caption-size);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  background: var(--sec-soft); color: var(--sec-text); border: 1px solid var(--sec-border);
+}
+.sil-eyebrow.is-neutral { background: var(--bg-surface-raised); color: var(--text-secondary); border-color: var(--border-subtle); }
+.sil-eyebrow .dot { width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;flex:none; }
+
+.sil-wordmark {
+  font-family: var(--font-display); font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-primary);
+}
+.sil-wordmark em { font-style: normal; color: var(--teal-500); }
+
+@media (max-width: 900px) {
+  :root {
+    --text-display-xl-size:2.75rem; --text-display-l-size:2.25rem;
+    --text-display-m-size:1.75rem;  --text-display-s-size:1.25rem;
+    --text-body-l-size:1.0625rem;
+  }
+  .sil-section { padding: var(--space-16) 0; }
+}
+@media (max-width: 520px) { :root { --text-display-xl-size:2.25rem; --text-display-l-size:1.875rem; } }
+
+/* ===========================================================================
+   7. BUTTONS
+   Prefixed with .sil-root because most buttons are <a> elements, and the base
+   `.sil-root a` rule (0,1,1) would otherwise outrank a bare `.sil-btn-*` (0,1,0)
+   and repaint the label with the link colour.
+   =========================================================================== */
+.sil-btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  font-family: var(--font-body); font-weight: var(--font-weight-semibold);
+  font-size: var(--text-body-m-size);
+  padding: 12px 24px; border-radius: var(--radius-pill);
+  border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.sil-btn-sm { padding: 8px 16px; font-size: var(--text-body-s-size); }
+.sil-btn-lg { padding: 16px 32px; font-size: var(--text-body-l-size); }
+.sil-btn .arw { transition: transform var(--duration-base) var(--ease-standard); flex: none; }
+.sil-btn:hover .arw { transform: translateX(3px); }
+
+.sil-root .sil-btn-primary { background: var(--accent); color: var(--text-on-accent); box-shadow: var(--shadow-sm); }
+.sil-root .sil-btn-primary:hover  { background: var(--accent-hover); color: var(--text-on-accent); box-shadow: 0 6px 24px rgba(124,107,240,0.28); transform: translateY(-1px); }
+.sil-root .sil-btn-primary:active { background: var(--accent-active); color: var(--text-on-accent); transform: none; }
+
+.sil-root .sil-btn-gradient {
+  color: var(--text-on-accent);
+  background: var(--grad-primary); background-size: 200% 200%;
+  animation: silGradShift 10s ease-in-out infinite;
+  box-shadow: var(--shadow-sm);
+}
+.sil-btn-gradient::before {
+  content:''; position:absolute; inset:0; z-index:-1;
+  background: radial-gradient(120px circle at var(--bx,50%) var(--by,50%), rgba(255,255,255,.30), transparent 65%);
+  opacity:0; transition: opacity var(--duration-base) var(--ease-standard);
+}
+.sil-root .sil-btn-gradient:hover { color: var(--text-on-accent); box-shadow: 0 8px 28px rgba(124,107,240,0.32); transform: translateY(-1px); }
+.sil-btn-gradient:hover::before { opacity: 1; }
+
+.sil-root .sil-btn-secondary { background: transparent; color: var(--text-primary); border-color: var(--border-default); }
+.sil-root .sil-btn-secondary:hover  { border-color: var(--sec); color: var(--sec-text); }
+.sil-root .sil-btn-secondary:active { border-color: var(--sec); color: var(--sec-text); }
+
+.sil-root .sil-btn-ghost {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  padding:4px 0; background:transparent; color:var(--sec-text);
+  font-weight:var(--font-weight-semibold); font-size:var(--text-body-m-size);
+}
+.sil-root .sil-btn-ghost:hover { color: var(--violet-100); }
+.sil-btn-ghost .arw { transition: transform var(--duration-base) var(--ease-standard); }
+.sil-btn-ghost:hover .arw { transform: translateX(3px); }
+
+/* ===========================================================================
+   8. CARDS
+   =========================================================================== */
+.sil-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: border-color var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-card.is-hover:hover { border-color: var(--sec-border); }
+.sil-card.is-lift:hover  { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.sil-card.is-raised { background: var(--bg-surface-raised); }
+.sil-card.is-bare   { background: transparent; }
+
+.sil-card.is-spot::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0; border-radius:inherit;
+  background: radial-gradient(340px circle at var(--mx,50%) var(--my,50%), rgba(var(--sec-rgb),0.07), transparent 62%);
+  opacity:0; transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.sil-card.is-spot::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:1; border-radius:inherit; padding:1px;
+  background: radial-gradient(300px circle at var(--mx,50%) var(--my,50%), rgba(var(--sec-rgb),0.55), transparent 68%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity:0; transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.sil-card.is-spot:hover::before, .sil-card.is-spot:hover::after { opacity: 1; }
+.sil-card > * { position: relative; z-index: 2; }
+
+.sil-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-md); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sec-soft); border: 1px solid var(--sec-border); color: var(--sec-text);
+  font-family: var(--font-mono); font-size: 15px; font-weight: 500;
+  transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-card:hover .sil-icon { box-shadow: var(--sec-glow); }
+
+/* ===========================================================================
+   9. TAGS / CHIPS
+   =========================================================================== */
+.sil-tag {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  padding:4px 12px; border-radius:var(--radius-pill);
+  font-family:var(--font-body); font-size:var(--text-caption-size);
+  font-weight:var(--font-weight-semibold); letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;
+  background:var(--bg-surface-raised); color:var(--text-secondary);
+  border:1px solid var(--border-subtle);
+}
+.sil-tag.is-accent { background:var(--sec-soft); color:var(--sec-text); border-color:var(--sec-border); }
+.sil-chip {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  font-family:var(--font-mono); font-size:var(--text-caption-size);
+  letter-spacing:var(--tracking-wide); color:var(--text-secondary);
+}
+.sil-chip .dot {
+  width:6px;height:6px;border-radius:50%;flex:none;
+  background:var(--chip, var(--sec)); box-shadow:0 0 8px var(--chip, var(--sec));
+}
+
+.sil-rule { height:1px; background:var(--border-subtle); border:0; }
+
+/* ===========================================================================
+   10. AMBIENT BACKGROUND
+   Deliberately faint: the canvas must still read as near-black.
+   =========================================================================== */
+.sil-mesh { position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.sil-mesh i {
+  position:absolute; display:block; border-radius:50%;
+  filter: blur(100px); mix-blend-mode: screen; will-change: transform;
+}
+.sil-mesh i:nth-child(1){width:46vw;height:46vw;left:-12%;top:-24%;background:var(--m1,var(--violet-500));opacity:.08;animation:silDrift 26s ease-in-out infinite;}
+.sil-mesh i:nth-child(2){width:34vw;height:34vw;right:-8%;top:4%;background:var(--m2,var(--violet-700));opacity:.07;animation:silDrift 33s ease-in-out infinite reverse;}
+.sil-mesh i:nth-child(3){width:30vw;height:30vw;left:34%;bottom:-20%;background:var(--m3,var(--coral-400));opacity:.05;animation:silDrift 39s ease-in-out infinite;}
+@keyframes silDrift {
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%    {transform:translate(4vw,3vw) scale(1.08);}
+  66%    {transform:translate(-3vw,2vw) scale(0.95);}
+}
+
+.sil-gridlines {
+  position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.020) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.020) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 35%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 35%, transparent 78%);
+}
+
+.sil-cursorglow {
+  position:absolute; inset:0; pointer-events:none; z-index:1;
+  background: radial-gradient(520px circle at var(--gx,50%) var(--gy,40%), rgba(var(--sec-rgb),0.07), transparent 60%);
+  transition: background var(--duration-fast) linear;
+}
+.sil-hairline { position:absolute; top:0; left:0; right:0; height:1px; z-index:2; background: var(--grad-line); opacity:.45; }
+
+/* ===========================================================================
+   11. SCROLL REVEAL
+   =========================================================================== */
+/* Start hidden ONLY when the runtime is present (it adds .sil-js). If the
+   script never runs -- Hostinger's editor canvas, a sandboxed embed, JS off --
+   the content stays fully visible instead of stuck at opacity:0. */
+.sil-js .sil-reveal { opacity:0; transform: translateY(14px); }
+.sil-reveal.is-in {
+  opacity:1; transform:none;
+  transition: opacity var(--duration-slow) var(--ease-standard),
+              transform var(--duration-slow) var(--ease-standard);
+  transition-delay: var(--d, 0ms);
+}
+
+/* ===========================================================================
+   12. DATA VISUALISATION
+   Series colours come from --sec plus the warm ramp, never from a fixed hue,
+   so charts follow whatever accent their section carries.
+   =========================================================================== */
+.sil-chart { width:100%; display:block; overflow:visible; }
+.sil-chart .axis   { stroke: rgba(255,255,255,0.07); stroke-width:1; }
+.sil-chart .glabel { font-family:var(--font-mono); font-size:10px; fill:var(--text-quaternary); letter-spacing:.04em; }
+.sil-chart .vlabel { font-family:var(--font-display); font-size:12px; font-weight:600; fill:var(--text-secondary); }
+
+/* Chart/meter "start" states are also gated behind .sil-js, so without the
+   runtime the charts render in their finished state rather than blank. */
+.sil-chart .bar { transform-origin:bottom; }
+.sil-js .sil-chart .bar { transform:scaleY(0); }
+.is-in .sil-chart .bar { transform:scaleY(1); transition:transform 700ms var(--ease-out); transition-delay:var(--d,0ms); }
+.sil-chart .line { stroke-dasharray:var(--len,2000); }
+.sil-js .sil-chart .line { stroke-dashoffset:var(--len,2000); }
+.is-in .sil-chart .line { stroke-dashoffset:0; transition:stroke-dashoffset 1500ms var(--ease-out); transition-delay:var(--d,0ms); }
+.sil-js .sil-chart .area, .sil-js .sil-chart .pt { opacity:0; }
+.is-in .sil-chart .area { opacity:1; transition:opacity var(--duration-slow) ease 400ms; }
+.is-in .sil-chart .pt   { opacity:1; transition:opacity var(--duration-base) ease; transition-delay:var(--d,0ms); }
+
+.sil-meter { height:5px; border-radius:var(--radius-pill); background:rgba(255,255,255,0.06); overflow:hidden; }
+.sil-meter > span { display:block; height:100%; border-radius:inherit; width:var(--w,0%); background:var(--acc, var(--sec)); }
+.sil-js .sil-meter > span { width:0; }
+.is-in .sil-meter > span { width:var(--w,0%); transition:width 700ms var(--ease-out); transition-delay:var(--d,0ms); }
+
+/* ===========================================================================
+   13. FAQ
+   =========================================================================== */
+.sil-faq { border-top:1px solid var(--border-subtle); }
+.sil-faq-item { border-bottom:1px solid var(--border-subtle); }
+.sil-faq-q {
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  gap:var(--space-4); padding:var(--space-6) 0; text-align:left;
+  font-family:var(--font-body); font-weight:var(--font-weight-bold);
+  font-size:var(--text-body-l-size); color:var(--text-primary);
+  transition:color var(--duration-base) var(--ease-standard);
+}
+.sil-faq-q:hover { color:var(--sec-text); }
+.sil-faq-sign {
+  flex-shrink:0; width:24px; height:24px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--sec-text); font-size:20px; line-height:1;
+  transition:transform var(--duration-base) var(--ease-standard);
+}
+.sil-faq-item.is-open .sil-faq-sign { transform:rotate(45deg); }
+.sil-faq-a { overflow:hidden; height:0; transition:height var(--duration-base) var(--ease-standard); }
+.sil-faq-a .inner {
+  padding-bottom:var(--space-6); max-width:65ch;
+  color:var(--text-secondary);
+  font-size:var(--text-body-m-size); line-height:var(--text-body-m-leading);
+}
+
+/* ===========================================================================
+   14. MARQUEE
+   =========================================================================== */
+.sil-marquee {
+  position:relative; overflow:hidden; width:100%;
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+}
+.sil-marquee-track { display:flex; align-items:center; gap:var(--space-10); width:max-content; animation:silMarquee 42s linear infinite; }
+.sil-marquee:hover .sil-marquee-track { animation-play-state:paused; }
+@keyframes silMarquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ===========================================================================
+   15. VERTICAL RHYTHM
+   Spacing between adjacent text and elements, set in one place.
+   These use compound sibling selectors (0,2,0), which outrank the .sil-mt-*
+   utilities (0,1,0) on purpose: the utilities set a floor, this sets the real
+   rhythm. Change the four --rhythm values to retune the whole site.
+   =========================================================================== */
+:root {
+  --rhythm-tight: var(--space-4);
+  --rhythm:       var(--space-5);
+  --rhythm-loose: var(--space-6);
+  --rhythm-block: clamp(48px, 5.5vw, 72px);
+}
+
+.sil-eyebrow + .sil-display-xl, .sil-eyebrow + .sil-display-l,
+.sil-eyebrow + .sil-display-m,  .sil-eyebrow + .sil-display-s,
+.sil-tag + .sil-display-xl, .sil-tag + .sil-display-l,
+.sil-tag + .sil-display-m,  .sil-tag + .sil-display-s,
+.sil-icon + .sil-display-xl, .sil-icon + .sil-display-l,
+.sil-icon + .sil-display-m,  .sil-icon + .sil-display-s,
+.sil-icon + h2, .sil-icon + h3 { margin-top: var(--rhythm-loose); }
+
+.sil-display-xl + .sil-body-l, .sil-display-xl + .sil-body-m, .sil-display-xl + .sil-body-s,
+.sil-display-l  + .sil-body-l, .sil-display-l  + .sil-body-m, .sil-display-l  + .sil-body-s {
+  margin-top: var(--rhythm-loose);
+}
+.sil-display-m + .sil-body-l, .sil-display-m + .sil-body-m, .sil-display-m + .sil-body-s,
+.sil-display-s + .sil-body-l, .sil-display-s + .sil-body-m, .sil-display-s + .sil-body-s {
+  margin-top: var(--rhythm);
+}
+.sil-body-l + .sil-body-l, .sil-body-l + .sil-body-m, .sil-body-l + .sil-body-s,
+.sil-body-m + .sil-body-l, .sil-body-m + .sil-body-m, .sil-body-m + .sil-body-s,
+.sil-body-s + .sil-body-l, .sil-body-s + .sil-body-m, .sil-body-s + .sil-body-s,
+.sil-body-l + .sil-ticks,  .sil-body-m + .sil-ticks,  .sil-body-s + .sil-ticks {
+  margin-top: var(--rhythm);
+}
+.sil-body-l + .sil-mono, .sil-body-m + .sil-mono, .sil-body-s + .sil-mono,
+.sil-display-s + .sil-mono, .sil-card ul + .sil-mono, .sil-card ol + .sil-mono,
+.sil-table + .sil-mono, .sil-chart + .sil-mono { margin-top: var(--rhythm-loose); }
+
+.sil-direct { gap: var(--space-5); }
+.sil-ticks  { gap: var(--space-4); }
+
+.sil-container > .sil-center + .sil-grid,
+.sil-container > .sil-center + .sil-steps,
+.sil-container > .sil-center + .sil-faq,
+.sil-container > .sil-center + .sil-table,
+.sil-container > .sil-center + .sil-card,
+.sil-container > .sil-center + .sil-outcomes-charts,
+.sil-container > .sil-reveal + .sil-table,
+.sil-container > .sil-reveal + .sil-grid { margin-top: var(--rhythm-block); }
+
+.sil-card { padding: clamp(24px, 2.6vw, 36px); }
+.sil-grid { gap: clamp(20px, 2.2vw, 28px); }
+
+.sil-body-l + .sil-btn, .sil-body-m + .sil-btn, .sil-body-s + .sil-btn,
+.sil-body-l + .sil-btn-ghost, .sil-body-m + .sil-btn-ghost, .sil-body-s + .sil-btn-ghost,
+.sil-ticks + .sil-btn, .sil-mono + .sil-btn { margin-top: var(--space-8); }
+
+/* A caption sitting under a button needs real clearance. A pill button has no
+   optical margin below it, so the default 20px reads as almost touching.
+   The :has() rule covers captions after a button wrapped in its own row div. */
+.sil-btn + .sil-mono, .sil-btn + .sil-caption, .sil-btn + .sil-body-s,
+.sil-btn-ghost + .sil-mono, .sil-btn-ghost + .sil-caption {
+  margin-top: var(--space-6);
+}
+.sil-root *:has(> .sil-btn) + .sil-mono,
+.sil-root *:has(> .sil-btn) + .sil-caption,
+.sil-root *:has(> .sil-btn) + .sil-body-s {
+  margin-top: var(--space-6);
+}
+
+/* ===========================================================================
+   16. RESPONSIVE
+   =========================================================================== */
+@media (max-width:1024px){
+  .sil-split{grid-template-columns:1fr;gap:var(--space-12);}
+  .sil-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:760px){
+  .sil-grid.c2,.sil-grid.c3,.sil-grid.c4{grid-template-columns:1fr;}
+  .sil-btn{width:100%;}
+  .sil-btn.is-auto{width:auto;}
+  .sil-mesh i{filter:blur(70px);}
+}
+
+/* ===========================================================================
+   17. ACCESSIBILITY
+   =========================================================================== */
+.sil-root :focus-visible { outline:2px solid var(--focus-ring); outline-offset:3px; border-radius:var(--radius-sm); }
+.sil-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+@media (prefers-reduced-motion: reduce){
+  .sil-root *, .sil-root *::before, .sil-root *::after {
+    animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;
+  }
+  .sil-reveal{opacity:1 !important;transform:none !important;}
+  .sil-chart .bar{transform:scaleY(1) !important;}
+  .sil-chart .line{stroke-dashoffset:0 !important;}
+  .sil-chart .area,.sil-chart .pt{opacity:1 !important;}
+  .sil-meter > span{width:var(--w,0%) !important;}
+}
+</style>
+<script>
+/* ===========================================================================
+   SILSTONE.AI SHARED RUNTIME
+   Idempotent and re-scannable, so it works regardless of the order Hostinger
+   renders the embed blocks in.
+   =========================================================================== */
+(function () {
+  // Mark that the runtime is live. CSS gates every "start hidden" state behind
+  // this class, so if the script never runs the content stays visible.
+  document.documentElement.classList.add('sil-js');
+
+  if (window.__silstoneInit) return;
+  window.__silstoneInit = true;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = new WeakSet();
+
+  function initReveal() {
+    var els = document.querySelectorAll('.sil-reveal, .sil-section');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    els.forEach(function (el) {
+      if (seen.has(el)) return;
+      seen.add(el);
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('is-in');
+      else io.observe(el);
+    });
+  }
+
+  function initSpotlight() {
+    document.querySelectorAll('.sil-card.is-spot').forEach(function (card) {
+      if (card.__spot) return;
+      card.__spot = true;
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+    document.querySelectorAll('.sil-btn-gradient').forEach(function (b) {
+      if (b.__spot) return;
+      b.__spot = true;
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.setProperty('--bx', (e.clientX - r.left) + 'px');
+        b.style.setProperty('--by', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+  }
+
+  function initSectionGlow() {
+    document.querySelectorAll('.sil-section').forEach(function (sec) {
+      if (sec.__glow || !sec.querySelector('.sil-cursorglow')) return;
+      sec.__glow = true;
+      sec.addEventListener('pointermove', function (e) {
+        var r = sec.getBoundingClientRect();
+        sec.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100) + '%');
+        sec.style.setProperty('--gy', ((e.clientY - r.top) / r.height * 100) + '%');
+      }, { passive: true });
+    });
+  }
+
+  /* <span class="sil-count" data-to="312" data-prefix="$" data-suffix="K"> */
+  function initCounters() {
+    var els = document.querySelectorAll('.sil-count');
+    if (!els.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        run(e.target);
+      });
+    }, { threshold: 0.4 });
+
+    els.forEach(function (el) {
+      if (el.__count) return;
+      el.__count = true;
+      el.textContent = (el.dataset.prefix || '') + '0' + (el.dataset.suffix || '');
+      io.observe(el);
+    });
+
+    function run(el) {
+      var to  = parseFloat(el.dataset.to || '0');
+      var dec = parseInt(el.dataset.dec || '0', 10);
+      var pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+      var sep = el.dataset.sep === '1';
+      function fmt(v) {
+        var s = v.toFixed(dec);
+        return sep ? Number(s).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) : s;
+      }
+      if (reduced) { el.textContent = pre + fmt(to) + suf; return; }
+      var dur = 1200, t0 = performance.now();
+      (function tick(now) {
+        var p = Math.min((now - t0) / dur, 1);
+        el.textContent = pre + fmt(to * (1 - Math.pow(1 - p, 3))) + suf;
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+  }
+
+  function initFaq() {
+    document.querySelectorAll('.sil-faq').forEach(function (faq) {
+      if (faq.__faq) return;
+      faq.__faq = true;
+      var single = faq.dataset.single !== '0';
+
+      faq.querySelectorAll('.sil-faq-item').forEach(function (item) {
+        var q = item.querySelector('.sil-faq-q');
+        var a = item.querySelector('.sil-faq-a');
+        if (!q || !a) return;
+        q.setAttribute('aria-expanded', item.classList.contains('is-open') ? 'true' : 'false');
+        if (item.classList.contains('is-open')) a.style.height = a.firstElementChild.offsetHeight + 'px';
+
+        q.addEventListener('click', function () {
+          var open = item.classList.contains('is-open');
+          if (single && !open) {
+            faq.querySelectorAll('.sil-faq-item.is-open').forEach(function (o) {
+              o.classList.remove('is-open');
+              o.querySelector('.sil-faq-a').style.height = '0px';
+              o.querySelector('.sil-faq-q').setAttribute('aria-expanded', 'false');
+            });
+          }
+          item.classList.toggle('is-open', !open);
+          q.setAttribute('aria-expanded', String(!open));
+          a.style.height = open ? '0px' : a.firstElementChild.offsetHeight + 'px';
+        });
+      });
+    });
+
+    if (!window.__silFaqResize) {
+      window.__silFaqResize = true;
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(function () {
+          document.querySelectorAll('.sil-faq-item.is-open .sil-faq-a').forEach(function (a) {
+            a.style.height = a.firstElementChild.offsetHeight + 'px';
+          });
+        }, 120);
+      }, { passive: true });
+    }
+  }
+
+  function initCharts() {
+    document.querySelectorAll('.sil-chart .line').forEach(function (p) {
+      if (p.__len) return;
+      p.__len = true;
+      try { p.style.setProperty('--len', Math.ceil(p.getTotalLength())); } catch (err) {}
+    });
+  }
+
+  /* Hostinger sizes each "Embed code" block by watching this document's body
+     with a ResizeObserver and matching the iframe to its content height. If it
+     measures before the webfont swaps in, the stored height can be left stale
+     -- content ends up shorter than the reserved box and a blank band shows
+     below the block. Poking the body's size makes the observer re-fire and the
+     host re-measures, so any stale height self-corrects. Harmless outside an
+     embed (the preview pages have no such observer). */
+  function nudgeHostResize() {
+    var b = document.body;
+    if (!b) return;
+    try {
+      var prev = b.style.minHeight;
+      b.style.minHeight = (b.offsetHeight + 1) + 'px';
+      void b.offsetHeight;            // force reflow so the +1 is observed
+      requestAnimationFrame(function () { b.style.minHeight = prev; });
+    } catch (e) {}
+    try { window.dispatchEvent(new Event('resize')); } catch (e) {}
+  }
+
+  function initHostResizeSync() {
+    if (window.__silResizeSync) return;
+    window.__silResizeSync = true;
+    // Re-measure once the real fonts are in (the common stale-height cause)...
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(nudgeHostResize).catch(function () {});
+    }
+    // ...plus a few settling passes for late images / slow font delivery.
+    [300, 900, 2000].forEach(function (t) { setTimeout(nudgeHostResize, t); });
+  }
+
+  function boot() { initReveal(); initSpotlight(); initSectionGlow(); initCounters(); initFaq(); initCharts(); }
+  window.silstoneRefresh = boot;
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  initHostResizeSync();
+
+  var mo = new MutationObserver(function () {
+    clearTimeout(window.__silMo);
+    window.__silMo = setTimeout(boot, 140);
+  });
+  mo.observe(document.body || document.documentElement, { childList: true, subtree: true });
+  [400, 1200, 2600].forEach(function (t) { setTimeout(boot, t); });
+})();
+</script>
+<!-- SIL:GLOBAL END -->
+
+<!--
+  SILSTONE.AI - PAGE: AESTHETICS AUTOMATION - BLOCK 98 - FAQ
+  Hostinger: Embed code block, FULL WIDTH. Suggested height 880px.
+  Coral accent. Reuses the shared .sil-faq accordion. JSON-LD makes these eligible
+  for Google's FAQ rich results -- keep it in sync with the questions.
+-->
+<div class="sil-root">
+<section class="sil-section acc-coral has-top sil-aesfaq">
+  <div class="sil-cursorglow" aria-hidden="true"></div>
+  <div class="sil-container is-narrow">
+
+    <div class="sil-center sil-reveal">
+      <span class="sil-eyebrow"><i class="dot"></i>FAQ</span>
+      <h2 class="sil-display-l sil-mt-5">Questions aesthetic practices ask us.</h2>
+    </div>
+
+    <div class="sil-faq sil-mt-12 sil-reveal" data-single="1">
+
+      <div class="sil-faq-item is-open">
+        <button class="sil-faq-q" type="button">
+          What types of practices do you work with?
+          <span class="sil-faq-sign" aria-hidden="true">+</span>
+        </button>
+        <div class="sil-faq-a"><div class="inner">
+          We work with medical spas, aesthetic clinics, laser and skin clinics, cosmetic dermatology
+          practices, body contouring clinics, wellness practices, medical weight loss clinics,
+          longevity clinics and other cash-pay healthcare businesses.
+        </div></div>
+      </div>
+
+      <div class="sil-faq-item">
+        <button class="sil-faq-q" type="button">
+          What can aesthetic workflow automation handle?
+          <span class="sil-faq-sign" aria-hidden="true">+</span>
+        </button>
+        <div class="sil-faq-a"><div class="inner">
+          Automation can support website inquiries, social media DMs, missed calls, appointment
+          requests, consultation follow-ups, patient re-engagement, rebooking reminders and other
+          repetitive communication workflows.
+        </div></div>
+      </div>
+
+      <div class="sil-faq-item">
+        <button class="sil-faq-q" type="button">
+          Does Silstone Health replace our existing software?
+          <span class="sil-faq-sign" aria-hidden="true">+</span>
+        </button>
+        <div class="sil-faq-a"><div class="inner">
+          No. We build workflow automation around your existing systems, helping your team improve
+          efficiency without requiring a complete technology change.
+        </div></div>
+      </div>
+
+      <div class="sil-faq-item">
+        <button class="sil-faq-q" type="button">
+          Does my team need to learn a new platform?
+          <span class="sil-faq-sign" aria-hidden="true">+</span>
+        </button>
+        <div class="sil-faq-a"><div class="inner">
+          No. Our goal is to automate repetitive workflows while keeping your team's existing
+          processes simple and familiar.
+        </div></div>
+      </div>
+
+      <div class="sil-faq-item">
+        <button class="sil-faq-q" type="button">
+          Can you respond to inquiries outside business hours?
+          <span class="sil-faq-sign" aria-hidden="true">+</span>
+        </button>
+        <div class="sil-faq-a"><div class="inner">
+          Yes. Automated lead response workflows can help your practice respond when inquiries
+          arrive, including outside normal front-desk hours.
+        </div></div>
+      </div>
+
+      <div class="sil-faq-item">
+        <button class="sil-faq-q" type="button">
+          How do you measure the value of automation?
+          <span class="sil-faq-sign" aria-hidden="true">+</span>
+        </button>
+        <div class="sil-faq-a"><div class="inner">
+          We review your inquiry volume, response times, follow-up activity and workflow gaps to
+          identify where lead response and patient follow-up automation can create the most value.
+        </div></div>
+      </div>
+
+    </div>
+
+    <div class="sil-center sil-mt-10 sil-reveal">
+      <p class="sil-body-m">Still have a question we haven't answered?</p>
+      <a href="https://www.silstone.ai/contact" target="_top" class="sil-btn sil-btn-secondary is-auto sil-mt-5">Ask us directly</a>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What types of practices do you work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We work with medical spas, aesthetic clinics, laser and skin clinics, cosmetic dermatology practices, body contouring clinics, wellness practices, medical weight loss clinics, longevity clinics, and other cash-pay healthcare businesses."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What can aesthetic workflow automation handle?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Automation can support website inquiries, social media DMs, missed calls, appointment requests, consultation follow-ups, patient re-engagement, rebooking reminders, and other repetitive communication workflows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Silstone Health replace our existing software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. We build workflow automation around your existing systems, helping your team improve efficiency without requiring a complete technology change."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my team need to learn a new platform?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Our goal is to automate repetitive workflows while keeping your team's existing processes simple and familiar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you respond to inquiries outside business hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Automated lead response workflows can help your practice respond when inquiries arrive, including outside normal front-desk hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you measure the value of automation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We review your inquiry volume, response times, follow-up activity, and workflow gaps to identify where lead response automation and patient follow-up automation can create the most value."
+      }
+    }
+  ]
+}
+</script>

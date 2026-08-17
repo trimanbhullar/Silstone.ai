@@ -1,0 +1,81 @@
+<!-- @dsCard group="Marketing Site" viewport="1280x900" name="Silstone.AI Marketing Site" subtitle="Home, Contact, Blog — click-through recreation" -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Silstone.AI — Marketing Site UI Kit</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="../../_ds_bundle.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg-canvas); }
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-hover); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="Offerings.jsx"></script>
+<script type="text/babel" src="CaseStudy.jsx"></script>
+<script type="text/babel" src="FaqSection.jsx"></script>
+<script type="text/babel" src="ContactPage.jsx"></script>
+<script type="text/babel" src="BlogListPage.jsx"></script>
+<script type="text/babel">
+const { NavBar, Footer, Button, Card, Badge, FaqItem } = window.SilstoneAIDesignSystem_aca135;
+
+function Logo() {
+  return <img src="../../assets/logo-mark.png" style={{ height: 22 }} alt="Silstone.AI" />;
+}
+
+function App() {
+  const [page, setPage] = React.useState('home');
+  const nav = (
+    <NavBar
+      logo={<a href="#" onClick={(e) => { e.preventDefault(); setPage('home'); }}><Logo /></a>}
+      links={[
+        { label: 'Home', href: '#home' },
+        { label: 'Blog', href: '#blog' },
+        { label: 'Contact', href: '#contact' },
+      ]}
+      cta={<Button variant="secondary" size="sm" onClick={() => setPage('contact')}>Book a call</Button>}
+    />
+  );
+
+  // intercept nav link clicks
+  React.useEffect(() => {
+    const handler = (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      if (a.getAttribute('href') === '#home') { e.preventDefault(); setPage('home'); }
+      if (a.getAttribute('href') === '#blog') { e.preventDefault(); setPage('blog'); }
+      if (a.getAttribute('href') === '#contact') { e.preventDefault(); setPage('contact'); }
+    };
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, []);
+
+  if (page === 'contact') {
+    return <ContactPage NavBar={nav} Button={Button} Footer={<Footer logo={<Logo />} />} />;
+  }
+  if (page === 'blog') {
+    return <BlogListPage NavBar={nav} Card={Card} Footer={<Footer logo={<Logo />} />} />;
+  }
+  return (
+    <div>
+      <Hero NavBar={nav} Button={Button} />
+      <Offerings Card={Card} Badge={Badge} />
+      <CaseStudy Badge={Badge} Card={Card} />
+      <FaqSection FaqItem={FaqItem} />
+      <Footer logo={<Logo />} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

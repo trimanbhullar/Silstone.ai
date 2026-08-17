@@ -1,0 +1,25 @@
+# Cloudflare Worker config for the Silstone underpayment demo backend.
+#
+# Deploy:
+#   1. npm install
+#   2. npx wrangler login
+#   3. npx wrangler secret put ANTHROPIC_API_KEY   (paste your key when prompted)
+#   4. npx wrangler deploy
+#
+# The ANTHROPIC_API_KEY is stored as an encrypted secret by Cloudflare and is
+# NEVER shipped to the browser. Do not put it in this file or in vars.
+
+name = "silstone-underpayment-demo"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Optional: pin a custom route/domain instead of the *.workers.dev URL.
+# routes = [{ pattern = "demo.silstone.ai/underpayment", zone_name = "silstone.ai" }]
+
+[vars]
+# Comma-separated list of origins allowed to call this Worker (CORS).
+ALLOWED_ORIGINS = "https://www.silstone.ai,https://silstone.ai"
+# Model to run. claude-sonnet-5 is the cost/quality sweet spot for extraction +
+# classification. Swap to claude-haiku-4-5 (cheaper/faster) or claude-opus-5 (max quality).
+CLAUDE_MODEL = "claude-sonnet-5"

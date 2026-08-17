@@ -1,0 +1,1206 @@
+<!-- SIL:GLOBAL START -- generated from assets/ by build-embeds.py. Everything between these markers is baked in; edit assets/silstone.css or assets/silstone.js and re-run, not here. -->
+<style>
+/* ===========================================================================
+   1. FONTS
+   Poppins/Inter are the design system's documented SUBSTITUTES; real brand font
+   files were never supplied. Swap this @import for @font-face and the rest of
+   the system follows automatically.
+   =========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ===========================================================================
+   2. PALETTE
+   =========================================================================== */
+:root {
+  /* ---- Canvas & surfaces ---- */
+  --bg-canvas:      #08080B;
+  --bg-canvas-alt:  #0C0C12;   /* the alternating section tone */
+  --bg-surface:     #101014;
+  --bg-surface-raised: #16161D;
+  --bg-surface-3:   #1C1C25;
+
+  /* ---- Lines ---- */
+  --border-subtle:  rgba(255,255,255,0.07);
+  --border-default: rgba(255,255,255,0.12);
+  --border-strong:  rgba(255,255,255,0.18);
+
+  /* ---- Type ---- */
+  --text-primary:    #F6F6F8;
+  --text-secondary:  #9B9BA6;
+  --text-tertiary:   #8B8B95;
+  /* Lifted from the original #6A6A75, which measured 3.7:1 on the canvas.
+     #7A7A86 reaches 4.7:1 and still reads as a quiet label colour. */
+  --text-quaternary: #7A7A86;
+
+  /* ---- Violet: the lead ---- */
+  --violet-100: #E4DEFF;
+  --violet-200: #C2B6FF;
+  --violet-300: #A594FF;
+  --violet-400: #8B7CF6;
+  --violet-500: #7C6BF0;
+  --violet-600: #6E56CF;
+  --violet-700: #5B44B8;
+
+  /* ---- Warm ---- */
+  --coral-200: #FFD8C6;
+  --coral-300: #FFC0A6;
+  --coral-400: #FF9E7A;
+  --coral-500: #F0855E;
+  --amber-200: #F7E3BE;
+  --amber-300: #F5D9A8;
+  --amber-400: #EFC178;
+  --amber-500: #E0A855;
+
+  /* ---- Cool ---- */
+  --mint-300: #93EFD0;
+  --mint-400: #5EE0A8;
+  --mint-500: #3FC48C;
+
+  /* ---- Brand teal ----
+     Threaded through in small doses so the wordmark belongs: nav active state,
+     the LIVE pill, the "Built on Claude" chip, footer badges, one stop in the
+     headline gradient, and the whole Trust & security page. Never the lead. */
+  --teal-300: #5FE6D9;
+  --teal-400: #3BDECE;
+  --teal-500: #2DD9D3;
+  --teal-600: #21B4AF;
+  --teal-700: #178C88;
+  --teal-soft:        rgba(45,217,211,0.10);
+  --teal-soft-border: rgba(45,217,211,0.28);
+
+  /* ---- Semantic ---- */
+  --accent:         var(--violet-600);   /* solid CTA: 5.3:1 against white */
+  --accent-hover:   #7A62DE;             /* still 4.5:1 against white      */
+  --accent-active:  var(--violet-700);
+  --text-accent:    var(--violet-300);   /* 7.8:1 on the canvas            */
+  --text-on-accent: #FFFFFF;
+  --focus-ring:     var(--violet-300);
+
+  --accent-soft:        rgba(124,107,240,0.11);
+  --accent-soft-border: rgba(124,107,240,0.28);
+
+  /* ---- Gradients ---- */
+  --grad-primary: linear-gradient(120deg, #7A62DE 0%, #5B44B8 100%);
+  --grad-vivid:   linear-gradient(120deg, var(--violet-400) 0%, var(--violet-600) 55%, #4E3AA6 100%);
+  /* The teal stop is what ties the wordmark to the rest of the page: headline
+     gradients sweep violet -> teal -> coral, so the logo reads as part of the
+     system rather than a leftover. */
+  --grad-text:    linear-gradient(100deg, var(--violet-200) 0%, var(--violet-400) 26%, var(--teal-300) 52%, var(--coral-300) 78%, var(--violet-200) 100%);
+  --grad-line:    linear-gradient(90deg, transparent, var(--violet-500), var(--coral-400), transparent);
+  --grad-warm:    linear-gradient(120deg, var(--coral-400) 0%, var(--amber-400) 100%);
+
+  /* ---- Type scale ---- */
+  --font-display:'Poppins',-apple-system,sans-serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono','SFMono-Regular',Menlo,monospace;
+
+  --text-display-xl-size:4rem;    --text-display-xl-weight:700; --text-display-xl-leading:1.05;
+  --text-display-l-size:3rem;     --text-display-l-weight:700;  --text-display-l-leading:1.1;
+  --text-display-m-size:2.25rem;  --text-display-m-weight:600;  --text-display-m-leading:1.15;
+  --text-display-s-size:1.5rem;   --text-display-s-weight:600;  --text-display-s-leading:1.25;
+
+  --text-body-l-size:1.25rem;    --text-body-l-leading:1.6;
+  --text-body-m-size:1.0625rem;  --text-body-m-leading:1.6;
+  --text-body-s-size:0.9375rem;  --text-body-s-leading:1.55;
+  --text-caption-size:0.8125rem; --text-caption-leading:1.4;
+
+  --tracking-tight:-0.02em; --tracking-normal:0em;
+  --tracking-wide:0.04em;   --tracking-widest:0.18em;
+
+  --font-weight-regular:400; --font-weight-medium:500;
+  --font-weight-semibold:600; --font-weight-bold:700;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1:4px;  --space-2:8px;  --space-3:12px; --space-4:16px;
+  --space-5:20px; --space-6:24px; --space-8:32px; --space-10:40px;
+  --space-12:48px; --space-16:64px; --space-20:80px; --space-24:96px; --space-32:128px;
+
+  /* ---- Radius ---- */
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-xl:24px; --radius-pill:999px;
+
+  /* ---- Shadow ---- */
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.45);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.5);
+
+  /* ---- Motion ---- */
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --duration-fast:120ms; --duration-base:200ms; --duration-slow:360ms;
+
+  /* ---- Layout ---- */
+  --container-max:1200px;
+  --container-pad:clamp(20px,5vw,80px);
+}
+
+/* ===========================================================================
+   3. PER-SECTION ACCENT
+   Put one of these classes on a .sil-section and everything inside re-tints.
+   A single card can override too: style="--sec-rgb:255,158,122".
+   =========================================================================== */
+.sil-section, .sil-root {
+  --sec-rgb: 124,107,240;              /* violet, the default            */
+  --sec-text: var(--violet-300);       /* legible tint for small type    */
+}
+.sil-section.acc-peri  { --sec-rgb: 165,148,255; --sec-text: var(--violet-200); }
+.sil-section.acc-coral { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-section.acc-amber { --sec-rgb: 239,193,120; --sec-text: var(--amber-300);  }
+.sil-section.acc-mint  { --sec-rgb:  94,224,168; --sec-text: var(--mint-300);   }
+.sil-section.acc-teal  { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* Each accent also gets its own ambient-mesh trio, so a warm section drifts
+   warm rather than sitting under a violet haze. */
+.sil-section.acc-coral { --m1: var(--coral-400); --m2: var(--violet-600); --m3: var(--amber-400); }
+.sil-section.acc-amber { --m1: var(--amber-400); --m2: var(--violet-700); --m3: var(--coral-400); }
+.sil-section.acc-mint  { --m1: var(--mint-400);  --m2: var(--violet-600); --m3: var(--teal-500);  }
+.sil-section.acc-peri  { --m1: var(--violet-300);--m2: var(--violet-600); --m3: var(--coral-400); }
+
+/* ---- Trios -------------------------------------------------------------
+   A group of three reads better as a set than as one colour repeated. Put
+   .sil-trio on the container and its three children cycle violet / coral /
+   teal, each re-deriving --sec-* from its own hue.
+
+   Use .sil-trio-1 / -2 / -3 directly on the items instead when something sits
+   between them in the DOM (the How it works steps have connector arrows), or
+   when you want to pick the order by hand.
+   ---------------------------------------------------------------------- */
+.sil-trio > *:nth-child(1), .sil-trio-1 { --sec-rgb: 124,107,240; --sec-text: var(--violet-300); }
+.sil-trio > *:nth-child(2), .sil-trio-2 { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-trio > *:nth-child(3), .sil-trio-3 { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* ---- Sequences ---------------------------------------------------------
+   Longer runs (the six-step engagement timeline) walk the full palette
+   cool -> warm -> cool, so each step is distinct and the row reads as
+   progress rather than repetition. Repeats every six items.
+   ---------------------------------------------------------------------- */
+.sil-seq > *:nth-child(6n+1) { --sec-rgb: 124,107,240; --sec-text: var(--violet-300); }
+.sil-seq > *:nth-child(6n+2) { --sec-rgb: 165,148,255; --sec-text: var(--violet-200); }
+.sil-seq > *:nth-child(6n+3) { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-seq > *:nth-child(6n+4) { --sec-rgb: 239,193,120; --sec-text: var(--amber-300);  }
+.sil-seq > *:nth-child(6n+5) { --sec-rgb:  94,224,168; --sec-text: var(--mint-300);   }
+.sil-seq > *:nth-child(6n+6) { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* Derived once, for every accent scope, so components never repeat an rgba()
+   literal. Whatever sets --sec-rgb above (section class, trio slot, seq slot,
+   or an inline style="--sec-rgb:...") flows through these. */
+.sil-section, .sil-root,
+.sil-trio > *, .sil-trio-1, .sil-trio-2, .sil-trio-3,
+.sil-seq > * {
+  --sec:        rgb(var(--sec-rgb));
+  --sec-soft:   rgba(var(--sec-rgb), 0.10);
+  --sec-softer: rgba(var(--sec-rgb), 0.05);
+  --sec-border: rgba(var(--sec-rgb), 0.26);
+  --sec-glow:   0 0 30px rgba(var(--sec-rgb), 0.20);
+}
+
+/* ===========================================================================
+   4. BASE  (scoped to .sil-root so Hostinger's own chrome is untouched)
+   =========================================================================== */
+.sil-root, .sil-root * { box-sizing: border-box; }
+.sil-root {
+  font-family: var(--font-body);
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-leading);
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  position: relative; overflow-x: clip;
+  /* Fill the section container edge to edge. Hostinger caps its grid container
+     width by default; lifting that cap is a one-time snippet in Settings >
+     Integrations (see README > "Full-width sections in Hostinger"). Once the
+     container is uncapped this fills it; .sil-container re-centres the content. */
+  width: 100%;
+}
+.sil-root img, .sil-root svg, .sil-root canvas { display: block; max-width: 100%; }
+.sil-root p { margin: 0; }
+.sil-root h1, .sil-root h2, .sil-root h3, .sil-root h4 { margin: 0; font-family: var(--font-display); }
+.sil-root ul, .sil-root ol { margin: 0; padding: 0; list-style: none; }
+.sil-root a { color: var(--text-accent); text-decoration: none; transition: color var(--duration-base) var(--ease-standard); }
+.sil-root a:hover { color: var(--violet-200); }
+.sil-root button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+.sil-root ::selection { background: var(--violet-500); color: #fff; }
+
+.sil-root input, .sil-root textarea, .sil-root select {
+  font-family: var(--font-body); font-size: var(--text-body-s-size);
+  color: var(--text-primary); width: 100%;
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 12px 16px; outline: none;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-root input:focus, .sil-root textarea:focus, .sil-root select:focus {
+  border-color: var(--sec); box-shadow: 0 0 0 3px var(--sec-soft);
+}
+.sil-root input::placeholder, .sil-root textarea::placeholder { color: var(--text-quaternary); }
+
+/* ===========================================================================
+   5. LAYOUT
+   =========================================================================== */
+.sil-section {
+  position: relative; width: 100%;
+  padding: var(--space-24) 0;
+  background: var(--bg-canvas); overflow: hidden;
+}
+.sil-section.is-alt   { background: var(--bg-canvas-alt); }
+.sil-section.is-tight { padding: var(--space-12) 0; }
+.sil-section.is-flush { padding: 0; }
+.sil-section.has-top    { border-top: 1px solid var(--border-subtle); }
+.sil-section.has-bottom { border-bottom: 1px solid var(--border-subtle); }
+
+/* A very faint wash of the section's own accent. Subtle by design: it should
+   read as a change of temperature, not as a coloured panel. */
+.sil-section.has-tint::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 88% 54% at 50% 0%, rgba(var(--sec-rgb), 0.03), transparent 66%);
+}
+
+.sil-container {
+  width: 100%; max-width: var(--container-max);
+  margin: 0 auto; padding: 0 var(--container-pad);
+  position: relative; z-index: 2;
+}
+.sil-container.is-narrow { max-width: 860px; }
+
+.sil-grid { display: grid; gap: var(--space-6); }
+.sil-grid.c2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.sil-grid.c3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.sil-grid.c4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.sil-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center; }
+
+.sil-center { text-align: center; }
+/* Scoped to .sil-root (0,2,0) on purpose: the element resets above
+   (`.sil-root p/ul/ol/h1-4 { margin: 0 }`, 0,1,1) would otherwise outrank a bare
+   `.sil-mt-*` (0,1,0) and silently zero it on every paragraph, list and heading.
+   Still below the compound rhythm rules (section 15, also 0,2,0) in source order,
+   so those keep priority where they apply -- utilities remain the floor. */
+.sil-root .sil-mt-2{margin-top:var(--space-2);}   .sil-root .sil-mt-3{margin-top:var(--space-3);}
+.sil-root .sil-mt-4{margin-top:var(--space-4);}   .sil-root .sil-mt-5{margin-top:var(--space-5);}
+.sil-root .sil-mt-6{margin-top:var(--space-6);}   .sil-root .sil-mt-8{margin-top:var(--space-8);}
+.sil-root .sil-mt-10{margin-top:var(--space-10);} .sil-root .sil-mt-12{margin-top:var(--space-12);}
+.sil-root .sil-mt-16{margin-top:var(--space-16);} .sil-root .sil-mt-20{margin-top:var(--space-20);}
+
+/* ===========================================================================
+   6. TYPOGRAPHY
+   =========================================================================== */
+.sil-display-xl,.sil-display-l,.sil-display-m,.sil-display-s {
+  font-family: var(--font-display); letter-spacing: var(--tracking-tight); color: var(--text-primary);
+}
+.sil-display-xl{font-size:var(--text-display-xl-size);font-weight:var(--text-display-xl-weight);line-height:var(--text-display-xl-leading);}
+.sil-display-l {font-size:var(--text-display-l-size); font-weight:var(--text-display-l-weight); line-height:var(--text-display-l-leading);}
+.sil-display-m {font-size:var(--text-display-m-size); font-weight:var(--text-display-m-weight); line-height:var(--text-display-m-leading);}
+.sil-display-s {font-size:var(--text-display-s-size); font-weight:var(--text-display-s-weight); line-height:var(--text-display-s-leading);}
+
+.sil-body-l{font-size:var(--text-body-l-size);line-height:var(--text-body-l-leading);color:var(--text-secondary);}
+.sil-body-m{font-size:var(--text-body-m-size);line-height:var(--text-body-m-leading);color:var(--text-secondary);}
+.sil-body-s{font-size:var(--text-body-s-size);line-height:var(--text-body-s-leading);color:var(--text-secondary);}
+.sil-caption{font-size:var(--text-caption-size);line-height:var(--text-caption-leading);color:var(--text-tertiary);}
+.sil-mono{font-family:var(--font-mono);font-size:var(--text-caption-size);letter-spacing:var(--tracking-wide);color:var(--text-quaternary);}
+.sil-measure{max-width:65ch;}
+
+.sil-root strong, .sil-em { font-weight: var(--font-weight-bold); color: var(--text-primary); }
+.sil-em-accent { color: var(--sec-text); font-weight: var(--font-weight-bold); }
+
+.sil-gt {
+  background: var(--grad-text); background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: silGradShift 13s ease-in-out infinite;
+}
+@keyframes silGradShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+
+.sil-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 5px 13px; border-radius: var(--radius-pill);
+  font-family: var(--font-body); font-size: var(--text-caption-size);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  background: var(--sec-soft); color: var(--sec-text); border: 1px solid var(--sec-border);
+}
+.sil-eyebrow.is-neutral { background: var(--bg-surface-raised); color: var(--text-secondary); border-color: var(--border-subtle); }
+.sil-eyebrow .dot { width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;flex:none; }
+
+.sil-wordmark {
+  font-family: var(--font-display); font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-primary);
+}
+.sil-wordmark em { font-style: normal; color: var(--teal-500); }
+
+@media (max-width: 900px) {
+  :root {
+    --text-display-xl-size:2.75rem; --text-display-l-size:2.25rem;
+    --text-display-m-size:1.75rem;  --text-display-s-size:1.25rem;
+    --text-body-l-size:1.0625rem;
+  }
+  .sil-section { padding: var(--space-16) 0; }
+}
+@media (max-width: 520px) { :root { --text-display-xl-size:2.25rem; --text-display-l-size:1.875rem; } }
+
+/* ===========================================================================
+   7. BUTTONS
+   Prefixed with .sil-root because most buttons are <a> elements, and the base
+   `.sil-root a` rule (0,1,1) would otherwise outrank a bare `.sil-btn-*` (0,1,0)
+   and repaint the label with the link colour.
+   =========================================================================== */
+.sil-btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  font-family: var(--font-body); font-weight: var(--font-weight-semibold);
+  font-size: var(--text-body-m-size);
+  padding: 12px 24px; border-radius: var(--radius-pill);
+  border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.sil-btn-sm { padding: 8px 16px; font-size: var(--text-body-s-size); }
+.sil-btn-lg { padding: 16px 32px; font-size: var(--text-body-l-size); }
+.sil-btn .arw { transition: transform var(--duration-base) var(--ease-standard); flex: none; }
+.sil-btn:hover .arw { transform: translateX(3px); }
+
+.sil-root .sil-btn-primary { background: var(--accent); color: var(--text-on-accent); box-shadow: var(--shadow-sm); }
+.sil-root .sil-btn-primary:hover  { background: var(--accent-hover); color: var(--text-on-accent); box-shadow: 0 6px 24px rgba(124,107,240,0.28); transform: translateY(-1px); }
+.sil-root .sil-btn-primary:active { background: var(--accent-active); color: var(--text-on-accent); transform: none; }
+
+.sil-root .sil-btn-gradient {
+  color: var(--text-on-accent);
+  background: var(--grad-primary); background-size: 200% 200%;
+  animation: silGradShift 10s ease-in-out infinite;
+  box-shadow: var(--shadow-sm);
+}
+.sil-btn-gradient::before {
+  content:''; position:absolute; inset:0; z-index:-1;
+  background: radial-gradient(120px circle at var(--bx,50%) var(--by,50%), rgba(255,255,255,.30), transparent 65%);
+  opacity:0; transition: opacity var(--duration-base) var(--ease-standard);
+}
+.sil-root .sil-btn-gradient:hover { color: var(--text-on-accent); box-shadow: 0 8px 28px rgba(124,107,240,0.32); transform: translateY(-1px); }
+.sil-btn-gradient:hover::before { opacity: 1; }
+
+.sil-root .sil-btn-secondary { background: transparent; color: var(--text-primary); border-color: var(--border-default); }
+.sil-root .sil-btn-secondary:hover  { border-color: var(--sec); color: var(--sec-text); }
+.sil-root .sil-btn-secondary:active { border-color: var(--sec); color: var(--sec-text); }
+
+.sil-root .sil-btn-ghost {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  padding:4px 0; background:transparent; color:var(--sec-text);
+  font-weight:var(--font-weight-semibold); font-size:var(--text-body-m-size);
+}
+.sil-root .sil-btn-ghost:hover { color: var(--violet-100); }
+.sil-btn-ghost .arw { transition: transform var(--duration-base) var(--ease-standard); }
+.sil-btn-ghost:hover .arw { transform: translateX(3px); }
+
+/* ===========================================================================
+   8. CARDS
+   =========================================================================== */
+.sil-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: border-color var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-card.is-hover:hover { border-color: var(--sec-border); }
+.sil-card.is-lift:hover  { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.sil-card.is-raised { background: var(--bg-surface-raised); }
+.sil-card.is-bare   { background: transparent; }
+
+.sil-card.is-spot::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0; border-radius:inherit;
+  background: radial-gradient(340px circle at var(--mx,50%) var(--my,50%), rgba(var(--sec-rgb),0.07), transparent 62%);
+  opacity:0; transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.sil-card.is-spot::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:1; border-radius:inherit; padding:1px;
+  background: radial-gradient(300px circle at var(--mx,50%) var(--my,50%), rgba(var(--sec-rgb),0.55), transparent 68%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity:0; transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.sil-card.is-spot:hover::before, .sil-card.is-spot:hover::after { opacity: 1; }
+.sil-card > * { position: relative; z-index: 2; }
+
+.sil-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-md); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sec-soft); border: 1px solid var(--sec-border); color: var(--sec-text);
+  font-family: var(--font-mono); font-size: 15px; font-weight: 500;
+  transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-card:hover .sil-icon { box-shadow: var(--sec-glow); }
+
+/* ===========================================================================
+   9. TAGS / CHIPS
+   =========================================================================== */
+.sil-tag {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  padding:4px 12px; border-radius:var(--radius-pill);
+  font-family:var(--font-body); font-size:var(--text-caption-size);
+  font-weight:var(--font-weight-semibold); letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;
+  background:var(--bg-surface-raised); color:var(--text-secondary);
+  border:1px solid var(--border-subtle);
+}
+.sil-tag.is-accent { background:var(--sec-soft); color:var(--sec-text); border-color:var(--sec-border); }
+.sil-chip {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  font-family:var(--font-mono); font-size:var(--text-caption-size);
+  letter-spacing:var(--tracking-wide); color:var(--text-secondary);
+}
+.sil-chip .dot {
+  width:6px;height:6px;border-radius:50%;flex:none;
+  background:var(--chip, var(--sec)); box-shadow:0 0 8px var(--chip, var(--sec));
+}
+
+.sil-rule { height:1px; background:var(--border-subtle); border:0; }
+
+/* ===========================================================================
+   10. AMBIENT BACKGROUND
+   Deliberately faint: the canvas must still read as near-black.
+   =========================================================================== */
+.sil-mesh { position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.sil-mesh i {
+  position:absolute; display:block; border-radius:50%;
+  filter: blur(100px); mix-blend-mode: screen; will-change: transform;
+}
+.sil-mesh i:nth-child(1){width:46vw;height:46vw;left:-12%;top:-24%;background:var(--m1,var(--violet-500));opacity:.08;animation:silDrift 26s ease-in-out infinite;}
+.sil-mesh i:nth-child(2){width:34vw;height:34vw;right:-8%;top:4%;background:var(--m2,var(--violet-700));opacity:.07;animation:silDrift 33s ease-in-out infinite reverse;}
+.sil-mesh i:nth-child(3){width:30vw;height:30vw;left:34%;bottom:-20%;background:var(--m3,var(--coral-400));opacity:.05;animation:silDrift 39s ease-in-out infinite;}
+@keyframes silDrift {
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%    {transform:translate(4vw,3vw) scale(1.08);}
+  66%    {transform:translate(-3vw,2vw) scale(0.95);}
+}
+
+.sil-gridlines {
+  position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.020) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.020) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 35%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 35%, transparent 78%);
+}
+
+.sil-cursorglow {
+  position:absolute; inset:0; pointer-events:none; z-index:1;
+  background: radial-gradient(520px circle at var(--gx,50%) var(--gy,40%), rgba(var(--sec-rgb),0.07), transparent 60%);
+  transition: background var(--duration-fast) linear;
+}
+.sil-hairline { position:absolute; top:0; left:0; right:0; height:1px; z-index:2; background: var(--grad-line); opacity:.45; }
+
+/* ===========================================================================
+   11. SCROLL REVEAL
+   =========================================================================== */
+/* Start hidden ONLY when the runtime is present (it adds .sil-js). If the
+   script never runs -- Hostinger's editor canvas, a sandboxed embed, JS off --
+   the content stays fully visible instead of stuck at opacity:0. */
+.sil-js .sil-reveal { opacity:0; transform: translateY(14px); }
+.sil-reveal.is-in {
+  opacity:1; transform:none;
+  transition: opacity var(--duration-slow) var(--ease-standard),
+              transform var(--duration-slow) var(--ease-standard);
+  transition-delay: var(--d, 0ms);
+}
+
+/* ===========================================================================
+   12. DATA VISUALISATION
+   Series colours come from --sec plus the warm ramp, never from a fixed hue,
+   so charts follow whatever accent their section carries.
+   =========================================================================== */
+.sil-chart { width:100%; display:block; overflow:visible; }
+.sil-chart .axis   { stroke: rgba(255,255,255,0.07); stroke-width:1; }
+.sil-chart .glabel { font-family:var(--font-mono); font-size:10px; fill:var(--text-quaternary); letter-spacing:.04em; }
+.sil-chart .vlabel { font-family:var(--font-display); font-size:12px; font-weight:600; fill:var(--text-secondary); }
+
+/* Chart/meter "start" states are also gated behind .sil-js, so without the
+   runtime the charts render in their finished state rather than blank. */
+.sil-chart .bar { transform-origin:bottom; }
+.sil-js .sil-chart .bar { transform:scaleY(0); }
+.is-in .sil-chart .bar { transform:scaleY(1); transition:transform 700ms var(--ease-out); transition-delay:var(--d,0ms); }
+.sil-chart .line { stroke-dasharray:var(--len,2000); }
+.sil-js .sil-chart .line { stroke-dashoffset:var(--len,2000); }
+.is-in .sil-chart .line { stroke-dashoffset:0; transition:stroke-dashoffset 1500ms var(--ease-out); transition-delay:var(--d,0ms); }
+.sil-js .sil-chart .area, .sil-js .sil-chart .pt { opacity:0; }
+.is-in .sil-chart .area { opacity:1; transition:opacity var(--duration-slow) ease 400ms; }
+.is-in .sil-chart .pt   { opacity:1; transition:opacity var(--duration-base) ease; transition-delay:var(--d,0ms); }
+
+.sil-meter { height:5px; border-radius:var(--radius-pill); background:rgba(255,255,255,0.06); overflow:hidden; }
+.sil-meter > span { display:block; height:100%; border-radius:inherit; width:var(--w,0%); background:var(--acc, var(--sec)); }
+.sil-js .sil-meter > span { width:0; }
+.is-in .sil-meter > span { width:var(--w,0%); transition:width 700ms var(--ease-out); transition-delay:var(--d,0ms); }
+
+/* ===========================================================================
+   13. FAQ
+   =========================================================================== */
+.sil-faq { border-top:1px solid var(--border-subtle); }
+.sil-faq-item { border-bottom:1px solid var(--border-subtle); }
+.sil-faq-q {
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  gap:var(--space-4); padding:var(--space-6) 0; text-align:left;
+  font-family:var(--font-body); font-weight:var(--font-weight-bold);
+  font-size:var(--text-body-l-size); color:var(--text-primary);
+  transition:color var(--duration-base) var(--ease-standard);
+}
+.sil-faq-q:hover { color:var(--sec-text); }
+.sil-faq-sign {
+  flex-shrink:0; width:24px; height:24px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--sec-text); font-size:20px; line-height:1;
+  transition:transform var(--duration-base) var(--ease-standard);
+}
+.sil-faq-item.is-open .sil-faq-sign { transform:rotate(45deg); }
+.sil-faq-a { overflow:hidden; height:0; transition:height var(--duration-base) var(--ease-standard); }
+.sil-faq-a .inner {
+  padding-bottom:var(--space-6); max-width:65ch;
+  color:var(--text-secondary);
+  font-size:var(--text-body-m-size); line-height:var(--text-body-m-leading);
+}
+
+/* ===========================================================================
+   14. MARQUEE
+   =========================================================================== */
+.sil-marquee {
+  position:relative; overflow:hidden; width:100%;
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+}
+.sil-marquee-track { display:flex; align-items:center; gap:var(--space-10); width:max-content; animation:silMarquee 42s linear infinite; }
+.sil-marquee:hover .sil-marquee-track { animation-play-state:paused; }
+@keyframes silMarquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ===========================================================================
+   15. VERTICAL RHYTHM
+   Spacing between adjacent text and elements, set in one place.
+   These use compound sibling selectors (0,2,0), which outrank the .sil-mt-*
+   utilities (0,1,0) on purpose: the utilities set a floor, this sets the real
+   rhythm. Change the four --rhythm values to retune the whole site.
+   =========================================================================== */
+:root {
+  --rhythm-tight: var(--space-4);
+  --rhythm:       var(--space-5);
+  --rhythm-loose: var(--space-6);
+  --rhythm-block: clamp(48px, 5.5vw, 72px);
+}
+
+.sil-eyebrow + .sil-display-xl, .sil-eyebrow + .sil-display-l,
+.sil-eyebrow + .sil-display-m,  .sil-eyebrow + .sil-display-s,
+.sil-tag + .sil-display-xl, .sil-tag + .sil-display-l,
+.sil-tag + .sil-display-m,  .sil-tag + .sil-display-s,
+.sil-icon + .sil-display-xl, .sil-icon + .sil-display-l,
+.sil-icon + .sil-display-m,  .sil-icon + .sil-display-s,
+.sil-icon + h2, .sil-icon + h3 { margin-top: var(--rhythm-loose); }
+
+.sil-display-xl + .sil-body-l, .sil-display-xl + .sil-body-m, .sil-display-xl + .sil-body-s,
+.sil-display-l  + .sil-body-l, .sil-display-l  + .sil-body-m, .sil-display-l  + .sil-body-s {
+  margin-top: var(--rhythm-loose);
+}
+.sil-display-m + .sil-body-l, .sil-display-m + .sil-body-m, .sil-display-m + .sil-body-s,
+.sil-display-s + .sil-body-l, .sil-display-s + .sil-body-m, .sil-display-s + .sil-body-s {
+  margin-top: var(--rhythm);
+}
+.sil-body-l + .sil-body-l, .sil-body-l + .sil-body-m, .sil-body-l + .sil-body-s,
+.sil-body-m + .sil-body-l, .sil-body-m + .sil-body-m, .sil-body-m + .sil-body-s,
+.sil-body-s + .sil-body-l, .sil-body-s + .sil-body-m, .sil-body-s + .sil-body-s,
+.sil-body-l + .sil-ticks,  .sil-body-m + .sil-ticks,  .sil-body-s + .sil-ticks {
+  margin-top: var(--rhythm);
+}
+.sil-body-l + .sil-mono, .sil-body-m + .sil-mono, .sil-body-s + .sil-mono,
+.sil-display-s + .sil-mono, .sil-card ul + .sil-mono, .sil-card ol + .sil-mono,
+.sil-table + .sil-mono, .sil-chart + .sil-mono { margin-top: var(--rhythm-loose); }
+
+.sil-direct { gap: var(--space-5); }
+.sil-ticks  { gap: var(--space-4); }
+
+.sil-container > .sil-center + .sil-grid,
+.sil-container > .sil-center + .sil-steps,
+.sil-container > .sil-center + .sil-faq,
+.sil-container > .sil-center + .sil-table,
+.sil-container > .sil-center + .sil-card,
+.sil-container > .sil-center + .sil-outcomes-charts,
+.sil-container > .sil-reveal + .sil-table,
+.sil-container > .sil-reveal + .sil-grid { margin-top: var(--rhythm-block); }
+
+.sil-card { padding: clamp(24px, 2.6vw, 36px); }
+.sil-grid { gap: clamp(20px, 2.2vw, 28px); }
+
+.sil-body-l + .sil-btn, .sil-body-m + .sil-btn, .sil-body-s + .sil-btn,
+.sil-body-l + .sil-btn-ghost, .sil-body-m + .sil-btn-ghost, .sil-body-s + .sil-btn-ghost,
+.sil-ticks + .sil-btn, .sil-mono + .sil-btn { margin-top: var(--space-8); }
+
+/* A caption sitting under a button needs real clearance. A pill button has no
+   optical margin below it, so the default 20px reads as almost touching.
+   The :has() rule covers captions after a button wrapped in its own row div. */
+.sil-btn + .sil-mono, .sil-btn + .sil-caption, .sil-btn + .sil-body-s,
+.sil-btn-ghost + .sil-mono, .sil-btn-ghost + .sil-caption {
+  margin-top: var(--space-6);
+}
+.sil-root *:has(> .sil-btn) + .sil-mono,
+.sil-root *:has(> .sil-btn) + .sil-caption,
+.sil-root *:has(> .sil-btn) + .sil-body-s {
+  margin-top: var(--space-6);
+}
+
+/* ===========================================================================
+   16. RESPONSIVE
+   =========================================================================== */
+@media (max-width:1024px){
+  .sil-split{grid-template-columns:1fr;gap:var(--space-12);}
+  .sil-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:760px){
+  .sil-grid.c2,.sil-grid.c3,.sil-grid.c4{grid-template-columns:1fr;}
+  .sil-btn{width:100%;}
+  .sil-btn.is-auto{width:auto;}
+  .sil-mesh i{filter:blur(70px);}
+}
+
+/* ===========================================================================
+   17. ACCESSIBILITY
+   =========================================================================== */
+.sil-root :focus-visible { outline:2px solid var(--focus-ring); outline-offset:3px; border-radius:var(--radius-sm); }
+.sil-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+@media (prefers-reduced-motion: reduce){
+  .sil-root *, .sil-root *::before, .sil-root *::after {
+    animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;
+  }
+  .sil-reveal{opacity:1 !important;transform:none !important;}
+  .sil-chart .bar{transform:scaleY(1) !important;}
+  .sil-chart .line{stroke-dashoffset:0 !important;}
+  .sil-chart .area,.sil-chart .pt{opacity:1 !important;}
+  .sil-meter > span{width:var(--w,0%) !important;}
+}
+</style>
+<script>
+/* ===========================================================================
+   SILSTONE.AI SHARED RUNTIME
+   Idempotent and re-scannable, so it works regardless of the order Hostinger
+   renders the embed blocks in.
+   =========================================================================== */
+(function () {
+  // Mark that the runtime is live. CSS gates every "start hidden" state behind
+  // this class, so if the script never runs the content stays visible.
+  document.documentElement.classList.add('sil-js');
+
+  if (window.__silstoneInit) return;
+  window.__silstoneInit = true;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = new WeakSet();
+
+  function initReveal() {
+    var els = document.querySelectorAll('.sil-reveal, .sil-section');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    els.forEach(function (el) {
+      if (seen.has(el)) return;
+      seen.add(el);
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('is-in');
+      else io.observe(el);
+    });
+  }
+
+  function initSpotlight() {
+    document.querySelectorAll('.sil-card.is-spot').forEach(function (card) {
+      if (card.__spot) return;
+      card.__spot = true;
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+    document.querySelectorAll('.sil-btn-gradient').forEach(function (b) {
+      if (b.__spot) return;
+      b.__spot = true;
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.setProperty('--bx', (e.clientX - r.left) + 'px');
+        b.style.setProperty('--by', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+  }
+
+  function initSectionGlow() {
+    document.querySelectorAll('.sil-section').forEach(function (sec) {
+      if (sec.__glow || !sec.querySelector('.sil-cursorglow')) return;
+      sec.__glow = true;
+      sec.addEventListener('pointermove', function (e) {
+        var r = sec.getBoundingClientRect();
+        sec.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100) + '%');
+        sec.style.setProperty('--gy', ((e.clientY - r.top) / r.height * 100) + '%');
+      }, { passive: true });
+    });
+  }
+
+  /* <span class="sil-count" data-to="312" data-prefix="$" data-suffix="K"> */
+  function initCounters() {
+    var els = document.querySelectorAll('.sil-count');
+    if (!els.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        run(e.target);
+      });
+    }, { threshold: 0.4 });
+
+    els.forEach(function (el) {
+      if (el.__count) return;
+      el.__count = true;
+      el.textContent = (el.dataset.prefix || '') + '0' + (el.dataset.suffix || '');
+      io.observe(el);
+    });
+
+    function run(el) {
+      var to  = parseFloat(el.dataset.to || '0');
+      var dec = parseInt(el.dataset.dec || '0', 10);
+      var pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+      var sep = el.dataset.sep === '1';
+      function fmt(v) {
+        var s = v.toFixed(dec);
+        return sep ? Number(s).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) : s;
+      }
+      if (reduced) { el.textContent = pre + fmt(to) + suf; return; }
+      var dur = 1200, t0 = performance.now();
+      (function tick(now) {
+        var p = Math.min((now - t0) / dur, 1);
+        el.textContent = pre + fmt(to * (1 - Math.pow(1 - p, 3))) + suf;
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+  }
+
+  function initFaq() {
+    document.querySelectorAll('.sil-faq').forEach(function (faq) {
+      if (faq.__faq) return;
+      faq.__faq = true;
+      var single = faq.dataset.single !== '0';
+
+      faq.querySelectorAll('.sil-faq-item').forEach(function (item) {
+        var q = item.querySelector('.sil-faq-q');
+        var a = item.querySelector('.sil-faq-a');
+        if (!q || !a) return;
+        q.setAttribute('aria-expanded', item.classList.contains('is-open') ? 'true' : 'false');
+        if (item.classList.contains('is-open')) a.style.height = a.firstElementChild.offsetHeight + 'px';
+
+        q.addEventListener('click', function () {
+          var open = item.classList.contains('is-open');
+          if (single && !open) {
+            faq.querySelectorAll('.sil-faq-item.is-open').forEach(function (o) {
+              o.classList.remove('is-open');
+              o.querySelector('.sil-faq-a').style.height = '0px';
+              o.querySelector('.sil-faq-q').setAttribute('aria-expanded', 'false');
+            });
+          }
+          item.classList.toggle('is-open', !open);
+          q.setAttribute('aria-expanded', String(!open));
+          a.style.height = open ? '0px' : a.firstElementChild.offsetHeight + 'px';
+        });
+      });
+    });
+
+    if (!window.__silFaqResize) {
+      window.__silFaqResize = true;
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(function () {
+          document.querySelectorAll('.sil-faq-item.is-open .sil-faq-a').forEach(function (a) {
+            a.style.height = a.firstElementChild.offsetHeight + 'px';
+          });
+        }, 120);
+      }, { passive: true });
+    }
+  }
+
+  function initCharts() {
+    document.querySelectorAll('.sil-chart .line').forEach(function (p) {
+      if (p.__len) return;
+      p.__len = true;
+      try { p.style.setProperty('--len', Math.ceil(p.getTotalLength())); } catch (err) {}
+    });
+  }
+
+  /* Hostinger sizes each "Embed code" block by watching this document's body
+     with a ResizeObserver and matching the iframe to its content height. If it
+     measures before the webfont swaps in, the stored height can be left stale
+     -- content ends up shorter than the reserved box and a blank band shows
+     below the block. Poking the body's size makes the observer re-fire and the
+     host re-measures, so any stale height self-corrects. Harmless outside an
+     embed (the preview pages have no such observer). */
+  function nudgeHostResize() {
+    var b = document.body;
+    if (!b) return;
+    try {
+      var prev = b.style.minHeight;
+      b.style.minHeight = (b.offsetHeight + 1) + 'px';
+      void b.offsetHeight;            // force reflow so the +1 is observed
+      requestAnimationFrame(function () { b.style.minHeight = prev; });
+    } catch (e) {}
+    try { window.dispatchEvent(new Event('resize')); } catch (e) {}
+  }
+
+  function initHostResizeSync() {
+    if (window.__silResizeSync) return;
+    window.__silResizeSync = true;
+    // Re-measure once the real fonts are in (the common stale-height cause)...
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(nudgeHostResize).catch(function () {});
+    }
+    // ...plus a few settling passes for late images / slow font delivery.
+    [300, 900, 2000].forEach(function (t) { setTimeout(nudgeHostResize, t); });
+  }
+
+  function boot() { initReveal(); initSpotlight(); initSectionGlow(); initCounters(); initFaq(); initCharts(); }
+  window.silstoneRefresh = boot;
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  initHostResizeSync();
+
+  var mo = new MutationObserver(function () {
+    clearTimeout(window.__silMo);
+    window.__silMo = setTimeout(boot, 140);
+  });
+  mo.observe(document.body || document.documentElement, { childList: true, subtree: true });
+  [400, 1200, 2600].forEach(function (t) { setTimeout(boot, t); });
+})();
+</script>
+<!-- SIL:GLOBAL END -->
+
+<!--
+  SILSTONE.AI - SECTION 13 - FOOTER
+  Hostinger: Embed code block, FULL WIDTH, last block on the page.
+  Suggested height 420px.
+
+  LOGO: inlined as a data URI so it works with zero setup. Replace the src with
+  your Hostinger media-library URL once uploaded.
+  Contact details are taken from the design system readme; update if they change.
+-->
+<div class="sil-root">
+<footer class="sil-section is-alt has-top sil-footer">
+  <div class="sil-container">
+
+    <div class="sil-footer-top">
+
+      <div class="sil-footer-brand">
+        <img class="sil-footer-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAwAAAABvCAMAAABsFVeuAAADAFBMVEVHcEz///9a2ND+/v7+/v7+/v7////+/v7////+/v7+/v7+/v7+/v7+/v7+/v5d2NH////+///////+/v79/v7+/v7////+/v7+/v7+/v7///9o2dOo6uZZ19D+/v7+/v7////+/v7+/v75/v7+/v7///9Z19D///////////////////9i2NP///9c1s9Z1c7///9a1s/+/v7////9/v5a1c////////9d19D///9b19D///9Z1s7+/v7+/v5Z1c5a1s9b1s/+/v7+/v7///9Z1tD+/v5Z1s5Z1s9Z1c7y/Pz////////+/v5c19D+/v7////+/v5b1s9b2ND+/v7+/v7+/v7+/v7///9a189Z1c7+/v7+/v7+/v7+/v5b189e2NH////+/v5Z1c7///9Z1c5Z18/+/v7///9b19Ba18/+/v5d19D///////9a189a1s9c19BZ1tBb2ND8/v5a1s/+/v5c1s9d19Bb18/+/v78/v5Z2ND+/v7+/v5a18/+/v7+/v7+/v7+/v5b19D///9c19D+/v7+/v5b2NBc19D+/v5Z1s/+/v5a1s9Z1s9a2ND+/v79/v7+/v5a1s/+/v7+/v79/v7+/v5Z1c7+/v77/v5a2NBa1s9Z1c5Z1c5b18/+/v7+/v7+/v5T1tT+/v5b19D8/v7///9b1s9Z1c7+/v5Y1s9a189p29RZ1c5b1s9Y1c5b19Bb1s9b1s+M5N9a19D///////9q29WO5OD+/v7+/v7///9z3dhx3djn+/pq29XD8u+b6eRa1s+h6uaQ5eGN5eFb19B639pv3dfv/Pyw7uuH4t6F4t5n2tSc6OXI8/F13tmJ49/I8/Ft3Nad6eVm2tSs7erM9PKj6ud439pz3dev7uvU9vTH8vHh+Pha2NC+8O7i+Pfi+fe68O5q29X///9a2NBZ1c5b1s9e19H+/v5l2tRh2NJq29Vw3dd339qK5OB94dyD4t2u7eqa6eTh+fjG8/GT5uJg2NGl7Oi48O3S9vSf6ua98e9fBNJ6AAAA53RSTlMA3PoPCAnOVaxtjWGiFS5HIBMldwOODDOZvuAEAoTKe9khLwWm/oj95OwB+wYKCPXxXw34GaKJ9A7n3/bAQrv6i50qFvcKRVZE6gfR3zsQ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" alt="Silstone.AI" width="768" height="111">
+        <div class="sil-footer-direct">
+          <ul class="sil-footer-contact">
+            <li>
+              <a href="mailto:sales@silstonegroup.com">
+                <svg class="sil-contact-ic sil-ic-mail" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>sales@silstonegroup.com</span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:+16135585913">
+                <svg class="sil-contact-ic sil-ic-phone" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6.5 4h3l1.5 4-2 1.5a11 11 0 005 5l1.5-2 4 1.5v3a2 2 0 01-2.2 2A16 16 0 014.5 6.2 2 2 0 016.5 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                </svg>
+                <span>+1 613 558 5913</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <nav class="sil-footer-nav" aria-label="Footer">
+        <div>
+          <h3 class="sil-footer-h">Site</h3>
+          <ul>
+            <li><a href="https://www.silstone.ai/" target="_top">Home</a></li>
+            <li><a href="https://www.silstone.ai/what-we-build" target="_top">What we build</a></li>
+            <li><a href="https://www.silstone.ai/live-demos" target="_top">Live demos</a></li>
+            <li><a href="https://www.silstone.ai/trust-and-security" target="_top">Trust and Security</a></li>
+            <li><a href="https://www.silstone.ai/pricing" target="_top">Pricing</a></li>
+            <li><a href="https://www.silstone.ai/blog" target="_top">Blog</a></li>
+          </ul>
+        </div>
+        <div class="sil-footer-get">
+          <h3 class="sil-footer-h">Getting started</h3>
+          <p class="sil-lead-copy">Book a scoping call. Drop your email and our team gets in touch, usually within one business day.</p>
+
+          <form class="sil-lead" id="silLead" novalidate>
+            <div class="sil-lead-field">
+              <input class="sil-lead-input" type="email" id="silLeadEmail" name="email"
+                     placeholder="you@yourclinic.com" autocomplete="email" required
+                     aria-label="Your work email">
+              <button class="sil-lead-btn" type="submit" aria-label="Book a scoping call">
+                <span class="sil-lead-spinner" aria-hidden="true"></span>
+                <svg class="sil-lead-arw" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <p class="sil-lead-hint" id="silLeadHint" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="sil-lead-done" id="silLeadDone" hidden>
+            <span class="sil-lead-check" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <p><strong>You're on the list.</strong> We'll reach out to <span id="silLeadWho">you</span> shortly.</p>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+
+    <div class="sil-footer-bottom">
+      <p class="sil-mono">&copy; <span id="silYear">2026</span> Silstone.AI. All rights reserved.</p>
+      <p class="sil-mono">We work from your data. We do not integrate with your EMR.</p>
+    </div>
+
+  </div>
+</footer>
+</div>
+
+<style>
+.sil-footer { padding-top: var(--space-16); padding-bottom: var(--space-8); }
+.sil-footer-top { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-12); }
+.sil-footer-logo { height: 24px; width: auto; }
+.sil-footer-brand .sil-body-s { max-width: 42ch; }
+.sil-footer-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.sil-footer-badges li {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: var(--radius-pill);
+  background: var(--sec-softer); border: 1px solid var(--sec-border); color: var(--sec-text);
+}
+.sil-footer-nav { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-12); }
+.sil-footer-h {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--text-quaternary);
+  margin-bottom: var(--space-4);
+}
+.sil-footer-nav ul { display: flex; flex-direction: column; gap: var(--space-3); }
+.sil-footer-nav a { font-size: var(--text-body-s-size); color: var(--text-secondary); white-space: nowrap; }
+.sil-footer-nav a:hover { color: var(--teal-300); }
+
+/* ---- Getting started column: email-capture form ---------------------- */
+.sil-footer-get .sil-lead-copy {
+  font-size: var(--text-body-s-size); line-height: 1.5;
+  color: var(--text-tertiary); max-width: 34ch; margin-bottom: var(--space-4);
+}
+
+.sil-lead-field {
+  display: flex; align-items: center; gap: var(--space-2);
+  background: var(--bg-surface); border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill); padding: 4px 4px 4px 4px;
+  max-width: 320px;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-lead-field:focus-within {
+  border-color: var(--violet-400);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.sil-lead.is-invalid .sil-lead-field {
+  border-color: var(--coral-400);
+  box-shadow: 0 0 0 3px rgba(255,158,122,0.14);
+  animation: silLeadShake 0.4s var(--ease-standard);
+}
+@keyframes silLeadShake {
+  0%,100%{transform:translateX(0);} 20%{transform:translateX(-5px);}
+  40%{transform:translateX(4px);} 60%{transform:translateX(-3px);} 80%{transform:translateX(2px);}
+}
+
+.sil-root .sil-lead-input {
+  flex: 1 1 auto; width: auto; min-width: 0;
+  background: transparent; border: 0; border-radius: 0;
+  padding: 8px 6px 8px 14px; font-size: var(--text-body-s-size);
+  color: var(--text-primary);
+}
+.sil-root .sil-lead-input:focus { border: 0; box-shadow: none; }
+
+.sil-lead-btn {
+  flex: none; position: relative;
+  width: 38px; height: 38px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-on-accent);
+  background: var(--grad-primary); background-size: 160% 160%;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.sil-lead-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(124,107,240,0.34); }
+.sil-lead-btn:active { transform: translateY(0); }
+.sil-lead-btn .sil-lead-arw { transition: transform var(--duration-base) var(--ease-out); }
+.sil-lead-btn:hover .sil-lead-arw { transform: translateX(2px); }
+
+.sil-lead-spinner {
+  position: absolute; width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff;
+  opacity: 0; animation: silLeadSpin 0.7s linear infinite;
+}
+@keyframes silLeadSpin { to { transform: rotate(360deg); } }
+.sil-lead.is-sending .sil-lead-arw { opacity: 0; }
+.sil-lead.is-sending .sil-lead-spinner { opacity: 1; }
+.sil-lead.is-sending .sil-lead-btn { pointer-events: none; }
+
+.sil-lead-hint {
+  font-size: var(--text-caption-size); line-height: 1.4;
+  color: var(--coral-300); min-height: 1.1em;
+  margin-top: var(--space-2); opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+.sil-lead.is-invalid .sil-lead-hint { opacity: 1; }
+
+/* Success state */
+.sil-lead-done {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  max-width: 320px;
+  opacity: 0; transform: translateY(8px);
+}
+.sil-lead-done.is-in {
+  opacity: 1; transform: none;
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+.sil-lead-done p { font-size: var(--text-body-s-size); line-height: 1.5; color: var(--text-secondary); }
+.sil-lead-done strong { color: var(--text-primary); }
+.sil-lead-check {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--mint-300); background: rgba(94,224,168,0.12);
+  border: 1px solid rgba(94,224,168,0.3);
+}
+.sil-lead-check path {
+  stroke-dasharray: 30; stroke-dashoffset: 30;
+}
+.sil-lead-done.is-in .sil-lead-check path {
+  animation: silLeadDraw 0.5s var(--ease-out) 0.15s forwards;
+}
+@keyframes silLeadDraw { to { stroke-dashoffset: 0; } }
+
+.sil-footer-direct {
+  margin-top: var(--space-6);
+  max-width: 340px;
+}
+.sil-footer-h-sub { margin-bottom: var(--space-3); }
+.sil-footer-contact {
+  display: flex; flex-direction: column; gap: var(--space-1);
+}
+.sil-footer-contact a {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  font-size: var(--text-body-s-size); color: var(--text-secondary);
+  padding: var(--space-1) 0;
+}
+.sil-footer-contact a:hover { color: var(--teal-300); }
+.sil-contact-ic { flex: none; }
+.sil-ic-mail  { color: var(--violet-300); }
+.sil-ic-phone { color: var(--coral-300); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sil-lead.is-invalid .sil-lead-field { animation: none; }
+  .sil-lead-done.is-in .sil-lead-check path { animation: none; stroke-dashoffset: 0; }
+}
+
+.sil-footer-bottom {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-10); padding-top: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 860px) {
+  .sil-footer-top { grid-template-columns: 1fr; gap: var(--space-12); }
+}
+@media (max-width: 480px) {
+  .sil-footer-nav { grid-template-columns: 1fr; gap: var(--space-8); }
+  .sil-footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+}
+</style>
+
+<script>
+(function () {
+  var y = document.getElementById('silYear');
+  if (y) y.textContent = new Date().getFullYear();
+
+  /* ---- Lead-capture form -------------------------------------------------
+     Submissions go to Web3Forms, which emails them to the address tied to the
+     access key (sales@silstonegroup.com). If the network call fails, it falls
+     back to a pre-filled mailto so a lead is never lost. */
+  var W3F_ENDPOINT = 'https://api.web3forms.com/submit';
+  var W3F_KEY = '94814fe7-9502-4b6a-b862-44da6cbe1576';
+
+  var form  = document.getElementById('silLead');
+  if (!form) return;
+  var input = document.getElementById('silLeadEmail');
+  var hint  = document.getElementById('silLeadHint');
+  var done  = document.getElementById('silLeadDone');
+  var who   = document.getElementById('silLeadWho');
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function fail(msg) {
+    hint.textContent = msg;
+    form.classList.add('is-invalid');
+    input.focus();
+  }
+  form.addEventListener('input', function () { form.classList.remove('is-invalid'); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = (input.value || '').trim();
+    if (!EMAIL.test(email)) { fail('Please enter a valid email address.'); return; }
+
+    form.classList.remove('is-invalid');
+    form.classList.add('is-sending');
+
+    function succeed() {
+      form.hidden = true;
+      if (who) who.textContent = email;
+      done.hidden = false;
+      // next frame so the transition runs
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { done.classList.add('is-in'); });
+      });
+    }
+
+    fetch(W3F_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: W3F_KEY,
+        subject: 'New scoping-call request from the website',
+        from_name: 'Silstone.AI website',
+        email: email,
+        message: 'Scoping-call request. Please reach out to: ' + email,
+        source: 'footer-scoping-call'
+      })
+    }).then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.success) { succeed(); }
+        else { fail('Something went wrong. Please email us directly.'); form.classList.remove('is-sending'); }
+      })
+      .catch(function () {
+        // network failed: fall back to mailto so the lead is never lost
+        window.location.href = mailto(email);
+        succeed();
+      });
+  });
+
+  function mailto(email) {
+    return 'mailto:sales@silstonegroup.com'
+      + '?subject=' + encodeURIComponent('Scoping call request')
+      + '&body=' + encodeURIComponent('Please book me a scoping call. My email: ' + email);
+  }
+})();
+</script>

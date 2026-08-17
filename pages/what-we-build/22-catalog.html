@@ -1,0 +1,1380 @@
+<!-- SIL:GLOBAL START -- generated from assets/ by build-embeds.py. Everything between these markers is baked in; edit assets/silstone.css or assets/silstone.js and re-run, not here. -->
+<style>
+/* ===========================================================================
+   1. FONTS
+   Poppins/Inter are the design system's documented SUBSTITUTES; real brand font
+   files were never supplied. Swap this @import for @font-face and the rest of
+   the system follows automatically.
+   =========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ===========================================================================
+   2. PALETTE
+   =========================================================================== */
+:root {
+  /* ---- Canvas & surfaces ---- */
+  --bg-canvas:      #08080B;
+  --bg-canvas-alt:  #0C0C12;   /* the alternating section tone */
+  --bg-surface:     #101014;
+  --bg-surface-raised: #16161D;
+  --bg-surface-3:   #1C1C25;
+
+  /* ---- Lines ---- */
+  --border-subtle:  rgba(255,255,255,0.07);
+  --border-default: rgba(255,255,255,0.12);
+  --border-strong:  rgba(255,255,255,0.18);
+
+  /* ---- Type ---- */
+  --text-primary:    #F6F6F8;
+  --text-secondary:  #9B9BA6;
+  --text-tertiary:   #8B8B95;
+  /* Lifted from the original #6A6A75, which measured 3.7:1 on the canvas.
+     #7A7A86 reaches 4.7:1 and still reads as a quiet label colour. */
+  --text-quaternary: #7A7A86;
+
+  /* ---- Violet: the lead ---- */
+  --violet-100: #E4DEFF;
+  --violet-200: #C2B6FF;
+  --violet-300: #A594FF;
+  --violet-400: #8B7CF6;
+  --violet-500: #7C6BF0;
+  --violet-600: #6E56CF;
+  --violet-700: #5B44B8;
+
+  /* ---- Warm ---- */
+  --coral-200: #FFD8C6;
+  --coral-300: #FFC0A6;
+  --coral-400: #FF9E7A;
+  --coral-500: #F0855E;
+  --amber-200: #F7E3BE;
+  --amber-300: #F5D9A8;
+  --amber-400: #EFC178;
+  --amber-500: #E0A855;
+
+  /* ---- Cool ---- */
+  --mint-300: #93EFD0;
+  --mint-400: #5EE0A8;
+  --mint-500: #3FC48C;
+
+  /* ---- Brand teal ----
+     Threaded through in small doses so the wordmark belongs: nav active state,
+     the LIVE pill, the "Built on Claude" chip, footer badges, one stop in the
+     headline gradient, and the whole Trust & security page. Never the lead. */
+  --teal-300: #5FE6D9;
+  --teal-400: #3BDECE;
+  --teal-500: #2DD9D3;
+  --teal-600: #21B4AF;
+  --teal-700: #178C88;
+  --teal-soft:        rgba(45,217,211,0.10);
+  --teal-soft-border: rgba(45,217,211,0.28);
+
+  /* ---- Semantic ---- */
+  --accent:         var(--violet-600);   /* solid CTA: 5.3:1 against white */
+  --accent-hover:   #7A62DE;             /* still 4.5:1 against white      */
+  --accent-active:  var(--violet-700);
+  --text-accent:    var(--violet-300);   /* 7.8:1 on the canvas            */
+  --text-on-accent: #FFFFFF;
+  --focus-ring:     var(--violet-300);
+
+  --accent-soft:        rgba(124,107,240,0.11);
+  --accent-soft-border: rgba(124,107,240,0.28);
+
+  /* ---- Gradients ---- */
+  --grad-primary: linear-gradient(120deg, #7A62DE 0%, #5B44B8 100%);
+  --grad-vivid:   linear-gradient(120deg, var(--violet-400) 0%, var(--violet-600) 55%, #4E3AA6 100%);
+  /* The teal stop is what ties the wordmark to the rest of the page: headline
+     gradients sweep violet -> teal -> coral, so the logo reads as part of the
+     system rather than a leftover. */
+  --grad-text:    linear-gradient(100deg, var(--violet-200) 0%, var(--violet-400) 26%, var(--teal-300) 52%, var(--coral-300) 78%, var(--violet-200) 100%);
+  --grad-line:    linear-gradient(90deg, transparent, var(--violet-500), var(--coral-400), transparent);
+  --grad-warm:    linear-gradient(120deg, var(--coral-400) 0%, var(--amber-400) 100%);
+
+  /* ---- Type scale ---- */
+  --font-display:'Poppins',-apple-system,sans-serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono','SFMono-Regular',Menlo,monospace;
+
+  --text-display-xl-size:4rem;    --text-display-xl-weight:700; --text-display-xl-leading:1.05;
+  --text-display-l-size:3rem;     --text-display-l-weight:700;  --text-display-l-leading:1.1;
+  --text-display-m-size:2.25rem;  --text-display-m-weight:600;  --text-display-m-leading:1.15;
+  --text-display-s-size:1.5rem;   --text-display-s-weight:600;  --text-display-s-leading:1.25;
+
+  --text-body-l-size:1.25rem;    --text-body-l-leading:1.6;
+  --text-body-m-size:1.0625rem;  --text-body-m-leading:1.6;
+  --text-body-s-size:0.9375rem;  --text-body-s-leading:1.55;
+  --text-caption-size:0.8125rem; --text-caption-leading:1.4;
+
+  --tracking-tight:-0.02em; --tracking-normal:0em;
+  --tracking-wide:0.04em;   --tracking-widest:0.18em;
+
+  --font-weight-regular:400; --font-weight-medium:500;
+  --font-weight-semibold:600; --font-weight-bold:700;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1:4px;  --space-2:8px;  --space-3:12px; --space-4:16px;
+  --space-5:20px; --space-6:24px; --space-8:32px; --space-10:40px;
+  --space-12:48px; --space-16:64px; --space-20:80px; --space-24:96px; --space-32:128px;
+
+  /* ---- Radius ---- */
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-xl:24px; --radius-pill:999px;
+
+  /* ---- Shadow ---- */
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.45);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.5);
+
+  /* ---- Motion ---- */
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --duration-fast:120ms; --duration-base:200ms; --duration-slow:360ms;
+
+  /* ---- Layout ---- */
+  --container-max:1200px;
+  --container-pad:clamp(20px,5vw,80px);
+}
+
+/* ===========================================================================
+   3. PER-SECTION ACCENT
+   Put one of these classes on a .sil-section and everything inside re-tints.
+   A single card can override too: style="--sec-rgb:255,158,122".
+   =========================================================================== */
+.sil-section, .sil-root {
+  --sec-rgb: 124,107,240;              /* violet, the default            */
+  --sec-text: var(--violet-300);       /* legible tint for small type    */
+}
+.sil-section.acc-peri  { --sec-rgb: 165,148,255; --sec-text: var(--violet-200); }
+.sil-section.acc-coral { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-section.acc-amber { --sec-rgb: 239,193,120; --sec-text: var(--amber-300);  }
+.sil-section.acc-mint  { --sec-rgb:  94,224,168; --sec-text: var(--mint-300);   }
+.sil-section.acc-teal  { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* Each accent also gets its own ambient-mesh trio, so a warm section drifts
+   warm rather than sitting under a violet haze. */
+.sil-section.acc-coral { --m1: var(--coral-400); --m2: var(--violet-600); --m3: var(--amber-400); }
+.sil-section.acc-amber { --m1: var(--amber-400); --m2: var(--violet-700); --m3: var(--coral-400); }
+.sil-section.acc-mint  { --m1: var(--mint-400);  --m2: var(--violet-600); --m3: var(--teal-500);  }
+.sil-section.acc-peri  { --m1: var(--violet-300);--m2: var(--violet-600); --m3: var(--coral-400); }
+
+/* ---- Trios -------------------------------------------------------------
+   A group of three reads better as a set than as one colour repeated. Put
+   .sil-trio on the container and its three children cycle violet / coral /
+   teal, each re-deriving --sec-* from its own hue.
+
+   Use .sil-trio-1 / -2 / -3 directly on the items instead when something sits
+   between them in the DOM (the How it works steps have connector arrows), or
+   when you want to pick the order by hand.
+   ---------------------------------------------------------------------- */
+.sil-trio > *:nth-child(1), .sil-trio-1 { --sec-rgb: 124,107,240; --sec-text: var(--violet-300); }
+.sil-trio > *:nth-child(2), .sil-trio-2 { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-trio > *:nth-child(3), .sil-trio-3 { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* ---- Sequences ---------------------------------------------------------
+   Longer runs (the six-step engagement timeline) walk the full palette
+   cool -> warm -> cool, so each step is distinct and the row reads as
+   progress rather than repetition. Repeats every six items.
+   ---------------------------------------------------------------------- */
+.sil-seq > *:nth-child(6n+1) { --sec-rgb: 124,107,240; --sec-text: var(--violet-300); }
+.sil-seq > *:nth-child(6n+2) { --sec-rgb: 165,148,255; --sec-text: var(--violet-200); }
+.sil-seq > *:nth-child(6n+3) { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-seq > *:nth-child(6n+4) { --sec-rgb: 239,193,120; --sec-text: var(--amber-300);  }
+.sil-seq > *:nth-child(6n+5) { --sec-rgb:  94,224,168; --sec-text: var(--mint-300);   }
+.sil-seq > *:nth-child(6n+6) { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* Derived once, for every accent scope, so components never repeat an rgba()
+   literal. Whatever sets --sec-rgb above (section class, trio slot, seq slot,
+   or an inline style="--sec-rgb:...") flows through these. */
+.sil-section, .sil-root,
+.sil-trio > *, .sil-trio-1, .sil-trio-2, .sil-trio-3,
+.sil-seq > * {
+  --sec:        rgb(var(--sec-rgb));
+  --sec-soft:   rgba(var(--sec-rgb), 0.10);
+  --sec-softer: rgba(var(--sec-rgb), 0.05);
+  --sec-border: rgba(var(--sec-rgb), 0.26);
+  --sec-glow:   0 0 30px rgba(var(--sec-rgb), 0.20);
+}
+
+/* ===========================================================================
+   4. BASE  (scoped to .sil-root so Hostinger's own chrome is untouched)
+   =========================================================================== */
+.sil-root, .sil-root * { box-sizing: border-box; }
+.sil-root {
+  font-family: var(--font-body);
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-leading);
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  position: relative; overflow-x: clip;
+  /* Fill the section container edge to edge. Hostinger caps its grid container
+     width by default; lifting that cap is a one-time snippet in Settings >
+     Integrations (see README > "Full-width sections in Hostinger"). Once the
+     container is uncapped this fills it; .sil-container re-centres the content. */
+  width: 100%;
+}
+.sil-root img, .sil-root svg, .sil-root canvas { display: block; max-width: 100%; }
+.sil-root p { margin: 0; }
+.sil-root h1, .sil-root h2, .sil-root h3, .sil-root h4 { margin: 0; font-family: var(--font-display); }
+.sil-root ul, .sil-root ol { margin: 0; padding: 0; list-style: none; }
+.sil-root a { color: var(--text-accent); text-decoration: none; transition: color var(--duration-base) var(--ease-standard); }
+.sil-root a:hover { color: var(--violet-200); }
+.sil-root button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+.sil-root ::selection { background: var(--violet-500); color: #fff; }
+
+.sil-root input, .sil-root textarea, .sil-root select {
+  font-family: var(--font-body); font-size: var(--text-body-s-size);
+  color: var(--text-primary); width: 100%;
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 12px 16px; outline: none;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-root input:focus, .sil-root textarea:focus, .sil-root select:focus {
+  border-color: var(--sec); box-shadow: 0 0 0 3px var(--sec-soft);
+}
+.sil-root input::placeholder, .sil-root textarea::placeholder { color: var(--text-quaternary); }
+
+/* ===========================================================================
+   5. LAYOUT
+   =========================================================================== */
+.sil-section {
+  position: relative; width: 100%;
+  padding: var(--space-24) 0;
+  background: var(--bg-canvas); overflow: hidden;
+}
+.sil-section.is-alt   { background: var(--bg-canvas-alt); }
+.sil-section.is-tight { padding: var(--space-12) 0; }
+.sil-section.is-flush { padding: 0; }
+.sil-section.has-top    { border-top: 1px solid var(--border-subtle); }
+.sil-section.has-bottom { border-bottom: 1px solid var(--border-subtle); }
+
+/* A very faint wash of the section's own accent. Subtle by design: it should
+   read as a change of temperature, not as a coloured panel. */
+.sil-section.has-tint::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 88% 54% at 50% 0%, rgba(var(--sec-rgb), 0.03), transparent 66%);
+}
+
+.sil-container {
+  width: 100%; max-width: var(--container-max);
+  margin: 0 auto; padding: 0 var(--container-pad);
+  position: relative; z-index: 2;
+}
+.sil-container.is-narrow { max-width: 860px; }
+
+.sil-grid { display: grid; gap: var(--space-6); }
+.sil-grid.c2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.sil-grid.c3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.sil-grid.c4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.sil-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center; }
+
+.sil-center { text-align: center; }
+/* Scoped to .sil-root (0,2,0) on purpose: the element resets above
+   (`.sil-root p/ul/ol/h1-4 { margin: 0 }`, 0,1,1) would otherwise outrank a bare
+   `.sil-mt-*` (0,1,0) and silently zero it on every paragraph, list and heading.
+   Still below the compound rhythm rules (section 15, also 0,2,0) in source order,
+   so those keep priority where they apply -- utilities remain the floor. */
+.sil-root .sil-mt-2{margin-top:var(--space-2);}   .sil-root .sil-mt-3{margin-top:var(--space-3);}
+.sil-root .sil-mt-4{margin-top:var(--space-4);}   .sil-root .sil-mt-5{margin-top:var(--space-5);}
+.sil-root .sil-mt-6{margin-top:var(--space-6);}   .sil-root .sil-mt-8{margin-top:var(--space-8);}
+.sil-root .sil-mt-10{margin-top:var(--space-10);} .sil-root .sil-mt-12{margin-top:var(--space-12);}
+.sil-root .sil-mt-16{margin-top:var(--space-16);} .sil-root .sil-mt-20{margin-top:var(--space-20);}
+
+/* ===========================================================================
+   6. TYPOGRAPHY
+   =========================================================================== */
+.sil-display-xl,.sil-display-l,.sil-display-m,.sil-display-s {
+  font-family: var(--font-display); letter-spacing: var(--tracking-tight); color: var(--text-primary);
+}
+.sil-display-xl{font-size:var(--text-display-xl-size);font-weight:var(--text-display-xl-weight);line-height:var(--text-display-xl-leading);}
+.sil-display-l {font-size:var(--text-display-l-size); font-weight:var(--text-display-l-weight); line-height:var(--text-display-l-leading);}
+.sil-display-m {font-size:var(--text-display-m-size); font-weight:var(--text-display-m-weight); line-height:var(--text-display-m-leading);}
+.sil-display-s {font-size:var(--text-display-s-size); font-weight:var(--text-display-s-weight); line-height:var(--text-display-s-leading);}
+
+.sil-body-l{font-size:var(--text-body-l-size);line-height:var(--text-body-l-leading);color:var(--text-secondary);}
+.sil-body-m{font-size:var(--text-body-m-size);line-height:var(--text-body-m-leading);color:var(--text-secondary);}
+.sil-body-s{font-size:var(--text-body-s-size);line-height:var(--text-body-s-leading);color:var(--text-secondary);}
+.sil-caption{font-size:var(--text-caption-size);line-height:var(--text-caption-leading);color:var(--text-tertiary);}
+.sil-mono{font-family:var(--font-mono);font-size:var(--text-caption-size);letter-spacing:var(--tracking-wide);color:var(--text-quaternary);}
+.sil-measure{max-width:65ch;}
+
+.sil-root strong, .sil-em { font-weight: var(--font-weight-bold); color: var(--text-primary); }
+.sil-em-accent { color: var(--sec-text); font-weight: var(--font-weight-bold); }
+
+.sil-gt {
+  background: var(--grad-text); background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: silGradShift 13s ease-in-out infinite;
+}
+@keyframes silGradShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+
+.sil-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 5px 13px; border-radius: var(--radius-pill);
+  font-family: var(--font-body); font-size: var(--text-caption-size);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  background: var(--sec-soft); color: var(--sec-text); border: 1px solid var(--sec-border);
+}
+.sil-eyebrow.is-neutral { background: var(--bg-surface-raised); color: var(--text-secondary); border-color: var(--border-subtle); }
+.sil-eyebrow .dot { width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;flex:none; }
+
+.sil-wordmark {
+  font-family: var(--font-display); font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-primary);
+}
+.sil-wordmark em { font-style: normal; color: var(--teal-500); }
+
+@media (max-width: 900px) {
+  :root {
+    --text-display-xl-size:2.75rem; --text-display-l-size:2.25rem;
+    --text-display-m-size:1.75rem;  --text-display-s-size:1.25rem;
+    --text-body-l-size:1.0625rem;
+  }
+  .sil-section { padding: var(--space-16) 0; }
+}
+@media (max-width: 520px) { :root { --text-display-xl-size:2.25rem; --text-display-l-size:1.875rem; } }
+
+/* ===========================================================================
+   7. BUTTONS
+   Prefixed with .sil-root because most buttons are <a> elements, and the base
+   `.sil-root a` rule (0,1,1) would otherwise outrank a bare `.sil-btn-*` (0,1,0)
+   and repaint the label with the link colour.
+   =========================================================================== */
+.sil-btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  font-family: var(--font-body); font-weight: var(--font-weight-semibold);
+  font-size: var(--text-body-m-size);
+  padding: 12px 24px; border-radius: var(--radius-pill);
+  border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.sil-btn-sm { padding: 8px 16px; font-size: var(--text-body-s-size); }
+.sil-btn-lg { padding: 16px 32px; font-size: var(--text-body-l-size); }
+.sil-btn .arw { transition: transform var(--duration-base) var(--ease-standard); flex: none; }
+.sil-btn:hover .arw { transform: translateX(3px); }
+
+.sil-root .sil-btn-primary { background: var(--accent); color: var(--text-on-accent); box-shadow: var(--shadow-sm); }
+.sil-root .sil-btn-primary:hover  { background: var(--accent-hover); color: var(--text-on-accent); box-shadow: 0 6px 24px rgba(124,107,240,0.28); transform: translateY(-1px); }
+.sil-root .sil-btn-primary:active { background: var(--accent-active); color: var(--text-on-accent); transform: none; }
+
+.sil-root .sil-btn-gradient {
+  color: var(--text-on-accent);
+  background: var(--grad-primary); background-size: 200% 200%;
+  animation: silGradShift 10s ease-in-out infinite;
+  box-shadow: var(--shadow-sm);
+}
+.sil-btn-gradient::before {
+  content:''; position:absolute; inset:0; z-index:-1;
+  background: radial-gradient(120px circle at var(--bx,50%) var(--by,50%), rgba(255,255,255,.30), transparent 65%);
+  opacity:0; transition: opacity var(--duration-base) var(--ease-standard);
+}
+.sil-root .sil-btn-gradient:hover { color: var(--text-on-accent); box-shadow: 0 8px 28px rgba(124,107,240,0.32); transform: translateY(-1px); }
+.sil-btn-gradient:hover::before { opacity: 1; }
+
+.sil-root .sil-btn-secondary { background: transparent; color: var(--text-primary); border-color: var(--border-default); }
+.sil-root .sil-btn-secondary:hover  { border-color: var(--sec); color: var(--sec-text); }
+.sil-root .sil-btn-secondary:active { border-color: var(--sec); color: var(--sec-text); }
+
+.sil-root .sil-btn-ghost {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  padding:4px 0; background:transparent; color:var(--sec-text);
+  font-weight:var(--font-weight-semibold); font-size:var(--text-body-m-size);
+}
+.sil-root .sil-btn-ghost:hover { color: var(--violet-100); }
+.sil-btn-ghost .arw { transition: transform var(--duration-base) var(--ease-standard); }
+.sil-btn-ghost:hover .arw { transform: translateX(3px); }
+
+/* ===========================================================================
+   8. CARDS
+   =========================================================================== */
+.sil-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: border-color var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-card.is-hover:hover { border-color: var(--sec-border); }
+.sil-card.is-lift:hover  { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.sil-card.is-raised { background: var(--bg-surface-raised); }
+.sil-card.is-bare   { background: transparent; }
+
+.sil-card.is-spot::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0; border-radius:inherit;
+  background: radial-gradient(340px circle at var(--mx,50%) var(--my,50%), rgba(var(--sec-rgb),0.07), transparent 62%);
+  opacity:0; transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.sil-card.is-spot::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:1; border-radius:inherit; padding:1px;
+  background: radial-gradient(300px circle at var(--mx,50%) var(--my,50%), rgba(var(--sec-rgb),0.55), transparent 68%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity:0; transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.sil-card.is-spot:hover::before, .sil-card.is-spot:hover::after { opacity: 1; }
+.sil-card > * { position: relative; z-index: 2; }
+
+.sil-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-md); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sec-soft); border: 1px solid var(--sec-border); color: var(--sec-text);
+  font-family: var(--font-mono); font-size: 15px; font-weight: 500;
+  transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-card:hover .sil-icon { box-shadow: var(--sec-glow); }
+
+/* ===========================================================================
+   9. TAGS / CHIPS
+   =========================================================================== */
+.sil-tag {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  padding:4px 12px; border-radius:var(--radius-pill);
+  font-family:var(--font-body); font-size:var(--text-caption-size);
+  font-weight:var(--font-weight-semibold); letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;
+  background:var(--bg-surface-raised); color:var(--text-secondary);
+  border:1px solid var(--border-subtle);
+}
+.sil-tag.is-accent { background:var(--sec-soft); color:var(--sec-text); border-color:var(--sec-border); }
+.sil-chip {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  font-family:var(--font-mono); font-size:var(--text-caption-size);
+  letter-spacing:var(--tracking-wide); color:var(--text-secondary);
+}
+.sil-chip .dot {
+  width:6px;height:6px;border-radius:50%;flex:none;
+  background:var(--chip, var(--sec)); box-shadow:0 0 8px var(--chip, var(--sec));
+}
+
+.sil-rule { height:1px; background:var(--border-subtle); border:0; }
+
+/* ===========================================================================
+   10. AMBIENT BACKGROUND
+   Deliberately faint: the canvas must still read as near-black.
+   =========================================================================== */
+.sil-mesh { position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.sil-mesh i {
+  position:absolute; display:block; border-radius:50%;
+  filter: blur(100px); mix-blend-mode: screen; will-change: transform;
+}
+.sil-mesh i:nth-child(1){width:46vw;height:46vw;left:-12%;top:-24%;background:var(--m1,var(--violet-500));opacity:.08;animation:silDrift 26s ease-in-out infinite;}
+.sil-mesh i:nth-child(2){width:34vw;height:34vw;right:-8%;top:4%;background:var(--m2,var(--violet-700));opacity:.07;animation:silDrift 33s ease-in-out infinite reverse;}
+.sil-mesh i:nth-child(3){width:30vw;height:30vw;left:34%;bottom:-20%;background:var(--m3,var(--coral-400));opacity:.05;animation:silDrift 39s ease-in-out infinite;}
+@keyframes silDrift {
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%    {transform:translate(4vw,3vw) scale(1.08);}
+  66%    {transform:translate(-3vw,2vw) scale(0.95);}
+}
+
+.sil-gridlines {
+  position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.020) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.020) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 35%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 35%, transparent 78%);
+}
+
+.sil-cursorglow {
+  position:absolute; inset:0; pointer-events:none; z-index:1;
+  background: radial-gradient(520px circle at var(--gx,50%) var(--gy,40%), rgba(var(--sec-rgb),0.07), transparent 60%);
+  transition: background var(--duration-fast) linear;
+}
+.sil-hairline { position:absolute; top:0; left:0; right:0; height:1px; z-index:2; background: var(--grad-line); opacity:.45; }
+
+/* ===========================================================================
+   11. SCROLL REVEAL
+   =========================================================================== */
+/* Start hidden ONLY when the runtime is present (it adds .sil-js). If the
+   script never runs -- Hostinger's editor canvas, a sandboxed embed, JS off --
+   the content stays fully visible instead of stuck at opacity:0. */
+.sil-js .sil-reveal { opacity:0; transform: translateY(14px); }
+.sil-reveal.is-in {
+  opacity:1; transform:none;
+  transition: opacity var(--duration-slow) var(--ease-standard),
+              transform var(--duration-slow) var(--ease-standard);
+  transition-delay: var(--d, 0ms);
+}
+
+/* ===========================================================================
+   12. DATA VISUALISATION
+   Series colours come from --sec plus the warm ramp, never from a fixed hue,
+   so charts follow whatever accent their section carries.
+   =========================================================================== */
+.sil-chart { width:100%; display:block; overflow:visible; }
+.sil-chart .axis   { stroke: rgba(255,255,255,0.07); stroke-width:1; }
+.sil-chart .glabel { font-family:var(--font-mono); font-size:10px; fill:var(--text-quaternary); letter-spacing:.04em; }
+.sil-chart .vlabel { font-family:var(--font-display); font-size:12px; font-weight:600; fill:var(--text-secondary); }
+
+/* Chart/meter "start" states are also gated behind .sil-js, so without the
+   runtime the charts render in their finished state rather than blank. */
+.sil-chart .bar { transform-origin:bottom; }
+.sil-js .sil-chart .bar { transform:scaleY(0); }
+.is-in .sil-chart .bar { transform:scaleY(1); transition:transform 700ms var(--ease-out); transition-delay:var(--d,0ms); }
+.sil-chart .line { stroke-dasharray:var(--len,2000); }
+.sil-js .sil-chart .line { stroke-dashoffset:var(--len,2000); }
+.is-in .sil-chart .line { stroke-dashoffset:0; transition:stroke-dashoffset 1500ms var(--ease-out); transition-delay:var(--d,0ms); }
+.sil-js .sil-chart .area, .sil-js .sil-chart .pt { opacity:0; }
+.is-in .sil-chart .area { opacity:1; transition:opacity var(--duration-slow) ease 400ms; }
+.is-in .sil-chart .pt   { opacity:1; transition:opacity var(--duration-base) ease; transition-delay:var(--d,0ms); }
+
+.sil-meter { height:5px; border-radius:var(--radius-pill); background:rgba(255,255,255,0.06); overflow:hidden; }
+.sil-meter > span { display:block; height:100%; border-radius:inherit; width:var(--w,0%); background:var(--acc, var(--sec)); }
+.sil-js .sil-meter > span { width:0; }
+.is-in .sil-meter > span { width:var(--w,0%); transition:width 700ms var(--ease-out); transition-delay:var(--d,0ms); }
+
+/* ===========================================================================
+   13. FAQ
+   =========================================================================== */
+.sil-faq { border-top:1px solid var(--border-subtle); }
+.sil-faq-item { border-bottom:1px solid var(--border-subtle); }
+.sil-faq-q {
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  gap:var(--space-4); padding:var(--space-6) 0; text-align:left;
+  font-family:var(--font-body); font-weight:var(--font-weight-bold);
+  font-size:var(--text-body-l-size); color:var(--text-primary);
+  transition:color var(--duration-base) var(--ease-standard);
+}
+.sil-faq-q:hover { color:var(--sec-text); }
+.sil-faq-sign {
+  flex-shrink:0; width:24px; height:24px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--sec-text); font-size:20px; line-height:1;
+  transition:transform var(--duration-base) var(--ease-standard);
+}
+.sil-faq-item.is-open .sil-faq-sign { transform:rotate(45deg); }
+.sil-faq-a { overflow:hidden; height:0; transition:height var(--duration-base) var(--ease-standard); }
+.sil-faq-a .inner {
+  padding-bottom:var(--space-6); max-width:65ch;
+  color:var(--text-secondary);
+  font-size:var(--text-body-m-size); line-height:var(--text-body-m-leading);
+}
+
+/* ===========================================================================
+   14. MARQUEE
+   =========================================================================== */
+.sil-marquee {
+  position:relative; overflow:hidden; width:100%;
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+}
+.sil-marquee-track { display:flex; align-items:center; gap:var(--space-10); width:max-content; animation:silMarquee 42s linear infinite; }
+.sil-marquee:hover .sil-marquee-track { animation-play-state:paused; }
+@keyframes silMarquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ===========================================================================
+   15. VERTICAL RHYTHM
+   Spacing between adjacent text and elements, set in one place.
+   These use compound sibling selectors (0,2,0), which outrank the .sil-mt-*
+   utilities (0,1,0) on purpose: the utilities set a floor, this sets the real
+   rhythm. Change the four --rhythm values to retune the whole site.
+   =========================================================================== */
+:root {
+  --rhythm-tight: var(--space-4);
+  --rhythm:       var(--space-5);
+  --rhythm-loose: var(--space-6);
+  --rhythm-block: clamp(48px, 5.5vw, 72px);
+}
+
+.sil-eyebrow + .sil-display-xl, .sil-eyebrow + .sil-display-l,
+.sil-eyebrow + .sil-display-m,  .sil-eyebrow + .sil-display-s,
+.sil-tag + .sil-display-xl, .sil-tag + .sil-display-l,
+.sil-tag + .sil-display-m,  .sil-tag + .sil-display-s,
+.sil-icon + .sil-display-xl, .sil-icon + .sil-display-l,
+.sil-icon + .sil-display-m,  .sil-icon + .sil-display-s,
+.sil-icon + h2, .sil-icon + h3 { margin-top: var(--rhythm-loose); }
+
+.sil-display-xl + .sil-body-l, .sil-display-xl + .sil-body-m, .sil-display-xl + .sil-body-s,
+.sil-display-l  + .sil-body-l, .sil-display-l  + .sil-body-m, .sil-display-l  + .sil-body-s {
+  margin-top: var(--rhythm-loose);
+}
+.sil-display-m + .sil-body-l, .sil-display-m + .sil-body-m, .sil-display-m + .sil-body-s,
+.sil-display-s + .sil-body-l, .sil-display-s + .sil-body-m, .sil-display-s + .sil-body-s {
+  margin-top: var(--rhythm);
+}
+.sil-body-l + .sil-body-l, .sil-body-l + .sil-body-m, .sil-body-l + .sil-body-s,
+.sil-body-m + .sil-body-l, .sil-body-m + .sil-body-m, .sil-body-m + .sil-body-s,
+.sil-body-s + .sil-body-l, .sil-body-s + .sil-body-m, .sil-body-s + .sil-body-s,
+.sil-body-l + .sil-ticks,  .sil-body-m + .sil-ticks,  .sil-body-s + .sil-ticks {
+  margin-top: var(--rhythm);
+}
+.sil-body-l + .sil-mono, .sil-body-m + .sil-mono, .sil-body-s + .sil-mono,
+.sil-display-s + .sil-mono, .sil-card ul + .sil-mono, .sil-card ol + .sil-mono,
+.sil-table + .sil-mono, .sil-chart + .sil-mono { margin-top: var(--rhythm-loose); }
+
+.sil-direct { gap: var(--space-5); }
+.sil-ticks  { gap: var(--space-4); }
+
+.sil-container > .sil-center + .sil-grid,
+.sil-container > .sil-center + .sil-steps,
+.sil-container > .sil-center + .sil-faq,
+.sil-container > .sil-center + .sil-table,
+.sil-container > .sil-center + .sil-card,
+.sil-container > .sil-center + .sil-outcomes-charts,
+.sil-container > .sil-reveal + .sil-table,
+.sil-container > .sil-reveal + .sil-grid { margin-top: var(--rhythm-block); }
+
+.sil-card { padding: clamp(24px, 2.6vw, 36px); }
+.sil-grid { gap: clamp(20px, 2.2vw, 28px); }
+
+.sil-body-l + .sil-btn, .sil-body-m + .sil-btn, .sil-body-s + .sil-btn,
+.sil-body-l + .sil-btn-ghost, .sil-body-m + .sil-btn-ghost, .sil-body-s + .sil-btn-ghost,
+.sil-ticks + .sil-btn, .sil-mono + .sil-btn { margin-top: var(--space-8); }
+
+/* A caption sitting under a button needs real clearance. A pill button has no
+   optical margin below it, so the default 20px reads as almost touching.
+   The :has() rule covers captions after a button wrapped in its own row div. */
+.sil-btn + .sil-mono, .sil-btn + .sil-caption, .sil-btn + .sil-body-s,
+.sil-btn-ghost + .sil-mono, .sil-btn-ghost + .sil-caption {
+  margin-top: var(--space-6);
+}
+.sil-root *:has(> .sil-btn) + .sil-mono,
+.sil-root *:has(> .sil-btn) + .sil-caption,
+.sil-root *:has(> .sil-btn) + .sil-body-s {
+  margin-top: var(--space-6);
+}
+
+/* ===========================================================================
+   16. RESPONSIVE
+   =========================================================================== */
+@media (max-width:1024px){
+  .sil-split{grid-template-columns:1fr;gap:var(--space-12);}
+  .sil-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:760px){
+  .sil-grid.c2,.sil-grid.c3,.sil-grid.c4{grid-template-columns:1fr;}
+  .sil-btn{width:100%;}
+  .sil-btn.is-auto{width:auto;}
+  .sil-mesh i{filter:blur(70px);}
+}
+
+/* ===========================================================================
+   17. ACCESSIBILITY
+   =========================================================================== */
+.sil-root :focus-visible { outline:2px solid var(--focus-ring); outline-offset:3px; border-radius:var(--radius-sm); }
+.sil-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+@media (prefers-reduced-motion: reduce){
+  .sil-root *, .sil-root *::before, .sil-root *::after {
+    animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;
+  }
+  .sil-reveal{opacity:1 !important;transform:none !important;}
+  .sil-chart .bar{transform:scaleY(1) !important;}
+  .sil-chart .line{stroke-dashoffset:0 !important;}
+  .sil-chart .area,.sil-chart .pt{opacity:1 !important;}
+  .sil-meter > span{width:var(--w,0%) !important;}
+}
+</style>
+<script>
+/* ===========================================================================
+   SILSTONE.AI SHARED RUNTIME
+   Idempotent and re-scannable, so it works regardless of the order Hostinger
+   renders the embed blocks in.
+   =========================================================================== */
+(function () {
+  // Mark that the runtime is live. CSS gates every "start hidden" state behind
+  // this class, so if the script never runs the content stays visible.
+  document.documentElement.classList.add('sil-js');
+
+  if (window.__silstoneInit) return;
+  window.__silstoneInit = true;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = new WeakSet();
+
+  function initReveal() {
+    var els = document.querySelectorAll('.sil-reveal, .sil-section');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    els.forEach(function (el) {
+      if (seen.has(el)) return;
+      seen.add(el);
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('is-in');
+      else io.observe(el);
+    });
+  }
+
+  function initSpotlight() {
+    document.querySelectorAll('.sil-card.is-spot').forEach(function (card) {
+      if (card.__spot) return;
+      card.__spot = true;
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+    document.querySelectorAll('.sil-btn-gradient').forEach(function (b) {
+      if (b.__spot) return;
+      b.__spot = true;
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.setProperty('--bx', (e.clientX - r.left) + 'px');
+        b.style.setProperty('--by', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+  }
+
+  function initSectionGlow() {
+    document.querySelectorAll('.sil-section').forEach(function (sec) {
+      if (sec.__glow || !sec.querySelector('.sil-cursorglow')) return;
+      sec.__glow = true;
+      sec.addEventListener('pointermove', function (e) {
+        var r = sec.getBoundingClientRect();
+        sec.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100) + '%');
+        sec.style.setProperty('--gy', ((e.clientY - r.top) / r.height * 100) + '%');
+      }, { passive: true });
+    });
+  }
+
+  /* <span class="sil-count" data-to="312" data-prefix="$" data-suffix="K"> */
+  function initCounters() {
+    var els = document.querySelectorAll('.sil-count');
+    if (!els.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        run(e.target);
+      });
+    }, { threshold: 0.4 });
+
+    els.forEach(function (el) {
+      if (el.__count) return;
+      el.__count = true;
+      el.textContent = (el.dataset.prefix || '') + '0' + (el.dataset.suffix || '');
+      io.observe(el);
+    });
+
+    function run(el) {
+      var to  = parseFloat(el.dataset.to || '0');
+      var dec = parseInt(el.dataset.dec || '0', 10);
+      var pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+      var sep = el.dataset.sep === '1';
+      function fmt(v) {
+        var s = v.toFixed(dec);
+        return sep ? Number(s).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) : s;
+      }
+      if (reduced) { el.textContent = pre + fmt(to) + suf; return; }
+      var dur = 1200, t0 = performance.now();
+      (function tick(now) {
+        var p = Math.min((now - t0) / dur, 1);
+        el.textContent = pre + fmt(to * (1 - Math.pow(1 - p, 3))) + suf;
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+  }
+
+  function initFaq() {
+    document.querySelectorAll('.sil-faq').forEach(function (faq) {
+      if (faq.__faq) return;
+      faq.__faq = true;
+      var single = faq.dataset.single !== '0';
+
+      faq.querySelectorAll('.sil-faq-item').forEach(function (item) {
+        var q = item.querySelector('.sil-faq-q');
+        var a = item.querySelector('.sil-faq-a');
+        if (!q || !a) return;
+        q.setAttribute('aria-expanded', item.classList.contains('is-open') ? 'true' : 'false');
+        if (item.classList.contains('is-open')) a.style.height = a.firstElementChild.offsetHeight + 'px';
+
+        q.addEventListener('click', function () {
+          var open = item.classList.contains('is-open');
+          if (single && !open) {
+            faq.querySelectorAll('.sil-faq-item.is-open').forEach(function (o) {
+              o.classList.remove('is-open');
+              o.querySelector('.sil-faq-a').style.height = '0px';
+              o.querySelector('.sil-faq-q').setAttribute('aria-expanded', 'false');
+            });
+          }
+          item.classList.toggle('is-open', !open);
+          q.setAttribute('aria-expanded', String(!open));
+          a.style.height = open ? '0px' : a.firstElementChild.offsetHeight + 'px';
+        });
+      });
+    });
+
+    if (!window.__silFaqResize) {
+      window.__silFaqResize = true;
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(function () {
+          document.querySelectorAll('.sil-faq-item.is-open .sil-faq-a').forEach(function (a) {
+            a.style.height = a.firstElementChild.offsetHeight + 'px';
+          });
+        }, 120);
+      }, { passive: true });
+    }
+  }
+
+  function initCharts() {
+    document.querySelectorAll('.sil-chart .line').forEach(function (p) {
+      if (p.__len) return;
+      p.__len = true;
+      try { p.style.setProperty('--len', Math.ceil(p.getTotalLength())); } catch (err) {}
+    });
+  }
+
+  /* Hostinger sizes each "Embed code" block by watching this document's body
+     with a ResizeObserver and matching the iframe to its content height. If it
+     measures before the webfont swaps in, the stored height can be left stale
+     -- content ends up shorter than the reserved box and a blank band shows
+     below the block. Poking the body's size makes the observer re-fire and the
+     host re-measures, so any stale height self-corrects. Harmless outside an
+     embed (the preview pages have no such observer). */
+  function nudgeHostResize() {
+    var b = document.body;
+    if (!b) return;
+    try {
+      var prev = b.style.minHeight;
+      b.style.minHeight = (b.offsetHeight + 1) + 'px';
+      void b.offsetHeight;            // force reflow so the +1 is observed
+      requestAnimationFrame(function () { b.style.minHeight = prev; });
+    } catch (e) {}
+    try { window.dispatchEvent(new Event('resize')); } catch (e) {}
+  }
+
+  function initHostResizeSync() {
+    if (window.__silResizeSync) return;
+    window.__silResizeSync = true;
+    // Re-measure once the real fonts are in (the common stale-height cause)...
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(nudgeHostResize).catch(function () {});
+    }
+    // ...plus a few settling passes for late images / slow font delivery.
+    [300, 900, 2000].forEach(function (t) { setTimeout(nudgeHostResize, t); });
+  }
+
+  function boot() { initReveal(); initSpotlight(); initSectionGlow(); initCounters(); initFaq(); initCharts(); }
+  window.silstoneRefresh = boot;
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  initHostResizeSync();
+
+  var mo = new MutationObserver(function () {
+    clearTimeout(window.__silMo);
+    window.__silMo = setTimeout(boot, 140);
+  });
+  mo.observe(document.body || document.documentElement, { childList: true, subtree: true });
+  [400, 1200, 2600].forEach(function (t) { setTimeout(boot, t); });
+})();
+</script>
+<!-- SIL:GLOBAL END -->
+
+<!--
+  SILSTONE.AI - PAGE: WHAT WE BUILD - BLOCK 22 - THE FULL PICTURE
+  Hostinger: Embed code block, FULL WIDTH. Suggested height 2200px.
+  Eight plain-English capability cards, each a title + one-line promise + a short
+  description + a three-step Understand->Act->Complete flow. Cards cycle the full
+  palette via .sil-seq (violet / peri / coral / amber / mint / teal, repeating).
+  Closes on the "real world" panel: three non-negotiables, each with its own icon.
+  No JS beyond the shared reveal; every card reads correctly with motion off.
+-->
+<div class="sil-root">
+<section class="sil-section acc-peri is-alt has-top sil-catalog">
+  <div class="sil-cursorglow" aria-hidden="true"></div>
+  <div class="sil-container">
+
+    <div class="sil-center sil-reveal">
+      <span class="sil-eyebrow"><i class="dot"></i>The full picture</span>
+      <h2 class="sil-display-l sil-mt-5">The kinds of work<br>we can take off your plate.</h2>
+      <p class="sil-body-l sil-mt-6 sil-measure" style="margin-inline:auto;">
+        From understanding information to making decisions and taking action, we build AI
+        systems that handle the work behind the scenes.
+      </p>
+    </div>
+
+    <div class="sil-grid c2 sil-mt-12">
+
+      <!-- 01 AI agents -->
+      <article class="sil-card is-hover is-spot sil-cap2 sil-reveal a-violet">
+        <div class="cap-viz2 v-agents" aria-hidden="true">
+          <svg class="wire" viewBox="0 0 200 112" preserveAspectRatio="none">
+            <path d="M72 56 H150"/>
+            <path d="M72 56 C112 56 112 28 150 28"/>
+            <path d="M72 56 C112 56 112 84 150 84"/>
+          </svg>
+          <span class="core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="12" cy="17" r="2"/><path d="M7.6 8.4 10.8 15.4M16.4 8.4 13.2 15.4M8 7h8"/></svg></span>
+          <span class="tool n1"></span><span class="tool n2"></span><span class="tool n3"></span>
+        </div>
+        <span class="sil-tag is-accent">AI agents</span>
+        <h3 class="sil-display-s sil-mt-5">Let AI handle the work, not just the conversation.</h3>
+        <p class="sil-body-m sil-mt-3">
+          AI agents can understand a request, decide what needs to happen, use the right tools,
+          and complete tasks across your systems.
+        </p>
+        <ul class="sil-flow sil-mt-6">
+          <li><span class="k">Understand</span><span class="v">Requests, instructions &amp; context</span></li>
+          <li><span class="k">Act</span><span class="v">Tools, systems &amp; workflows</span></li>
+          <li><span class="k">Complete</span><span class="v">Tasks from start to finish</span></li>
+        </ul>
+      </article>
+
+      <!-- 02 document intelligence -->
+      <article class="sil-card is-hover is-spot sil-cap2 sil-reveal a-amber" style="--d:80ms;">
+        <div class="cap-viz2 v-docs" aria-hidden="true">
+          <div class="doc"><span class="row"></span><span class="row"></span><span class="row"></span><span class="row s"></span><span class="scan"></span></div>
+          <div class="fields"><span class="f f1">Name</span><span class="f f2">Date</span><span class="f f3">Total</span></div>
+        </div>
+        <span class="sil-tag is-accent">Document intelligence</span>
+        <h3 class="sil-display-s sil-mt-5">Turn mountains of information into something useful.</h3>
+        <p class="sil-body-m sil-mt-3">
+          AI can read contracts, forms, reports, PDFs, emails and other documents, then extract
+          the information your team actually needs.
+        </p>
+        <ul class="sil-flow sil-mt-6">
+          <li><span class="k">Read</span><span class="v">Documents at scale</span></li>
+          <li><span class="k">Extract</span><span class="v">Key information &amp; insights</span></li>
+          <li><span class="k">Organize</span><span class="v">Data into usable formats</span></li>
+        </ul>
+      </article>
+
+      <!-- 03 workflow automation -->
+      <article class="sil-card is-hover is-spot sil-cap2 sil-reveal a-teal" style="--d:160ms;">
+        <div class="cap-viz2 v-flow" aria-hidden="true">
+          <span class="track"></span>
+          <span class="node w1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg></span>
+          <span class="node w2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h7l-1 7 9-11h-7z"/></svg></span>
+          <span class="node w3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 6"/></svg></span>
+          <span class="pulse"></span>
+        </div>
+        <span class="sil-tag is-accent">Workflow automation</span>
+        <h3 class="sil-display-s sil-mt-5">Take repetitive work off your team's hands.</h3>
+        <p class="sil-body-m sil-mt-3">
+          Connect multiple steps into one intelligent workflow so routine processes can run
+          automatically instead of being handled manually.
+        </p>
+        <ul class="sil-flow sil-mt-6">
+          <li><span class="k">Trigger</span><span class="v">Start when an event happens</span></li>
+          <li><span class="k">Process</span><span class="v">Follow the right steps</span></li>
+          <li><span class="k">Complete</span><span class="v">Update systems &amp; move work forward</span></li>
+        </ul>
+      </article>
+
+      <!-- 04 AI copilots -->
+      <article class="sil-card is-hover is-spot sil-cap2 sil-reveal a-coral" style="--d:240ms;">
+        <div class="cap-viz2 v-copilot" aria-hidden="true">
+          <span class="star">&#10022;</span>
+          <span class="bub u">Draft the reply</span>
+          <span class="bub a"><i></i><i></i><i></i></span>
+        </div>
+        <span class="sil-tag is-accent">AI copilots</span>
+        <h3 class="sil-display-s sil-mt-5">Give your team an AI assistant that knows the job.</h3>
+        <p class="sil-body-m sil-mt-3">
+          Build intelligent assistants that understand your business, work with your data, and help
+          employees find information, create content and get things done faster.
+        </p>
+        <ul class="sil-flow sil-mt-6">
+          <li><span class="k">Ask</span><span class="v">Questions in plain language</span></li>
+          <li><span class="k">Find</span><span class="v">Relevant information</span></li>
+          <li><span class="k">Assist</span><span class="v">With everyday decisions and tasks</span></li>
+        </ul>
+      </article>
+
+      <!-- 05 predictive AI -->
+      <article class="sil-card is-hover is-spot sil-cap2 sil-reveal a-blue" style="--d:80ms;">
+        <div class="cap-viz2 v-predict" aria-hidden="true">
+          <svg viewBox="0 0 200 112" preserveAspectRatio="none">
+            <line class="grid" x1="14" y1="34" x2="190" y2="34"/>
+            <line class="grid" x1="14" y1="62" x2="190" y2="62"/>
+            <line class="grid" x1="14" y1="90" x2="190" y2="90"/>
+            <polygon class="cone" points="132,46 190,16 190,72"/>
+            <path class="area" d="M14,86 46,70 76,78 106,52 132,46 132,92 14,92 Z"/>
+            <polyline class="past" points="14,86 46,70 76,78 106,52 132,46"/>
+            <line class="median" x1="132" y1="46" x2="190" y2="42"/>
+            <circle class="pt" cx="190" cy="42" r="4"/>
+          </svg>
+        </div>
+        <span class="sil-tag is-accent">Predictive AI</span>
+        <h3 class="sil-display-s sil-mt-5">Spot what is likely to happen next.</h3>
+        <p class="sil-body-m sil-mt-3">
+          Use your existing business data to identify patterns, predict outcomes, and help your team
+          make better decisions before problems happen.
+        </p>
+        <ul class="sil-flow sil-mt-6">
+          <li><span class="k">Analyze</span><span class="v">Historical &amp; real-time data</span></li>
+          <li><span class="k">Predict</span><span class="v">Likely outcomes</span></li>
+          <li><span class="k">Improve</span><span class="v">Planning &amp; decision-making</span></li>
+        </ul>
+      </article>
+
+      <!-- 06 knowledge systems -->
+      <article class="sil-card is-hover is-spot sil-cap2 sil-reveal a-rose" style="--d:160ms;">
+        <div class="cap-viz2 v-knowledge" aria-hidden="true">
+          <svg class="wire" viewBox="0 0 200 112" preserveAspectRatio="none">
+            <path d="M40 26 L100 56"/><path d="M40 86 L100 56"/><path d="M160 26 L100 56"/><path d="M160 86 L100 56"/>
+          </svg>
+          <span class="src p1"></span><span class="src p2"></span><span class="src p3"></span><span class="src p4"></span>
+          <span class="hub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></span>
+        </div>
+        <span class="sil-tag is-accent">Knowledge systems</span>
+        <h3 class="sil-display-s sil-mt-5">Make your company's knowledge easier to use.</h3>
+        <p class="sil-body-m sil-mt-3">
+          Connect AI to your internal documents, databases, policies and knowledge so people can find
+          reliable answers without digging through multiple systems.
+        </p>
+        <ul class="sil-flow sil-mt-6">
+          <li><span class="k">Connect</span><span class="v">Your existing knowledge</span></li>
+          <li><span class="k">Understand</span><span class="v">Context &amp; intent</span></li>
+          <li><span class="k">Answer</span><span class="v">With relevant information</span></li>
+        </ul>
+      </article>
+
+      <!-- 07 AI + your existing systems -->
+      <article class="sil-card is-hover is-spot sil-cap2 sil-reveal a-mint" style="--d:240ms;">
+        <div class="cap-viz2 v-connect" aria-hidden="true">
+          <span class="link"></span>
+          <span class="sys s-a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></span>
+          <span class="sys s-b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></span>
+          <span class="dot d1"></span><span class="dot d2"></span>
+        </div>
+        <span class="sil-tag is-accent">AI + your existing systems</span>
+        <h3 class="sil-display-s sil-mt-5">Make AI work with the tools you already use.</h3>
+        <p class="sil-body-m sil-mt-3">
+          AI becomes much more useful when it can actually interact with your existing software,
+          databases, APIs and business systems.
+        </p>
+        <ul class="sil-flow sil-mt-6">
+          <li><span class="k">Connect</span><span class="v">APIs, databases &amp; platforms</span></li>
+          <li><span class="k">Exchange</span><span class="v">Information securely</span></li>
+          <li><span class="k">Automate</span><span class="v">Actions across systems</span></li>
+        </ul>
+      </article>
+
+      <!-- 08 custom AI products -->
+      <article class="sil-card is-hover is-spot sil-cap2 sil-reveal a-fuchsia" style="--d:80ms;">
+        <div class="cap-viz2 v-custom" aria-hidden="true">
+          <div class="win">
+            <span class="tb"><i></i><i></i><i></i></span>
+            <span class="blk b1"></span>
+            <span class="blk b2"></span>
+            <span class="blk b3"></span>
+          </div>
+          <span class="cursor"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 2 20 12 13 13 10 20 Z"/></svg></span>
+          <span class="star">&#10022;</span>
+        </div>
+        <span class="sil-tag is-accent">Custom AI products</span>
+        <h3 class="sil-display-s sil-mt-5">Have an AI idea? Turn it into something people can actually use.</h3>
+        <p class="sil-body-m sil-mt-3">
+          From the first prototype to a production-ready product, we build AI around your users,
+          your workflows and your business goals.
+        </p>
+        <ul class="sil-flow sil-mt-6">
+          <li><span class="k">Prototype</span><span class="v">Test the idea quickly</span></li>
+          <li><span class="k">Build</span><span class="v">Turn it into a working product</span></li>
+          <li><span class="k">Scale</span><span class="v">Support real users and real workloads</span></li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- closing panel: AI that works in the real world -->
+    <div class="sil-card is-raised sil-realworld sil-reveal sil-mt-12">
+      <div class="rw-head">
+        <span class="sil-eyebrow"><i class="dot"></i>AI that works in the real world</span>
+        <h3 class="sil-display-m sil-mt-4">Not just a demo. Not just another chatbot.</h3>
+        <p class="sil-body-l sil-mt-4 sil-measure">
+          We combine AI models, automation, integrations and human oversight to build systems that
+          can actually fit into the way your business works.
+        </p>
+      </div>
+      <div class="sil-grid c3 sil-trio rw-points sil-mt-10">
+        <div class="rw-point">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.2 2.9 7.7 7 9 4.1-1.3 7-4.8 7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          <span class="k">Secure</span>
+          <span class="v">Built with privacy &amp; security in mind</span>
+        </div>
+        <div class="rw-point">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7 4 12l5 5M15 7l5 5-5 5M14 4l-4 16"/></svg>
+          </span>
+          <span class="k">Connected</span>
+          <span class="v">Works with your existing systems</span>
+        </div>
+        <div class="rw-point">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.5 2 5 5.5 5 9 0 2.5-1 4.5-2 6H9c-1-1.5-2-3.5-2-6 0-3.5 1.5-7 5-9z"/><circle cx="12" cy="10" r="1.6"/><path d="M9 18l-2 3M15 18l2 3"/></svg>
+          </span>
+          <span class="k">Production-ready</span>
+          <span class="v">Built for real users, not just demos</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<style>
+/* ---- capability cards ------------------------------------------------------
+   Colour comes entirely from .sil-seq on the grid (global stylesheet): each
+   card walks the palette violet -> peri -> coral -> amber -> mint -> teal and
+   re-derives the full --sec-* set, so the tag chip, heading tint, flow dots and
+   hover glow all follow that card's hue. Cards flex-column so every three-step
+   flow bottom-aligns across a row regardless of description length. */
+.sil-catalog .sil-cap2 { display: flex; flex-direction: column; }
+.sil-catalog .sil-cap2 > .sil-flow { margin-top: auto; }
+
+.sil-cap2 .sil-tag { align-self: flex-start; }
+
+/* ---- per-card accent: 8 distinct, contrasting hues -------------------------
+   Each card owns a hue (no palette-cycling), so neighbours contrast hard and
+   every solution reads as its own thing. Re-derives the same --sec-* set the
+   global stylesheet builds, so the graphic, chip, heading tint, flow dots, card
+   rim and hover glow all follow. Text tints clear ~7:1 on the near-black canvas. */
+.sil-catalog .a-violet  { --sec-rgb: 124,107,240; --sec-text: #A594FF; }
+.sil-catalog .a-amber   { --sec-rgb: 239,193,120; --sec-text: #F5D9A8; }
+.sil-catalog .a-teal    { --sec-rgb:  45,217,211; --sec-text: #5FE6D9; }
+.sil-catalog .a-coral   { --sec-rgb: 255,158,122; --sec-text: #FFC0A6; }
+.sil-catalog .a-blue    { --sec-rgb:  86,140,246; --sec-text: #A9C6FF; }
+.sil-catalog .a-rose    { --sec-rgb: 240,113,124; --sec-text: #FFB1B7; }
+.sil-catalog .a-mint    { --sec-rgb:  94,224,168; --sec-text: #93EFD0; }
+.sil-catalog .a-fuchsia { --sec-rgb: 213,120,234; --sec-text: #ECBAF7; }
+.sil-catalog .a-violet, .sil-catalog .a-amber, .sil-catalog .a-teal,
+.sil-catalog .a-coral,  .sil-catalog .a-blue,  .sil-catalog .a-rose,
+.sil-catalog .a-mint,   .sil-catalog .a-fuchsia {
+  --sec: rgb(var(--sec-rgb));
+  --sec-soft:   rgba(var(--sec-rgb), 0.10);
+  --sec-softer: rgba(var(--sec-rgb), 0.05);
+  --sec-border: rgba(var(--sec-rgb), 0.26);
+  --sec-glow:   0 0 30px rgba(var(--sec-rgb), 0.20);
+}
+
+/* ---- graphic panel (shared) ------------------------------------------------
+   A framed, accent-tinted stage at the top of every card. Each motif below is
+   built from the card's --sec-* vars, so it recolours automatically. Every
+   animation rests on a legible final frame: with reduced-motion (which the
+   global sheet snaps to that frame) or no JS the graphic still reads. */
+.cap-viz2 {
+  position: relative; overflow: hidden; flex: none;
+  height: 132px; border-radius: var(--radius-md);
+  margin-bottom: var(--space-6);
+  background:
+    radial-gradient(130% 130% at 50% 0%, var(--sec-soft), transparent 68%),
+    var(--bg-canvas);
+  border: 1px solid var(--sec-border);
+}
+.cap-viz2 > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cap-viz2 svg.wire path { fill: none; stroke: var(--sec-border); stroke-width: 1.2; }
+.cap-viz2 .core, .cap-viz2 .hub, .cap-viz2 .node, .cap-viz2 .sys {
+  position: absolute; display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-raised); border: 1px solid var(--sec-border); color: var(--sec-text);
+}
+
+/* 1 · AI agents - a core that dispatches to tools, firing in sequence */
+.v-agents .core { left: 28%; top: 50%; width: 40px; height: 40px; transform: translate(-50%,-50%); animation: vGlow 3.6s ease-in-out infinite; }
+.v-agents .core svg { width: 21px; height: 21px; }
+.v-agents .tool { position: absolute; left: 75%; width: 17px; height: 17px; border-radius: 5px; transform: translate(-50%,-50%); background: var(--bg-surface-3); border: 1px solid var(--sec-border); animation: vFire 3.6s ease-in-out infinite; }
+.v-agents .n1 { top: 25%; animation-delay: .2s; }
+.v-agents .n2 { top: 50%; animation-delay: .8s; }
+.v-agents .n3 { top: 75%; animation-delay: 1.4s; }
+@keyframes vFire {
+  0%,12%   { background: var(--bg-surface-3); border-color: var(--sec-border); box-shadow: none; }
+  26%,46%  { background: var(--sec-soft);     border-color: var(--sec);        box-shadow: 0 0 12px var(--sec); }
+  62%,100% { background: var(--bg-surface-3); border-color: var(--sec-border); box-shadow: none; }
+}
+@keyframes vGlow { 0%,100% { box-shadow: 0 0 0 0 rgba(var(--sec-rgb),0); } 50% { box-shadow: var(--sec-glow); } }
+
+/* 2 · Document intelligence - scanline sweeps a doc, fields light up */
+.v-docs { display: flex; align-items: center; justify-content: center; gap: 22px; }
+.v-docs .doc {
+  position: relative; width: 60px; height: 80px; overflow: hidden;
+  padding: 10px; border-radius: 6px;
+  background: var(--bg-surface); border: 1px solid var(--border-default);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.v-docs .doc .row { height: 5px; border-radius: 3px; background: rgba(255,255,255,.14); }
+.v-docs .doc .row.s { width: 55%; }
+.v-docs .doc .scan {
+  position: absolute; left: 0; right: 0; top: -20px; height: 20px;
+  background: linear-gradient(rgba(var(--sec-rgb),.42), transparent);
+  border-top: 1px solid var(--sec); animation: vScan 3.2s ease-in-out infinite;
+}
+@keyframes vScan { 0% { top: -20px; } 70%,100% { top: 100%; } }
+.v-docs .fields { display: flex; flex-direction: column; gap: 8px; }
+.v-docs .f {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em;
+  padding: 4px 10px; border-radius: var(--radius-pill);
+  background: var(--bg-surface-raised); border: 1px solid var(--border-subtle); color: var(--text-tertiary);
+  animation: vField 3.2s ease-in-out infinite;
+}
+.v-docs .f1 { animation-delay: .6s; } .v-docs .f2 { animation-delay: 1.0s; } .v-docs .f3 { animation-delay: 1.4s; }
+@keyframes vField {
+  0%,18%   { color: var(--text-tertiary); border-color: var(--border-subtle); background: var(--bg-surface-raised); }
+  34%,100% { color: var(--sec-text);      border-color: var(--sec-border);    background: var(--sec-soft); }
+}
+
+/* 3 · Workflow automation - a pulse travels a track; nodes light as it passes */
+.v-flow .track { position: absolute; left: 18%; right: 18%; top: 50%; height: 2px; transform: translateY(-50%); background: var(--sec-border); }
+.v-flow .node { top: 50%; width: 36px; height: 36px; transform: translate(-50%,-50%); animation: vNodeLit 2.8s ease-in-out infinite; }
+.v-flow .node svg { width: 18px; height: 18px; }
+.v-flow .w1 { left: 18%; animation-delay: 0s; }
+.v-flow .w2 { left: 50%; animation-delay: .9s; }
+.v-flow .w3 { left: 82%; animation-delay: 1.8s; }
+.v-flow .w1 svg { animation: vSpin 5s linear infinite; }
+@keyframes vSpin { to { transform: rotate(360deg); } }
+.v-flow .pulse {
+  position: absolute; top: 50%; left: 18%; width: 9px; height: 9px; border-radius: 50%;
+  transform: translate(-50%,-50%); background: var(--sec-text); box-shadow: 0 0 12px var(--sec-text);
+  animation: vTravel 2.8s var(--ease-standard) infinite;
+}
+@keyframes vTravel { 0% { left: 18%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: 82%; opacity: 0; } }
+@keyframes vNodeLit {
+  0%,20%   { background: var(--bg-surface-raised); border-color: var(--sec-border); box-shadow: none; }
+  32%,56%  { background: var(--sec-soft);          border-color: var(--sec);        box-shadow: 0 0 12px var(--sec); }
+  70%,100% { background: var(--bg-surface-raised); border-color: var(--sec-border); box-shadow: none; }
+}
+
+/* 4 · AI copilots - a prompt, then the assistant typing back */
+.v-copilot .bub { position: absolute; padding: 8px 12px; border-radius: 12px; font-family: var(--font-body); font-size: 11px; }
+.v-copilot .u { top: 24%; right: 13%; background: var(--sec-soft); border: 1px solid var(--sec-border); color: var(--sec-text); border-bottom-right-radius: 3px; }
+.v-copilot .a { bottom: 22%; left: 13%; background: var(--bg-surface-raised); border: 1px solid var(--border-default); border-bottom-left-radius: 3px; display: flex; gap: 5px; align-items: center; }
+.v-copilot .a i { width: 6px; height: 6px; border-radius: 50%; background: var(--sec-text); animation: vType 1.4s ease-in-out infinite; }
+.v-copilot .a i:nth-child(2) { animation-delay: .2s; } .v-copilot .a i:nth-child(3) { animation-delay: .4s; }
+@keyframes vType { 0%,60%,100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-4px); opacity: 1; } }
+.v-copilot .star { position: absolute; top: 16%; left: 18%; color: var(--sec-text); font-size: 15px; animation: vTwinkle 2.6s ease-in-out infinite; }
+@keyframes vTwinkle { 0%,100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
+
+/* 5 · Predictive AI - history draws in, then a widening forecast cone + point */
+.v-predict .grid { stroke: rgba(255,255,255,.06); stroke-width: 1; }
+.v-predict .area { fill: rgba(var(--sec-rgb),.12); stroke: none; }
+.v-predict .cone {
+  fill: rgba(var(--sec-rgb),.10); stroke: rgba(var(--sec-rgb),.38); stroke-width: 1;
+  stroke-dasharray: 3 4; vector-effect: non-scaling-stroke;
+  transform-box: view-box; transform-origin: 132px 46px; animation: vCone 3.8s var(--ease-out) infinite;
+}
+@keyframes vCone { 0%,38% { transform: scaleX(0); opacity: 0; } 55%,100% { transform: scaleX(1); opacity: 1; } }
+.v-predict .past {
+  fill: none; stroke: var(--sec); stroke-width: 2.5; vector-effect: non-scaling-stroke;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 220; stroke-dashoffset: 0; animation: vDraw 3.8s var(--ease-out) infinite;
+}
+@keyframes vDraw { 0% { stroke-dashoffset: 220; } 40%,100% { stroke-dashoffset: 0; } }
+.v-predict .median {
+  stroke: var(--sec-text); stroke-width: 2; vector-effect: non-scaling-stroke;
+  stroke-linecap: round; stroke-dasharray: 4 5;
+}
+.v-predict .pt { fill: var(--sec-text); filter: drop-shadow(0 0 4px var(--sec)); animation: vPt 3.8s ease-in-out infinite; }
+@keyframes vPt { 0%,46% { r: 0; opacity: 0; } 60% { r: 6; opacity: 1; } 100% { r: 4; opacity: 1; } }
+
+/* 6 · Knowledge systems - sources feed a central store, in sequence */
+.v-knowledge .hub { left: 50%; top: 50%; width: 42px; height: 42px; transform: translate(-50%,-50%); animation: vGlow 3.2s ease-in-out infinite; }
+.v-knowledge .hub svg { width: 21px; height: 21px; }
+.v-knowledge .src {
+  position: absolute; width: 15px; height: 15px; border-radius: 4px;
+  transform: translate(-50%,-50%); background: var(--bg-surface-3); border: 1px solid var(--sec-border);
+  animation: vFire 3.2s ease-in-out infinite;
+}
+.v-knowledge .p1 { left: 20%; top: 24%; animation-delay: 0s; }
+.v-knowledge .p2 { left: 20%; top: 76%; animation-delay: .4s; }
+.v-knowledge .p3 { left: 80%; top: 24%; animation-delay: .8s; }
+.v-knowledge .p4 { left: 80%; top: 76%; animation-delay: 1.2s; }
+
+/* 7 · AI + existing systems - two systems exchanging data both ways */
+.v-connect .sys { top: 50%; width: 42px; height: 42px; transform: translate(-50%,-50%); }
+.v-connect .s-a { left: 22%; } .v-connect .s-b { left: 78%; }
+.v-connect .sys svg { width: 21px; height: 21px; }
+.v-connect .link { position: absolute; left: 22%; right: 22%; top: 50%; height: 2px; transform: translateY(-50%); background: var(--sec-border); }
+.v-connect .dot { position: absolute; top: 50%; width: 8px; height: 8px; border-radius: 50%; transform: translate(-50%,-50%); background: var(--sec-text); box-shadow: 0 0 10px var(--sec-text); }
+.v-connect .d1 { animation: vAB 2.6s ease-in-out infinite; }
+.v-connect .d2 { animation: vBA 2.6s ease-in-out infinite; animation-delay: 1.3s; }
+@keyframes vAB { 0% { left: 22%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: 78%; opacity: 0; } }
+@keyframes vBA { 0% { left: 78%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: 22%; opacity: 0; } }
+
+/* 8 · Custom AI products - a bespoke product UI assembling, piece by piece */
+.v-custom { display: flex; align-items: center; justify-content: center; }
+.v-custom .win {
+  position: relative; width: 108px; height: 76px; padding: 8px; overflow: hidden;
+  border-radius: 8px; background: var(--bg-surface);
+  border: 1px solid var(--sec-border); box-shadow: 0 0 18px rgba(var(--sec-rgb),.14);
+}
+.v-custom .tb { position: absolute; top: 7px; left: 8px; display: flex; gap: 4px; }
+.v-custom .tb i { width: 5px; height: 5px; border-radius: 50%; background: rgba(var(--sec-rgb),.5); }
+.v-custom .blk {
+  position: absolute; border-radius: 4px;
+  background: linear-gradient(135deg, var(--sec), rgba(var(--sec-rgb),.28));
+  transform-origin: center; transform: scale(1);
+  animation: vBuild 3.4s var(--ease-out) infinite;
+}
+.v-custom .b1 { left: 8px;  top: 22px; width: 44px; height: 46px; animation-delay: .1s; }
+.v-custom .b2 { left: 58px; top: 22px; width: 42px; height: 20px; animation-delay: .5s; }
+.v-custom .b3 { left: 58px; top: 48px; width: 42px; height: 20px; animation-delay: .9s; }
+@keyframes vBuild { 0%,8% { transform: scale(0); opacity: 0; } 26%,100% { transform: scale(1); opacity: 1; } }
+.v-custom .cursor { position: absolute; right: 20%; bottom: 15%; color: var(--sec-text); animation: vCursor 3.4s ease-in-out infinite; }
+.v-custom .cursor svg { width: 15px; height: 15px; filter: drop-shadow(0 0 4px rgba(var(--sec-rgb),.6)); }
+@keyframes vCursor { 0%,100% { transform: translate(0,0); } 30% { transform: translate(-7px,-9px); } 62% { transform: translate(-2px,-3px); } }
+.v-custom .star { position: absolute; right: 14%; top: 13%; color: var(--sec-text); font-size: 13px; animation: vTwinkle 2.6s ease-in-out infinite; }
+
+/* ---- three-step flow ---- */
+.sil-flow { display: flex; flex-direction: column; gap: var(--space-3); padding-top: var(--space-6); }
+.sil-flow li {
+  position: relative; display: flex; align-items: baseline;
+  gap: var(--space-3); padding-left: 20px;
+}
+/* a dot + connector so the three steps read as a sequence */
+.sil-flow li::before {
+  content: ''; position: absolute; left: 3px; top: 8px;
+  width: 7px; height: 7px; border-radius: 50%; z-index: 1;
+  background: var(--sec); box-shadow: 0 0 8px var(--sec);
+}
+.sil-flow li:not(:last-child)::after {
+  content: ''; position: absolute; left: 6px; top: 13px; bottom: -13px;
+  width: 1px; background: var(--sec-border);
+}
+.sil-flow .k {
+  flex: none; min-width: 92px;
+  font-weight: var(--font-weight-bold); color: var(--sec-text);
+  font-size: var(--text-body-s-size);
+}
+.sil-flow .v { color: var(--text-secondary); font-size: var(--text-body-s-size); }
+
+/* ---- closing panel: AI that works in the real world ---- */
+.sil-realworld { padding: clamp(28px, 3vw, 48px); }
+.sil-realworld .rw-head .sil-measure { max-width: 62ch; }
+.sil-realworld .rw-points { gap: var(--space-6); }
+.sil-realworld .rw-point {
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 1px solid var(--sec-border); border-radius: var(--radius-lg);
+  background: var(--sec-soft);
+}
+.sil-realworld .rw-point .ic {
+  width: 40px; height: 40px; flex: none; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: var(--space-2);
+  background: var(--bg-canvas); border: 1px solid var(--sec-border); color: var(--sec-text);
+}
+.sil-realworld .rw-point .ic svg { width: 21px; height: 21px; }
+.sil-realworld .rw-point .k {
+  font-family: var(--font-display); font-weight: var(--font-weight-semibold);
+  font-size: var(--text-display-s-size); color: var(--text-primary);
+}
+.sil-realworld .rw-point .v { color: var(--text-secondary); font-size: var(--text-body-m-size); }
+
+@media (max-width: 760px) {
+  .sil-realworld .rw-points { gap: var(--space-4); }
+}
+</style>

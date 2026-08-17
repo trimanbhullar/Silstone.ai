@@ -1,0 +1,57 @@
+/* Silstone.AI — Typography tokens
+   NOTE — FONT SUBSTITUTION FLAG:
+   The live site (silstone.ai, built on Hostinger's site builder) does not expose
+   downloadable webfont files, and no codebase/Figma was attached to this design
+   system. The wordmark ("SILSTONE.AI") uses a geometric, wide-tracked sans. In the
+   absence of real font files we substituted the closest Google Fonts match:
+     - Display/headings: Poppins (geometric sans, matches the wordmark's tracking
+       and bowl shapes)
+     - Body/UI: Inter (neutral, highly legible workhorse for a technical B2B brand)
+   Please supply real brand font files if the company has them — swap the
+   @font-face src values in fonts.css and these var()s will pick them up everywhere. */
+
+:root {
+  --font-display: 'Poppins', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+
+  /* Type scale — display copy on the site leans large + bold with tight tracking.
+     Sizes expressed separately (not as font shorthand) so weight/line-height/size
+     stay independently overridable. */
+  --text-display-xl-size: 4rem; /* scales down via media query at narrow viewports, not clamp() */
+  --text-display-xl-weight: 700;
+  --text-display-xl-leading: 1.05;
+
+  --text-display-l-size: 3rem;
+  --text-display-l-weight: 700;
+  --text-display-l-leading: 1.1;
+
+  --text-display-m-size: 2.25rem;
+  --text-display-m-weight: 600;
+  --text-display-m-leading: 1.15;
+
+  --text-display-s-size: 1.5rem;
+  --text-display-s-weight: 600;
+  --text-display-s-leading: 1.25;
+
+  --text-body-l-size: 1.25rem;
+  --text-body-l-leading: 1.6;
+  --text-body-m-size: 1.0625rem;
+  --text-body-m-leading: 1.6;
+  --text-body-s-size: 0.9375rem;
+  --text-body-s-leading: 1.55;
+  --text-caption-size: 0.8125rem;
+  --text-caption-leading: 1.4;
+  --text-eyebrow-size: 0.8125rem;
+  --text-eyebrow-leading: 1.2;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-widest: 0.18em; /* wordmark-style letterspacing, e.g. "S I L S T O N E" */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}

@@ -1,0 +1,43 @@
+name: Build & Deploy
+
+# When the source branch changes (a dev push, or the CMS saving a post),
+# rebuild the static site and publish it to `main`, which Hostinger serves.
+on:
+  push:
+    branches: [source]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          ref: source
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build the static site
+        run: python build-site.py
+
+      - name: Publish dist/ to the main branch (Hostinger deploys from main)
+        run: |
+          cd dist
+          rm -rf .git .gitignore
+          git init -b main
+          git config user.name "silstone-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Deploy from source@${GITHUB_SHA::7}"
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" main

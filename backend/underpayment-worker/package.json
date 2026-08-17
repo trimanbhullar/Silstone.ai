@@ -1,0 +1,16 @@
+{
+  "name": "silstone-underpayment-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker that runs the Silstone underpayment/denial demo on real EOB input via Claude.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.70.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

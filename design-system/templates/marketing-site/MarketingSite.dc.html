@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Marketing Site" description="Silstone.AI dark, teal-accent B2B marketing homepage: hero, offerings grid, case study, FAQ, footer" -->
+<helmet>
+  <script src="./ds-base.js"></script>
+</helmet>
+<div style="background: var(--bg-canvas-true-black); min-height: 100vh;">
+  <x-import component-from-global-scope="SilstoneAIDesignSystem_aca135.NavBar"
+    logo="{{ logoImg }}" links="{{ navLinks }}" cta="{{ ctaButton }}" hint-size="100%,80px">
+  </x-import>
+
+  <section style="position: relative; min-height: 560px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 clamp(20px,5vw,80px); gap: 32px;">
+    <h1 style="font-family: var(--font-display); color: var(--text-primary); font-size: 4rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; max-width: 900px; margin: 0;">
+      Your <span style="color: var(--accent);">On-Demand</span> AI Product Team
+    </h1>
+    <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.25rem; line-height: 1.6; max-width: 640px; margin: 0;">
+      We partner with <b style="color: var(--text-primary);">founders</b>, <b style="color: var(--text-primary);">product leaders</b>, and <b style="color: var(--text-primary);">engineering teams</b> to design, build, and ship <b style="color: var(--text-primary);">AI-powered</b> features that <b style="color: var(--text-primary);">work in production</b> — fast, secure, and built for real users.
+    </p>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+      <x-import component-from-global-scope="SilstoneAIDesignSystem_aca135.Button" variant="primary" size="lg" hint-size="220px,52px">Book a strategy call</x-import>
+      <x-import component-from-global-scope="SilstoneAIDesignSystem_aca135.Button" variant="ghost" size="lg" icon="→" hint-size="220px,52px">Discover How We Work</x-import>
+    </div>
+  </section>
+
+  <section style="padding: 96px clamp(20px,5vw,80px); background: var(--bg-canvas);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <x-import component-from-global-scope="SilstoneAIDesignSystem_aca135.Badge" tone="accent" hint-size="140px,28px">What we do</x-import>
+      <h2 style="font-family: var(--font-display); color: var(--text-primary); font-weight: 700; font-size: 2.25rem; margin: 16px 0 8px; max-width: 640px;">
+        AI Solutions That Adapt to Your Industry, Data &amp; Vision
+      </h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px;">
+        <sc-for list="{{ offerings }}" as="item" hint-placeholder-count="6">
+          <x-import component-from-global-scope="SilstoneAIDesignSystem_aca135.Card" hint-size="100%,160px">
+            <h3 style="font-family: var(--font-display); color: var(--text-primary); font-size: 19px; font-weight: 600; margin: 0 0 8px;">{{ item.title }}</h3>
+            <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin: 0;">{{ item.desc }}</p>
+          </x-import>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 80px clamp(20px,5vw,80px); background: var(--bg-canvas-true-black);">
+    <div style="max-width: 760px; margin: 0 auto;">
+      <h2 style="font-family: var(--font-display); color: var(--text-primary); font-weight: 700; font-size: 1.5rem; margin: 0 0 32px; text-align: center;">
+        Everything You Need to Know About Working With Silstone.AI
+      </h2>
+      <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="6">
+        <x-import component-from-global-scope="SilstoneAIDesignSystem_aca135.FaqItem" question="{{ item.q }}" hint-size="100%,60px">{{ item.a }}</x-import>
+      </sc-for>
+    </div>
+  </section>
+
+  <x-import component-from-global-scope="SilstoneAIDesignSystem_aca135.Footer" logo="{{ logoImg }}" hint-size="100%,180px"></x-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const logoImg = React.createElement('img', { src: '../../assets/logo-mark.png', style: { height: 22 } });
+    const navLinks = [
+      { label: 'Home', href: '#' },
+      { label: 'Blog', href: '#' },
+      { label: 'Contact', href: '#' },
+    ];
+    const ctaButton = React.createElement(
+      window.SilstoneAIDesignSystem_aca135.Button,
+      { variant: 'secondary', size: 'sm' },
+      'Book a call'
+    );
+    const offerings = [
+      { title: 'AI Agents & Copilots', desc: 'Autonomous and human-in-the-loop agents embedded in your product.' },
+      { title: 'Prediction Engines', desc: 'Models that forecast, score, and rank on your real production data.' },
+      { title: 'AI Document Processing', desc: 'Securely ingest, process, and train on internal documents and datasets.' },
+      { title: 'Automation Pipelines', desc: 'End-to-end workflows that remove manual, repetitive work.' },
+      { title: 'AI Strategy Consulting', desc: 'Define your roadmap, identify high-value use cases, and scale.' },
+      { title: 'AI Software Development', desc: 'Full-stack engineering to ship AI features that work in production.' },
+    ];
+    const faqs = [
+      { q: 'Do you work with only specific industries?', a: 'No. We build AI solutions across biotech, finance, manufacturing, healthcare, logistics, retail, energy, and more.' },
+      { q: 'Do you only build chatbots?', a: 'Not at all. We create full end-to-end AI systems including models, agents, copilots, prediction engines, and automation pipelines.' },
+      { q: "What's the usual project timeline?", a: 'Prototype → 2–4 weeks. MVP → 6–10 weeks. Full system → 2–4 months.' },
+    ];
+    return { logoImg, navLinks, ctaButton, offerings, faqs };
+  }
+}
+
+</script>
+</body>
+</html>
