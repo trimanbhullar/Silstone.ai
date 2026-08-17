@@ -1,0 +1,52 @@
+# ---- block access to the deploy repo's .git (Hostinger Git pull leaves it in public_html) ----
+RedirectMatch 404 /\.git
+
+RewriteEngine On
+
+# ---- canonicalize the PRODUCTION domain to https://www.silstone.ai ----
+# Scoped to silstone.ai on purpose, so the Hostinger *.hostingersite.com
+# preview URL (and import 'recognition' check) is NOT redirected away.
+RewriteCond %{HTTP_HOST} ^silstone\.ai$ [NC]
+RewriteRule ^ https://www.silstone.ai%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.silstone\.ai$ [NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://www.silstone.ai%{REQUEST_URI} [L,R=301]
+
+# ---- resources renamed to live-demos ----
+RewriteRule ^resources/?$ /live-demos [L,R=301]
+
+# ---- old Builder blog -> new /blog ----
+RewriteRule ^blog-list/?$ /blog [L,R=301]
+RewriteRule ^best\-ai\-agents\-for\-medical\-practices\-in\-2026/?$ /blog/best-ai-agents-for-medical-practices-in-2026 [L,R=301]
+RewriteRule ^how\-to\-build\-a\-hipaa\-compliant\-ai\-agent\-in\-2026/?$ /blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026 [L,R=301]
+RewriteRule ^how\-to\-build\-your\-first\-ai\-agent\-as\-a\-non\-technical\-founder\-in\-2026/?$ /blog/how-to-build-your-first-ai-agent-as-a-non-technical-founder-in-2026 [L,R=301]
+RewriteRule ^7\-things\-that\-will\-happen\-if\-your\-company\-is\-not\-ai\-ready\-in\-2026/?$ /blog/7-things-that-will-happen-if-your-company-is-not-ai-ready-in-2026 [L,R=301]
+RewriteRule ^why\-strong\-engineering\-is\-the\-real\-ai\-competitive\-advantage/?$ /blog/why-strong-engineering-is-the-real-ai-competitive-advantage [L,R=301]
+RewriteRule ^what\-makes\-ai\-software\-safe\-for\-regulated\-industries/?$ /blog/what-makes-ai-software-safe-for-regulated-industries [L,R=301]
+
+# ---- clean URLs: /what-we-build -> /what-we-build/index.html ----
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.*)$ $1/index.html [L]
+
+# ---- gzip/deflate text responses ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/plain application/xml
+</IfModule>
+
+# ---- caching: fingerprint-free, so long cache on assets, short on HTML ----
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|png|jpg|jpeg|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Build a HIPAA Compliant AI Agent in 2026 | Silstone.AI</title>
+<meta name="description" content="Learn how to build a HIPAA-compliant AI agent in 2026 with a secure architecture, PHI protection, audit logging, and enterprise-ready compliance practices.">
+<link rel="canonical" href="https://www.silstone.ai/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#08080B">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Silstone.AI">
+<meta property="og:title" content="How to Build a HIPAA Compliant AI Agent in 2026 | Silstone.AI">
+<meta property="og:description" content="Learn how to build a HIPAA-compliant AI agent in 2026 with a secure architecture, PHI protection, audit logging, and enterprise-ready compliance practices.">
+<meta property="og:url" content="https://www.silstone.ai/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026">
+<meta property="og:image" content="https://www.silstone.ai/assets/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026.jpg">
+<meta property="og:image:width" content="1440">
+<meta property="og:image:height" content="756">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Build a HIPAA Compliant AI Agent in 2026 | Silstone.AI">
+<meta name="twitter:description" content="Learn how to build a HIPAA-compliant AI agent in 2026 with a secure architecture, PHI protection, audit logging, and enterprise-ready compliance practices.">
+<meta name="twitter:image" content="https://www.silstone.ai/assets/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026.jpg">
+
+<link rel="icon" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/favicon.png">
+
+<!-- fonts loaded directly (was a serial @import inside the CSS) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+
+<style>html,body{margin:0;padding:0;background:#08080B;}</style>
+<link rel="stylesheet" href="/assets/silstone.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Silstone.AI","url":"https://www.silstone.ai/","logo":"https://www.silstone.ai/assets/logo-mark.png","description":"Healthcare-native AI studio that designs, builds and deploys custom AI agents to automate back-office work for medical and dental practices.","contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"sales@silstonegroup.com","telephone":"+1-613-558-5913"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.silstone.ai/"},{"@type":"ListItem","position":2,"name":"How to Build a HIPAA Compliant AI Agent in 2026","item":"https://www.silstone.ai/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to Build a HIPAA Compliant AI Agent in 2026","description":"Learn how to build a HIPAA-compliant AI agent in 2026 with a secure architecture, PHI protection, audit logging, and enterprise-ready compliance practices.","image":"https://www.silstone.ai/assets/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026.jpg","datePublished":"2026-08-04","dateModified":"2026-08-04","author":{"@type":"Organization","name":"Silstone.AI"},"publisher":{"@type":"Organization","name":"Silstone.AI","logo":{"@type":"ImageObject","url":"https://www.silstone.ai/assets/logo-mark.png"}},"mainEntityOfPage":"https://www.silstone.ai/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026"}</script>
+</head>
+<body>
+<!--
+  SILSTONE.AI - SECTION 01 - NAVIGATION
+  Hostinger: Embed code block, FULL WIDTH, at the very top of the page.
+  Suggested height 76px. Set the block background to transparent.
+
+  LOGO: the <img> below uses the real wordmark from the design system, inlined
+  as a data URI so it works with zero setup. Once you upload logo-mark.png to
+  Hostinger's media library, replace the src with that URL to trim page weight.
+
+  Update the href values to match your real Hostinger page slugs.
+-->
+<div class="sil-root">
+<header class="sil-nav" id="silNav">
+  <div class="sil-nav-inner">
+
+    <a href="/" target="_top" class="sil-logo" aria-label="Silstone.AI home">
+      <img class="sil-logo-img" src="/assets/logo-mark.png" alt="Silstone.AI" width="768" height="111">
+    </a>
+
+    <nav class="sil-nav-links" id="silNavLinks" aria-label="Main">
+
+      <div class="sil-nav-item sil-has-menu">
+        <button type="button" class="sil-nav-trigger" aria-expanded="false" aria-haspopup="true">
+          Solutions
+          <svg class="sil-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="sil-menu" role="menu">
+          <a href="https://www.silstone.ai/what-we-build" target="_top" role="menuitem">
+            <span class="sil-menu-t">What we build</span>
+            <span class="sil-menu-d">The knowledge brain &amp; custom agents</span>
+          </a>
+          <a href="https://www.silstone.ai/dental-automation" target="_top" role="menuitem">
+            <span class="sil-menu-t">Dental automation</span>
+            <span class="sil-menu-d">Fax triage, underpayments, credentialing</span>
+          </a>
+          <a href="https://www.silstone.ai/aesthetics-automation" target="_top" role="menuitem">
+            <span class="sil-menu-t">Aesthetics automation</span>
+            <span class="sil-menu-d">Enquiries, bookings, back-office admin</span>
+          </a>
+        </div>
+      </div>
+
+      <a class="sil-nav-item sil-nav-demo" href="https://www.silstone.ai/live-demos" target="_top">
+        <span class="sil-demo-dot" aria-hidden="true"></span>Live demos
+      </a>
+
+      <a class="sil-nav-item" href="https://www.silstone.ai/pricing" target="_top">Pricing</a>
+
+      <a class="sil-nav-item" href="https://www.silstone.ai/trust-and-security" target="_top">Trust &amp; security</a>
+
+      <div class="sil-nav-item sil-has-menu">
+        <button type="button" class="sil-nav-trigger" aria-expanded="false" aria-haspopup="true">
+          Company
+          <svg class="sil-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="sil-menu" role="menu">
+          <a href="https://www.silstone.ai/why-silstone" target="_top" role="menuitem">
+            <span class="sil-menu-t">Why Silstone</span>
+            <span class="sil-menu-d">Built inside healthcare, not adjacent</span>
+          </a>
+          <a href="https://www.silstone.ai/blog" target="_top" role="menuitem">
+            <span class="sil-menu-t">Blog</span>
+            <span class="sil-menu-d">Field notes on healthcare AI</span>
+          </a>
+        </div>
+      </div>
+
+      <a class="sil-nav-item sil-nav-cta-m" href="https://www.silstone.ai/contact" target="_top">Book a scoping call</a>
+
+    </nav>
+
+    <div class="sil-nav-right">
+      <a href="https://www.silstone.ai/contact" target="_top" class="sil-btn sil-btn-primary sil-btn-sm is-auto">Book a scoping call</a>
+      <button class="sil-burger" id="silBurger" aria-label="Open menu" aria-expanded="false" aria-controls="silNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+</div>
+
+<style>
+.sil-nav {
+  position: sticky; top: 0; z-index: 900; width: 100%;
+  background: var(--bg-canvas);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--duration-base) var(--ease-standard);
+}
+.sil-nav.is-stuck { border-bottom-color: var(--border-subtle); }
+.sil-nav.is-stuck::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal-500), transparent); opacity: .45;
+}
+.sil-nav-inner {
+  max-width: var(--container-max); margin: 0 auto;
+  padding: var(--space-4) var(--container-pad);
+  display: flex; align-items: center; gap: var(--space-6);
+}
+
+.sil-logo { display: inline-flex; align-items: center; flex: none; }
+.sil-logo-img { height: 26px; width: auto; }
+
+.sil-nav-links { display: flex; align-items: center; gap: var(--space-6); margin-left: auto; }
+.sil-nav-links a {
+  position: relative; padding: 6px 0;
+  font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+.sil-nav-links a:hover { color: var(--teal-300); }
+.sil-nav-links a.is-active { color: var(--text-primary); }
+.sil-nav-links a.is-active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+  border-radius: 2px; background: var(--teal-500);
+}
+
+.sil-nav-right { display: flex; align-items: center; gap: var(--space-3); flex: none; }
+
+.sil-burger {
+  display: none; width: 40px; height: 40px; border-radius: var(--radius-md);
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  border: 1px solid var(--border-default); background: transparent;
+  transition: border-color var(--duration-base) var(--ease-standard);
+}
+.sil-burger:hover { border-color: var(--teal-500); }
+.sil-burger span {
+  display: block; width: 17px; height: 1.5px; border-radius: 2px; background: var(--text-primary);
+  transition: transform var(--duration-base) var(--ease-standard), opacity var(--duration-fast);
+}
+.sil-burger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.sil-burger.is-open span:nth-child(2) { opacity: 0; }
+.sil-burger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 980px) {
+  .sil-burger { display: flex; }
+  .sil-nav-links {
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    margin-left: 0; padding: var(--space-2) var(--container-pad) var(--space-5);
+    background: var(--bg-canvas);
+    border-bottom: 1px solid var(--border-subtle);
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: opacity var(--duration-base) var(--ease-standard),
+                transform var(--duration-base) var(--ease-standard),
+                visibility var(--duration-base);
+  }
+  .sil-nav-links.is-open { opacity: 1; visibility: visible; transform: none; }
+  .sil-nav-links a { padding: var(--space-4) 0; font-size: var(--text-body-m-size); border-bottom: 1px solid var(--border-subtle); }
+  .sil-nav-links a:last-child { border-bottom: 0; }
+  .sil-nav-links a.is-active::after { display: none; }
+  .sil-nav-right .sil-btn { display: none; }
+}
+
+/* ============ grouped nav: triggers, dropdowns, demo highlight ============ */
+.sil-nav-item { position: relative; }
+
+.sil-nav-trigger,
+a.sil-nav-item {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 0; margin: 0; background: none; border: 0; cursor: pointer;
+  font-family: inherit; font-size: var(--text-body-s-size);
+  font-weight: var(--font-weight-medium); color: var(--text-secondary);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+.sil-nav-trigger:hover, a.sil-nav-item:hover,
+.sil-has-menu:hover .sil-nav-trigger,
+.sil-nav-trigger.is-active { color: var(--teal-300); }
+
+.sil-caret { width: 9px; height: 6px; opacity: .8;
+  transition: transform var(--duration-base) var(--ease-standard); }
+.sil-has-menu:hover .sil-caret,
+.sil-has-menu.is-open .sil-caret { transform: rotate(180deg); }
+
+.sil-menu {
+  position: absolute; top: calc(100% + 12px); left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 264px; padding: var(--space-2);
+  display: flex; flex-direction: column; gap: 2px;
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard),
+              visibility var(--duration-base);
+  z-index: 950;
+}
+/* invisible hover bridge so the 12px gap doesn't drop the menu */
+.sil-menu::before { content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
+.sil-has-menu:hover .sil-menu,
+.sil-has-menu:focus-within .sil-menu,
+.sil-has-menu.is-open .sil-menu {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.sil-menu a {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 9px 12px; border-radius: var(--radius-md); border-bottom: 0 !important;
+}
+.sil-menu a::after { display: none !important; }
+.sil-menu a:hover { background: var(--bg-surface-3); }
+.sil-menu-t { font-size: var(--text-body-s-size); font-weight: var(--font-weight-semibold); color: var(--text-primary); }
+.sil-menu a:hover .sil-menu-t { color: var(--teal-300); }
+.sil-menu-d { font-size: 12px; line-height: 1.35; color: var(--text-tertiary); }
+.sil-menu a.is-active { background: var(--bg-surface-3); }
+.sil-menu a.is-active .sil-menu-t { color: var(--teal-300); }
+
+/* Live demos: the conversion highlight */
+a.sil-nav-demo { color: var(--text-primary); }
+.sil-demo-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--teal-500);
+  animation: silDemoPulse 2.4s ease-out infinite;
+}
+@keyframes silDemoPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(45,217,211,.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(45,217,211,0); }
+  100% { box-shadow: 0 0 0 0 rgba(45,217,211,0); }
+}
+@media (prefers-reduced-motion: reduce) { .sil-demo-dot { animation: none; } }
+
+/* Book-a-call sits in the header on desktop; this in-sheet copy is mobile-only */
+a.sil-nav-item.sil-nav-cta-m { display: none; }
+
+/* ---- mobile: dropdowns become tap-accordions inside the burger sheet ---- */
+@media (max-width: 980px) {
+  .sil-nav-right { margin-left: auto; }   /* burger to the far right of the bar */
+  .sil-nav-links { padding-bottom: var(--space-4); }
+  .sil-nav-item { width: 100%; }
+
+  .sil-nav-trigger,
+  a.sil-nav-item {
+    width: 100%;
+    padding: var(--space-4) 0; font-size: var(--text-body-m-size);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .sil-nav-trigger { justify-content: space-between; }          /* label | caret */
+  a.sil-nav-item { justify-content: flex-start; gap: 10px; }    /* dot hugs its text */
+
+  /* an open group reads as one unit: drop the row line, indent under a teal spine */
+  .sil-has-menu.is-open > .sil-nav-trigger { border-bottom-color: transparent; }
+  .sil-menu {
+    position: static; transform: none; min-width: 0; width: 100%;
+    margin: 0 0 2px; padding: 2px 0 var(--space-3) var(--space-4);
+    background: none; border: 0; border-left: 2px solid var(--teal-700);
+    border-radius: 0; box-shadow: none;
+    display: none; opacity: 1; visibility: visible; pointer-events: auto;
+  }
+  .sil-has-menu.is-open .sil-menu { display: flex; transform: none; }
+  .sil-menu::before { display: none; }
+  .sil-menu a { padding: var(--space-3) 0; }
+  .sil-menu a:hover { background: none; }
+  .sil-menu-t { font-weight: var(--font-weight-medium); color: var(--text-secondary); }
+  .sil-menu a:hover .sil-menu-t,
+  .sil-menu a.is-active .sil-menu-t { color: var(--teal-300); }
+  .sil-menu-d { display: none; }
+
+  /* full-width Book-a-call at the bottom of the sheet */
+  a.sil-nav-item.sil-nav-cta-m {
+    display: flex; justify-content: center; gap: 0;
+    margin-top: var(--space-5); padding: var(--space-4);
+    border: 0; border-radius: var(--radius-md);
+    background: var(--accent); color: var(--text-on-accent);
+    font-weight: var(--font-weight-semibold); box-shadow: var(--shadow-sm);
+  }
+  a.sil-nav-item.sil-nav-cta-m:hover { background: var(--accent-hover); color: var(--text-on-accent); }
+}
+</style>
+
+<script>
+(function () {
+  var nav = document.getElementById('silNav');
+  var burger = document.getElementById('silBurger');
+  var links = document.getElementById('silNavLinks');
+  if (!nav || nav.__init) return;
+  nav.__init = true;
+
+  var onScroll = function () { nav.classList.toggle('is-stuck', window.scrollY > 12); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  burger.addEventListener('click', function () {
+    var open = links.classList.toggle('is-open');
+    burger.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+
+  var groups = links.querySelectorAll('.sil-has-menu');
+  function closeGroups(except) {
+    groups.forEach(function (g) {
+      if (g === except) return;
+      g.classList.remove('is-open');
+      var t = g.querySelector('.sil-nav-trigger');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  // Click / tap / keyboard toggle for each dropdown (drives mobile accordion
+  // and desktop keyboard use; hover is handled in CSS).
+  groups.forEach(function (g) {
+    var trigger = g.querySelector('.sil-nav-trigger');
+    trigger.addEventListener('click', function () {
+      var open = g.classList.toggle('is-open');
+      closeGroups(g);
+      trigger.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  links.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      links.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      closeGroups(null);
+    }
+  });
+
+  // Close open dropdowns on outside click or Escape.
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.sil-has-menu')) closeGroups(null);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeGroups(null);
+  });
+
+  // Active state: highlight the current page's link, and its parent group.
+  var here = location.pathname.replace(/\/+$/, '') || '/';
+  links.querySelectorAll('a').forEach(function (a) {
+    var href = a.getAttribute('href').replace(/\/+$/, '') || '/';
+    if (href !== '/' && here.indexOf(href) === 0) {
+      a.classList.add('is-active');
+      var g = a.closest('.sil-has-menu');
+      if (g) { var t = g.querySelector('.sil-nav-trigger'); if (t) t.classList.add('is-active'); }
+    }
+  });
+})();
+</script>
+
+<div class="sil-root"><article class="sil-article-page"><div class="sil-article-top"><a class="sil-article-back" href="/blog" target="_top">&larr; All articles</a><span class="sil-blog-date">August 4, 2026</span></div><h1 class="sil-article-title">How to Build a HIPAA Compliant AI Agent in 2026</h1><img class="sil-article-hero-img" src="/assets/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026.jpg" alt="How to Build a HIPAA Compliant AI Agent in 2026" width="1440" height="756"><div class="sil-article"><p>AI agents are transforming how healthcare organizations handle everything from patient scheduling to prior authorization to clinical documentation. But in healthcare, building an AI agent is not just an engineering challenge. It is a compliance challenge. And getting compliance wrong does not just cost you time and money. It exposes your organization to legal liability, enterprise deals that fall apart at the security review stage, and patient trust that once lost is nearly impossible to rebuild.</p>
+<p>The good news is that building a HIPAA compliant AI agent is absolutely achievable in 2026. The bad news is that it requires deliberate architectural decisions from the very first line of code. Compliance is not something you layer onto a finished system. It is a property of how the system was designed and built.</p>
+<p>This guide walks you through exactly what HIPAA compliance means for an AI agent, what the technical requirements are, and how to build a system that meets those requirements without sacrificing the speed and intelligence that make AI agents valuable in the first place.</p>
+<h2>Why HIPAA Compliance Is Not Automatic for AI Agents</h2>
+<p>The most dangerous assumption a health tech founder or CTO can make is that the AI platform they are building on handles HIPAA compliance for them. It does not.</p>
+<p>HIPAA compliant AI comes down to five requirements: encryption, access controls, audit logging, a signed business associate agreement, and data minimization. And one principle: compliance is a property of the deployment, not the model.</p>
+<p>That last point is critical. The foundation model you are using, whether it is from Anthropic, OpenAI, or Google, is not HIPAA compliant by default. The cloud infrastructure you are running on is not HIPAA compliant by default. Compliance is determined by how you configure, deploy, and govern your entire system, not by which components you chose.</p>
+<p>According to the HIPAA Journal's 2026 healthcare data breach report, breaches affected roughly 139.7 million people in the previous year. Without the right safeguards and a compliance contract, AI adoption becomes legal and financial exposure.</p>
+<p>The stakes are high and the path to compliance is specific. Here is exactly what it requires.</p>
+<p><strong>Step 1: Get Your Legal Foundation Right Before You Build Anything</strong></p>
+<p>Before a single line of code is written, your legal framework needs to be in place. This is not optional and it is not something you can sort out after your agent is live.</p>
+<p>A Business Associate Agreement is a non-negotiable legal contract between a healthcare provider and a vendor that handles Protected Health Information on their behalf. Every AI vendor whose technology touches patient data in your system must sign a BAA with your organization.</p>
+<p>This applies to your AI model provider, your cloud infrastructure provider, and any third-party tool that processes or stores PHI as part of your agent workflow. If a vendor will not sign a BAA, you cannot use their service in a HIPAA-regulated context, regardless of how good their technology is.</p>
+<p>The LLM endpoint you use must be under a BAA, via your cloud provider such as AWS Bedrock, Azure OpenAI, or Google Vertex, or directly with the model vendor's enterprise tier where a BAA is offered. Consumer-facing API tiers from major model providers do not include BAA coverage and cannot be used in HIPAA-regulated deployments. Getting your BAA stack in order before you start building means you will not reach the final stages of a hospital procurement process only to discover that one of your vendors cannot sign the agreement that the buyer requires.</p>
+<p><strong> Step 2: Design Your PHI Classification Layer First</strong></p>
+<p>Most AI pipeline architectures were not designed with HIPAA in mind. The standard chunk, embed, retrieve, and generate patterns were built for enterprise search, not PHI governance. Healthcare organizations must treat compliance as an architectural requirement from day one and embed it within the context fed to AI agents. What this means in practice is that your first architectural decision after establishing your legal framework should be your PHI classification layer. Before any patient data enters your AI pipeline, every field that constitutes protected health information needs to be identified, tagged, and governed.</p>
+<p>PHI includes eighteen categories of identifiers under HIPAA, ranging from obvious ones like names, dates, and social security numbers to less obvious ones like geographic identifiers smaller than a state, device identifiers, and full-face photographs. Your classification layer needs to catch all of them automatically, not rely on engineers to manually flag PHI fields as they build.</p>
+<p>This classification needs to propagate downstream through your data pipelines. When a new field is added to an EHR feed or a new data source is connected to your agent, it needs to be evaluated and tagged before any agent can query it. A PHI classification layer that requires manual updates every time your data model changes is a compliance liability, not a compliance solution.</p>
+<p><strong> Step 3: Enforce the Minimum Necessary Standard at the Architecture Level</strong></p>
+<p>The minimum necessary standard requires PHI access to be limited to what is needed for a specific task. An agent scheduling a follow-up appointment should not retrieve the full patient clinical history.</p>
+<p>This sounds straightforward but it is one of the most commonly violated HIPAA requirements in AI agent deployments. AI agents tend to retrieve more context than they need because more context generally produces better reasoning outputs. The tension between compliance and performance needs to be resolved at the architecture level, not left to individual engineers to manage case by case.</p>
+<p>The right approach is to define the minimum necessary data scope for each task your agent performs and enforce that scope through your access control layer, not through prompting or convention. An agent handling appointment scheduling gets access to scheduling-relevant fields. An agent handling prior authorization gets access to authorization-relevant fields. The boundaries are enforced by the system, not by trust.</p>
+<p>Retrieval-based systems with validation layers are safer than models that rely on training on customer data. Accuracy and policy adherence are critical in regulated industries. Enterprise-ready AI agents provide auditability, configurability, and clear data governance controls.</p>
+<p>Building your retrieval layer around minimum necessary access also makes your agent more accurate. Agents that receive precisely scoped, relevant context produce better outputs than agents that receive everything and have to filter it themselves.</p>
+<p><strong> Step 4: Build Comprehensive Audit Trail Logging</strong></p>
+<p>Every action your AI agent takes that involves PHI needs to be logged in a way that supports compliance audits. This is not a nice-to-have. It is a HIPAA requirement and it is one of the first things enterprise health buyers check when they evaluate a new vendor.</p>
+<p>Key obligations include minimum necessary access controls, audit trail logging of every PHI access event, and business associate agreements with every AI vendor handling PHI. Existing Privacy and Security Rule requirements apply fully to agentic systems.</p>
+<p>Your audit logs need to capture what data the agent accessed, when it accessed it, what action it took as a result, and what the output was. For multi-step agent workflows that chain together several actions across connected systems, each step in the chain needs its own log entry with enough context to reconstruct exactly what happened and why.</p>
+<p>These logs need to be stored securely, with access controls that prevent modification, and retained for a minimum of six years under HIPAA requirements. They also need to be queryable in a way that supports breach investigation and compliance audits without requiring engineering effort every time a security team asks a question.</p>
+<p>Building your logging infrastructure to meet these requirements from the start is significantly cheaper than retrofitting it after the fact. And the discipline of comprehensive logging tends to make your agents more reliable and easier to debug, not just more compliant.</p>
+<p><strong> Step 5: Design Your Human Oversight and Escalation Pathways</strong></p>
+<p>HIPAA does not prohibit autonomy. It requires accountability, and full autonomy makes accountability hard. In practice, deployable healthcare agents run at graduated autonomy: fully autonomous for retrieval and summarization, supervised for drafting and data entry, and human-approved for anything clinical or patient-facing.</p>
+<p>Designing your escalation pathways is as important as designing the automated workflows themselves. Every agent workflow needs a clear definition of when the agent operates autonomously, when it produces output for human review before taking action, and when it escalates to a human operator entirely.</p>
+<p>The boundaries of those categories should be determined by the clinical and compliance risk of each action. Retrieving and summarizing patient history for a physician to review is low risk and can be fully automated. Drafting a prior authorization letter based on that history is medium risk and should include a human review step before submission. Making a clinical recommendation that influences treatment decisions should always require physician approval regardless of how confident the agent is in its output.</p>
+<p>Regulators and your customers' security teams will ask one question: who is responsible when the agent is wrong? Your architecture must have an answer. Documenting those escalation pathways clearly and being able to demonstrate them during a security review is a meaningful competitive advantage when you are selling to enterprise health buyers who have seen too many AI deployments that promised automation and delivered liability.</p>
+<p><strong> Step 6: Implement Encryption and Access Controls at Every Layer</strong></p>
+<p>Encryption and access controls are the most technically straightforward part of HIPAA compliance for AI agents, but they still need to be implemented deliberately and completely.</p>
+<p>PHI must be encrypted in transit using TLS 1.2 or higher on every connection between your agent and the systems it talks to. It must be encrypted at rest using AES-256 or equivalent on every storage layer that holds patient data, including your vector databases, your audit logs, and your model context stores.</p>
+<p>Access controls need to be role-based and enforced at the system level. Engineers, operations staff, and support teams should have access only to the PHI necessary for their specific role, and that access should be logged. Production PHI should never appear in development or testing environments. Synthetic or de-identified data should be used for development and testing purposes wherever possible.</p>
+<p>Multi-factor authentication should be required for all human access to systems that handle PHI, including administrative interfaces, logging systems, and monitoring dashboards. This is baseline hygiene for any HIPAA-regulated system and enterprise buyers will check for it.</p>
+<p><strong> Step 7: Build for Ongoing Governance, Not Just Launch-Day Compliance</strong></p>
+<p>Building HIPAA compliant AI agent infrastructure in-house typically requires significant initial investment in security engineering, compliance consulting, infrastructure, and ongoing penetration testing, plus substantial annual maintenance costs.</p>
+<p>The investment does not stop at launch. HIPAA compliance for an AI agent is an ongoing operational commitment, not a one-time certification. Your governance framework needs to cover how you monitor agent performance and compliance continuously after deployment, how you handle security incidents and breach notifications within the 60-day HIPAA timeline, how you evaluate and onboard new AI vendors and tools as your system evolves, and how you conduct regular compliance reviews as regulations and your product change.</p>
+<p>The organizations winning in 2026 are not choosing between security and automation. They are deploying AI agents architected for both from day one.</p>
+<p>Ongoing governance also means staying current with regulatory changes. The HIPAA Security Rule has been updated with new requirements that affect AI deployments specifically in 2026, and the Canadian equivalents, PHIPA and PIPEDA, are continuing to evolve. Teams that treat compliance as a living practice rather than a launch checklist are the ones that maintain enterprise buyer trust over time.</p>
+<h2>What HIPAA Compliant AI Agent Development Actually Costs</h2>
+<p>The cost of building a HIPAA compliant AI agent varies significantly based on the complexity of the workflow you are automating, the systems you need to integrate with, and the compliance architecture you are starting from.</p>
+<p>Building HIPAA compliant AI agent infrastructure in-house typically requires significant initial investment covering security engineering, compliance consulting, infrastructure setup, and ongoing penetration testing, plus substantial annual maintenance.</p>
+<p>For most health tech startups, the most cost-effective path is working with an engineering partner who has already built the compliance architecture components and can adapt them to your specific use case, rather than building every layer from scratch. The compliance infrastructure, PHI classification, audit logging, access controls, and BAA management, is not differentiated from competitor to competitor. What is differentiated is the clinical workflow logic and the user experience your agent delivers. Investing your engineering budget where it creates competitive advantage, rather than rebuilding commodity compliance infrastructure, is almost always the smarter financial decision.</p>
+<p>Silstone Group works with health tech teams building exactly this kind of infrastructure. Our senior engineers have built HIPAA and PHIPA compliant AI systems for healthcare clients in both Canada and the USA, and we bring that compliance architecture to every project from day one rather than retrofitting it after the fact.</p>
+<p>Visit <a href="https://silstone.ai/?utm_source=blog&amp;utm_medium=compliance-ai-agent">silstone.ai</a> to learn more or book a discovery call.</p></div></article></div>
+
+<!--
+  SILSTONE.AI - SECTION 12 - FINAL CTA
+  Hostinger: Embed code block, FULL WIDTH. Suggested height 480px.
+-->
+<div class="sil-root">
+<section class="sil-section has-tint has-top sil-finalcta">
+  <div class="sil-mesh" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="sil-gridlines" aria-hidden="true"></div>
+  <div class="sil-cursorglow" aria-hidden="true"></div>
+
+  <div class="sil-container is-narrow sil-center">
+    <h2 class="sil-display-l sil-reveal">
+      The AI partner who<br><span class="sil-gt">already speaks your language.</span>
+    </h2>
+    <p class="sil-body-l sil-mt-6 sil-reveal" style="--d:80ms;">
+      Book a 20 minute scoping call. We will find where the time and money is leaking, and tell you
+      honestly whether we can help. No integration, no obligation.
+    </p>
+    <div class="sil-finalcta-row sil-reveal" style="--d:160ms;">
+      <a href="https://www.silstone.ai/contact" target="_top" class="sil-btn sil-btn-gradient sil-btn-lg">Book a scoping call</a>
+    </div>
+    <p class="sil-mono sil-mt-6 sil-reveal" style="--d:220ms;">
+      We work from your data. We do not integrate with your EMR.
+    </p>
+  </div>
+</section>
+</div>
+
+<style>
+.sil-finalcta { padding-top: var(--space-20); padding-bottom: var(--space-20); }
+.sil-finalcta-row { display: flex; justify-content: center; margin-top: var(--space-10); }
+@media (max-width: 760px) { .sil-finalcta-row .sil-btn { width: 100%; } }
+</style>
+
+<!-- build-marker:ci-live-1786976135 -->
+
+<!--
+  SILSTONE.AI - SECTION 13 - FOOTER
+  Hostinger: Embed code block, FULL WIDTH, last block on the page.
+  Suggested height 420px.
+
+  LOGO: inlined as a data URI so it works with zero setup. Replace the src with
+  your Hostinger media-library URL once uploaded.
+  Contact details are taken from the design system readme; update if they change.
+-->
+<div class="sil-root">
+<footer class="sil-section is-alt has-top sil-footer">
+  <div class="sil-container">
+
+    <div class="sil-footer-top">
+
+      <div class="sil-footer-brand">
+        <img class="sil-footer-logo" src="/assets/logo-mark.png" alt="Silstone.AI" width="768" height="111">
+        <div class="sil-footer-direct">
+          <ul class="sil-footer-contact">
+            <li>
+              <a href="mailto:sales@silstonegroup.com">
+                <svg class="sil-contact-ic sil-ic-mail" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>sales@silstonegroup.com</span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:+16135585913">
+                <svg class="sil-contact-ic sil-ic-phone" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6.5 4h3l1.5 4-2 1.5a11 11 0 005 5l1.5-2 4 1.5v3a2 2 0 01-2.2 2A16 16 0 014.5 6.2 2 2 0 016.5 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                </svg>
+                <span>+1 613 558 5913</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <nav class="sil-footer-nav" aria-label="Footer">
+        <div>
+          <h3 class="sil-footer-h">Site</h3>
+          <ul>
+            <li><a href="https://www.silstone.ai/" target="_top">Home</a></li>
+            <li><a href="https://www.silstone.ai/what-we-build" target="_top">What we build</a></li>
+            <li><a href="https://www.silstone.ai/live-demos" target="_top">Live demos</a></li>
+            <li><a href="https://www.silstone.ai/trust-and-security" target="_top">Trust and Security</a></li>
+            <li><a href="https://www.silstone.ai/pricing" target="_top">Pricing</a></li>
+            <li><a href="https://www.silstone.ai/blog" target="_top">Blog</a></li>
+          </ul>
+        </div>
+        <div class="sil-footer-get">
+          <h3 class="sil-footer-h">Getting started</h3>
+          <p class="sil-lead-copy">Book a scoping call. Drop your email and our team gets in touch, usually within one business day.</p>
+
+          <form class="sil-lead" id="silLead" novalidate>
+            <div class="sil-lead-field">
+              <input class="sil-lead-input" type="email" id="silLeadEmail" name="email"
+                     placeholder="you@yourclinic.com" autocomplete="email" required
+                     aria-label="Your work email">
+              <button class="sil-lead-btn" type="submit" aria-label="Book a scoping call">
+                <span class="sil-lead-spinner" aria-hidden="true"></span>
+                <svg class="sil-lead-arw" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <p class="sil-lead-hint" id="silLeadHint" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="sil-lead-done" id="silLeadDone" hidden>
+            <span class="sil-lead-check" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <p><strong>You're on the list.</strong> We'll reach out to <span id="silLeadWho">you</span> shortly.</p>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+
+    <div class="sil-footer-bottom">
+      <p class="sil-mono">&copy; <span id="silYear">2026</span> Silstone.AI. All rights reserved.</p>
+      <p class="sil-mono">We work from your data. We do not integrate with your EMR.</p>
+    </div>
+
+  </div>
+</footer>
+</div>
+
+<style>
+.sil-footer { padding-top: var(--space-16); padding-bottom: var(--space-8); }
+.sil-footer-top { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-12); }
+.sil-footer-logo { height: 24px; width: auto; }
+.sil-footer-brand .sil-body-s { max-width: 42ch; }
+.sil-footer-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.sil-footer-badges li {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: var(--radius-pill);
+  background: var(--sec-softer); border: 1px solid var(--sec-border); color: var(--sec-text);
+}
+.sil-footer-nav { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-12); }
+.sil-footer-h {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--text-quaternary);
+  margin-bottom: var(--space-4);
+}
+.sil-footer-nav ul { display: flex; flex-direction: column; gap: var(--space-3); }
+.sil-footer-nav a { font-size: var(--text-body-s-size); color: var(--text-secondary); white-space: nowrap; }
+.sil-footer-nav a:hover { color: var(--teal-300); }
+
+/* ---- Getting started column: email-capture form ---------------------- */
+.sil-footer-get .sil-lead-copy {
+  font-size: var(--text-body-s-size); line-height: 1.5;
+  color: var(--text-tertiary); max-width: 34ch; margin-bottom: var(--space-4);
+}
+
+.sil-lead-field {
+  display: flex; align-items: center; gap: var(--space-2);
+  background: var(--bg-surface); border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill); padding: 4px 4px 4px 4px;
+  max-width: 320px;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-lead-field:focus-within {
+  border-color: var(--violet-400);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.sil-lead.is-invalid .sil-lead-field {
+  border-color: var(--coral-400);
+  box-shadow: 0 0 0 3px rgba(255,158,122,0.14);
+  animation: silLeadShake 0.4s var(--ease-standard);
+}
+@keyframes silLeadShake {
+  0%,100%{transform:translateX(0);} 20%{transform:translateX(-5px);}
+  40%{transform:translateX(4px);} 60%{transform:translateX(-3px);} 80%{transform:translateX(2px);}
+}
+
+.sil-root .sil-lead-input {
+  flex: 1 1 auto; width: auto; min-width: 0;
+  background: transparent; border: 0; border-radius: 0;
+  padding: 8px 6px 8px 14px; font-size: var(--text-body-s-size);
+  color: var(--text-primary);
+}
+.sil-root .sil-lead-input:focus { border: 0; box-shadow: none; }
+
+.sil-lead-btn {
+  flex: none; position: relative;
+  width: 38px; height: 38px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-on-accent);
+  background: var(--grad-primary); background-size: 160% 160%;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.sil-lead-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(124,107,240,0.34); }
+.sil-lead-btn:active { transform: translateY(0); }
+.sil-lead-btn .sil-lead-arw { transition: transform var(--duration-base) var(--ease-out); }
+.sil-lead-btn:hover .sil-lead-arw { transform: translateX(2px); }
+
+.sil-lead-spinner {
+  position: absolute; width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff;
+  opacity: 0; animation: silLeadSpin 0.7s linear infinite;
+}
+@keyframes silLeadSpin { to { transform: rotate(360deg); } }
+.sil-lead.is-sending .sil-lead-arw { opacity: 0; }
+.sil-lead.is-sending .sil-lead-spinner { opacity: 1; }
+.sil-lead.is-sending .sil-lead-btn { pointer-events: none; }
+
+.sil-lead-hint {
+  font-size: var(--text-caption-size); line-height: 1.4;
+  color: var(--coral-300); min-height: 1.1em;
+  margin-top: var(--space-2); opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+.sil-lead.is-invalid .sil-lead-hint { opacity: 1; }
+
+/* Success state */
+.sil-lead-done {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  max-width: 320px;
+  opacity: 0; transform: translateY(8px);
+}
+.sil-lead-done.is-in {
+  opacity: 1; transform: none;
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+.sil-lead-done p { font-size: var(--text-body-s-size); line-height: 1.5; color: var(--text-secondary); }
+.sil-lead-done strong { color: var(--text-primary); }
+.sil-lead-check {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--mint-300); background: rgba(94,224,168,0.12);
+  border: 1px solid rgba(94,224,168,0.3);
+}
+.sil-lead-check path {
+  stroke-dasharray: 30; stroke-dashoffset: 30;
+}
+.sil-lead-done.is-in .sil-lead-check path {
+  animation: silLeadDraw 0.5s var(--ease-out) 0.15s forwards;
+}
+@keyframes silLeadDraw { to { stroke-dashoffset: 0; } }
+
+.sil-footer-direct {
+  margin-top: var(--space-6);
+  max-width: 340px;
+}
+.sil-footer-h-sub { margin-bottom: var(--space-3); }
+.sil-footer-contact {
+  display: flex; flex-direction: column; gap: var(--space-1);
+}
+.sil-footer-contact a {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  font-size: var(--text-body-s-size); color: var(--text-secondary);
+  padding: var(--space-1) 0;
+}
+.sil-footer-contact a:hover { color: var(--teal-300); }
+.sil-contact-ic { flex: none; }
+.sil-ic-mail  { color: var(--violet-300); }
+.sil-ic-phone { color: var(--coral-300); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sil-lead.is-invalid .sil-lead-field { animation: none; }
+  .sil-lead-done.is-in .sil-lead-check path { animation: none; stroke-dashoffset: 0; }
+}
+
+.sil-footer-bottom {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-10); padding-top: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 860px) {
+  .sil-footer-top { grid-template-columns: 1fr; gap: var(--space-12); }
+}
+@media (max-width: 480px) {
+  .sil-footer-nav { grid-template-columns: 1fr; gap: var(--space-8); }
+  .sil-footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+}
+</style>
+
+<script>
+(function () {
+  var y = document.getElementById('silYear');
+  if (y) y.textContent = new Date().getFullYear();
+
+  /* ---- Lead-capture form -------------------------------------------------
+     Submissions go to Web3Forms, which emails them to the address tied to the
+     access key (sales@silstonegroup.com). If the network call fails, it falls
+     back to a pre-filled mailto so a lead is never lost. */
+  var W3F_ENDPOINT = 'https://api.web3forms.com/submit';
+  var W3F_KEY = '94814fe7-9502-4b6a-b862-44da6cbe1576';
+
+  var form  = document.getElementById('silLead');
+  if (!form) return;
+  var input = document.getElementById('silLeadEmail');
+  var hint  = document.getElementById('silLeadHint');
+  var done  = document.getElementById('silLeadDone');
+  var who   = document.getElementById('silLeadWho');
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function fail(msg) {
+    hint.textContent = msg;
+    form.classList.add('is-invalid');
+    input.focus();
+  }
+  form.addEventListener('input', function () { form.classList.remove('is-invalid'); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = (input.value || '').trim();
+    if (!EMAIL.test(email)) { fail('Please enter a valid email address.'); return; }
+
+    form.classList.remove('is-invalid');
+    form.classList.add('is-sending');
+
+    function succeed() {
+      form.hidden = true;
+      if (who) who.textContent = email;
+      done.hidden = false;
+      // next frame so the transition runs
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { done.classList.add('is-in'); });
+      });
+    }
+
+    fetch(W3F_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: W3F_KEY,
+        subject: 'New scoping-call request from the website',
+        from_name: 'Silstone.AI website',
+        email: email,
+        message: 'Scoping-call request. Please reach out to: ' + email,
+        source: 'footer-scoping-call'
+      })
+    }).then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.success) { succeed(); }
+        else { fail('Something went wrong. Please email us directly.'); form.classList.remove('is-sending'); }
+      })
+      .catch(function () {
+        // network failed: fall back to mailto so the lead is never lost
+        window.location.href = mailto(email);
+        succeed();
+      });
+  });
+
+  function mailto(email) {
+    return 'mailto:sales@silstonegroup.com'
+      + '?subject=' + encodeURIComponent('Scoping call request')
+      + '&body=' + encodeURIComponent('Please book me a scoping call. My email: ' + email);
+  }
+})();
+</script>
+<script src="/assets/silstone.js" defer></script>
+</body>
+</html>
