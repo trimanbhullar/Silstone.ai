@@ -31,6 +31,7 @@ import pathlib
 import re
 import shutil
 import datetime
+import hashlib
 import html as _html
 
 ROOT = pathlib.Path(__file__).parent
@@ -50,6 +51,10 @@ FAVICON_HREF = "/assets/favicon.png" if FAVICON_SRC.exists() else "/assets/logo-
 FONTS_HREF = ("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700"
               "&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500"
               "&display=swap")
+# Fingerprinted at build time so the 1-year "immutable" cache is correct and every
+# CSS/JS change gets a new URL that returning browsers actually re-fetch.
+CSS_HREF = "/assets/silstone.css"
+JS_HREF = "/assets/silstone.js"
 TODAY = datetime.date.today().isoformat()
 
 START = "<!-- SIL:GLOBAL START"
@@ -269,7 +274,7 @@ def head(meta: dict) -> str:
 <noscript><link rel="stylesheet" href="{FONTS_HREF}"></noscript>
 
 <style>html,body{{margin:0;padding:0;background:#08080B;}}</style>
-<link rel="stylesheet" href="/assets/silstone.css">
+<link rel="stylesheet" href="{CSS_HREF}">
 {ld_tags}
 </head>
 <body>
@@ -280,7 +285,7 @@ def page_html(meta: dict, body: str) -> str:
     doc = (
         head(meta)
         + body
-        + '\n<script src="/assets/silstone.js" defer></script>\n</body>\n</html>\n'
+        + f'\n<script src="{JS_HREF}" defer></script>\n</body>\n</html>\n'
     )
     return deinline_logo(doc)
 
@@ -475,11 +480,20 @@ def build() -> None:
     # ---- assets (one shared copy) ----
     assets_out = DIST / "assets"
     assets_out.mkdir()
-    # served CSS: drop the @import (fonts now load from <head>) + minify.
+    # served CSS: drop the @import (fonts now load from <head>) + minify, then
+    # fingerprint CSS + JS filenames for correct long-cache busting.
     css = (ROOT / "assets" / "silstone.css").read_text(encoding="utf-8")
-    css = re.sub(r"@import\s+url\([^)]*\);", "", css)
-    (assets_out / "silstone.css").write_text(minify_css(css), encoding="utf-8")
-    shutil.copy(ROOT / "assets" / "silstone.js", assets_out / "silstone.js")
+    css = minify_css(re.sub(r"@import\s+url\([^)]*\);", "", css))
+    js = (ROOT / "assets" / "silstone.js").read_text(encoding="utf-8")
+    global CSS_HREF, JS_HREF
+    css_name = f"silstone.{hashlib.sha1(css.encode()).hexdigest()[:8]}.css"
+    js_name = f"silstone.{hashlib.sha1(js.encode()).hexdigest()[:8]}.js"
+    CSS_HREF, JS_HREF = f"/assets/{css_name}", f"/assets/{js_name}"
+    (assets_out / css_name).write_text(css, encoding="utf-8")
+    (assets_out / js_name).write_text(js, encoding="utf-8")
+    # also emit the un-hashed names so any briefly-cached old HTML doesn't 404
+    (assets_out / "silstone.css").write_text(css, encoding="utf-8")
+    (assets_out / "silstone.js").write_text(js, encoding="utf-8")
     shutil.copy(ROOT / "brand" / "hero-still.jpg", assets_out / "og.jpg")
     shutil.copy(ROOT / "brand" / "logo-mark.png", assets_out / "logo-mark.png")
     if FAVICON_SRC.exists():
