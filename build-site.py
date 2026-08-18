@@ -472,9 +472,15 @@ ORG_TAGLINE = "Healthcare-native AI studio building custom AI agents for medical
 # Per-author metadata (byline/author-box link + JSON-LD sameAs). Keys must match
 # the Author dropdown values in .pages.yml.
 AUTHORS = {
-    "Keshav Gambhir": {"linkedin": "https://www.linkedin.com/in/keshav-gambhir/"},
-    "Triman Bhullar": {"linkedin": "https://www.linkedin.com/in/trimansinghbhullar"},
-    "Silstone.AI Team": {"linkedin": ""},
+    "Keshav Gambhir": {
+        "linkedin": "https://www.linkedin.com/in/keshav-gambhir/",
+        "bio": "Head of Marketing at Silstone, working where product meets growth — turning customer insight into positioning, go-to-market strategy, and demand generation for B2B SaaS.",
+    },
+    "Triman Bhullar": {
+        "linkedin": "https://www.linkedin.com/in/trimansinghbhullar",
+        "bio": "Head of Innovation and Creative Lead at Silstone, with 10+ years leading at the intersection of research, design, engineering, and business strategy across healthcare and defense technology.",
+    },
+    "Silstone.AI Team": {"linkedin": "", "bio": ORG_TAGLINE},
 }
 
 
@@ -523,6 +529,7 @@ def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> Non
     author_raw = post.get("author") or DEFAULT_AUTHOR
     author = _html.escape(author_raw)
     linkedin = AUTHORS.get(author_raw, {}).get("linkedin", "")
+    bio = _html.escape(AUTHORS.get(author_raw, {}).get("bio", ORG_TAGLINE))
     if linkedin:
         byline_author = f'<a class="sil-byline-author" href="{linkedin}" target="_blank" rel="noopener">{author}</a>'
         author_name_html = f'<a href="{linkedin}" target="_blank" rel="noopener">{author}</a>'
@@ -559,7 +566,7 @@ def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> Non
         '<div class="sil-author-box">'
         f'<span class="sil-author-avatar" aria-hidden="true">{initials}</span>'
         f'<div><p class="sil-author-name">{author_name_html}</p>'
-        f'<p class="sil-author-desc">{ORG_TAGLINE}</p>'
+        f'<p class="sil-author-desc">{bio}</p>'
         f"{author_linkedin}</div></div>"
     )
 
