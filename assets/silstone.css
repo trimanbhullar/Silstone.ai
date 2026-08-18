@@ -675,7 +675,7 @@
 /* ===========================================================================
    BLOG  (index cards + article) — used by build-site.py generated pages
    =========================================================================== */
-.sil-blog-wrap { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-pad) var(--space-16); }
+.sil-blog-wrap { max-width: var(--container-max); margin: 0 auto; padding: var(--space-12) var(--container-pad) var(--space-16); }
 .sil-blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-6); }
 .sil-blog-card { display: flex; flex-direction: column; overflow: hidden; text-decoration: none;
   background: var(--bg-surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
