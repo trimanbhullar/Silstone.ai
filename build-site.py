@@ -570,18 +570,27 @@ def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> Non
         f"{author_linkedin}</div></div>"
     )
 
-    article = (
-        '<div class="sil-progress" id="silProgress" aria-hidden="true"></div>'
-        '<div class="sil-root"><article class="sil-article-page">'
+    main_inner = (
         '<div class="sil-article-top">'
         '<a class="sil-article-back" href="/blog" target="_top">&larr; All articles</a>'
         "</div>"
         f'<h1 class="sil-article-title">{title_h}</h1>'
         f"{byline}"
         f'<div class="sil-article-hero"><img src="{post.get("image","")}" alt="{title_h}"></div>'
-        f"{toc}"
         f'<div class="sil-article">{body_html}</div>'
         f"{tags_row}{share}{author_box}"
+    )
+    if toc:
+        layout = (
+            f'<div class="sil-article-layout">{toc}'
+            f'<div class="sil-article-main">{main_inner}</div></div>'
+        )
+    else:
+        layout = f'<div class="sil-article-main sil-article-main--full">{main_inner}</div>'
+    article = (
+        '<div class="sil-progress" id="silProgress" aria-hidden="true"></div>'
+        '<div class="sil-root"><article class="sil-article-page">'
+        f"{layout}"
         "</article></div>"
     )
     body = "\n\n".join([nav, article, read_next_html(post, posts), cta, footer])

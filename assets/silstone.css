@@ -713,7 +713,7 @@
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .sil-blog-more { margin-top: auto; padding-top: var(--space-2); color: var(--teal-300); font-weight: var(--font-weight-semibold); font-size: var(--text-body-s-size); }
 
-.sil-article-page { max-width: 1080px; margin: 0 auto; padding: var(--space-12) var(--container-pad) var(--space-16); }
+.sil-article-page { max-width: 1200px; margin: 0 auto; padding: var(--space-12) var(--container-pad) var(--space-16); }
 .sil-article-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); }
 .sil-article-back { color: var(--text-secondary); font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium); }
 .sil-article-back:hover { color: var(--teal-300); }
@@ -797,3 +797,22 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .sil-author-name a:hover { color: var(--teal-300); }
 .sil-author-linkedin { display: inline-block; margin-top: var(--space-2); color: var(--teal-300); font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium); text-decoration: none; }
 .sil-author-linkedin:hover { text-decoration: underline; }
+
+/* ===========================================================================
+   ARTICLE LAYOUT: sticky TOC sidebar (desktop) + scroll-spy
+   =========================================================================== */
+.sil-article-main { min-width: 0; }
+.sil-article-main--full { max-width: 820px; margin: 0 auto; }
+.sil-toc { display: none; }   /* hidden on mobile; becomes a sidebar on desktop */
+
+@media (min-width: 981px) {
+  .sil-article-layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: var(--space-12); align-items: start; }
+  .sil-toc { display: block; position: sticky; top: 96px; align-self: start;
+    max-width: none; margin: 0; padding: 0; background: none; border: 0; border-radius: 0;
+    max-height: calc(100vh - 120px); overflow-y: auto; }
+  .sil-toc-label { margin: 0 0 var(--space-3); }
+  .sil-toc ul { border-left: 1px solid var(--border-subtle); gap: 0; }
+  .sil-toc a { display: block; padding: 6px 0 6px var(--space-4); margin-left: -1px;
+    border-left: 2px solid transparent; transition: color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard); }
+  .sil-toc a.is-active { color: var(--teal-300); border-left-color: var(--teal-500); }
+}
