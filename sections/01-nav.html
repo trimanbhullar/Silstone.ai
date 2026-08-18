@@ -1037,8 +1037,8 @@
 /* ============ grouped nav: triggers, dropdowns, demo highlight ============ */
 .sil-nav-item { position: relative; }
 
-.sil-nav-trigger,
-a.sil-nav-item {
+.sil-root .sil-nav-trigger,
+.sil-root a.sil-nav-item {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 0; margin: 0; background: none; border: 0; cursor: pointer;
   font-family: inherit; font-size: var(--text-body-s-size);
@@ -1110,8 +1110,8 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
   .sil-nav-links { padding-bottom: var(--space-4); }
   .sil-nav-item { width: 100%; }
 
-  .sil-nav-trigger,
-  a.sil-nav-item {
+  .sil-root .sil-nav-trigger,
+  .sil-root a.sil-nav-item {
     width: 100%;
     padding: var(--space-4) 0; font-size: var(--text-body-m-size);
     border-bottom: 1px solid var(--border-subtle);
