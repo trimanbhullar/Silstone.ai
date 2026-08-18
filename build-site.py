@@ -644,6 +644,10 @@ def build() -> None:
     shutil.copy(ROOT / "brand" / "logo-mark.png", assets_out / "logo-mark.png")
     if FAVICON_SRC.exists():
         shutil.copy(FAVICON_SRC, assets_out / "favicon.png")
+        # also serve it at the conventional root paths that browsers/crawlers
+        # request by default, so /favicon.ico doesn't 404.
+        shutil.copy(FAVICON_SRC, DIST / "favicon.png")
+        shutil.copy(FAVICON_SRC, DIST / "favicon.ico")
     # blog hero images
     blog_img_src = ROOT / "assets" / "blog"
     if blog_img_src.exists():
