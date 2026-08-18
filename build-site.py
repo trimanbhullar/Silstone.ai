@@ -43,7 +43,7 @@ DOMAIN = "https://www.silstone.ai"
 ORG_NAME = "Silstone.AI"
 ORG_EMAIL = "sales@silstonegroup.com"
 ORG_PHONE = "+1-613-558-5913"
-OG_IMAGE = f"{DOMAIN}/assets/og.jpg"
+OG_IMAGE = f"{DOMAIN}/assets/og.png"
 # Favicon: drop a square icon at brand/favicon.png and it is used automatically;
 # otherwise we fall back to the wordmark so the build never breaks.
 FAVICON_SRC = ROOT / "brand" / "favicon.png"
@@ -228,6 +228,8 @@ def head(meta: dict) -> str:
     url = canonical(slug)
     og_image = meta.get("og_image") or OG_IMAGE
     og_type = meta.get("og_type", "website")
+    og_w = meta.get("og_w", 1920)
+    og_h = meta.get("og_h", 1080)
     ld = [org_jsonld()]
     if slug == "":
         ld.append(website_jsonld())
@@ -255,8 +257,8 @@ def head(meta: dict) -> str:
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{og_image}">
-<meta property="og:image:width" content="1440">
-<meta property="og:image:height" content="756">
+<meta property="og:image:width" content="{og_w}">
+<meta property="og:image:height" content="{og_h}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -600,6 +602,7 @@ def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> Non
         "desc": post.get("description", ""),
         "og_image": DOMAIN + post.get("image", ""),
         "og_type": "article",
+        "og_w": 1440, "og_h": 756,
         "extra_ld": [blogposting_jsonld(post, url)],
     }
     out_dir = DIST / "blog" / slug
@@ -640,7 +643,7 @@ def build() -> None:
     # also emit the un-hashed names so any briefly-cached old HTML doesn't 404
     (assets_out / "silstone.css").write_text(css, encoding="utf-8")
     (assets_out / "silstone.js").write_text(js, encoding="utf-8")
-    shutil.copy(ROOT / "brand" / "hero-still.jpg", assets_out / "og.jpg")
+    shutil.copy(ROOT / "brand" / "og-logo.png", assets_out / "og.png")
     shutil.copy(ROOT / "brand" / "logo-mark.png", assets_out / "logo-mark.png")
     if FAVICON_SRC.exists():
         shutil.copy(FAVICON_SRC, assets_out / "favicon.png")
