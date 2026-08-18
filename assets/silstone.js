@@ -250,3 +250,26 @@
     });
   });
 })();
+
+/* ===== BLOG: TOC scroll-spy (highlight current section) ===== */
+(function () {
+  var toc = document.querySelector('.sil-toc');
+  if (!toc) return;
+  var links = {};
+  [].forEach.call(toc.querySelectorAll('a'), function (a) {
+    links[a.getAttribute('href').slice(1)] = a;
+  });
+  var headings = [].slice.call(document.querySelectorAll('.sil-article h2[id]'));
+  if (!headings.length) return;
+  var spy = function () {
+    var pos = window.scrollY + 120, current = headings[0];
+    headings.forEach(function (h) {
+      if (h.getBoundingClientRect().top + window.scrollY <= pos) current = h;
+    });
+    Object.keys(links).forEach(function (id) {
+      links[id].classList.toggle('is-active', id === current.id);
+    });
+  };
+  window.addEventListener('scroll', spy, { passive: true });
+  spy();
+})();
