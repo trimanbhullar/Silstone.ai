@@ -200,3 +200,53 @@
   mo.observe(document.body || document.documentElement, { childList: true, subtree: true });
   [400, 1200, 2600].forEach(function (t) { setTimeout(boot, t); });
 })();
+
+/* ===== BLOG: reading progress bar, tag filter, copy-link (guarded) ===== */
+(function () {
+  // reading progress bar
+  var bar = document.getElementById('silProgress');
+  var article = document.querySelector('.sil-article-page');
+  if (bar && article) {
+    var update = function () {
+      var total = article.offsetHeight - window.innerHeight;
+      var scrolled = Math.min(Math.max(-article.getBoundingClientRect().top, 0), Math.max(total, 1));
+      bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  // tag filtering on the listing
+  var filter = document.querySelector('.sil-tagfilter');
+  if (filter) {
+    var cards = [].slice.call(document.querySelectorAll('.sil-blog-card, .sil-blog-featured'));
+    var apply = function (tag) {
+      cards.forEach(function (c) {
+        var tags = (c.getAttribute('data-tags') || '').split(',');
+        c.style.display = (!tag || tags.indexOf(tag) !== -1) ? '' : 'none';
+      });
+      [].forEach.call(filter.querySelectorAll('.sil-tagfilter-btn'), function (b) {
+        b.classList.toggle('is-active', (b.getAttribute('data-tag') || '') === tag);
+      });
+    };
+    filter.addEventListener('click', function (e) {
+      var btn = e.target.closest('.sil-tagfilter-btn');
+      if (btn) apply(btn.getAttribute('data-tag') || '');
+    });
+    var m = location.search.match(/[?&]tag=([^&]+)/);
+    if (m) apply(decodeURIComponent(m[1]));
+  }
+
+  // copy-link buttons
+  [].forEach.call(document.querySelectorAll('.sil-copy-link'), function (btn) {
+    btn.addEventListener('click', function () {
+      var url = btn.getAttribute('data-url') || location.href;
+      var done = function () {
+        var t = btn.textContent; btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = t; }, 1600);
+      };
+      if (navigator.clipboard) { navigator.clipboard.writeText(url).then(done).catch(function () {}); }
+    });
+  });
+})();
