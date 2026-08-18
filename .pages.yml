@@ -30,7 +30,12 @@ content:
         required: true
       - name: author
         label: Author
-        type: string
+        type: select
+        options:
+          values:
+            - Keshav Gambhir
+            - Triman Bhullar
+            - Silstone.AI Team
         default: Silstone.AI Team
       - name: tags
         label: Tags

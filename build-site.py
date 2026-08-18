@@ -405,12 +405,15 @@ def blogposting_jsonld(post: dict, url: str) -> str:
     img = DOMAIN + post.get("image", "")
     t = _html.escape(post["title"], quote=True)
     d = _html.escape(post.get("description", ""), quote=True)
-    author = _html.escape(post.get("author") or "Silstone.AI Team", quote=True)
+    author_raw = post.get("author") or "Silstone.AI Team"
+    author = _html.escape(author_raw, quote=True)
+    li = AUTHORS.get(author_raw, {}).get("linkedin", "")
+    author_ld = f'{{"@type":"Person","name":"{author}"' + (f',"url":"{li}"' if li else "") + "}"
     return (
         '{"@context":"https://schema.org","@type":"BlogPosting",'
         f'"headline":"{t}","description":"{d}","image":"{img}",'
         f'"datePublished":"{post.get("date","")}","dateModified":"{post.get("date","")}",'
-        f'"author":{{"@type":"Person","name":"{author}"}},'
+        f'"author":{author_ld},'
         '"publisher":{"@type":"Organization","name":"Silstone.AI",'
         f'"logo":{{"@type":"ImageObject","url":"{DOMAIN}/assets/logo-mark.png"}}}},'
         f'"mainEntityOfPage":"{url}"}}'
@@ -466,6 +469,13 @@ def blog_cards_html(posts: list) -> str:
 
 DEFAULT_AUTHOR = "Silstone.AI Team"
 ORG_TAGLINE = "Healthcare-native AI studio building custom AI agents for medical and dental practices."
+# Per-author metadata (byline/author-box link + JSON-LD sameAs). Keys must match
+# the Author dropdown values in .pages.yml.
+AUTHORS = {
+    "Keshav Gambhir": {"linkedin": "https://www.linkedin.com/in/keshav-gambhir/"},
+    "Triman Bhullar": {"linkedin": "https://www.linkedin.com/in/trimansinghbhullar"},
+    "Silstone.AI Team": {"linkedin": ""},
+}
 
 
 def reading_minutes(body_md: str) -> int:
@@ -510,9 +520,19 @@ def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> Non
     slug = post["slug"]
     url = f"{DOMAIN}/blog/{slug}"
     title_h = _html.escape(post["title"])
-    author = _html.escape(post.get("author") or DEFAULT_AUTHOR)
+    author_raw = post.get("author") or DEFAULT_AUTHOR
+    author = _html.escape(author_raw)
+    linkedin = AUTHORS.get(author_raw, {}).get("linkedin", "")
+    if linkedin:
+        byline_author = f'<a class="sil-byline-author" href="{linkedin}" target="_blank" rel="noopener">{author}</a>'
+        author_name_html = f'<a href="{linkedin}" target="_blank" rel="noopener">{author}</a>'
+        author_linkedin = f'<a class="sil-author-linkedin" href="{linkedin}" target="_blank" rel="noopener">View LinkedIn &rarr;</a>'
+    else:
+        byline_author = f'<span class="sil-byline-author">{author}</span>'
+        author_name_html = author
+        author_linkedin = ""
     byline = (
-        f'<div class="sil-article-byline">By <span class="sil-byline-author">{author}</span>'
+        f'<div class="sil-article-byline">By {byline_author}'
         f' &middot; {fmt_date(post.get("date",""))}'
         f' &middot; {reading_minutes(post["body"])} min read</div>'
     )
@@ -534,12 +554,13 @@ def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> Non
         "</div>"
     )
 
-    initials = "".join(w[0] for w in (post.get("author") or DEFAULT_AUTHOR).split()[:2]).upper()
+    initials = "".join(w[0] for w in author_raw.split()[:2]).upper()
     author_box = (
         '<div class="sil-author-box">'
         f'<span class="sil-author-avatar" aria-hidden="true">{initials}</span>'
-        f'<div><p class="sil-author-name">{author}</p>'
-        f'<p class="sil-author-desc">{ORG_TAGLINE}</p></div></div>'
+        f'<div><p class="sil-author-name">{author_name_html}</p>'
+        f'<p class="sil-author-desc">{ORG_TAGLINE}</p>'
+        f"{author_linkedin}</div></div>"
     )
 
     article = (
