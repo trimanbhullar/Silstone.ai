@@ -1,5 +1,6 @@
 ---
 title: "How to Build Your First AI Agent as a Non Technical Founder in 2026"
+author: "Silstone.AI Team"
 description: "You do not need to be a developer to build your first AI agent in 2026. Here is a practical step by step guide for non-technical founders who want to automate their workflows and scale faster without writing a single line of code."
 date: 2026-07-28
 image: /assets/blog/how-to-build-your-first-ai-agent-as-a-non-technical-founder-in-2026.jpg

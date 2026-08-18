@@ -1,5 +1,6 @@
 ---
 title: "Why Strong Engineering Is the Real AI Competitive Advantage"
+author: "Silstone.AI Team"
 description: "Strong engineering is the real AI competitive advantage because it turns models into reliable, scalable systems that actually deliver long-term value."
 date: 2026-07-14
 image: /assets/blog/why-strong-engineering-is-the-real-ai-competitive-advantage.jpg

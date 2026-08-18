@@ -1,5 +1,6 @@
 ---
 title: "7 Things That Will Happen If Your Company Is Not AI Ready in 2026"
+author: "Silstone.AI Team"
 description: "Companies that are not AI ready in 2026 will face slower operations, higher costs, and competitive disadvantage. Learn the 7 key business risks and how to prepare."
 date: 2026-07-21
 image: /assets/blog/7-things-that-will-happen-if-your-company-is-not-ai-ready-in-2026.jpg

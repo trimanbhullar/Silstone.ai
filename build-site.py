@@ -392,11 +392,12 @@ def blogposting_jsonld(post: dict, url: str) -> str:
     img = DOMAIN + post.get("image", "")
     t = _html.escape(post["title"], quote=True)
     d = _html.escape(post.get("description", ""), quote=True)
+    author = _html.escape(post.get("author") or "Silstone.AI Team", quote=True)
     return (
         '{"@context":"https://schema.org","@type":"BlogPosting",'
         f'"headline":"{t}","description":"{d}","image":"{img}",'
         f'"datePublished":"{post.get("date","")}","dateModified":"{post.get("date","")}",'
-        '"author":{"@type":"Organization","name":"Silstone.AI"},'
+        f'"author":{{"@type":"Person","name":"{author}"}},'
         '"publisher":{"@type":"Organization","name":"Silstone.AI",'
         f'"logo":{{"@type":"ImageObject","url":"{DOMAIN}/assets/logo-mark.png"}}}},'
         f'"mainEntityOfPage":"{url}"}}'
@@ -432,22 +433,49 @@ def blog_cards_html(posts: list) -> str:
     )
 
 
-def render_post(post: dict, nav: str, cta: str, footer: str) -> None:
+DEFAULT_AUTHOR = "Silstone.AI Team"
+
+
+def reading_minutes(body_md: str) -> int:
+    return max(1, round(len(re.findall(r"\w+", body_md)) / 200))
+
+
+def read_next_html(current: dict, posts: list) -> str:
+    """3 other posts at the end of an article to keep readers on the site."""
+    others = [p for p in posts if p["slug"] != current["slug"]][:3]
+    if not others:
+        return ""
+    cards = "".join(_blog_card(p) for p in others)
+    return (
+        '<div class="sil-root"><section class="sil-blog-wrap sil-readnext">'
+        '<h2 class="sil-readnext-title">Read next</h2>'
+        f'<div class="sil-blog-grid">{cards}</div>'
+        "</section></div>"
+    )
+
+
+def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> None:
     slug = post["slug"]
     url = f"{DOMAIN}/blog/{slug}"
     title_h = _html.escape(post["title"])
+    author = _html.escape(post.get("author") or DEFAULT_AUTHOR)
+    byline = (
+        f'<div class="sil-article-byline">By <span class="sil-byline-author">{author}</span>'
+        f' &middot; {fmt_date(post.get("date",""))}'
+        f' &middot; {reading_minutes(post["body"])} min read</div>'
+    )
     article = (
         '<div class="sil-root"><article class="sil-article-page">'
         '<div class="sil-article-top">'
         '<a class="sil-article-back" href="/blog" target="_top">&larr; All articles</a>'
-        f'<span class="sil-blog-date">{fmt_date(post.get("date",""))}</span>'
         "</div>"
         f'<h1 class="sil-article-title">{title_h}</h1>'
-        f'<img class="sil-article-hero-img" src="{post.get("image","")}" alt="{title_h}" width="1440" height="756">'
+        f"{byline}"
+        f'<div class="sil-article-hero"><img src="{post.get("image","")}" alt="{title_h}"></div>'
         f'<div class="sil-article">{md_to_html(post["body"])}</div>'
         "</article></div>"
     )
-    body = "\n\n".join([nav, article, cta, footer])
+    body = "\n\n".join([nav, article, read_next_html(post, posts), cta, footer])
     meta = {
         "slug": f"blog/{slug}",
         "title": f'{post["title"]} | Silstone.AI',
@@ -530,7 +558,7 @@ def build() -> None:
 
     # individual blog post pages
     for post in posts:
-        render_post(post, nav, cta, footer)
+        render_post(post, posts, nav, cta, footer)
         print(f"  dist/blog/{post['slug']}/index.html")
 
     write_sitemap(posts)

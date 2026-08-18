@@ -28,6 +28,10 @@ content:
         label: Title
         type: string
         required: true
+      - name: author
+        label: Author
+        type: string
+        default: Silstone.AI Team
       - name: description
         label: SEO description
         type: text

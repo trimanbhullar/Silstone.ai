@@ -1,5 +1,6 @@
 ---
 title: "How to Build a HIPAA Compliant AI Agent in 2026"
+author: "Silstone.AI Team"
 description: "Learn how to build a HIPAA-compliant AI agent in 2026 with a secure architecture, PHI protection, audit logging, and enterprise-ready compliance practices."
 date: 2026-08-04
 image: /assets/blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026.jpg
