@@ -55,6 +55,7 @@ FONTS_HREF = ("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700
 # CSS/JS change gets a new URL that returning browsers actually re-fetch.
 CSS_HREF = "/assets/silstone.css"
 JS_HREF = "/assets/silstone.js"
+LOGO_HREF = "/assets/logo-mark.png"   # fingerprinted at build time
 TODAY = datetime.date.today().isoformat()
 
 START = "<!-- SIL:GLOBAL START"
@@ -180,7 +181,7 @@ WORDMARK_URI = _wordmark_uri()
 def deinline_logo(html: str) -> str:
     """Point every copy of the wordmark (nav + footer) at the one cached file."""
     if WORDMARK_URI:
-        html = html.replace(WORDMARK_URI, "/assets/logo-mark.png")
+        html = html.replace(WORDMARK_URI, LOGO_HREF)
     return html
 
 
@@ -200,7 +201,7 @@ def org_jsonld() -> str:
     return (
         '{"@context":"https://schema.org","@type":"Organization",'
         f'"name":"{ORG_NAME}","url":"{DOMAIN}/",'
-        f'"logo":"{DOMAIN}/assets/logo-mark.png",'
+        f'"logo":"{DOMAIN}{LOGO_HREF}",'
         '"description":"Healthcare-native AI studio that designs, builds and deploys custom AI agents to automate back-office work for medical and dental practices.",'
         '"contactPoint":{"@type":"ContactPoint","contactType":"sales",'
         f'"email":"{ORG_EMAIL}","telephone":"{ORG_PHONE}"}}}}'
@@ -417,7 +418,7 @@ def blogposting_jsonld(post: dict, url: str) -> str:
         f'"datePublished":"{post.get("date","")}","dateModified":"{post.get("date","")}",'
         f'"author":{author_ld},'
         '"publisher":{"@type":"Organization","name":"Silstone.AI",'
-        f'"logo":{{"@type":"ImageObject","url":"{DOMAIN}/assets/logo-mark.png"}}}},'
+        f'"logo":{{"@type":"ImageObject","url":"{DOMAIN}{LOGO_HREF}"}}}},'
         f'"mainEntityOfPage":"{url}"}}'
     )
 
@@ -634,7 +635,7 @@ def build() -> None:
     css = (ROOT / "assets" / "silstone.css").read_text(encoding="utf-8")
     css = minify_css(re.sub(r"@import\s+url\([^)]*\);", "", css))
     js = (ROOT / "assets" / "silstone.js").read_text(encoding="utf-8")
-    global CSS_HREF, JS_HREF
+    global CSS_HREF, JS_HREF, LOGO_HREF, OG_IMAGE, FAVICON_HREF
     css_name = f"silstone.{hashlib.sha1(css.encode()).hexdigest()[:8]}.css"
     js_name = f"silstone.{hashlib.sha1(js.encode()).hexdigest()[:8]}.js"
     CSS_HREF, JS_HREF = f"/assets/{css_name}", f"/assets/{js_name}"
@@ -643,12 +644,20 @@ def build() -> None:
     # also emit the un-hashed names so any briefly-cached old HTML doesn't 404
     (assets_out / "silstone.css").write_text(css, encoding="utf-8")
     (assets_out / "silstone.js").write_text(js, encoding="utf-8")
-    shutil.copy(ROOT / "brand" / "og-logo.png", assets_out / "og.png")
-    shutil.copy(ROOT / "brand" / "logo-mark.png", assets_out / "logo-mark.png")
+
+    # Fingerprint brand images too, so swapping a logo/favicon/OG image actually
+    # reaches returning browsers (they're cached "immutable" for a year).
+    def fp_asset(src: pathlib.Path, base: str) -> str:
+        data = src.read_bytes()
+        name = f"{base}.{hashlib.sha1(data).hexdigest()[:8]}{src.suffix}"
+        (assets_out / name).write_bytes(data)
+        return f"/assets/{name}"
+
+    LOGO_HREF = fp_asset(ROOT / "brand" / "logo-mark.png", "logo-mark")
+    OG_IMAGE = DOMAIN + fp_asset(ROOT / "brand" / "og-logo.png", "og")
     if FAVICON_SRC.exists():
-        shutil.copy(FAVICON_SRC, assets_out / "favicon.png")
-        # also serve it at the conventional root paths that browsers/crawlers
-        # request by default, so /favicon.ico doesn't 404.
+        FAVICON_HREF = fp_asset(FAVICON_SRC, "favicon")
+        # conventional root paths (stable names) so /favicon.ico never 404s
         shutil.copy(FAVICON_SRC, DIST / "favicon.png")
         shutil.copy(FAVICON_SRC, DIST / "favicon.ico")
     # blog hero images
