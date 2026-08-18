@@ -1,6 +1,7 @@
 ---
 title: "Best AI Agents for Medical Practices in 2026"
 author: "Silstone.AI Team"
+tags: "AI Agents, Healthcare"
 description: "Finding the right AI agent for your medical practice in 2026 does not have to be overwhelming. Here is a straight forward breakdown of the best platforms, what they actually do, and how to choose the right one for your practice."
 date: 2026-08-11
 image: /assets/blog/best-ai-agents-for-medical-practices-in-2026.jpg

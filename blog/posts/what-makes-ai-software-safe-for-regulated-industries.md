@@ -1,6 +1,7 @@
 ---
 title: "What Makes AI Software Safe for Regulated Industries"
 author: "Silstone.AI Team"
+tags: "Compliance, Engineering"
 description: "AI software is safe for regulated industries when it is built with strong data governance, auditability, security controls, and engineering discipline from the start."
 date: 2026-07-07
 image: /assets/blog/what-makes-ai-software-safe-for-regulated-industries.jpg

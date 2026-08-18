@@ -332,6 +332,17 @@ def load_posts() -> list:
     return posts
 
 
+def slugify(text: str) -> str:
+    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"[^\w\s-]", "", text.lower())
+    return re.sub(r"[\s_]+", "-", text).strip("-")
+
+
+def post_tags(post: dict) -> list:
+    """Tags are stored as a comma-separated string in frontmatter."""
+    return [t.strip() for t in str(post.get("tags", "")).split(",") if t.strip()]
+
+
 def _md_inline(text: str) -> str:
     text = _html.escape(text, quote=False)
     text = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)",
@@ -369,7 +380,9 @@ def md_to_html(md: str) -> str:
             mh = re.match(r"^(#{1,6})\s+(.*)$", b, re.DOTALL)
             level = len(mh.group(1))
             tag = "h2" if level <= 2 else ("h3" if level == 3 else "h4")
-            out.append(f"<{tag}>{_md_inline(mh.group(2).strip())}</{tag}>")
+            raw = mh.group(2).strip()
+            hid = slugify(raw)
+            out.append(f'<{tag} id="{hid}">{_md_inline(raw)}</{tag}>')
         elif all(l.strip().startswith(">") for l in lines):
             inner = " ".join(_md_inline(l.strip().lstrip(">").strip()) for l in lines)
             out.append(f"<blockquote>{inner}</blockquote>")
@@ -409,13 +422,18 @@ def _blog_card(p: dict, featured: bool = False) -> str:
     desc = _html.escape(p.get("description", ""))
     wrap_cls = "sil-blog-featured-img" if featured else "sil-blog-thumb"
     heading = "h2" if featured else "h3"
+    tags = post_tags(p)
+    data_tags = _html.escape(",".join(slugify(t) for t in tags), quote=True)
+    chips = "".join(f'<span class="sil-tag">{_html.escape(t)}</span>' for t in tags[:2])
+    chips_row = f'<div class="sil-card-tags">{chips}</div>' if chips else ""
     return (
         f'<a class="{"sil-blog-featured" if featured else "sil-blog-card"}" '
-        f'href="/blog/{p["slug"]}" target="_top">'
+        f'href="/blog/{p["slug"]}" target="_top" data-tags="{data_tags}">'
         f'<span class="{wrap_cls}"><img src="{p.get("image","")}" alt="{title}" loading="lazy"></span>'
         f'<div class="sil-blog-card-body">'
         f'<span class="sil-blog-date">{fmt_date(p.get("date",""))}</span>'
         f"<{heading}>{title}</{heading}><p>{desc}</p>"
+        f"{chips_row}"
         f'<span class="sil-blog-more">Read article &rarr;</span>'
         f"</div></a>"
     )
@@ -424,25 +442,58 @@ def _blog_card(p: dict, featured: bool = False) -> str:
 def blog_cards_html(posts: list) -> str:
     if not posts:
         return ""
+    all_tags = []
+    for p in posts:
+        for t in post_tags(p):
+            if t not in all_tags:
+                all_tags.append(t)
+    filter_bar = ""
+    if all_tags:
+        btns = '<button class="sil-tagfilter-btn is-active" data-tag="">All</button>'
+        btns += "".join(
+            f'<button class="sil-tagfilter-btn" data-tag="{slugify(t)}">{_html.escape(t)}</button>'
+            for t in all_tags
+        )
+        filter_bar = f'<div class="sil-tagfilter" role="group" aria-label="Filter posts by topic">{btns}</div>'
     featured = _blog_card(posts[0], featured=True)
     rest = "".join(_blog_card(p) for p in posts[1:])
     grid = f'<div class="sil-blog-grid">{rest}</div>' if rest else ""
     return (
         '<div class="sil-root"><section class="sil-blog-wrap">'
-        + featured + grid + "</section></div>"
+        + filter_bar + featured + grid + "</section></div>"
     )
 
 
 DEFAULT_AUTHOR = "Silstone.AI Team"
+ORG_TAGLINE = "Healthcare-native AI studio building custom AI agents for medical and dental practices."
 
 
 def reading_minutes(body_md: str) -> int:
     return max(1, round(len(re.findall(r"\w+", body_md)) / 200))
 
 
+def toc_html(article_html: str) -> str:
+    """'On this page' jump-links, built from the article's H2s (>=3 needed)."""
+    heads = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', article_html, re.DOTALL)
+    if len(heads) < 3:
+        return ""
+    items = "".join(
+        f'<li><a href="#{hid}">{re.sub(r"<[^>]+>", "", txt).strip()}</a></li>'
+        for hid, txt in heads
+    )
+    return (
+        '<nav class="sil-toc" aria-label="On this page">'
+        '<p class="sil-toc-label">On this page</p>'
+        f"<ul>{items}</ul></nav>"
+    )
+
+
 def read_next_html(current: dict, posts: list) -> str:
-    """3 other posts at the end of an article to keep readers on the site."""
-    others = [p for p in posts if p["slug"] != current["slug"]][:3]
+    """Up to 3 other posts, preferring ones that share tags with this one."""
+    cur = set(t.lower() for t in post_tags(current))
+    others = [p for p in posts if p["slug"] != current["slug"]]
+    others.sort(key=lambda p: len(set(t.lower() for t in post_tags(p)) & cur), reverse=True)
+    others = others[:3]
     if not others:
         return ""
     cards = "".join(_blog_card(p) for p in others)
@@ -455,6 +506,7 @@ def read_next_html(current: dict, posts: list) -> str:
 
 
 def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> None:
+    from urllib.parse import quote
     slug = post["slug"]
     url = f"{DOMAIN}/blog/{slug}"
     title_h = _html.escape(post["title"])
@@ -464,7 +516,34 @@ def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> Non
         f' &middot; {fmt_date(post.get("date",""))}'
         f' &middot; {reading_minutes(post["body"])} min read</div>'
     )
+    body_html = md_to_html(post["body"])
+    toc = toc_html(body_html)
+
+    tag_chips = "".join(
+        f'<a class="sil-tag" href="/blog?tag={slugify(t)}" target="_top">{_html.escape(t)}</a>'
+        for t in post_tags(post)
+    )
+    tags_row = f'<div class="sil-article-tags">{tag_chips}</div>' if tag_chips else ""
+
+    enc_url, enc_title = quote(url, safe=""), quote(post["title"])
+    share = (
+        '<div class="sil-share"><span class="sil-share-label">Share</span>'
+        f'<a class="sil-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url={enc_url}" target="_blank" rel="noopener">LinkedIn</a>'
+        f'<a class="sil-share-btn" href="https://twitter.com/intent/tweet?url={enc_url}&amp;text={enc_title}" target="_blank" rel="noopener">X</a>'
+        f'<button class="sil-share-btn sil-copy-link" type="button" data-url="{url}">Copy link</button>'
+        "</div>"
+    )
+
+    initials = "".join(w[0] for w in (post.get("author") or DEFAULT_AUTHOR).split()[:2]).upper()
+    author_box = (
+        '<div class="sil-author-box">'
+        f'<span class="sil-author-avatar" aria-hidden="true">{initials}</span>'
+        f'<div><p class="sil-author-name">{author}</p>'
+        f'<p class="sil-author-desc">{ORG_TAGLINE}</p></div></div>'
+    )
+
     article = (
+        '<div class="sil-progress" id="silProgress" aria-hidden="true"></div>'
         '<div class="sil-root"><article class="sil-article-page">'
         '<div class="sil-article-top">'
         '<a class="sil-article-back" href="/blog" target="_top">&larr; All articles</a>'
@@ -472,7 +551,9 @@ def render_post(post: dict, posts: list, nav: str, cta: str, footer: str) -> Non
         f'<h1 class="sil-article-title">{title_h}</h1>'
         f"{byline}"
         f'<div class="sil-article-hero"><img src="{post.get("image","")}" alt="{title_h}"></div>'
-        f'<div class="sil-article">{md_to_html(post["body"])}</div>'
+        f"{toc}"
+        f'<div class="sil-article">{body_html}</div>'
+        f"{tags_row}{share}{author_box}"
         "</article></div>"
     )
     body = "\n\n".join([nav, article, read_next_html(post, posts), cta, footer])

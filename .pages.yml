@@ -32,6 +32,10 @@ content:
         label: Author
         type: string
         default: Silstone.AI Team
+      - name: tags
+        label: Tags
+        type: string
+        description: 'Comma-separated topics, e.g. "AI agents, HIPAA, Healthcare". Powers the topic filter and related posts.'
       - name: description
         label: SEO description
         type: text
