@@ -17,6 +17,7 @@ RewriteRule ^resources/?$ /live-demos [L,R=301]
 
 # ---- old Builder blog -> new /blog ----
 RewriteRule ^blog-list/?$ /blog [L,R=301]
+RewriteRule ^how\-medical\-practice\-automation\-is\-cutting\-admin\-costs\-in\-2026/?$ /blog/how-medical-practice-automation-is-cutting-admin-costs-in-2026 [L,R=301]
 RewriteRule ^best\-ai\-agents\-for\-medical\-practices\-in\-2026/?$ /blog/best-ai-agents-for-medical-practices-in-2026 [L,R=301]
 RewriteRule ^how\-to\-build\-a\-hipaa\-compliant\-ai\-agent\-in\-2026/?$ /blog/how-to-build-a-hipaa-compliant-ai-agent-in-2026 [L,R=301]
 RewriteRule ^how\-to\-build\-your\-first\-ai\-agent\-as\-a\-non\-technical\-founder\-in\-2026/?$ /blog/how-to-build-your-first-ai-agent-as-a-non-technical-founder-in-2026 [L,R=301]
