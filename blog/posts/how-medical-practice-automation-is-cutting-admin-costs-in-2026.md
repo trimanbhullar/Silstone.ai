@@ -56,6 +56,6 @@ For practices in Canada specifically, this measurement discipline matters even m
 ### Where This Leaves Practice Leaders in 2026
 
 Admin cost automation is no longer an early adopter bet. The data, the tooling, and the compliance frameworks have matured enough that a five to twenty five physician practice can realistically expect measurable savings within a year of implementation, not just large hospital systems with dedicated IT budgets. The practices seeing the best results are not automating everything at once. They are picking one or two of the workflows above, measuring the results against a clear ROI benchmark, and expanding from there.  
-  
+
 If you're evaluating where automation fits into your practice's admin workflow, [Silstone Group](https://silstone.ai/?utm_source=medical%20practice&utm_medium=blog) works with health tech and clinical teams across Canada and the US to build compliance-first automation, from prior auth to clinical documentation. Reach out to talk through where the fastest wins are for your practice.
 
