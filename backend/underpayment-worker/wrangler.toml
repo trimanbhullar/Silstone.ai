@@ -23,3 +23,20 @@ ALLOWED_ORIGINS = "https://www.silstone.ai,https://silstone.ai"
 # Model to run. claude-sonnet-5 is the cost/quality sweet spot for extraction +
 # classification. Swap to claude-haiku-4-5 (cheaper/faster) or claude-opus-5 (max quality).
 CLAUDE_MODEL = "claude-sonnet-5"
+
+# Fax-triage route (POST /api/triage) uses OpenAI. Set the key as a secret:
+#   npx wrangler secret put OPENAI_API_KEY
+OPENAI_MODEL = "gpt-4o-mini"
+
+# --- Optional bill-protection for /api/triage (both OFF until configured) ---
+# Per-IP rate limit: create a KV namespace and bind it here as RATE_LIMIT.
+#   npx wrangler kv namespace create TRIAGE_RATELIMIT
+#   then uncomment + paste the id below and redeploy.
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "<paste-kv-namespace-id>"
+# TRIAGE_RATE_MAX = "20"   # requests per IP per hour (default 20)
+#
+# Turnstile: set the secret, then add a widget to the demo's paste form that
+# sends { "turnstileToken": "<token>" } alongside "fax".
+#   npx wrangler secret put TURNSTILE_SECRET
