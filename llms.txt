@@ -15,7 +15,7 @@ approving every action.
 - [What We Build](https://www.silstone.ai/what-we-build): A cited knowledge brain your staff can ask anything, plus custom agents that clear the fax pile, chase underpayments and run portals that have no API.
 - [Dental Practice AI Automation](https://www.silstone.ai/dental-automation): AI agents for dental practices: clear the fax pile, chase insurance underpayments and run credentialing portals. Live in weeks, no PMS integration.
 - [Aesthetics & Med-Spa AI Automation](https://www.silstone.ai/aesthetics-automation): AI agents for aesthetic and med-spa clinics that handle inbound enquiries, bookings and back-office admin, so your team sells time instead of chasing it.
-- [Live Demos](https://www.silstone.ai/live-demos): Run a free, interactive healthcare AI agent right in your browser, no signup. See how a Silstone agent answers questions and handles admin, built on Claude.
+- [Live Demos](https://www.silstone.ai/live-demos): Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and triage a pile of inbound faxes by clinical urgency. Built on Claude.
 - [Why Silstone](https://www.silstone.ai/why-silstone): Built inside healthcare, not adjacent to it. Years of practice operations plus years shipping healthcare software, in one small and senior team.
 - [Pricing](https://www.silstone.ai/pricing): Priced in three parts so incentives stay honest: a build fee to stand it up, a monthly subscription to run it, and an outcome slice tied to the result.
 - [Trust & Security](https://www.silstone.ai/trust-and-security): No EMR integration by design. PHI runs on AWS Bedrock under a full HIPAA BAA, with a human approving every action before anything is filed, sent or paid.

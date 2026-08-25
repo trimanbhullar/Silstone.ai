@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Live Demos | Try a Healthcare AI Agent | Silstone.AI</title>
-<meta name="description" content="Run a free, interactive healthcare AI agent right in your browser, no signup. See how a Silstone agent answers questions and handles admin, built on Claude.">
+<title>Live Demos | Try Healthcare AI Agents | Silstone.AI</title>
+<meta name="description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and triage a pile of inbound faxes by clinical urgency. Built on Claude.">
 <link rel="canonical" href="https://www.silstone.ai/live-demos">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#08080B">
@@ -12,8 +12,8 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Silstone.AI">
-<meta property="og:title" content="Live Demos | Try a Healthcare AI Agent | Silstone.AI">
-<meta property="og:description" content="Run a free, interactive healthcare AI agent right in your browser, no signup. See how a Silstone agent answers questions and handles admin, built on Claude.">
+<meta property="og:title" content="Live Demos | Try Healthcare AI Agents | Silstone.AI">
+<meta property="og:description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and triage a pile of inbound faxes by clinical urgency. Built on Claude.">
 <meta property="og:url" content="https://www.silstone.ai/live-demos">
 <meta property="og:image" content="https://www.silstone.ai/assets/og.9e039572.png">
 <meta property="og:image:width" content="1920">
@@ -21,8 +21,8 @@
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Live Demos | Try a Healthcare AI Agent | Silstone.AI">
-<meta name="twitter:description" content="Run a free, interactive healthcare AI agent right in your browser, no signup. See how a Silstone agent answers questions and handles admin, built on Claude.">
+<meta name="twitter:title" content="Live Demos | Try Healthcare AI Agents | Silstone.AI">
+<meta name="twitter:description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and triage a pile of inbound faxes by clinical urgency. Built on Claude.">
 <meta name="twitter:image" content="https://www.silstone.ai/assets/og.9e039572.png">
 
 <link rel="icon" href="/assets/favicon.018c3355.png">
@@ -577,35 +577,6 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
     </div>
   </section>
 
-  <!-- ==================== NOTIFY ==================== -->
-  <section class="sil-section has-top">
-    <div class="sil-cursorglow" aria-hidden="true"></div>
-    <div class="sil-container">
-      <div class="sil-card is-hover is-spot sil-reveal">
-        <div class="sil-soon">
-          <div>
-            <span class="sil-tag">More on the way</span>
-            <h2 class="sil-display-s sil-mt-4">New demos land often.</h2>
-            <p class="sil-body-m sil-mt-3 sil-measure">
-              We're building a demo for every piece of admin practices dread.
-              Leave an email and we'll tell you the moment the next one goes live.
-            </p>
-          </div>
-          <form class="sil-notify" id="silNotify" action="https://api.web3forms.com/submit" method="POST" novalidate>
-            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
-            <input type="hidden" name="subject" value="New Live Demo notify signup">
-            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo page">
-            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-            <label class="sil-sr" for="silNotifyEmail">Email address</label>
-            <input id="silNotifyEmail" name="email" type="email" required placeholder="you@practice.com" autocomplete="email">
-            <button type="submit" class="sil-btn sil-btn-primary is-auto">Notify me</button>
-            <p class="sil-notify-msg" id="silNotifyMsg" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </div>
 
 <style>
@@ -737,13 +708,7 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
 .sil-drdemo .drd-phi-warning span{font-size:1.25rem;flex:none}
 @media(max-width:820px){.sil-drdemo .drd-summary-cards{grid-template-columns:repeat(2,1fr)}.sil-drdemo .drd-doc-body{min-height:280px}.sil-drdemo .drd-step .l{display:none}.sil-drdemo .drd-trow{grid-template-columns:54px 1fr 74px 96px 46px}.sil-drdemo .drd-trow>*:nth-child(3){display:none}}
 @media(max-width:520px){.sil-drdemo .drd-sstats{flex-direction:column;gap:var(--space-3)}.sil-drdemo .drd-summary-cards{grid-template-columns:1fr 1fr}}
-.sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
-.sil-notify{display:grid;grid-template-columns:1fr auto;gap:var(--space-3);align-items:start}
-.sil-notify .sil-btn{white-space:nowrap}
-.sil-notify-msg{grid-column:1/-1;margin:0;font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
-.sil-notify-msg.is-warn{color:var(--coral-500)}
-@media(max-width:900px){.sil-soon{grid-template-columns:1fr;gap:var(--space-6)}}
-@media(max-width:520px){.sil-notify{grid-template-columns:1fr}.sil-notify .sil-btn{width:100%}}
+
 </style>
 
 <script>
@@ -1183,6 +1148,585 @@ if(document.readyState==='loading'){
 }else{showState('drdStateA');initTextarea();bindEvents();}
 })();
 </script>
+
+<!--
+  SILSTONE.AI - PAGE: LIVE-DEMOS - BLOCK 62 - FAX TRIAGE DEMO
+  Hostinger: Embed code block, FULL WIDTH. Second demo in the list.
+  "Simulate a busy morning" runs a client-side simulation on SYNTHETIC faxes.
+  "Paste your own fax" calls the SAME Cloudflare Worker backend as demo 1
+  (Claude via /api/triage), with a client-side heuristic fallback if the API
+  is unreachable. Also carries the shared "notify / next demo" signup (moved
+  here so it follows both demos). Markup + trailing <style>/<script> live
+  OUTSIDE the SIL:GLOBAL markers; run build-embeds.py to bake the system in.
+-->
+<div class="sil-root">
+
+  <!-- ==================== SUB-HERO ==================== -->
+  <section class="sil-section is-alt has-tint acc-teal" style="padding:var(--space-16) 0 var(--space-10)">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container sil-center">
+      <span class="sil-eyebrow sil-reveal"><i class="dot"></i>Live demo&nbsp;&middot;&nbsp;Fax triage</span>
+      <h1 class="sil-display-l sil-mt-4 sil-reveal" style="--d:70ms">Turn the fax pile into a <span class="sil-gt">ranked worklist.</span></h1>
+      <p class="sil-body-l sil-mt-4 sil-hero-sub sil-reveal" style="--d:140ms">
+        A clinic takes in 50&ndash;200 faxes a day &mdash; referrals, results, prior-auth replies, refills &mdash; all mixed together, oldest first. Press the button and watch the agent read each one and re-stack the pile by clinical urgency, so the STAT result never waits behind the refills.
+      </p>
+      <div class="sil-hero-chips sil-mt-4 sil-reveal" style="--d:210ms">
+        <span class="sil-chip"><i class="dot"></i>Synthetic faxes &middot; no real PHI</span>
+        <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
+        <span class="sil-chip"><i class="dot"></i>The same pipeline as production</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE DEMO ==================== -->
+  <section class="sil-section" style="padding:var(--space-10) 0 var(--space-16)">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container">
+      <div class="trg-demo" id="trgDemo">
+
+        <!-- PHI / privacy disclaimer (top) -->
+        <div class="trg-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <span>This demo uses <b>synthetic data</b>. When you paste your own fax it is analysed for triage and not stored &mdash; still, please don&rsquo;t paste real patient information (PHI).</span>
+        </div>
+
+        <!-- controls -->
+        <div class="trg-controls">
+          <button type="button" class="trg-btn-primary" id="trgSim"><span class="trg-pulse"></span>Simulate a busy morning</button>
+          <button type="button" class="trg-btn-ghost" id="trgPasteToggle">Paste your own fax</button>
+          <button type="button" class="trg-btn-ghost" id="trgReset">Reset</button>
+        </div>
+
+        <!-- paste-your-own panel -->
+        <div class="trg-paste" id="trgPaste">
+          <label class="trg-paste-lbl" for="trgPasteText">Paste a fax (or any clinical document) and watch the agent read it and slot it into the queue against everything else.</label>
+          <textarea id="trgPasteText" spellcheck="false" placeholder="e.g.  PRIOR AUTHORIZATION DETERMINATION&#10;Member: Jane Doe   DOB: 04/12/1968&#10;Requested: MRI lumbar spine&#10;DETERMINATION: DENIED — not medically necessary. You may appeal within 5 business days."></textarea>
+          <div class="trg-paste-row">
+            <button type="button" class="trg-btn-primary" id="trgPasteRun">Prioritize my fax</button>
+            <button type="button" class="trg-link" id="trgPasteSample">Fill a sample</button>
+            <span class="trg-paste-note">Sent for analysis &middot; not stored</span>
+          </div>
+        </div>
+
+        <!-- stats -->
+        <div class="trg-stats">
+          <div class="trg-stat"><div class="v" id="trgVRead">0</div><div class="l">Faxes read</div></div>
+          <div class="trg-stat"><div class="v trg-c-p1" id="trgVP1">0</div><div class="l">P1 &middot; critical</div></div>
+          <div class="trg-stat"><div class="v trg-c-p2" id="trgVP2">0</div><div class="l">P2 &middot; urgent</div></div>
+          <div class="trg-stat"><div class="v trg-c-mut" id="trgVFilt">0</div><div class="l">Auto-filtered junk</div></div>
+          <div class="trg-stat"><div class="v trg-c-teal" id="trgVTime">0h</div><div class="l">Staff time saved</div></div>
+        </div>
+
+        <!-- panel: queue + detail -->
+        <div class="trg-panel">
+          <div class="trg-queuewrap">
+            <div class="trg-qhead">
+              <span class="trg-qtitle">Priority queue</span>
+              <span class="trg-prog" id="trgProg">idle</span>
+            </div>
+            <ul class="trg-queue" id="trgQueue">
+              <div class="trg-empty" id="trgEmpty">
+                <div class="trg-empty-ico">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/></svg>
+                </div>
+                <h3>The queue is empty</h3>
+                <p>Hit &ldquo;Simulate a busy morning&rdquo; &mdash; or paste your own fax &mdash; to watch the pipeline work.</p>
+              </div>
+            </ul>
+          </div>
+
+          <aside class="trg-detail" id="trgDetail">
+            <div class="trg-dempty" id="trgDempty">
+              <h3>Nothing selected</h3>
+              <p>Select a fax to see the original page beside the fields the agent pulled out.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NOTIFY ==================== -->
+  <section class="sil-section has-top">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container">
+      <div class="sil-card is-hover is-spot sil-reveal">
+        <div class="sil-soon">
+          <div>
+            <span class="sil-tag">More on the way</span>
+            <h2 class="sil-display-s sil-mt-4">New demos land often.</h2>
+            <p class="sil-body-m sil-mt-3 sil-measure">
+              We're building a demo for every piece of admin practices dread.
+              Leave an email and we'll tell you the moment the next one goes live.
+            </p>
+          </div>
+          <form class="sil-notify" id="silNotify" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
+            <input type="hidden" name="subject" value="New Live Demo notify signup">
+            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo page">
+            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+            <label class="sil-sr" for="silNotifyEmail">Email address</label>
+            <input id="silNotifyEmail" name="email" type="email" required placeholder="you@practice.com" autocomplete="email">
+            <button type="submit" class="sil-btn sil-btn-primary is-auto">Notify me</button>
+            <p class="sil-notify-msg" id="silNotifyMsg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+/* ============ Silstone Triage demo (block-scoped) ============ */
+.trg-demo{ --p1:var(--coral-500); --p2:var(--amber-400); --p3:var(--teal-500); --p4:var(--mint-400);
+  --p1w:rgba(240,133,94,.14); --p2w:rgba(239,193,120,.14); --p3w:rgba(45,217,211,.13); --p4w:rgba(94,224,168,.14);
+  --vw:rgba(110,86,207,.16);
+  max-width:1120px; margin:0 auto; }
+.trg-demo *{box-sizing:border-box}
+
+.trg-note{display:flex;align-items:center;gap:10px;font-size:12.5px;line-height:1.45;color:var(--text-tertiary);background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:11px 15px;margin-bottom:18px}
+.trg-note svg{flex:none;color:var(--teal-500)}
+.trg-note b{color:var(--text-secondary);font-weight:600}
+
+.trg-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
+.trg-demo button{font-family:inherit;cursor:pointer;border:none;border-radius:12px;font-weight:600;transition:transform .1s ease,background .15s ease,opacity .15s,border-color .15s}
+.trg-demo button:active{transform:translateY(1px)}
+.trg-demo button:disabled{opacity:.5;cursor:default}
+.trg-btn-primary{background:linear-gradient(150deg,var(--violet-600),var(--violet-500));color:#fff;font-size:15px;padding:13px 22px;box-shadow:0 8px 22px rgba(110,86,207,.4);display:inline-flex;align-items:center;gap:10px}
+.trg-btn-primary .trg-pulse{width:9px;height:9px;border-radius:50%;background:#fff;animation:trgPulse 1.6s infinite}
+@keyframes trgPulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.5)}70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+.trg-btn-ghost{background:var(--bg-surface-raised);color:var(--text-secondary);font-size:14px;padding:12px 18px;border:1px solid var(--border-default)}
+.trg-btn-ghost:hover{color:var(--text-primary)}
+.trg-btn-ghost.active{color:var(--violet-200);border-color:var(--violet-500)}
+.trg-link{background:none;color:var(--violet-300);font-size:13px;font-weight:500;padding:6px 4px}
+.trg-link:hover{color:var(--violet-200)}
+
+.trg-paste{display:none;margin-bottom:18px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:16px 18px}
+.trg-paste.open{display:block;animation:trgEnter .25s ease}
+.trg-paste-lbl{display:block;font-size:13px;color:var(--text-secondary);margin-bottom:10px}
+.trg-paste textarea{width:100%;min-height:118px;resize:vertical;background:var(--bg-surface-3);border:1px solid var(--border-default);border-radius:10px;color:var(--text-primary);font-family:var(--font-mono);font-size:12.5px;padding:12px 13px;line-height:1.55}
+.trg-paste textarea:focus{outline:none;border-color:var(--violet-500)}
+.trg-paste-row{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.trg-paste-note{font-family:var(--font-mono);font-size:11px;color:var(--text-quaternary);margin-left:auto}
+
+.trg-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.trg-stat{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:15px 16px}
+.trg-stat .v{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.65rem;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--text-primary)}
+.trg-stat .l{font-size:11.5px;color:var(--text-quaternary);margin-top:7px;letter-spacing:.02em}
+.trg-c-p1{color:var(--coral-500)!important} .trg-c-p2{color:var(--amber-400)!important}
+.trg-c-teal{color:var(--teal-500)!important} .trg-c-mut{color:var(--text-quaternary)!important}
+.trg-stat.trg-flash .v{animation:trgFlash 1s ease}
+@keyframes trgFlash{0%,100%{color:var(--coral-500)}50%{color:#fff}}
+
+.trg-panel{display:grid;grid-template-columns:1fr 376px;gap:16px}
+.trg-queuewrap,.trg-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:580px;display:flex;flex-direction:column;overflow:hidden}
+.trg-qhead{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
+.trg-qtitle{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary)}
+.trg-prog{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
+.trg-queue{list-style:none;margin:0;padding:8px;overflow-y:auto;flex:1}
+
+.trg-empty,.trg-dempty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:40px 24px;color:var(--text-quaternary)}
+.trg-empty-ico{width:52px;height:52px;border-radius:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--text-quaternary)}
+.trg-empty h3,.trg-dempty h3{margin:0 0 6px;color:var(--text-secondary);font-size:15px;font-weight:600}
+.trg-empty p,.trg-dempty p{margin:0;font-size:13.5px;max-width:36ch}
+
+.trg-row{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px 14px;border-radius:11px;cursor:pointer;border:1px solid transparent;position:relative;overflow:hidden}
+.trg-row:hover{background:var(--bg-surface-raised)}
+.trg-row.sel{background:var(--bg-surface-raised);border-color:var(--border-default)}
+.trg-row.mine{box-shadow:inset 0 0 0 1.5px var(--violet-500)}
+.trg-row.enter{animation:trgEnter .34s ease}
+.trg-row.settle{animation:trgSettle .5s ease}
+@keyframes trgEnter{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes trgSettle{0%{background:var(--vw)}100%{background:transparent}}
+.trg-band{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:5px 0;border-radius:7px;text-align:center;letter-spacing:.03em;position:relative;z-index:1}
+.trg-band.P1{background:var(--p1w);color:var(--p1)} .trg-band.P2{background:var(--p2w);color:var(--p2)}
+.trg-band.P3{background:var(--p3w);color:var(--p3)} .trg-band.P4{background:var(--p4w);color:var(--p4)}
+.trg-band.FILTER{background:var(--bg-surface-3);color:var(--text-quaternary)}
+.trg-band.reading{background:var(--vw);color:var(--violet-300)}
+.trg-rmain{min-width:0;position:relative;z-index:1}
+.trg-rtitle{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary);display:flex;align-items:center}
+.trg-rtitle .who{color:var(--text-quaternary);font-weight:400;margin-left:5px;overflow:hidden;text-overflow:ellipsis}
+.trg-ico{display:inline-flex;width:16px;height:16px;flex:none;margin-right:8px}
+.trg-ico svg{width:16px;height:16px}
+.trg-you{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;background:var(--vw);color:var(--violet-300);padding:2px 6px;border-radius:5px;margin-left:8px;flex:none}
+.trg-rreason{font-size:12.5px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+.trg-rreason.reading{color:var(--violet-300);font-family:'IBM Plex Mono',monospace;font-size:12px}
+.trg-pbar{height:3px;border-radius:2px;background:var(--bg-surface-3);margin-top:9px;overflow:hidden}
+.trg-pbar>i{display:block;height:100%;width:4%;border-radius:2px;background:linear-gradient(90deg,var(--violet-500),var(--teal-500))}
+.trg-rmeta{text-align:right;white-space:nowrap;position:relative;z-index:1}
+.trg-rmeta .pt{font-size:13px;font-weight:500;color:var(--text-primary)}
+.trg-rmeta .sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:3px}
+.trg-dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:5px}
+.trg-scan{position:absolute;inset:0;pointer-events:none;z-index:0}
+.trg-scan::after{content:"";position:absolute;top:0;bottom:0;width:36%;left:-40%;background:linear-gradient(90deg,transparent,rgba(165,148,255,.14),transparent);animation:trgSweep 1.15s linear infinite}
+@keyframes trgSweep{to{left:120%}}
+
+.trg-dhead{padding:16px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
+.trg-dhead .row1{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.trg-dtype{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary)}
+.trg-conf{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary)}
+.trg-dfrom{font-size:12.5px;color:var(--text-secondary)}
+.trg-dbody{overflow-y:auto;padding:16px 18px}
+.trg-dsec{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quaternary);margin:4px 0 10px}
+.trg-page{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:15px 16px;font-size:12px;line-height:1.6;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word}
+.trg-page .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--text-primary);margin-bottom:2px}
+.trg-page .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
+.trg-mk{background:var(--p1w);color:var(--coral-500);padding:1px 5px;border-radius:4px;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px}
+.trg-fields{list-style:none;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--border-subtle);display:grid;gap:11px}
+.trg-fields li{display:grid;grid-template-columns:108px 1fr;gap:12px;align-items:baseline}
+.trg-fields .k{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary);text-transform:uppercase;letter-spacing:.04em}
+.trg-fields .val{font-size:13.5px;color:var(--text-primary);font-weight:500}
+.trg-why{margin-top:16px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--teal-500);border-radius:0 11px 11px 0;padding:12px 14px}
+.trg-why .wk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
+.trg-why .wv{font-size:13px;color:var(--text-primary)}
+.trg-why .sla{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary)}
+
+@media (max-width:820px){
+  .trg-stats{grid-template-columns:repeat(2,1fr)}
+  .trg-panel{grid-template-columns:1fr}
+  .trg-queuewrap{height:auto;max-height:66vh} .trg-detail{height:auto}
+}
+@media (prefers-reduced-motion:reduce){.trg-demo *{animation-duration:.01ms!important}}
+
+/* notify (moved from block 61) */
+.sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
+.sil-notify{display:grid;grid-template-columns:1fr auto;gap:var(--space-3);align-items:start}
+.sil-notify .sil-btn{white-space:nowrap}
+.sil-notify-msg{grid-column:1/-1;margin:0;font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
+.sil-notify-msg.is-warn{color:var(--coral-500)}
+@media(max-width:900px){.sil-soon{grid-template-columns:1fr;gap:var(--space-6)}}
+@media(max-width:520px){.sil-notify{grid-template-columns:1fr}.sil-notify .sil-btn{width:100%}}
+</style>
+
+<script>
+(function(){
+  "use strict";
+  if(window.__trgInit) return; window.__trgInit=true;
+
+  /* Same backend as demo 1 (the underpayment worker), new /api/triage route.
+     GPT-4o-mini reads the pasted fax server-side; the key never touches the browser.
+     If the endpoint is unreachable (local preview, or before the route ships),
+     we fall back to a client-side heuristic so the demo still works. */
+  var TRIAGE_API="https://dental-denial-agent.denial-agent.workers.dev/api/triage";
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var RANK={P1:4,P2:3,P3:2,P4:1,FILTER:0};
+  var BASE={P1:96,P2:74,P3:45,P4:20,FILTER:2};
+  var STAGES=["Running OCR…","Classifying document…","Extracting fields…","Scoring urgency…"];
+  var MAXR=3, simN=22;
+
+  var FIRST=["Maria","James","Linda","Robert","Aisha","David","Elena","Michael","Priya","John","Sofia","Wei","Grace","Omar","Nina","Carlos","Ruth","Samuel","Ivy","Hassan"];
+  var LAST=["Alvarez","Thompson","Nguyen","Patel","Johnson","Garcia","Kim","O'Brien","Rossi","Cohen","Okafor","Martinez","Singh","Walsh","Fischer","Haddad","Brooks","Delgado","Sato","Reyes"];
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function pad(n){return n<10?"0"+n:""+n;}
+  function dob(){var y=1938+Math.floor(Math.random()*70);return pad(1+Math.floor(Math.random()*12))+"/"+pad(1+Math.floor(Math.random()*28))+"/"+y;}
+  function mrn(){return "MRN-"+(100000+Math.floor(Math.random()*899999));}
+  function recvTime(){var h=8+Math.floor(Math.random()*3);return pad(h)+":"+pad(Math.floor(Math.random()*60))+" AM";}
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+  var ICONS={
+    result:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h2.4l1.6-4.2 2.5 8.4 1.5-4.2H13"/></svg>',
+    doc:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M3.4 1.4h4.2l3 3v8.2H3.4z"/><path d="M7.6 1.4v3h3"/></svg>',
+    rx:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.8" y="4.5" width="10.4" height="5" rx="2.5"/><line x1="7" y1="4.7" x2="7" y2="9.3"/></svg>',
+    auth:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M7 1.3l4.6 1.8v3.4c0 2.8-2 4.7-4.6 5.5-2.6-.8-4.6-2.7-4.6-5.5V3.1z"/></svg>',
+    junk:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7" cy="7" r="5.3"/><line x1="3.2" y1="3.2" x2="10.8" y2="10.8"/></svg>'
+  };
+  function kindFor(type){var t=(type||"").toLowerCase();
+    if(/refill|prescription/.test(t))return"rx";
+    if(/prior-?auth|authorization/.test(t))return"auth";
+    if(/marketing|advert|cover|junk|spam/.test(t))return"junk";
+    if(/lab|result|imaging|path|discharge|abnormal|normal|stat|critical|x-ray|ct|mri/.test(t))return"result";
+    return"doc";}
+
+  var T=[
+    {cat:"P1",type:"STAT lab result",sender:"Quest Diagnostics",conf:.99,reason:"Critical potassium 6.8 mmol/L — panic value",mk:"6.8 mmol/L (H, CRITICAL)",
+     fields:[["Result","Potassium 6.8 mmol/L"],["Flag","Panic / critical high"],["Ordering MD","Dr. Nguyen"],["Collected","Today 07:12"]],
+     body:"STAT CHEMISTRY PANEL — CRITICAL RESULT\nPatient: {{PT}}   DOB: {{DOB}}   {{MRN}}\nOrdering provider: Dr. Nguyen\n\nPotassium ......... {{MK}}\nSodium ............ 139 mmol/L\nCreatinine ........ 1.9 mg/dL (H)\n\n** Critical value phoned to lab. Please acknowledge. **"},
+    {cat:"P1",type:"Critical imaging read",sender:"Regional Radiology",conf:.97,reason:"CT head: acute intracranial finding, wet-read",mk:"Recommend urgent clinical correlation.",
+     fields:[["Study","CT head w/o contrast"],["Impression","Acute finding, see report"],["Radiologist","Dr. Adeyemi"],["Priority","Wet read / STAT"]],
+     body:"RADIOLOGY REPORT — STAT\nPatient: {{PT}}   DOB: {{DOB}}\nExam: CT HEAD WITHOUT CONTRAST\n\nIMPRESSION:\nAcute intracranial abnormality identified.\n{{MK}}\n\nRead by: Dr. Adeyemi, MD"},
+    {cat:"P1",type:"Pathology result",sender:"CBL Path Labs",conf:.96,reason:"Biopsy positive for malignancy",mk:"POSITIVE for malignancy",
+     fields:[["Specimen","Skin, left forearm"],["Diagnosis","Positive — malignant"],["Pathologist","Dr. Ruiz"],["Received","Yesterday"]],
+     body:"SURGICAL PATHOLOGY REPORT\nPatient: {{PT}}   DOB: {{DOB}}   {{MRN}}\nSpecimen: Skin punch biopsy, L forearm\n\nDIAGNOSIS:\n{{MK}}. Recommend prompt clinical follow-up and referral.\n\nPathologist: Dr. Ruiz"},
+    {cat:"P1",type:"Hospital discharge",sender:"St. Mary's Medical Ctr",conf:.94,reason:"Discharged today — 48h follow-up needed",mk:"within 48 hours",
+     fields:[["Discharged","Today"],["Dx","CHF exacerbation"],["Follow-up","within 48 hours"],["Meds","3 changes — reconcile"]],
+     body:"DISCHARGE SUMMARY\nPatient: {{PT}}   DOB: {{DOB}}\nAdmit dx: Acute CHF exacerbation\nDisposition: Home today\n\nFOLLOW-UP: PCP visit {{MK}}.\nMedication changes x3 — please reconcile."},
+    {cat:"P2",type:"Prior-auth DENIAL",sender:"BlueCross Payer Svcs",conf:.95,reason:"MRI denied — appeal window 5 days",mk:"5 business days",
+     fields:[["Service","MRI lumbar spine"],["Decision","Denied"],["Reason","Medical necessity"],["Appeal by","5 business days"]],
+     body:"PRIOR AUTHORIZATION DETERMINATION\nMember: {{PT}}   ID: {{MRN}}\nRequested: MRI lumbar spine\n\nDETERMINATION: DENIED — medical necessity not established.\nYou may appeal within {{MK}}."},
+    {cat:"P2",type:"Prior-auth — info request",sender:"Aetna Auth Unit",conf:.9,reason:"RFI: needs recent notes to proceed",mk:"Recent progress notes required.",
+     fields:[["Service","Specialty infusion"],["Status","Pended — RFI"],["Needs","Recent progress notes"],["Due","3 days"]],
+     body:"AUTHORIZATION — REQUEST FOR INFORMATION\nMember: {{PT}}\nRequest pended. To continue review, submit recent progress notes.\n{{MK}}"},
+    {cat:"P2",type:"Urgent referral",sender:"Northside Family Med",conf:.92,reason:"Cardiology — new exertional chest pain",mk:"new exertional chest pain",
+     fields:[["Refer to","Cardiology"],["Reason","Exertional chest pain"],["Urgency","Urgent"],["From","Dr. Walsh"]],
+     body:"REFERRAL / CONSULT REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nRefer to: CARDIOLOGY (urgent)\nReason: {{MK}}. Requesting expedited appointment.\nReferring: Dr. Walsh"},
+    {cat:"P2",type:"Abnormal lab result",sender:"LabCorp",conf:.93,reason:"HbA1c 11.2% — markedly elevated",mk:"11.2% (H)",
+     fields:[["Result","HbA1c 11.2%"],["Flag","High"],["Ordering MD","Dr. Kim"],["Collected","Today"]],
+     body:"HEMATOLOGY / CHEMISTRY\nPatient: {{PT}}   DOB: {{DOB}}\nHbA1c ............. {{MK}}\nReference: <5.7%\nOrdering: Dr. Kim"},
+    {cat:"P3",type:"Routine referral",sender:"Eastside Clinic",conf:.9,reason:"Dermatology — chronic rash, routine",mk:"",
+     fields:[["Refer to","Dermatology"],["Reason","Chronic rash"],["Urgency","Routine"],["From","Dr. Brooks"]],
+     body:"REFERRAL REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nRefer to: Dermatology (routine)\nReason: chronic rash, stable. Standard scheduling."},
+    {cat:"P3",type:"Normal lab result",sender:"Quest Diagnostics",conf:.95,reason:"Lipid panel — within normal limits",mk:"",
+     fields:[["Result","Lipid panel — normal"],["Flag","None"],["Ordering MD","Dr. Kim"],["Collected","Yesterday"]],
+     body:"LIPID PANEL\nPatient: {{PT}}   DOB: {{DOB}}\nAll values within normal limits.\nOrdering: Dr. Kim. File to chart, notify patient routine."},
+    {cat:"P3",type:"Records / ROI request",sender:"Harbor Law LLP",conf:.88,reason:"Records request — signed authorization attached",mk:"",
+     fields:[["Requestor","Harbor Law LLP"],["Scope","Visit notes 2024–25"],["Auth","Signed, attached"],["Due","Standard"]],
+     body:"RELEASE OF INFORMATION REQUEST\nRe: {{PT}}   DOB: {{DOB}}\nRequesting: office visit notes 2024–2025.\nSigned patient authorization enclosed."},
+    {cat:"P3",type:"Normal imaging",sender:"Regional Radiology",conf:.94,reason:"Chest X-ray — no acute findings",mk:"",
+     fields:[["Study","Chest X-ray"],["Impression","No acute findings"],["Radiologist","Dr. Adeyemi"],["Priority","Routine"]],
+     body:"RADIOLOGY REPORT\nPatient: {{PT}}   Exam: Chest X-ray, PA/LAT\nIMPRESSION: No acute cardiopulmonary findings.\nRead: Dr. Adeyemi"},
+    {cat:"P4",type:"Prescription refill",sender:"Walgreens #4821",conf:.96,reason:"Refill authorization — metformin 500mg",mk:"",
+     fields:[["Drug","Metformin 500mg"],["Qty","90 / refills 3"],["Pharmacy","Walgreens #4821"],["Type","Refill auth"]],
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Metformin 500mg, #90, refills x3\nPharmacy: Walgreens #4821. Please approve/deny."},
+    {cat:"P4",type:"Prescription refill",sender:"CVS Pharmacy #337",conf:.96,reason:"Refill authorization — lisinopril 10mg",mk:"",
+     fields:[["Drug","Lisinopril 10mg"],["Qty","30 / refills 5"],["Pharmacy","CVS #337"],["Type","Refill auth"]],
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Lisinopril 10mg, #30, refills x5\nPharmacy: CVS #337."},
+    {cat:"P4",type:"Prescription refill",sender:"Rite Aid #1102",conf:.95,reason:"Refill authorization — atorvastatin 20mg",mk:"",
+     fields:[["Drug","Atorvastatin 20mg"],["Qty","90 / refills 3"],["Pharmacy","Rite Aid #1102"],["Type","Refill auth"]],
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Atorvastatin 20mg, #90, refills x3\nPharmacy: Rite Aid #1102."},
+    {cat:"P4",type:"Insurance / EOB",sender:"UnitedHealthcare",conf:.9,reason:"Explanation of benefits — for filing",mk:"",
+     fields:[["Doc","EOB statement"],["Action","File to billing"],["Amount","see statement"],["Type","Not a bill"]],
+     body:"EXPLANATION OF BENEFITS\nMember: {{PT}}   ID: {{MRN}}\nThis is not a bill. For your records / billing reconciliation."},
+    {cat:"FILTER",type:"Marketing fax",sender:"MedSupply Direct",conf:.99,reason:"Unsolicited advertisement — auto-quarantined",mk:"",
+     fields:[["Type","Advertisement"],["Sender","MedSupply Direct"],["Action","Quarantined"],["Patient","None detected"]],
+     body:"*** SPECIAL OFFER ***\nSave on exam gloves & supplies! Reply STOP to opt out.\nThis is a promotional fax. No patient information."},
+    {cat:"FILTER",type:"Cover page only",sender:"Unknown sender",conf:.85,reason:"Blank cover sheet — no content",mk:"",
+     fields:[["Type","Cover sheet"],["Pages","1 (blank)"],["Action","Quarantined"],["Patient","None detected"]],
+     body:"FAX COVER SHEET\nTo: Front desk\nFrom: —\nPages: 1\n(no additional content transmitted)"}
+  ];
+  var WEIGHT={P1:1,P2:2,P3:3,P4:4,FILTER:2};
+  var BAG=[]; T.forEach(function(t,i){var w=WEIGHT[t.cat];for(var k=0;k<w;k++)BAG.push(i);});
+
+  var $=function(id){return document.getElementById(id);};
+  var queueEl=$("trgQueue"), emptyEl=$("trgEmpty"), detailEl=$("trgDetail"), progEl=$("trgProg");
+  var nodes={}, data={}, seq=0, selected=null;
+  var pending=[], active=0, produced=0, doneCount=0, running=false;
+  var count={read:0,P1:0,P2:0,P3:0,P4:0,FILTER:0};
+  var DOT={P1:"var(--coral-500)",P2:"var(--amber-400)",P3:"var(--teal-500)",P4:"var(--mint-400)",FILTER:"var(--text-quaternary)"};
+  var SLA={P1:"Act within 30–60 min",P2:"Act same day",P3:"Act within 24–48 h",P4:"Batch / low priority",FILTER:"No action — quarantined"};
+
+  function instance(ti){
+    var t=T[ti], pt=pick(FIRST)+" "+pick(LAST), d=dob(), m=mrn(), mk=t.mk;
+    function inj(s){return s.replace(/{{PT}}/g,pt).replace(/{{DOB}}/g,d).replace(/{{MRN}}/g,m).replace(/{{MK}}/g,mk);}
+    var fields=t.fields.map(function(f){return [f[0],inj(f[1])];});
+    if(t.cat!=="FILTER"){ fields.unshift(["DOB",d]); fields.unshift(["Patient",pt]); }
+    return {id:"fx"+(seq++),cat:t.cat,score:BASE[t.cat]+Math.random()*3,type:t.type,sender:t.sender,conf:t.conf,
+      reason:t.reason,patient:(t.cat==="FILTER"?"—":pt),body:inj(t.body),mk:mk,fields:fields,sla:SLA[t.cat],recv:recvTime()};
+  }
+
+  /* ---- paste: real backend (OpenAI via the shared Worker) + local fallback ---- */
+  function field(raw,re){var m=raw.match(re);return m?m[1].trim():"";}
+  function classifyLocal(raw){
+    var t=raw.toLowerCase();
+    function has(){for(var i=0;i<arguments.length;i++){if(t.indexOf(arguments[i])>-1)return true;}return false;}
+    var cat="P3",type="Clinical document",reason="Document received — routed for review",conf=.72;
+    if(has("stat","panic","critical value","code stroke","code stemi")||(/\bcritical\b/.test(t)&&has("result","value","lab","high"))){cat="P1";type="Critical result";reason="Critical / STAT language detected";conf=.9;}
+    else if(has("positive for malignan","malignant","carcinoma","acute intracran")){cat="P1";type="Critical result";reason="Positive / acute finding detected";conf=.9;}
+    else if(has("discharge summary","discharged","disposition: home")){cat="P1";type="Hospital discharge";reason="Hospital discharge — timely follow-up";conf=.86;}
+    else if(has("denied","denial","not medically necessary","adverse determination","upheld")){cat="P2";type="Prior-auth denial";reason="Authorization denial / appeal deadline";conf=.88;}
+    else if(has("prior authorization","prior auth","pre-authorization","request for information","information request","pended","rfi")){cat="P2";type="Prior-auth reply";reason="Prior-authorization reply — time-boxed";conf=.84;}
+    else if(has("refill","prescription refill","pharmacy")){cat="P4";type="Prescription refill";reason="Refill authorization request";conf=.88;}
+    else if(has("explanation of benefits","remittance","not a bill")||/\beob\b/.test(t)){cat="P4";type="Insurance / EOB";reason="Insurance / billing document — file";conf=.8;}
+    else if(has("release of information","records request","medical records")||/\broi\b/.test(t)){cat="P3";type="Records / ROI request";reason="Records request — verify authorization";conf=.8;}
+    else if(has("referral","consult","refer to")){var u=has("urgent","expedite","asap","stat","chest pain","2-week","two week");cat=u?"P2":"P3";type=(u?"Urgent":"Routine")+" referral";reason=(u?"Urgent":"Routine")+" referral / consult request";conf=.82;}
+    else if(has("abnormal","elevated","a1c","positive")){cat="P2";type="Abnormal result";reason="Abnormal result flagged";conf=.78;}
+    else if(has("special offer","advertis","unsubscribe","promotion","reply stop")){cat="FILTER";type="Marketing fax";reason="Unsolicited advertisement — quarantined";conf=.95;}
+    else if(has("cover sheet","cover page")&&raw.length<220){cat="FILTER";type="Cover page only";reason="Cover sheet — no content";conf=.8;}
+    var pt=""; raw.split(/\n/).some(function(line){
+      var m=line.match(/^\s*(?:patient|member|name|re)\b\s*[:#\-]*\s*(.+)$/i);
+      if(m){ var nm=m[1].split(/\s{2,}|\bID\b|\bDOB\b|\bMRN\b|,|#/i)[0].trim();
+        if(nm && /[A-Za-z]{2,}/.test(nm) && nm.length<=40){ pt=nm; return true; } }
+      return false;
+    });
+    var d=(raw.match(/\b(0?[1-9]|1[0-2])[\/\-.](0?[1-9]|[12]\d|3[01])[\/\-.](\d{2,4})\b/)||[])[0]||"";
+    return normalize({priority:cat,docType:type,sender:"Your pasted fax",patient:pt||"—",dob:d,reason:reason,urgencyMarker:"",confidence:conf,fields:[]}, raw);
+  }
+  // shape a triage result (from API or local) into a queue instance
+  function normalize(d, raw){
+    var cat=(["P1","P2","P3","P4","FILTER"].indexOf(d.priority)>-1)?d.priority:"P3";
+    var fields=[];
+    if(cat!=="FILTER"){ fields.push(["Patient",d.patient||"—"]); if(d.dob)fields.push(["DOB",d.dob]); }
+    (d.fields||[]).forEach(function(x){ if(x&&x.key) fields.push([x.key,String(x.value==null?"":x.value)]); });
+    fields.push(["Detected type",d.docType||"Document"]);
+    fields.push(["Priority",cat==="FILTER"?"Filtered":cat]);
+    var conf=(typeof d.confidence==="number")?Math.max(0,Math.min(1,d.confidence)):.85;
+    return {id:"fx"+(seq++),cat:cat,score:BASE[cat]+Math.random()*3,type:d.docType||"Clinical document",
+      sender:(d.sender&&d.sender.toLowerCase()!=="unknown")?d.sender:"Your pasted fax",conf:conf,
+      reason:d.reason||"Classified",patient:(cat==="FILTER"?"—":(d.patient||"—")),
+      body:raw.slice(0,1200),mk:d.urgencyMarker||"",fields:fields,sla:SLA[cat],recv:recvTime(),mine:true};
+  }
+  function classifyRemote(raw){
+    return fetch(TRIAGE_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({fax:raw})})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){ if(!d||!d.priority) throw 0; return normalize(d, raw); })
+      .catch(function(){ return classifyLocal(raw); });
+  }
+
+  function makeReadingNode(f){
+    var li=document.createElement("li");
+    li.className="trg-row reading enter"; li.setAttribute("data-id",f.id);
+    li.innerHTML='<div class="trg-band reading">reading</div>'+
+      '<div class="trg-rmain"><div class="trg-rtitle">'+(f.mine?'Your fax <span class="trg-you">You</span>':'Incoming fax')+' <span class="who">· '+esc(f.sender)+'</span></div>'+
+      '<div class="trg-rreason reading trg-status">'+STAGES[0]+'</div>'+
+      '<div class="trg-pbar"><i></i></div></div>'+
+      '<div class="trg-rmeta"><div class="pt">&nbsp;</div><div class="sub">'+f.recv+'</div></div>'+
+      '<div class="trg-scan" aria-hidden="true"></div>';
+    li.addEventListener("click",function(){ if(data[f.id]&&!data[f.id].reading) select(f.id); });
+    return li;
+  }
+  function fillNode(li,f){
+    li.classList.remove("reading");
+    if(f.mine) li.classList.add("mine");
+    if(!reduce){ li.classList.add("settle"); setTimeout(function(){li.classList.remove("settle");},520); }
+    var patient=f.cat==="FILTER"?'<span style="color:var(--text-quaternary)">no patient</span>':esc(f.patient);
+    var you=f.mine?'<span class="trg-you">You</span>':'';
+    li.innerHTML='<div class="trg-band '+f.cat+'">'+(f.cat==="FILTER"?"junk":f.cat)+'</div>'+
+      '<div class="trg-rmain"><div class="trg-rtitle"><span class="trg-ico" style="color:'+DOT[f.cat]+'">'+ICONS[kindFor(f.type)]+'</span>'+esc(f.type)+' <span class="who">· '+esc(f.sender)+'</span>'+you+'</div>'+
+      '<div class="trg-rreason"><span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.reason)+'</div></div>'+
+      '<div class="trg-rmeta"><div class="pt">'+patient+'</div><div class="sub">'+Math.round(f.conf*100)+'% · '+f.recv+'</div></div>';
+    li.addEventListener("click",function(){ select(f.id); });
+    if(selected===f.id) li.classList.add("sel");
+  }
+  function orderedIds(){
+    return Object.keys(data).sort(function(a,b){
+      var A=data[a],B=data[b];
+      if(RANK[B.cat]!==RANK[A.cat]) return RANK[B.cat]-RANK[A.cat];
+      return B.score-A.score;
+    });
+  }
+  function reorder(){
+    var ids=orderedIds(), firstTops={};
+    if(!reduce) ids.forEach(function(id){var n=nodes[id];if(n)firstTops[id]=n.getBoundingClientRect().top;});
+    ids.forEach(function(id){ queueEl.appendChild(nodes[id]); });
+    if(!reduce) ids.forEach(function(id){
+      var n=nodes[id], f=firstTops[id]; if(f==null)return;
+      var last=n.getBoundingClientRect().top, dy=f-last;
+      if(dy && n.animate){ n.animate([{transform:"translateY("+dy+"px)"},{transform:"none"}],{duration:440,easing:"cubic-bezier(.2,.75,.2,1)"}); }
+    });
+  }
+  function updateStats(flashP1){
+    $("trgVRead").textContent=count.read; $("trgVP1").textContent=count.P1;
+    $("trgVP2").textContent=count.P2; $("trgVFilt").textContent=count.FILTER;
+    var hrs=count.read*15/60;
+    $("trgVTime").textContent=(hrs<10?hrs.toFixed(1):Math.round(hrs))+"h";
+    if(flashP1){var s=$("trgVP1").parentNode;s.classList.remove("trg-flash");void s.offsetWidth;s.classList.add("trg-flash");}
+  }
+
+  // shared: create a reading row + return its parts. Used by both sim and paste.
+  function spawnReading(f){
+    if(emptyEl){emptyEl.parentNode&&emptyEl.parentNode.removeChild(emptyEl);emptyEl=null;}
+    var li=makeReadingNode(f); nodes[f.id]=li; data[f.id]={reading:true};
+    queueEl.insertBefore(li, queueEl.firstChild);
+    return {li:li, status:li.querySelector(".trg-status"), bar:li.querySelector(".trg-pbar>i")};
+  }
+  function cycleStages(status, dur){ // simulated staged status for the sim path
+    for(var i=1;i<STAGES.length;i++){ (function(idx){ setTimeout(function(){ if(status&&status.parentNode&&status.classList.contains("reading")) status.textContent=STAGES[idx]; }, dur*idx/STAGES.length); })(i); }
+  }
+  function commit(f, li, flashOk){
+    data[f.id]=f; count.read++; count[f.cat]++; doneCount++;
+    fillNode(li,f); reorder(); updateStats(f.cat==="P1");
+    if(f.mine){ select(f.id); try{ li.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"}); }catch(e){} }
+    else if(selected===null && f.cat==="P1"){ select(f.id); }
+  }
+
+  // ---- SIM path: synthetic, simulated read time ----
+  function startReading(f){
+    active++;
+    var r=spawnReading(f);
+    var dur=reduce?300:(1500+Math.random()*1100);
+    if(r.bar){ requestAnimationFrame(function(){ r.bar.style.transition="width "+dur+"ms cubic-bezier(.3,.6,.3,1)"; r.bar.style.width="100%"; }); }
+    cycleStages(r.status, dur);
+    setTimeout(function(){
+      commit(f, r.li, true); active--; pump();
+      if(running){
+        if(produced>=simN && pending.length===0 && active===0){
+          running=false; $("trgSim").disabled=false;
+          progEl.textContent=count.read+" read · "+count.P1+" critical up top";
+        } else { progEl.textContent=doneCount+" / "+simN+" read · "+active+" reading"; }
+      }
+    }, dur);
+  }
+  function pump(){ while(active<MAXR && pending.length){ startReading(pending.shift()); } }
+  function simulate(){
+    if(running)return; running=true; doneCount=0; produced=0;
+    $("trgSim").disabled=true;
+    for(var i=0;i<simN;i++){ pending.push(instance(pick(BAG))); produced++; }
+    progEl.textContent="0 / "+simN+" read";
+    pump();
+  }
+
+  // ---- PASTE path: real backend latency drives the read animation ----
+  function submitPaste(raw){
+    var placeholder={id:"fx"+(seq++), mine:true, sender:"Your pasted fax", recv:recvTime()};
+    var r=spawnReading(placeholder);
+    var si=0;
+    if(r.bar){ requestAnimationFrame(function(){ r.bar.style.transition="width 4000ms cubic-bezier(.2,.6,.15,1)"; r.bar.style.width="90%"; }); }
+    var iv=setInterval(function(){ si++; if(r.status && si<STAGES.length) r.status.textContent=STAGES[si]; }, 750);
+    classifyRemote(raw).then(function(f){
+      clearInterval(iv);
+      f.id=placeholder.id; f.recv=placeholder.recv; f.mine=true; // keep the node's id
+      if(r.bar){ r.bar.style.transition="width 220ms linear"; r.bar.style.width="100%"; }
+      setTimeout(function(){ commit(f, r.li, true); }, 200);
+    });
+  }
+
+  function select(id){
+    var f=data[id]; if(!f||f.reading)return; selected=id;
+    Array.prototype.forEach.call(queueEl.querySelectorAll(".trg-row"),function(n){n.classList.toggle("sel",n.getAttribute("data-id")===id);});
+    var markBody=esc(f.body).replace(/\n/g,"<br>");
+    if(f.mk){var mk=esc(f.mk);if(markBody.indexOf(mk)>-1)markBody=markBody.replace(mk,'<span class="trg-mk">'+mk+'</span>');}
+    var fieldsHtml=f.fields.map(function(x){return '<li><span class="k">'+esc(x[0])+'</span><span class="val">'+esc(x[1])+'</span></li>';}).join("");
+    var bandLabel=f.cat==="FILTER"?"JUNK":f.cat;
+    var youTag=f.mine?' <span class="trg-you">Your fax</span>':'';
+    detailEl.innerHTML=
+      '<div class="trg-dhead"><div class="row1">'+
+        '<span class="trg-band '+f.cat+'" style="padding:5px 10px">'+bandLabel+'</span>'+
+        '<span class="trg-dtype">'+esc(f.type)+'</span>'+
+        '<span class="trg-conf">'+Math.round(f.conf*100)+'% conf.</span></div>'+
+        '<div class="trg-dfrom">From '+esc(f.sender)+' · received '+f.recv+youTag+'</div></div>'+
+      '<div class="trg-dbody">'+
+        '<div class="trg-dsec">The fax, as received</div>'+
+        '<div class="trg-page"><div class="lh">'+esc(f.sender)+'</div><div class="lh-sub">inbound fax · '+f.recv+'</div>'+markBody+'</div>'+
+        '<div class="trg-dsec" style="margin-top:18px">What the agent extracted</div>'+
+        '<ul class="trg-fields">'+fieldsHtml+'</ul>'+
+        '<div class="trg-why"><div class="wk">Why this priority</div><div class="wv">'+esc(f.reason)+'</div>'+
+          '<div class="sla"><span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla)+'</div></div>'+
+      '</div>';
+  }
+
+  function reset(){
+    pending=[]; active=0; running=false; produced=0; doneCount=0;
+    queueEl.innerHTML='';
+    var e=document.createElement("div"); e.className="trg-empty";
+    e.innerHTML='<div class="trg-empty-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/></svg></div><h3>Queue cleared</h3><p>Run the simulation again — or paste your own fax — to watch it fill and sort.</p>';
+    queueEl.appendChild(e); emptyEl=e;
+    nodes={};data={};count={read:0,P1:0,P2:0,P3:0,P4:0,FILTER:0};selected=null;
+    detailEl.innerHTML='<div class="trg-dempty"><h3>Nothing selected</h3><p>Select a fax to see the original page beside the fields the agent pulled out.</p></div>';
+    updateStats(false); progEl.textContent="idle"; $("trgSim").disabled=false;
+  }
+
+  var SAMPLE="PRIOR AUTHORIZATION DETERMINATION\nMember: Jane Doe   ID: 55831092   DOB: 04/12/1968\nRequested service: MRI lumbar spine (72148)\n\nDETERMINATION: DENIED — not medically necessary per policy MSK-14.\nYou may file an appeal within 5 business days of this notice.\nBlueCross Payer Services";
+
+  function bind(){
+    $("trgSim").addEventListener("click",simulate);
+    $("trgReset").addEventListener("click",reset);
+    var pasteBox=$("trgPaste"), toggle=$("trgPasteToggle");
+    toggle.addEventListener("click",function(){
+      var open=pasteBox.classList.toggle("open"); toggle.classList.toggle("active",open);
+      if(open) setTimeout(function(){$("trgPasteText").focus();},60);
+    });
+    $("trgPasteSample").addEventListener("click",function(){ $("trgPasteText").value=SAMPLE; $("trgPasteText").focus(); });
+    $("trgPasteRun").addEventListener("click",function(){
+      var txt=$("trgPasteText").value.trim(); if(!txt){ $("trgPasteText").focus(); return; }
+      submitPaste(txt);
+      $("trgPasteText").value=""; pasteBox.classList.remove("open"); toggle.classList.remove("active");
+    });
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
+  else bind();
+})();
+</script>
+
 <script>
 (function(){
 var f=document.getElementById('silNotify');
@@ -1193,7 +1737,7 @@ f.addEventListener('submit',function(e){
 e.preventDefault();
 var email=f.querySelector('input[type=email]');
 if(!email.value||email.validity.typeMismatch){msg.textContent='Please enter a valid email address.';msg.className='sil-notify-msg is-warn';return;}
-msg.textContent='Sending\u2026';msg.className='sil-notify-msg';
+msg.textContent='Sending…';msg.className='sil-notify-msg';
 if(btn)btn.disabled=true;
 fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
 .then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
