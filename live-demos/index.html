@@ -1403,8 +1403,9 @@ if(document.readyState==='loading'){
   "use strict";
   if(window.__trgInit) return; window.__trgInit=true;
 
-  /* Same backend as demo 1 (the underpayment worker), new /api/triage route.
-     GPT-4o-mini reads the pasted fax server-side; the key never touches the browser.
+  /* Same Worker as demo 1 (dental-denial-agent), new /api/triage route.
+     Cloudflare Workers AI (Llama, env.AI binding) reads the pasted fax server-
+     side — no external key. CORS is open, so it works from the live site.
      If the endpoint is unreachable (local preview, or before the route ships),
      we fall back to a client-side heuristic so the demo still works. */
   var TRIAGE_API="https://dental-denial-agent.denial-agent.workers.dev/api/triage";
@@ -1514,7 +1515,7 @@ if(document.readyState==='loading'){
       reason:t.reason,patient:(t.cat==="FILTER"?"—":pt),body:inj(t.body),mk:mk,fields:fields,sla:SLA[t.cat],recv:recvTime()};
   }
 
-  /* ---- paste: real backend (OpenAI via the shared Worker) + local fallback ---- */
+  /* ---- paste: real backend (Cloudflare Workers AI via the shared Worker) + local fallback ---- */
   function field(raw,re){var m=raw.match(re);return m?m[1].trim():"";}
   function classifyLocal(raw){
     var t=raw.toLowerCase();
