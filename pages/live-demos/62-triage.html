@@ -1114,12 +1114,13 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   <section class="sil-section is-alt has-tint acc-teal" style="padding:var(--space-16) 0 var(--space-10)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container sil-center">
-      <span class="sil-eyebrow sil-reveal"><i class="dot"></i>Live demo&nbsp;&middot;&nbsp;Built on Claude</span>
+      <span class="sil-eyebrow sil-reveal"><i class="dot"></i>Live demo&nbsp;&middot;&nbsp;Fax Triage</span>
       <h1 class="sil-display-l sil-mt-4 sil-reveal" style="--d:70ms">Turn the fax pile into a <span class="sil-gt">ranked worklist.</span></h1>
       <p class="sil-body-l sil-mt-4 sil-hero-sub sil-reveal" style="--d:140ms">
         A clinic takes in 50&ndash;200 faxes a day &mdash; referrals, results, prior-auth replies, refills &mdash; all mixed together, oldest first. Press the button and watch the agent read each one and re-stack the pile by clinical urgency, so the STAT result never waits behind the refills.
       </p>
       <div class="sil-hero-chips sil-mt-4 sil-reveal" style="--d:210ms">
+        <span class="sil-chip"><i class="dot"></i>Built on Claude</span>
         <span class="sil-chip"><i class="dot"></i>Synthetic faxes &middot; no real PHI</span>
         <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
         <span class="sil-chip"><i class="dot"></i>The same pipeline as production</span>
@@ -1141,19 +1142,43 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
         <!-- controls -->
         <div class="trg-controls">
-          <button type="button" class="trg-btn-primary" id="trgSim"><span class="trg-pulse"></span>Simulate a busy morning</button>
+          <button type="button" class="trg-btn-sim" id="trgSim">
+            <svg class="trg-sim-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h6l-1 8 10-12h-6l1-8z"/></svg>
+            Simulate a busy morning
+            <span class="trg-sim-shine" aria-hidden="true"></span>
+          </button>
           <button type="button" class="trg-btn-ghost" id="trgPasteToggle">Paste your own fax</button>
           <button type="button" class="trg-btn-ghost" id="trgReset">Reset</button>
         </div>
 
-        <!-- paste-your-own panel -->
+        <!-- paste-your-own panel (lead gate -> editor) -->
         <div class="trg-paste" id="trgPaste">
-          <label class="trg-paste-lbl" for="trgPasteText">Paste a fax (or any clinical document) and watch the agent read it and slot it into the queue against everything else.</label>
-          <textarea id="trgPasteText" spellcheck="false" placeholder="e.g.  PRIOR AUTHORIZATION DETERMINATION&#10;Member: Jane Doe   DOB: 04/12/1968&#10;Requested: MRI lumbar spine&#10;DETERMINATION: DENIED — not medically necessary. You may appeal within 5 business days."></textarea>
-          <div class="trg-paste-row">
-            <button type="button" class="trg-btn-primary" id="trgPasteRun">Prioritize my fax</button>
-            <button type="button" class="trg-link" id="trgPasteSample">Fill a sample</button>
-            <span class="trg-paste-note">Sent for analysis &middot; not stored</span>
+          <div class="trg-lead" id="trgLead">
+            <h3 class="trg-lead-title">Run it on <span class="sil-gt">your own fax</span></h3>
+            <p class="trg-lead-sub">Enter your details to unlock the tool and triage your own document in real time — live, against the rest of the queue.</p>
+            <form id="trgLeadForm" novalidate>
+              <label class="sil-sr" for="trgLName">Full name</label>
+              <input type="text" name="name" id="trgLName" placeholder="Dr. Smith" required>
+              <label class="sil-sr" for="trgLEmail">Work email</label>
+              <input type="email" name="email" id="trgLEmail" placeholder="you@practice.com" required>
+              <label class="sil-sr" for="trgLPhone">Phone number</label>
+              <input type="tel" name="phone" id="trgLPhone" placeholder="(555) 123-4567" required>
+              <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
+              <input type="hidden" name="subject" value="Demo request: Fax Triage Agent">
+              <input type="hidden" name="from_name" value="Silstone.AI - Live Demo">
+              <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+              <button type="submit" class="trg-btn-primary" id="trgLeadBtn" style="width:100%">Unlock the tool <span class="arw">&rarr;</span></button>
+            </form>
+            <p class="trg-lead-micro">Use sample or de-identified data only. We respect your privacy.</p>
+          </div>
+          <div class="trg-paste-editor" id="trgPasteEditor" style="display:none">
+            <label class="trg-paste-lbl" for="trgPasteText">Paste a fax (or any clinical document) below, then watch the agent read it and slot it into the queue against everything else.</label>
+            <textarea id="trgPasteText" spellcheck="false" placeholder="Paste a fax here — for example:&#10;&#10;PRIOR AUTHORIZATION DETERMINATION&#10;Member: Jane Doe   DOB: 04/12/1968&#10;Requested: MRI lumbar spine&#10;DETERMINATION: DENIED — not medically necessary. You may appeal within 5 business days."></textarea>
+            <div class="trg-paste-row">
+              <button type="button" class="trg-btn-primary" id="trgPasteRun">Prioritize my fax <span class="arw">&rarr;</span></button>
+              <button type="button" class="trg-link" id="trgPasteSample">Fill a sample</button>
+              <span class="trg-paste-note">Sent for analysis &middot; not stored</span>
+            </div>
           </div>
         </div>
 
@@ -1241,7 +1266,11 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .trg-demo button{font-family:inherit;cursor:pointer;border:none;border-radius:12px;font-weight:600;transition:transform .1s ease,background .15s ease,opacity .15s,border-color .15s}
 .trg-demo button:active{transform:translateY(1px)}
 .trg-demo button:disabled{opacity:.5;cursor:default}
-.trg-btn-primary{background:linear-gradient(150deg,var(--violet-600),var(--violet-500));color:#fff;font-size:15px;padding:13px 22px;box-shadow:0 8px 22px rgba(110,86,207,.4);display:inline-flex;align-items:center;gap:10px}
+.trg-btn-primary{background:var(--grad-primary);background-size:200% 200%;animation:silGradShift 10s ease-in-out infinite;color:#fff;font-size:15px;padding:13px 24px;border-radius:var(--radius-pill);box-shadow:0 8px 22px rgba(110,86,207,.4);display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.trg-btn-primary:hover{box-shadow:0 10px 30px rgba(110,86,207,.5);transform:translateY(-1px)}
+.trg-btn-primary:disabled{opacity:.5;cursor:default;transform:none}
+.trg-btn-primary .arw{transition:transform .2s}
+.trg-btn-primary:hover .arw{transform:translateX(3px)}
 .trg-btn-primary .trg-pulse{width:9px;height:9px;border-radius:50%;background:#fff;animation:trgPulse 1.6s infinite}
 @keyframes trgPulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.5)}70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
 .trg-btn-ghost{background:var(--bg-surface-raised);color:var(--text-secondary);font-size:14px;padding:12px 18px;border:1px solid var(--border-default)}
@@ -1253,10 +1282,27 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .trg-paste{display:none;margin-bottom:18px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:16px 18px}
 .trg-paste.open{display:block;animation:trgEnter .25s ease}
 .trg-paste-lbl{display:block;font-size:13px;color:var(--text-secondary);margin-bottom:10px}
-.trg-paste textarea{width:100%;min-height:118px;resize:vertical;background:var(--bg-surface-3);border:1px solid var(--border-default);border-radius:10px;color:var(--text-primary);font-family:var(--font-mono);font-size:12.5px;padding:12px 13px;line-height:1.55}
+.trg-paste textarea{width:100%;min-height:210px;resize:vertical;background:var(--bg-surface-3);border:1px solid var(--border-default);border-radius:10px;color:var(--text-primary);font-family:var(--font-mono);font-size:13.5px;padding:14px 15px;line-height:1.6}
 .trg-paste textarea:focus{outline:none;border-color:var(--violet-500)}
 .trg-paste-row{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
 .trg-paste-note{font-family:var(--font-mono);font-size:11px;color:var(--text-quaternary);margin-left:auto}
+/* compelling simulate button */
+.trg-btn-sim{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:var(--radius-pill);font-family:inherit;font-weight:600;font-size:16px;color:#fff;border:0;cursor:pointer;background:var(--grad-primary);background-size:200% 200%;box-shadow:0 10px 30px rgba(110,86,207,.5);animation:silGradShift 8s ease-in-out infinite, trgBreathe 3.6s ease-in-out infinite;transition:transform .12s,box-shadow .2s}
+.trg-btn-sim:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(45,217,211,.5)}
+.trg-btn-sim:active{transform:translateY(0)}
+.trg-btn-sim:disabled{opacity:.55;cursor:default;box-shadow:0 8px 22px rgba(110,86,207,.35);animation:silGradShift 8s ease-in-out infinite}
+.trg-sim-ico{width:17px;height:17px;flex:none;filter:drop-shadow(0 0 6px rgba(255,255,255,.55))}
+.trg-sim-shine{position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-18deg);animation:trgShine 3.6s ease-in-out infinite;pointer-events:none}
+@keyframes trgBreathe{0%,100%{box-shadow:0 10px 30px rgba(110,86,207,.45)}50%{box-shadow:0 14px 42px rgba(45,217,211,.5)}}
+@keyframes trgShine{0%,12%{left:-70%}50%,100%{left:140%}}
+/* lead gate (matches demo 1) */
+.trg-lead{max-width:460px;margin:4px auto;text-align:center;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:16px;padding:clamp(22px,3vw,34px)}
+.trg-lead-title{font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:600;color:var(--text-primary)}
+.trg-lead-sub{font-size:13.5px;line-height:1.6;color:var(--text-secondary);margin:10px 0 18px}
+.trg-lead input{width:100%;padding:14px 16px;margin-bottom:12px;border-radius:10px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);color:var(--text-primary);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
+.trg-lead input:focus{border-color:var(--violet-500)}
+.trg-lead input::placeholder{color:var(--text-quaternary)}
+.trg-lead-micro{font-size:11.5px;color:var(--text-quaternary);margin-top:12px}
 
 .trg-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
 .trg-stat{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:15px 16px}
@@ -1655,7 +1701,40 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     updateStats(false); progEl.textContent="idle"; $("trgSim").disabled=false;
   }
 
-  var SAMPLE="PRIOR AUTHORIZATION DETERMINATION\nMember: Jane Doe   ID: 55831092   DOB: 04/12/1968\nRequested service: MRI lumbar spine (72148)\n\nDETERMINATION: DENIED — not medically necessary per policy MSK-14.\nYou may file an appeal within 5 business days of this notice.\nBlueCross Payer Services";
+  var SAMPLES=[
+    "PRIOR AUTHORIZATION DETERMINATION\nMember: Jane Doe   ID: 55831092   DOB: 04/12/1968\nRequested service: MRI lumbar spine (72148)\n\nDETERMINATION: DENIED — not medically necessary per policy MSK-14.\nYou may file an appeal within 5 business days of this notice.\nBlueCross Payer Services",
+    "STAT CHEMISTRY PANEL — CRITICAL RESULT\nPatient: Robert Nguyen   DOB: 09/03/1975   MRN-448201\nOrdering provider: Dr. Kim\n\nPotassium ......... 6.8 mmol/L (CRITICAL HIGH)\nCreatinine ........ 2.1 mg/dL (H)\n\n** Critical value phoned to lab. Please acknowledge immediately. **\nQuest Diagnostics",
+    "REFERRAL / CONSULT REQUEST\nPatient: Maria Alvarez   DOB: 02/14/1980\nRefer to: CARDIOLOGY (URGENT)\nReason: new-onset exertional chest pain, abnormal ECG.\nRequesting expedited appointment within 1 week.\nReferring: Dr. Walsh, Northside Family Medicine",
+    "REFILL AUTHORIZATION REQUEST\nPatient: David Johnson   DOB: 11/22/1959\nDrug: Atorvastatin 20mg, #90, refills x3\nPharmacy: CVS #337\nPlease approve or deny at your convenience.",
+    "RELEASE OF INFORMATION REQUEST\nRe: Linda Thompson   DOB: 06/30/1971\nRequesting: office visit notes 2024–2025.\nSigned patient authorization enclosed.\nHarbor Law LLP",
+    "HOSPITAL DISCHARGE SUMMARY\nPatient: Omar Haddad   DOB: 07/19/1962\nAdmit dx: acute CHF exacerbation. Disposition: home today.\nFOLLOW-UP: PCP visit within 48 hours. Medication changes x3 — please reconcile.\nSt. Mary's Medical Center",
+    "*** SPECIAL OFFER — MEDICAL SUPPLIES ***\nSave 25% on nitrile exam gloves and paper products!\nCall now or reply STOP to opt out.\nThis is a promotional fax. No patient information.\nMedSupply Direct"
+  ];
+  var sampleIdx=0, pasteUnlocked=false;
+
+  function showPasteStage(){
+    $("trgLead").style.display = pasteUnlocked ? "none" : "block";
+    $("trgPasteEditor").style.display = pasteUnlocked ? "block" : "none";
+    setTimeout(function(){ var el = pasteUnlocked ? $("trgPasteText") : $("trgLName"); if(el) el.focus(); }, 70);
+  }
+  function submitLead(e){
+    e.preventDefault();
+    var f=$("trgLeadForm"), btn=$("trgLeadBtn");
+    var name=$("trgLName").value.trim(), email=$("trgLEmail").value.trim(), phone=$("trgLPhone").value.trim();
+    if(name.length<2){ alert("Please enter your full name."); return false; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert("Enter a valid email."); return false; }
+    if(phone.replace(/\D/g,"").length<10){ alert("Enter a valid phone number."); return false; }
+    btn.disabled=true; btn.innerHTML="Sending\u2026";
+    fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:new FormData(f)})
+      .then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
+      .then(function(res){
+        if(res.ok && res.data && res.data.success){
+          pasteUnlocked=true; showPasteStage();
+          var te=$("trgPasteText"); if(te && !te.value) te.value=SAMPLES[0];
+        } else { alert((res.data&&res.data.message)||"Something went wrong."); btn.disabled=false; btn.innerHTML='Unlock the tool <span class="arw">&rarr;</span>'; }
+      }).catch(function(){ alert("Network error. Please try again."); btn.disabled=false; btn.innerHTML='Unlock the tool <span class="arw">&rarr;</span>'; });
+    return false;
+  }
 
   function bind(){
     $("trgSim").addEventListener("click",simulate);
@@ -1663,9 +1742,10 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     var pasteBox=$("trgPaste"), toggle=$("trgPasteToggle");
     toggle.addEventListener("click",function(){
       var open=pasteBox.classList.toggle("open"); toggle.classList.toggle("active",open);
-      if(open) setTimeout(function(){$("trgPasteText").focus();},60);
+      if(open) showPasteStage();
     });
-    $("trgPasteSample").addEventListener("click",function(){ $("trgPasteText").value=SAMPLE; $("trgPasteText").focus(); });
+    var lf=$("trgLeadForm"); if(lf) lf.addEventListener("submit",submitLead);
+    $("trgPasteSample").addEventListener("click",function(){ $("trgPasteText").value=SAMPLES[sampleIdx % SAMPLES.length]; sampleIdx++; $("trgPasteText").focus(); });
     $("trgPasteRun").addEventListener("click",function(){
       var txt=$("trgPasteText").value.trim(); if(!txt){ $("trgPasteText").focus(); return; }
       submitPaste(txt);
