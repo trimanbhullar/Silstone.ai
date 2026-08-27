@@ -1115,7 +1115,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 <div class="sil-root">
 
   <!-- ==================== SUB-HERO ==================== -->
-  <section class="sil-section is-alt has-tint acc-teal" style="padding:var(--space-16) 0 var(--space-10)">
+  <section class="sil-section is-alt has-tint acc-teal" style="padding:var(--space-12) 0 var(--space-8)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container sil-center">
       <span class="sil-eyebrow sil-reveal"><i class="dot"></i>Live demo&nbsp;&middot;&nbsp;Fax Triage</span>
@@ -1133,7 +1133,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   </section>
 
   <!-- ==================== THE DEMO ==================== -->
-  <section class="sil-section" style="padding:var(--space-10) 0 var(--space-16)">
+  <section class="sil-section" style="padding:var(--space-8) 0 var(--space-12)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container">
       <div class="trg-demo" id="trgDemo">
@@ -1270,15 +1270,15 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   max-width:1120px; margin:0 auto; }
 .trg-demo *{box-sizing:border-box}
 
-.trg-note{display:flex;align-items:center;gap:10px;font-size:12.5px;line-height:1.45;color:var(--text-tertiary);background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:11px 15px;margin-bottom:18px}
+.trg-note{display:flex;align-items:center;gap:9px;font-size:12px;line-height:1.45;color:var(--text-tertiary);background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:11px;padding:9px 13px;margin-bottom:12px}
 .trg-note svg{flex:none;color:var(--teal-500)}
 .trg-note b{color:var(--text-secondary);font-weight:600}
 
-.trg-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
+.trg-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
 .trg-demo button{font-family:inherit;cursor:pointer;border:none;font-weight:600}
 .trg-demo button:active{transform:translateY(1px)}
 .trg-demo button:disabled{opacity:.5;cursor:default}
-.trg-demo .trg-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;border-radius:var(--radius-pill);font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--text-on-accent);background:var(--grad-primary);background-size:200% 200%;box-shadow:var(--shadow-sm);cursor:pointer;transition:box-shadow .2s,transform .2s;animation:silGradShift 10s ease-in-out infinite}
+.trg-demo .trg-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 24px;border-radius:var(--radius-pill);font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--text-on-accent);background:var(--grad-primary);background-size:200% 200%;box-shadow:var(--shadow-sm);cursor:pointer;transition:box-shadow .2s,transform .2s;animation:silGradShift 10s ease-in-out infinite}
 .trg-demo .trg-btn-primary:hover{box-shadow:0 8px 28px rgba(124,107,240,.34);transform:translateY(-1px);color:var(--text-on-accent)}
 .trg-demo .trg-btn-primary:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none;animation:none}
 .trg-demo .trg-btn-primary .arw{transition:transform .2s}
@@ -1306,28 +1306,28 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .trg-demo .trg-lead .trg-btn-primary{margin-top:var(--space-2)}
 .trg-demo .trg-lead-micro{font-size:12px;color:var(--text-quaternary);text-align:center;margin-top:var(--space-4)}
 
-.trg-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
-.trg-stat{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:15px 16px}
-.trg-stat .v{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.65rem;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--text-primary)}
-.trg-stat .l{font-size:11.5px;color:var(--text-quaternary);margin-top:7px;letter-spacing:.02em}
+.trg-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px}
+.trg-stat{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:11px 13px}
+.trg-stat .v{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.3rem;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--text-primary)}
+.trg-stat .l{font-size:11px;color:var(--text-quaternary);margin-top:5px;letter-spacing:.02em}
 .trg-c-p1{color:var(--coral-500)!important} .trg-c-p2{color:var(--amber-400)!important}
 .trg-c-teal{color:var(--teal-500)!important} .trg-c-mut{color:var(--text-quaternary)!important}
 .trg-stat.trg-flash .v{animation:trgFlash 1s ease}
 @keyframes trgFlash{0%,100%{color:var(--coral-500)}50%{color:#fff}}
 
 .trg-panel{display:grid;grid-template-columns:1fr 440px;gap:16px}
-.trg-queuewrap,.trg-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:748px;display:flex;flex-direction:column;overflow:hidden}
-.trg-qhead{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border-subtle);flex:none;min-height:52px}
+.trg-queuewrap,.trg-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:clamp(460px,calc(100vh - 365px),650px);display:flex;flex-direction:column;overflow:hidden}
+.trg-qhead{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:9px 16px;border-bottom:1px solid var(--border-subtle);flex:none;min-height:46px}
 .trg-qtitle{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary)}
 .trg-prog{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
-.trg-queue{list-style:none;margin:0;padding:8px;overflow-y:auto;flex:1}
+.trg-queue{list-style:none;margin:0;padding:6px;overflow-y:auto;flex:1}
 
 .trg-empty,.trg-dempty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:40px 24px;color:var(--text-quaternary)}
 .trg-empty-ico{width:52px;height:52px;border-radius:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--text-quaternary)}
 .trg-empty h3,.trg-dempty h3{margin:0 0 6px;color:var(--text-secondary);font-size:15px;font-weight:600}
 .trg-empty p,.trg-dempty p{margin:0;font-size:13.5px;max-width:36ch}
 
-.trg-row{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px 14px;border-radius:11px;cursor:pointer;border:1px solid transparent;position:relative;overflow:hidden}
+.trg-row{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;padding:9px 12px;border-radius:11px;cursor:pointer;border:1px solid transparent;position:relative;overflow:hidden}
 .trg-row:hover{background:var(--bg-surface-raised)}
 .trg-row.sel{background:var(--bg-surface-raised);border-color:var(--border-default)}
 .trg-row.mine{box-shadow:inset 0 0 0 1.5px var(--violet-500)}
@@ -1341,12 +1341,12 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .trg-band.FILTER{background:var(--bg-surface-3);color:var(--text-quaternary)}
 .trg-band.reading{background:var(--vw);color:var(--violet-300)}
 .trg-rmain{min-width:0;position:relative;z-index:1}
-.trg-rtitle{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary);display:flex;align-items:center}
+.trg-rtitle{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary);display:flex;align-items:center}
 .trg-rtitle .who{color:var(--text-quaternary);font-weight:400;margin-left:5px;overflow:hidden;text-overflow:ellipsis}
 .trg-ico{display:inline-flex;width:16px;height:16px;flex:none;margin-right:8px}
 .trg-ico svg{width:16px;height:16px}
 .trg-you{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;background:var(--vw);color:var(--violet-300);padding:2px 6px;border-radius:5px;margin-left:8px;flex:none}
-.trg-rreason{font-size:12.5px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+.trg-rreason{font-size:12px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
 .trg-rreason.reading{color:var(--violet-300);font-family:'IBM Plex Mono',monospace;font-size:12px}
 .trg-pbar{height:3px;border-radius:2px;background:var(--bg-surface-3);margin-top:9px;overflow:hidden}
 .trg-pbar>i{display:block;height:100%;width:4%;border-radius:2px;background:linear-gradient(90deg,var(--violet-500),var(--teal-500))}
@@ -1358,43 +1358,43 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .trg-scan::after{content:"";position:absolute;top:0;bottom:0;width:36%;left:-40%;background:linear-gradient(90deg,transparent,rgba(165,148,255,.14),transparent);animation:trgSweep 1.15s linear infinite}
 @keyframes trgSweep{to{left:120%}}
 
-.trg-dhead{padding:16px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
+.trg-dhead{padding:12px 15px;border-bottom:1px solid var(--border-subtle);flex:none}
 .trg-dhead .row1{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .trg-dtype{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary)}
 .trg-conf{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary)}
 .trg-dfrom{font-size:12.5px;color:var(--text-secondary)}
-.trg-dbody{overflow-y:auto;padding:16px 18px}
-.trg-dsec{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quaternary);margin:4px 0 10px}
-.trg-page{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:15px 16px;font-size:12px;line-height:1.6;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word}
+.trg-dbody{overflow-y:auto;padding:13px 15px}
+.trg-dsec{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quaternary);margin:0 0 8px}
+.trg-page{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:12px 14px;font-size:11.5px;line-height:1.6;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word}
 .trg-page .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--text-primary);margin-bottom:2px}
 .trg-page .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
-.trg-page.clip{max-height:184px;overflow:hidden;position:relative}
+.trg-page.clip{max-height:148px;overflow:hidden;position:relative}
 .trg-page.clip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:66px;background:linear-gradient(to bottom,transparent,var(--bg-surface-3))}
 .trg-demo .trg-pagemore{display:block;margin:8px 0 0;padding:6px 0;background:none;border:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;color:var(--violet-300);cursor:pointer}
 .trg-mk{background:var(--p1w);color:var(--coral-500);padding:1px 5px;border-radius:4px;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px}
-.trg-fields{list-style:none;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--border-subtle);display:grid;gap:11px}
+.trg-fields{list-style:none;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--border-subtle);display:grid;gap:8px}
 .trg-fields li{display:grid;grid-template-columns:108px 1fr;gap:12px;align-items:baseline}
 .trg-fields .k{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary);text-transform:uppercase;letter-spacing:.04em}
-.trg-fields .val{font-size:13.5px;color:var(--text-primary);font-weight:500}
-.trg-why{margin-top:16px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--teal-500);border-radius:0 11px 11px 0;padding:12px 14px}
+.trg-fields .val{font-size:12.5px;color:var(--text-primary);font-weight:500}
+.trg-why{margin-top:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--teal-500);border-radius:0 11px 11px 0;padding:10px 12px}
 .trg-why .wk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
 .trg-why .wv{font-size:13px;color:var(--text-primary)}
 .trg-why .sla{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary)}
 
 
 /* ---- action layer: what happens next + ledger ---- */
-.trg-board{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:13px 15px 15px;margin-bottom:16px;display:flex;flex-direction:column;gap:12px}
+.trg-board{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:10px 13px 12px;margin-bottom:12px;display:flex;flex-direction:column;gap:9px}
 .trg-board[hidden]{display:none}
 .trg-bhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .trg-demo .trg-ldlbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-quaternary);flex:none}
 .trg-demo .trg-btotal{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary);flex:1;min-width:120px}
-.trg-dests{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.trg-demo .trg-dest{background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:12px;padding:11px 12px;display:flex;flex-direction:column;gap:5px;min-width:0;transition:border-color .3s,transform .3s}
+.trg-dests{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.trg-demo .trg-dest{background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:11px;padding:9px 11px;display:flex;flex-direction:column;gap:4px;min-width:0;transition:border-color .3s,transform .3s}
 .trg-demo .trg-dest .dtop{display:flex;align-items:center;gap:7px;min-width:0}
 .trg-demo .trg-dest .di{width:15px;height:15px;flex:none;display:flex}
 .trg-demo .trg-dest .di svg{width:15px;height:15px}
 .trg-demo .trg-dest .dl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.trg-demo .trg-dest .dv{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.4rem;line-height:1;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.trg-demo .trg-dest .dv{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.15rem;line-height:1;color:var(--text-primary);font-variant-numeric:tabular-nums}
 .trg-demo .trg-dest .dlast{font-size:10.5px;line-height:1.35;color:var(--text-quaternary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:14px}
 .trg-dest.aim{border-color:currentColor;transform:translateY(-2px)}
 .trg-dest.hit{animation:trgHit .8s cubic-bezier(.3,.8,.3,1)}
@@ -1416,7 +1416,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 @keyframes trgPop{0%{transform:scale(1)}35%{transform:scale(1.25)}100%{transform:scale(1)}}
 
 /* inside a box */
-.trg-boxview{padding:8px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:6px}
+.trg-boxview{padding:6px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:5px}
 .trg-boxview[hidden]{display:none}
 .trg-demo .trg-qtitle{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .trg-demo .trg-back{display:inline-flex;align-items:center;gap:6px;flex:none;padding:5px 11px 5px 8px;
@@ -1427,11 +1427,11 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .trg-demo .trg-back:focus-visible{outline:2px solid var(--violet-500);outline-offset:2px}
 .trg-demo .trg-back svg{width:11px;height:11px;flex:none}
 .trg-demo .trg-back[hidden]{display:none}
-.trg-demo .trg-task{display:grid;grid-template-columns:9px 1fr 14px;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:11px;padding:11px 13px;cursor:pointer;font-family:var(--font-body);color:var(--text-primary)}
+.trg-demo .trg-task{display:grid;grid-template-columns:9px 1fr 14px;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:11px;padding:9px 11px;cursor:pointer;font-family:var(--font-body);color:var(--text-primary)}
 .trg-demo .trg-task:hover{background:var(--bg-surface-raised);border-color:var(--border-subtle)}
 .trg-demo .trg-task.sel{background:var(--bg-surface-raised);border-color:var(--border-default)}
 .trg-demo .trg-task .tdot{width:9px;height:9px;border-radius:50%;flex:none}
-.trg-demo .trg-task .tt{display:block;font-size:13.5px;font-weight:600;line-height:1.4}
+.trg-demo .trg-task .tt{display:block;font-size:12.5px;font-weight:600;line-height:1.38}
 .trg-demo .trg-task .ts{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .trg-demo .trg-task .tgo{display:flex;color:var(--text-quaternary)}
 .trg-demo .trg-task .tgo svg{width:14px;height:14px}
@@ -1445,19 +1445,19 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .trg-demo .trg-btn-clear:hover:not(:disabled){background:rgba(110,86,207,.3)}
 .trg-demo .trg-btn-clear:disabled{opacity:.45;cursor:default}
 
-.trg-acts{display:flex;flex-direction:column;gap:8px}
-.trg-demo .trg-act{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;width:100%;text-align:left;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:11px;padding:11px 13px;cursor:pointer;font-family:var(--font-body);color:var(--text-primary);transition:border-color .18s,background .18s}
+.trg-acts{display:flex;flex-direction:column;gap:6px}
+.trg-demo .trg-act{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;width:100%;text-align:left;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:11px;padding:9px 11px;cursor:pointer;font-family:var(--font-body);color:var(--text-primary);transition:border-color .18s,background .18s}
 .trg-demo .trg-act:hover:not(:disabled){border-color:var(--violet-500);background:var(--vw)}
 .trg-demo .trg-act.is-primary{border-color:rgba(110,86,207,.5);background:var(--vw)}
 .trg-demo .trg-act .aic{width:18px;height:18px;border-radius:6px;border:1.5px solid var(--border-default);display:flex;align-items:center;justify-content:center;margin-top:1px;color:var(--text-quaternary)}
 .trg-demo .trg-act .aic svg{width:11px;height:11px}
-.trg-demo .trg-act .al{display:block;font-size:13.5px;font-weight:600;line-height:1.4}
-.trg-demo .trg-act .ak{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-top:4px}
+.trg-demo .trg-act .al{display:block;font-size:12.5px;font-weight:600;line-height:1.38}
+.trg-demo .trg-act .ak{display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-top:3px}
 .trg-demo .trg-act.is-done{cursor:default;border-color:rgba(94,224,168,.35);background:rgba(94,224,168,.07)}
 .trg-demo .trg-act.is-done .aic{border-color:var(--mint-400);color:var(--mint-400);background:rgba(94,224,168,.14)}
 .trg-demo .trg-act.is-done .al{font-weight:500;color:var(--text-secondary)}
 .trg-demo .trg-act.is-done .ak{color:var(--mint-400)}
-.trg-demo .trg-actnote{margin:11px 0 0;font-size:12px;line-height:1.55;color:var(--text-quaternary)}
+.trg-demo .trg-actnote{margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--text-quaternary)}
 .trg-demo .trg-why .sla.done{color:var(--mint-400)}
 .trg-demo .trg-clearnote{margin:10px 0 0;font-size:12.5px;color:var(--violet-300)}
 .trg-row.is-done{opacity:.6}
@@ -1466,25 +1466,25 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 @keyframes trgOut{to{opacity:0;transform:translateX(30px)}}
 
 /* ---- work surfaces: the refill protocol check + the appeal packet ---- */
-.trg-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.trg-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .trg-checks li{display:grid;grid-template-columns:17px 1fr;gap:10px;align-items:start}
 .trg-checks .ci{width:17px;height:17px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;flex:none}
 .trg-checks .ci svg{width:10px;height:10px}
 .trg-checks li.ok .ci{background:rgba(94,224,168,.15);color:var(--mint-400)}
 .trg-checks li.bad .ci,.trg-checks li.blocked .ci{background:var(--p1w);color:var(--coral-500)}
-.trg-checks .cl{display:block;font-size:13.5px;font-weight:500;color:var(--text-primary);line-height:1.4}
+.trg-checks .cl{display:block;font-size:12.5px;font-weight:500;color:var(--text-primary);line-height:1.38}
 .trg-checks li.bad .cl,.trg-checks li.blocked .cl{color:var(--coral-500)}
 .trg-checks .cd{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.35;color:var(--text-quaternary);margin-top:2px}
-.trg-verdict{margin-top:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--mint-400);border-radius:0 11px 11px 0;padding:12px 14px}
+.trg-verdict{margin-top:11px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--mint-400);border-radius:0 11px 11px 0;padding:10px 12px}
 .trg-verdict.warn{border-left-color:var(--amber-400)}
 .trg-verdict.stop{border-left-color:var(--coral-500)}
 .trg-verdict .vk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
-.trg-verdict .vv{font-size:13px;color:var(--text-primary);line-height:1.5}
+.trg-verdict .vv{font-size:12.5px;color:var(--text-primary);line-height:1.48}
 .trg-verdict .sla{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary)}
 .trg-dsechead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 .trg-dsechead .trg-dsec{margin:0}
 .trg-clock{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:4px 9px;border-radius:6px;background:var(--p2w);color:var(--amber-400)}
-.trg-letter{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:15px 16px;font-size:12px;line-height:1.65;color:var(--text-secondary);white-space:pre-wrap}
+.trg-letter{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:12px 14px;font-size:11.5px;line-height:1.65;color:var(--text-secondary);white-space:pre-wrap}
 .trg-letter .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:12.5px;color:var(--text-primary);margin-bottom:2px}
 .trg-letter .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
 
@@ -1498,7 +1498,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
 @media (max-width:1040px){
   .trg-panel{grid-template-columns:1fr 372px}
-  .trg-queuewrap,.trg-detail{height:672px}
+  .trg-queuewrap,.trg-detail{height:clamp(460px,calc(100vh - 300px),600px)}
 }
 @media (max-width:560px){
   /* the box title matters more than the counter - drop the counter to its own
@@ -1750,15 +1750,13 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       {l:"Create the chart and file the packet",h:"\u2192 Patient chart \u00b7 new record",d:"Chart created \u2014 referral packet filed",b:"filed"}]},
     denial:{note:"The appeal deadline is the whole game \u2014 a denial that sits four days in the pile is revenue written off.",acts:[
       {p:1,l:"Start the appeal \u2014 {due}",h:"\u2192 Signature queue \u00b7 medical necessity",d:"Appeal packet drafted \u2014 waiting on signature",b:"sign"},
-      {l:"Pull the payer's policy criteria",h:"\u2192 Escalations \u00b7 criteria matched to the chart",d:"Policy criteria matched to the chart evidence",b:"task"},
       {l:"File the determination to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Determination filed to chart",b:"filed"}]},
     rfi:{note:"A pended authorization is usually held up by one missing item. The agent names it instead of re-reading the letter.",acts:[
       {p:1,l:"Send the payer the notes it asked for",h:"\u2192 Outbound \u00b7 to the payer",d:"Requested progress notes sent to the payer",b:"out"},
       {l:"Re-open the auth with a due-date clock",h:"\u2192 Escalations \u00b7 due-date clock",d:"Authorization re-opened \u2014 due-date clock running",b:"task"}]},
     refill:{note:"Protocol-clean refills batch onto one screen. Controlled substances always route to manual \u2014 no exceptions.",acts:[
       {p:1,l:"Approve \u2014 protocol clean \u00b7 fax to {pharmacy}",h:"\u2192 Outbound \u00b7 fax to {pharmacy}",d:"{drug} authorized \u2014 sent to {pharmacy}",b:"out"},
-      {l:"Hold for the prescriber with the evidence",h:"\u2192 Signature queue \u00b7 needs the prescriber",d:"Held for the prescriber \u2014 evidence attached",b:"sign"},
-      {l:"Log the refill to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill logged to chart",b:"filed"}]},
+      {l:"Hold for the prescriber with the evidence",h:"\u2192 Signature queue \u00b7 needs the prescriber",d:"Held for the prescriber \u2014 evidence attached",b:"sign"}]},
     roi:{note:"This gate never automates. The agent validates and assembles; a human decides what is released.",acts:[
       {p:1,l:"Validate the authorization and scope",h:"\u2192 Escalations \u00b7 scope check",d:"Authorization validated \u2014 scope matches the request",b:"task"},
       {l:"Assemble the records and draft the cover letter",h:"\u2192 Signature queue \u00b7 needs a release approval",d:"Record set assembled \u2014 waiting on release approval",b:"sign"},
@@ -1835,7 +1833,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       ? '<div class="trg-clock"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.3"/><path d="M7 4v3.2l2 1.2"/></svg>'+esc(w.deadline)+'</div>'
       : "";
     var letter = (withLetter && w.letter)
-      ? '<div class="trg-dsec" style="margin-top:20px">The drafted letter</div>'+
+      ? '<div class="trg-dsec" style="margin-top:14px">The drafted letter</div>'+
         '<div class="trg-letter"><div class="lh">Letter of medical necessity \u2014 draft</div>'+
         '<div class="lh-sub">assembled by the agent \u00b7 unsigned</div>'+
         esc(w.letter).replace(/\n/g,"<br>")+'</div>'
@@ -1862,12 +1860,10 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         {l:"File the request to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill request filed to chart",b:"filed"}]};
       if(!w.clean) return {note:"The agent did the checking and named what is missing. The judgement stays with the prescriber.",acts:[
         {p:1,l:"Queue for the prescriber \u2014 "+w.hold,h:"\u2192 Signature queue \u00b7 held, evidence attached",d:"Held for the prescriber \u2014 "+w.hold,b:"sign"},
-        {l:"Ask {pharmacy} for the missing item",h:"\u2192 Outbound \u00b7 fax to {pharmacy}",d:"Query faxed to {pharmacy}",b:"out"},
-        {l:"File the request to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill request filed to chart",b:"filed"}]};
+        {l:"Ask {pharmacy} for the missing item",h:"\u2192 Outbound \u00b7 fax to {pharmacy}",d:"Query faxed to {pharmacy}",b:"out"}]};
       return {note:"Protocol-clean refills pile up in the signature queue and clear together \u2014 one click for the batch, not one click each.",acts:[
         {p:1,l:"Queue for the prescriber \u2014 protocol clean",h:"\u2192 Signature queue \u00b7 clears in the batch",d:"Queued for signature \u2014 protocol clean",b:"sign"},
-        {l:"Hold \u2014 book a visit instead",h:"\u2192 Outbound \u00b7 to the patient",d:"Held \u2014 visit offered to the patient",b:"out"},
-        {l:"Log the refill to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill logged to chart",b:"filed"}]};
+        {l:"Hold \u2014 book a visit instead",h:"\u2192 Outbound \u00b7 to the patient",d:"Held \u2014 visit offered to the patient",b:"out"}]};
     }
     return laneOf(f);
   }
@@ -1881,9 +1877,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         '<span><span class="al">'+esc(fill(isDone?a.d:a.l,f))+'</span>'+
         '<span class="ak">'+(isDone?"Approved by you \u00b7 just now":esc(fill(a.h,f)))+'</span></span></button>';
     }).join("");
-    return '<div class="trg-dsec" style="margin-top:18px">What happens next</div>'+
+    return '<div class="trg-dsec" style="margin-top:14px">What happens next</div>'+
       '<div class="trg-acts">'+rows+'</div>'+
-      '<p class="trg-actnote">'+esc(lane.note)+'</p>';
+      (f.work?'':'<p class="trg-actnote">'+esc(lane.note)+'</p>');   // the verdict already says it
   }
 
   function allDone(f){ var a=actsFor(f).acts, d=f.acts||{};
@@ -2050,9 +2046,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
           '<div class="sla">'+esc(x.hint)+'</div></div>'+
         cta+
         workHtml(f,true)+
-        (fieldsHtml?'<div class="trg-dsec" style="margin-top:20px">What the agent extracted</div>'+
+        (fieldsHtml?'<div class="trg-dsec" style="margin-top:14px">What the agent extracted</div>'+
           '<ul class="trg-fields" style="margin:0;padding:0;border-top:0">'+fieldsHtml+'</ul>':'')+
-        '<div class="trg-dsec" style="margin-top:20px">The fax it came from</div>'+
+        '<div class="trg-dsec" style="margin-top:14px">The fax it came from</div>'+
         pageHtml(f.sender,f.recv,esc(f.body||"").replace(/\n/g,"<br>"),f.body)+
       '</div>';
   }
@@ -2378,9 +2374,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
                     ? '<span class="trg-dot" style="background:var(--mint-400)"></span>SLA met \u00b7 cleared'
                     : '<span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla))+'</div></div>')+
         actsHtml(f)+
-        '<div class="trg-dsec" style="margin-top:20px">What the agent extracted</div>'+
+        '<div class="trg-dsec" style="margin-top:14px">What the agent extracted</div>'+
         '<ul class="trg-fields" style="margin:0;padding:0;border-top:0">'+fieldsHtml+'</ul>'+
-        '<div class="trg-dsec" style="margin-top:20px">The fax, as received</div>'+
+        '<div class="trg-dsec" style="margin-top:14px">The fax, as received</div>'+
         pageHtml(f.sender,f.recv,markBody,f.body)+
       '</div>';
     if(keepScroll){ var nb=detailEl.querySelector(".trg-dbody"); if(nb) nb.scrollTop=prevScroll; }
