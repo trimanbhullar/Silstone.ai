@@ -1140,8 +1140,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
         <!-- PHI / privacy disclaimer (top) -->
         <div class="trg-note">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-          <span>This demo uses <b>synthetic data</b>. When you paste your own fax it is analysed for triage and not stored &mdash; still, please don&rsquo;t paste real patient information (PHI).</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.2 2.8 20h18.4L12 4.2Z"/><line x1="12" y1="10" x2="12" y2="14.2"/><line x1="12" y1="17" x2="12" y2="17.1"/></svg>
+          <span class="trg-note-tag">Synthetic data only</span>
+          <span>Anything you paste is analysed for triage and never stored &mdash; even so, <b>do not paste real patient information (PHI)</b>.</span>
         </div>
 
         <!-- controls -->
@@ -1270,9 +1271,14 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   max-width:1120px; margin:0 auto; }
 .trg-demo *{box-sizing:border-box}
 
-.trg-note{display:flex;align-items:center;gap:9px;font-size:12px;line-height:1.45;color:var(--text-tertiary);background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:11px;padding:9px 13px;margin-bottom:12px}
-.trg-note svg{flex:none;color:var(--teal-500)}
-.trg-note b{color:var(--text-secondary);font-weight:600}
+.trg-note{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;font-size:12px;line-height:1.45;
+  color:var(--amber-300);background:rgba(239,193,120,.08);border:1px solid rgba(239,193,120,.28);
+  border-radius:11px;padding:10px 13px;margin-bottom:12px}
+.trg-note svg{flex:none;color:var(--amber-400)}
+.trg-note b{color:var(--amber-200);font-weight:600}
+.trg-demo .trg-note-tag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 8px;border-radius:5px;flex:none;
+  background:rgba(239,193,120,.16);color:var(--amber-300)}
 
 .trg-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
 .trg-demo button{font-family:inherit;cursor:pointer;border:none;font-weight:600}
