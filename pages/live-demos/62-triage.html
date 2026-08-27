@@ -1101,12 +1101,16 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 <!--
   SILSTONE.AI - PAGE: LIVE-DEMOS - BLOCK 62 - FAX TRIAGE DEMO
   Hostinger: Embed code block, FULL WIDTH. Second demo in the list.
+  Fax is the channel every one of these documents arrives on, so the refill
+  protocol check and the prior-auth appeal packet live HERE as work surfaces
+  on the fax, not as separate demos (block 63 was retired into this one).
   "Simulate a busy morning" runs a client-side simulation on SYNTHETIC faxes.
   "Paste your own fax" calls the SAME Cloudflare Worker backend as demo 1
   (Claude via /api/triage), with a client-side heuristic fallback if the API
-  is unreachable. The shared "notify / next demo" signup lives in block 63 so
-  it stays after every demo. Markup + trailing <style>/<script> live OUTSIDE
-  the SIL:GLOBAL markers; run build-embeds.py to bake the system in.
+  is unreachable. Carries the shared "notify / next demo" signup, which must
+  always sit in the LAST block on the page - move it if a block 63 returns.
+  Markup + trailing <style>/<script> live OUTSIDE the SIL:GLOBAL markers;
+  run build-embeds.py to bake the system in.
 -->
 <div class="sil-root">
 
@@ -1115,9 +1119,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container sil-center">
       <span class="sil-eyebrow sil-reveal"><i class="dot"></i>Live demo&nbsp;&middot;&nbsp;Fax Triage</span>
-      <h1 class="sil-display-l sil-mt-4 sil-reveal" style="--d:70ms">Turn the fax pile into a <span class="sil-gt">ranked worklist.</span></h1>
+      <h1 class="sil-display-l sil-mt-4 sil-reveal" style="--d:70ms">Turn the fax pile into <span class="sil-gt">finished work.</span></h1>
       <p class="sil-body-l sil-mt-4 sil-hero-sub sil-reveal" style="--d:140ms">
-        A clinic takes in 50&ndash;200 faxes a day &mdash; referrals, results, prior-auth replies, refills &mdash; all mixed together, oldest first. Press the button and watch the agent read each one and re-stack the pile by clinical urgency, so the STAT result never waits behind the refills.
+        A clinic takes in 50&ndash;200 faxes a day &mdash; referrals, results, prior-auth replies, refills &mdash; all mixed together, oldest first. Press the button and watch the agent read each one, re-stack the pile by clinical urgency, and carry each document to the point where one human click finishes it: refills checked against your protocol and cleared as a batch, denials assembled into an appeal against the deadline.
       </p>
       <div class="sil-hero-chips sil-mt-4 sil-reveal" style="--d:210ms">
         <span class="sil-chip"><i class="dot"></i>Built on Claude</span>
@@ -1228,6 +1232,34 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     </div>
   </section>
 
+  <!-- ==================== NOTIFY ==================== -->
+  <section class="sil-section has-top">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container">
+      <div class="sil-card is-hover is-spot sil-reveal">
+        <div class="sil-soon">
+          <div>
+            <span class="sil-tag">More on the way</span>
+            <h2 class="sil-display-s sil-mt-4">New demos land often.</h2>
+            <p class="sil-body-m sil-mt-3 sil-measure">
+              We're building a demo for every piece of admin practices dread.
+              Leave an email and we'll tell you the moment the next one goes live.
+            </p>
+          </div>
+          <form class="sil-notify" id="silNotify" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
+            <input type="hidden" name="subject" value="New Live Demo notify signup">
+            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo page">
+            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+            <label class="sil-sr" for="silNotifyEmail">Email address</label>
+            <input id="silNotifyEmail" name="email" type="email" required placeholder="you@practice.com" autocomplete="email">
+            <button type="submit" class="sil-btn sil-btn-primary is-auto">Notify me</button>
+            <p class="sil-notify-msg" id="silNotifyMsg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <style>
@@ -1284,7 +1316,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 @keyframes trgFlash{0%,100%{color:var(--coral-500)}50%{color:#fff}}
 
 .trg-panel{display:grid;grid-template-columns:1fr 440px;gap:16px}
-.trg-queuewrap,.trg-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:700px;display:flex;flex-direction:column;overflow:hidden}
+.trg-queuewrap,.trg-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:748px;display:flex;flex-direction:column;overflow:hidden}
 .trg-qhead{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
 .trg-qtitle{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary)}
 .trg-prog{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
@@ -1427,9 +1459,40 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .trg-row.is-clearing{animation:trgOut .3s ease forwards;pointer-events:none}
 @keyframes trgOut{to{opacity:0;transform:translateX(30px)}}
 
+/* ---- work surfaces: the refill protocol check + the appeal packet ---- */
+.trg-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.trg-checks li{display:grid;grid-template-columns:17px 1fr;gap:10px;align-items:start}
+.trg-checks .ci{width:17px;height:17px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;flex:none}
+.trg-checks .ci svg{width:10px;height:10px}
+.trg-checks li.ok .ci{background:rgba(94,224,168,.15);color:var(--mint-400)}
+.trg-checks li.bad .ci,.trg-checks li.blocked .ci{background:var(--p1w);color:var(--coral-500)}
+.trg-checks .cl{display:block;font-size:13.5px;font-weight:500;color:var(--text-primary);line-height:1.4}
+.trg-checks li.bad .cl,.trg-checks li.blocked .cl{color:var(--coral-500)}
+.trg-checks .cd{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.35;color:var(--text-quaternary);margin-top:2px}
+.trg-verdict{margin-top:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--mint-400);border-radius:0 11px 11px 0;padding:12px 14px}
+.trg-verdict.warn{border-left-color:var(--amber-400)}
+.trg-verdict.stop{border-left-color:var(--coral-500)}
+.trg-verdict .vk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
+.trg-verdict .vv{font-size:13px;color:var(--text-primary);line-height:1.5}
+.trg-verdict .sla{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary)}
+.trg-dsechead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.trg-dsechead .trg-dsec{margin:0}
+.trg-clock{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:4px 9px;border-radius:6px;background:var(--p2w);color:var(--amber-400)}
+.trg-letter{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:15px 16px;font-size:12px;line-height:1.65;color:var(--text-secondary);white-space:pre-wrap}
+.trg-letter .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:12.5px;color:var(--text-primary);margin-bottom:2px}
+.trg-letter .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
+
+/* the one-click batch, inside the Signature queue */
+.trg-batchbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--bg-surface-raised);border:1px solid rgba(94,224,168,.3);border-radius:12px;padding:11px 13px;margin-bottom:8px}
+.trg-demo .trg-bstxt{flex:1;min-width:150px;font-size:12.5px;color:var(--text-secondary);line-height:1.45}
+.trg-demo .trg-bstxt b{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.trg-demo .trg-btn-batch{flex:none;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--radius-pill);border:1px solid var(--mint-400);background:rgba(94,224,168,.14);color:var(--mint-400);font-family:var(--font-body);font-weight:600;font-size:12.5px;cursor:pointer;transition:background .2s}
+.trg-demo .trg-btn-batch:hover:not(:disabled){background:rgba(94,224,168,.28)}
+.trg-demo .trg-btn-batch:disabled{opacity:.45;cursor:default}
+
 @media (max-width:1040px){
   .trg-panel{grid-template-columns:1fr 372px}
-  .trg-queuewrap,.trg-detail{height:640px}
+  .trg-queuewrap,.trg-detail{height:672px}
 }
 @media (max-width:820px){
   .trg-stats{grid-template-columns:repeat(2,1fr)}
@@ -1439,6 +1502,15 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   .trg-queuewrap{height:auto;max-height:66vh} .trg-detail{height:auto}
 }
 @media (prefers-reduced-motion:reduce){.trg-demo *{animation-duration:.01ms!important}}
+
+/* notify (shared signup — lives with the last demo on the page) */
+.sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
+.sil-notify{display:grid;grid-template-columns:1fr auto;gap:var(--space-3);align-items:start}
+.sil-notify .sil-btn{white-space:nowrap}
+.sil-notify-msg{grid-column:1/-1;margin:0;font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
+.sil-notify-msg.is-warn{color:var(--coral-500)}
+@media(max-width:900px){.sil-soon{grid-template-columns:1fr;gap:var(--space-6)}}
+@media(max-width:520px){.sil-notify{grid-template-columns:1fr}.sil-notify .sil-btn{width:100%}}
 </style>
 
 <script>
@@ -1497,9 +1569,21 @@ a.sil-byline-author:hover { color: var(--teal-300); }
      body:"DISCHARGE SUMMARY\nPatient: {{PT}}   DOB: {{DOB}}\nAdmit dx: Acute CHF exacerbation\nDisposition: Home today\n\nFOLLOW-UP: PCP visit {{MK}}.\nMedication changes x3 — please reconcile."},
     {cat:"P2",type:"Prior-auth DENIAL",sender:"BlueCross Payer Svcs",conf:.95,reason:"MRI denied — appeal window 5 days",mk:"5 business days",
      fields:[["Service","MRI lumbar spine"],["Decision","Denied"],["Reason","Medical necessity"],["Appeal by","5 business days"]],
+     work:{kind:"appeal",deadline:"5 business days left to file",policy:"BlueCross policy MSK-14",
+       checks:[["ok","Six weeks of conservative therapy documented","PT notes 04 Jan – 18 Feb 2026"],
+               ["ok","Neurological deficit documented","progressive L5 radiculopathy, 21 Feb 2026"],
+               ["ok","Plain films obtained first","lumbar X-ray 11 Jan 2026"]],
+       verdict:"The payer's own criteria are all met and evidenced in the chart. The packet is drafted, waiting on a signature.",
+       letter:"RE: Appeal of adverse determination — MRI lumbar spine (72148)\nMember: {{PT}}   ID: {{MRN}}\n\nThis request meets all three criteria in BlueCross policy MSK-14:\n\n1. Conservative therapy — physical therapy 04 Jan to 18 Feb 2026, twelve sessions, documented in the chart with no sustained improvement.\n2. Neurological deficit — progressive L5 radiculopathy on examination 21 Feb 2026.\n3. Prior imaging — lumbar plain films obtained 11 Jan 2026.\n\nThe determination cites medical necessity not established. The evidence above was in the record at the time of the original request. We ask that the determination be overturned.\n\nEnclosures: PT notes, examination note 21 Feb 2026, radiology report 11 Jan 2026."},
      body:"PRIOR AUTHORIZATION DETERMINATION\nMember: {{PT}}   ID: {{MRN}}\nRequested: MRI lumbar spine\n\nDETERMINATION: DENIED — medical necessity not established.\nYou may appeal within {{MK}}."},
     {cat:"P2",type:"Prior-auth — info request",sender:"Aetna Auth Unit",conf:.9,reason:"RFI: needs recent notes to proceed",mk:"Recent progress notes required.",
      fields:[["Service","Specialty infusion"],["Status","Pended — RFI"],["Needs","Recent progress notes"],["Due","3 days"]],
+     work:{kind:"appeal",deadline:"3 days before the request closes",policy:"Aetna pended review",
+       checks:[["ok","Progress notes located in the chart","office visits 12 Jan and 09 Feb 2026"],
+               ["ok","Diagnosis code matches the authorisation request",""],
+               ["bad","The payer has not received them","pended 3 days — nothing sent back yet"]],
+       verdict:"One missing item is holding the authorisation. The notes are assembled and ready to send back.",
+       letter:"RE: Response to request for information — specialty infusion\nMember: {{PT}}\n\nEnclosed are the progress notes requested to continue review:\n\n· Office visit 12 Jan 2026 — assessment and plan\n· Office visit 09 Feb 2026 — response to therapy\n\nThe diagnosis on both notes matches the code on the original authorisation request. Please resume review."},
      body:"AUTHORIZATION — REQUEST FOR INFORMATION\nMember: {{PT}}\nRequest pended. To continue review, submit recent progress notes.\n{{MK}}"},
     {cat:"P2",type:"Urgent referral",sender:"Northside Family Med",conf:.92,reason:"Cardiology — new exertional chest pain",mk:"new exertional chest pain",
      fields:[["Refer to","Cardiology"],["Reason","Exertional chest pain"],["Urgency","Urgent"],["From","Dr. Walsh"]],
@@ -1521,13 +1605,48 @@ a.sil-byline-author:hover { color: var(--teal-300); }
      body:"RADIOLOGY REPORT\nPatient: {{PT}}   Exam: Chest X-ray, PA/LAT\nIMPRESSION: No acute cardiopulmonary findings.\nRead: Dr. Adeyemi"},
     {cat:"P4",type:"Prescription refill",sender:"Walgreens #4821",conf:.96,reason:"Refill authorization — metformin 500mg",mk:"",
      fields:[["Drug","Metformin 500mg"],["Qty","90 / refills 3"],["Pharmacy","Walgreens #4821"],["Type","Refill auth"]],
+     work:{kind:"refill",clean:true,drug:"Metformin 500 mg",pharmacy:"Walgreens #4821",
+       checks:[["ok","Office visit 4 months ago","protocol: within 12 months"],
+               ["ok","A1c 6.9% on 12 Mar 2026","protocol: within 6 months, at goal"],
+               ["ok","2 refills left on the original Rx",""],
+               ["ok","Not a controlled substance",""]],
+       verdict:"Protocol clean. Every rule the practice set for metformin is satisfied, with the evidence attached."},
      body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Metformin 500mg, #90, refills x3\nPharmacy: Walgreens #4821. Please approve/deny."},
     {cat:"P4",type:"Prescription refill",sender:"CVS Pharmacy #337",conf:.96,reason:"Refill authorization — lisinopril 10mg",mk:"",
      fields:[["Drug","Lisinopril 10mg"],["Qty","30 / refills 5"],["Pharmacy","CVS #337"],["Type","Refill auth"]],
+     work:{kind:"refill",clean:true,drug:"Lisinopril 10 mg",pharmacy:"CVS #337",
+       checks:[["ok","Office visit 3 months ago","protocol: within 12 months"],
+               ["ok","Potassium 4.1 · creatinine 0.9 on 02 Feb 2026","protocol: within 12 months"],
+               ["ok","5 refills left on the original Rx",""],
+               ["ok","Not a controlled substance",""]],
+       verdict:"Protocol clean. Renal function checked inside the window the protocol requires for an ACE inhibitor."},
      body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Lisinopril 10mg, #30, refills x5\nPharmacy: CVS #337."},
     {cat:"P4",type:"Prescription refill",sender:"Rite Aid #1102",conf:.95,reason:"Refill authorization — atorvastatin 20mg",mk:"",
      fields:[["Drug","Atorvastatin 20mg"],["Qty","90 / refills 3"],["Pharmacy","Rite Aid #1102"],["Type","Refill auth"]],
+     work:{kind:"refill",clean:true,drug:"Atorvastatin 20 mg",pharmacy:"Rite Aid #1102",
+       checks:[["ok","Office visit 6 months ago","protocol: within 12 months"],
+               ["ok","Lipid panel 08 Jan 2026","protocol: within 12 months"],
+               ["ok","3 refills left on the original Rx",""],
+               ["ok","Not a controlled substance",""]],
+       verdict:"Protocol clean. Statin continuation with a current lipid panel on file."},
      body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Atorvastatin 20mg, #90, refills x3\nPharmacy: Rite Aid #1102."},
+    {cat:"P4",type:"Prescription refill",sender:"Kroger Pharmacy",conf:.92,reason:"Refill — metformin 1000mg, A1c overdue",mk:"",
+     fields:[["Drug","Metformin 1000mg"],["Qty","90 / refills 0"],["Pharmacy","Kroger Pharmacy"],["Held","Lab overdue"]],
+     work:{kind:"refill",clean:false,hold:"Lab overdue",drug:"Metformin 1000 mg",pharmacy:"Kroger Pharmacy",
+       checks:[["ok","Office visit 8 months ago","protocol: within 12 months"],
+               ["bad","No A1c since 04 Aug 2024","protocol: within 6 months — 19 months overdue"],
+               ["ok","Refills remain on the original Rx",""],
+               ["ok","Not a controlled substance",""]],
+       verdict:"Held for a prescriber. The agent will not authorise a diabetes medication on a 19-month-old A1c — that is a clinical call, not a rule."},
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Metformin 1000mg, #90\nPharmacy: Kroger Pharmacy. Please approve/deny."},
+    {cat:"P4",type:"Prescription refill",sender:"Costco Pharmacy #118",conf:.99,reason:"Refill — alprazolam, controlled substance",mk:"",
+     fields:[["Drug","Alprazolam 0.5mg"],["Qty","30 / refills 0"],["Pharmacy","Costco #118"],["Held","Schedule IV"]],
+     work:{kind:"refill",clean:false,controlled:true,hold:"Schedule IV",drug:"Alprazolam 0.5 mg",pharmacy:"Costco #118",
+       checks:[["blocked","Schedule IV controlled substance","protocol: never auto-authorised"],
+               ["ok","Office visit 2 months ago",""],
+               ["ok","Requesting pharmacy verified",""]],
+       verdict:"Controlled substance. The agent stops here every time, whatever the rest of the chart says — this needs a prescriber and the usual EPCS path."},
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Alprazolam 0.5mg, #30\nPharmacy: Costco #118. Please approve/deny."},
     {cat:"P4",type:"Insurance / EOB",sender:"UnitedHealthcare",conf:.9,reason:"Explanation of benefits — for filing",mk:"",
      fields:[["Doc","EOB statement"],["Action","File to billing"],["Amount","see statement"],["Type","Not a bill"]],
      body:"EXPLANATION OF BENEFITS\nMember: {{PT}}   ID: {{MRN}}\nThis is not a bill. For your records / billing reconciliation."},
@@ -1679,8 +1798,68 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     if(!pg) return;
     n.textContent = pg.classList.toggle("clip") ? "Show the full page" : "Hide the full page";
   }
+  var XMARK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4l6 6M10 4l-6 6"/></svg>';
+  var LOCKI='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6.3" width="8" height="5.4" rx="1.4"/><path d="M5.1 6.3V4.7a1.9 1.9 0 0 1 3.8 0v1.6"/></svg>';
+
+  /* The work behind the fax. A refill carries the practice protocol checked
+     rule by rule; a prior-auth reply carries the payer's own criteria matched
+     against the chart, plus the drafted letter. Same fax pipeline either way. */
+  function workHtml(f,withLetter,lead){
+    var w=f&&f.work; if(!w) return "";
+    var isRefill=(w.kind==="refill");
+    var checks=w.checks.map(function(c){
+      var ico = c[0]==="ok"?CHECK:(c[0]==="blocked"?LOCKI:XMARK);
+      return '<li class="'+c[0]+'"><span class="ci">'+ico+'</span>'+
+        '<span><span class="cl">'+esc(c[1])+'</span>'+
+        (c[2]?'<span class="cd">'+esc(c[2])+'</span>':'')+'</span></li>';
+    }).join("");
+    var anyBad=false; w.checks.forEach(function(c){ if(c[0]!=="ok") anyBad=true; });
+    var vc = isRefill ? (w.controlled?" stop":(w.clean?"":" warn")) : (anyBad?" warn":"");
+    var vk = isRefill ? (w.controlled?"Verdict \u00b7 controlled substance"
+                                     :(w.clean?"Verdict \u00b7 safe to authorise":"Verdict \u00b7 held for a prescriber"))
+                      : ("Verdict \u00b7 "+w.policy);
+    var clock = (!isRefill && w.deadline)
+      ? '<div class="trg-clock"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.3"/><path d="M7 4v3.2l2 1.2"/></svg>'+esc(w.deadline)+'</div>'
+      : "";
+    var letter = (withLetter && w.letter)
+      ? '<div class="trg-dsec" style="margin-top:20px">The drafted letter</div>'+
+        '<div class="trg-letter"><div class="lh">Letter of medical necessity \u2014 draft</div>'+
+        '<div class="lh-sub">assembled by the agent \u00b7 unsigned</div>'+
+        esc(w.letter).replace(/\n/g,"<br>")+'</div>'
+      : "";
+    var sla = lead && f.sla
+      ? '<div class="sla"><span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla)+'</div>'
+      : "";
+    return '<div class="trg-dsechead" style="margin-top:'+(lead?"0":"20px")+'">'+
+        '<span class="trg-dsec">'+(isRefill?"Protocol check":"Appeal readiness")+'</span>'+
+        clock+'</div>'+
+      '<ul class="trg-checks">'+checks+'</ul>'+
+      '<div class="trg-verdict'+vc+'"><div class="vk">'+vk+'</div>'+
+        '<div class="vv">'+esc(w.verdict)+'</div>'+sla+'</div>'+
+      letter;
+  }
+
+  /* A refill's options depend on what the protocol check found - that is the
+     whole point of checking it. Everything else uses its lane's defaults. */
+  function actsFor(f){
+    var w=f&&f.work;
+    if(w && w.kind==="refill"){
+      if(w.controlled) return {note:"Controlled substances are the one lane with no automatic path, by design. The agent files the paperwork and gets out of the way.",acts:[
+        {p:1,l:"Route to the prescriber \u00b7 EPCS",h:"\u2192 Escalations \u00b7 never automated",d:"Routed to the prescriber for EPCS",b:"task"},
+        {l:"File the request to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill request filed to chart",b:"filed"}]};
+      if(!w.clean) return {note:"The agent did the checking and named what is missing. The judgement stays with the prescriber.",acts:[
+        {p:1,l:"Queue for the prescriber \u2014 "+w.hold,h:"\u2192 Signature queue \u00b7 held, evidence attached",d:"Held for the prescriber \u2014 "+w.hold,b:"sign"},
+        {l:"Ask {pharmacy} for the missing item",h:"\u2192 Outbound \u00b7 fax to {pharmacy}",d:"Query faxed to {pharmacy}",b:"out"},
+        {l:"File the request to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill request filed to chart",b:"filed"}]};
+      return {note:"Protocol-clean refills pile up in the signature queue and clear together \u2014 one click for the batch, not one click each.",acts:[
+        {p:1,l:"Queue for the prescriber \u2014 protocol clean",h:"\u2192 Signature queue \u00b7 clears in the batch",d:"Queued for signature \u2014 protocol clean",b:"sign"},
+        {l:"Hold \u2014 book a visit instead",h:"\u2192 Outbound \u00b7 to the patient",d:"Held \u2014 visit offered to the patient",b:"out"},
+        {l:"Log the refill to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill logged to chart",b:"filed"}]};
+    }
+    return laneOf(f);
+  }
   function actsHtml(f){
-    var lane=laneOf(f), done=f.acts||{};
+    var lane=actsFor(f), done=f.acts||{};
     var rows=lane.acts.map(function(a,i){
       var isDone=!!done[i];
       return '<button type="button" class="trg-act'+((a.p&&!isDone)?" is-primary":"")+(isDone?" is-done":"")+
@@ -1694,7 +1873,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       '<p class="trg-actnote">'+esc(lane.note)+'</p>';
   }
 
-  function allDone(f){ var a=laneOf(f).acts, d=f.acts||{};
+  function allDone(f){ var a=actsFor(f).acts, d=f.acts||{};
     for(var i=0;i<a.length;i++){ if(!d[i]) return false; } return true; }
   function markRowDone(f){
     var li=nodes[f.id]; if(!li) return;
@@ -1761,7 +1940,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   function showLedger(){ var el=$("trgLedger"); if(el&&el.hasAttribute("hidden")) el.removeAttribute("hidden"); renderLedger(); }
   function doAction(id,i,srcRect){
     var f=data[id]; if(!f||f.reading) return;
-    var a=laneOf(f).acts[i]; if(!a) return;
+    var a=actsFor(f).acts[i]; if(!a) return;
     f.acts=f.acts||{}; if(f.acts[i]) return;
     f.acts[i]=true;
     if(allDone(f)) markRowDone(f);
@@ -1807,7 +1986,16 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         '<p>Approve an action on a fax and it lands in this box.</p></div>';
       return;
     }
-    el.innerHTML=list.map(function(x){
+    var batch="";
+    if(b==="sign"){
+      var cleanN=0;
+      list.forEach(function(x){ if(!x.done && x.fax.work && x.fax.work.kind==="refill" && x.fax.work.clean) cleanN++; });
+      if(cleanN>1) batch='<div class="trg-batchbar"><span class="trg-bstxt"><b>'+cleanN+
+        '</b> protocol-clean refills are waiting. Every rule checked, evidence attached.</span>'+
+        '<button type="button" class="trg-btn-batch" data-batch="1">Approve all '+cleanN+
+        ' <span class="arw">&rarr;</span></button></div>';
+    }
+    el.innerHTML=batch+list.map(function(x){
       return '<button type="button" class="trg-task'+(x.done?" is-done":"")+(selTask===x.tid?" sel":"")+
         '" data-t="'+x.tid+'">'+
         '<span class="tdot" style="background:'+d.c+'"></span>'+
@@ -1823,11 +2011,16 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     var f=x.fax, d=DEST[x.b];
     var fieldsHtml=(f.fields||[]).map(function(k){
       return '<li><span class="k">'+esc(k[0])+'</span><span class="val">'+esc(k[1])+'</span></li>'; }).join("");
-    var cta="";
+    var w=f.work, cta="";
+    var signLabel="Sign &amp; release", signHint="\u2192 Outbound \u00b7 delivered on your signature";
+    if(w && w.kind==="appeal"){ signLabel="Sign &amp; submit the appeal";
+      signHint="\u2192 Outbound \u00b7 filed with "+esc(f.sender); }
+    else if(w && w.kind==="refill"){ signLabel="Approve &amp; send to "+esc(w.pharmacy);
+      signHint="\u2192 Outbound \u00b7 authorised on your signature"; }
     if(!x.done && x.b==="sign")
       cta='<button type="button" class="trg-act is-primary" data-do="'+x.tid+'" style="margin-top:14px">'+
-          '<span class="aic"></span><span><span class="al">Sign &amp; release</span>'+
-          '<span class="ak">\u2192 Outbound \u00b7 delivered on your signature</span></span></button>';
+          '<span class="aic"></span><span><span class="al">'+signLabel+'</span>'+
+          '<span class="ak">'+signHint+'</span></span></button>';
     else if(!x.done && x.b==="task")
       cta='<button type="button" class="trg-act is-primary" data-do="'+x.tid+'" style="margin-top:14px">'+
           '<span class="aic"></span><span><span class="al">Acknowledge</span>'+
@@ -1843,11 +2036,32 @@ a.sil-byline-author:hover { color: var(--teal-300); }
           '<div class="wv">'+esc(x.title)+'</div>'+
           '<div class="sla">'+esc(x.hint)+'</div></div>'+
         cta+
+        workHtml(f,true)+
         (fieldsHtml?'<div class="trg-dsec" style="margin-top:20px">What the agent extracted</div>'+
           '<ul class="trg-fields" style="margin:0;padding:0;border-top:0">'+fieldsHtml+'</ul>':'')+
         '<div class="trg-dsec" style="margin-top:20px">The fax it came from</div>'+
         pageHtml(f.sender,f.recv,esc(f.body||"").replace(/\n/g,"<br>"),f.body)+
       '</div>';
+  }
+  // one signature clears every protocol-clean refill in the queue
+  function batchSign(){
+    var list=(inbox.sign||[]).filter(function(x){
+      return !x.done && x.fax.work && x.fax.work.kind==="refill" && x.fax.work.clean; });
+    if(!list.length) return;
+    var btn=$("trgBoxView").querySelector("[data-batch]");
+    if(btn) btn.disabled=true;
+    var rect=btn?btn.getBoundingClientRect():null, i=0;
+    (function step(){
+      if(i>=list.length){ if(openBox) renderBox(openBox); if(selTask) selectTask(selTask); return; }
+      var x=list[i++];
+      x.done=true;
+      flyFrom(rect,"out",{tid:"t"+(seqT++),b:"out",label:x.label,
+        title:"Authorised in the batch \u2014 "+(x.fax.work.drug||x.label),
+        hint:"\u2192 Outbound \u00b7 sent to "+x.fax.work.pharmacy,
+        fax:x.fax,at:nowStamp(),done:true});
+      renderLedger();
+      setTimeout(step, reduce?8:90);
+    })();
   }
   function completeTask(tid){
     var x=findTask(tid); if(!x||x.done) return;
@@ -1874,6 +2088,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   }
   function onTaskClick(ev){
     var n=ev.target;
+    while(n&&n!==$("trgBoxView")&&!(n.getAttribute&&n.getAttribute("data-batch"))) n=n.parentNode;
+    if(n&&n.getAttribute&&n.getAttribute("data-batch")){ batchSign(); return; }
+    n=ev.target;
     while(n&&n!==$("trgBoxView")&&!(n.getAttribute&&n.getAttribute("data-t"))) n=n.parentNode;
     if(!n||!n.getAttribute||!n.getAttribute("data-t")) return;
     selectTask(n.getAttribute("data-t"));
@@ -1908,7 +2125,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       var rect=li?li.getBoundingClientRect():null;
       if(f && f.cat!=="FILTER" && !allDone(f)){
         f.acts=f.acts||{};
-        laneOf(f).acts.forEach(function(a,k){
+        actsFor(f).acts.forEach(function(a,k){
           if(f.acts[k]) return;
           f.acts[k]=true;
           (function(bucket,item,delay){ setTimeout(function(){ flyFrom(rect,bucket,item); }, delay); })(a.b, mkItem(f,a), k*135);
@@ -1951,8 +2168,12 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     function inj(s){return s.replace(/{{PT}}/g,pt).replace(/{{DOB}}/g,d).replace(/{{MRN}}/g,m).replace(/{{MK}}/g,mk);}
     var fields=t.fields.map(function(f){return [f[0],inj(f[1])];});
     if(t.cat!=="FILTER"){ fields.unshift(["DOB",d]); fields.unshift(["Patient",pt]); }
+    var work=null;
+    if(t.work){ work={}; for(var k in t.work) if(t.work.hasOwnProperty(k)) work[k]=t.work[k];
+      if(work.letter) work.letter=inj(work.letter); }
     return {id:"fx"+(seq++),cat:t.cat,score:BASE[t.cat]+Math.random()*3,type:t.type,sender:t.sender,conf:t.conf,
-      reason:t.reason,patient:(t.cat==="FILTER"?"—":pt),body:inj(t.body),mk:mk,fields:fields,sla:SLA[t.cat],recv:recvTime()};
+      reason:t.reason,patient:(t.cat==="FILTER"?"—":pt),body:inj(t.body),mk:mk,fields:fields,sla:SLA[t.cat],
+      work:work,recv:recvTime()};
   }
 
   /* ---- paste: real backend (Cloudflare Workers AI via the shared Worker) + local fallback ---- */
@@ -2138,10 +2359,11 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         '<span class="trg-conf">'+Math.round(f.conf*100)+'% conf.</span></div>'+
         '<div class="trg-dfrom">From '+esc(f.sender)+' · received '+f.recv+youTag+'</div></div>'+
       '<div class="trg-dbody">'+
-        '<div class="trg-why" style="margin-top:0"><div class="wk">Why this priority</div><div class="wv">'+esc(f.reason)+'</div>'+
-          '<div class="sla'+(f.cleared?" done":"")+'">'+(f.cleared
-            ? '<span class="trg-dot" style="background:var(--mint-400)"></span>SLA met \u00b7 cleared'
-            : '<span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla))+'</div></div>'+
+        (f.work ? workHtml(f,false,true)
+                : '<div class="trg-why" style="margin-top:0"><div class="wk">Why this priority</div><div class="wv">'+esc(f.reason)+'</div>'+
+                  '<div class="sla'+(f.cleared?" done":"")+'">'+(f.cleared
+                    ? '<span class="trg-dot" style="background:var(--mint-400)"></span>SLA met \u00b7 cleared'
+                    : '<span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla))+'</div></div>')+
         actsHtml(f)+
         '<div class="trg-dsec" style="margin-top:20px">What the agent extracted</div>'+
         '<ul class="trg-fields" style="margin:0;padding:0;border-top:0">'+fieldsHtml+'</ul>'+
@@ -2232,5 +2454,28 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
   else bind();
+})();
+</script>
+
+<script>
+(function(){
+var f=document.getElementById('silNotify');
+if(!f||f.__init)return;f.__init=true;
+var msg=document.getElementById('silNotifyMsg');
+var btn=f.querySelector('button[type=submit]');
+f.addEventListener('submit',function(e){
+e.preventDefault();
+var email=f.querySelector('input[type=email]');
+if(!email.value||email.validity.typeMismatch){msg.textContent='Please enter a valid email address.';msg.className='sil-notify-msg is-warn';return;}
+msg.textContent='Sending…';msg.className='sil-notify-msg';
+if(btn)btn.disabled=true;
+fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+.then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
+.then(function(res){
+if(res.ok&&res.data&&res.data.success){f.reset();msg.textContent="You're on the list. We'll email you the moment the next demo lands.";msg.className='sil-notify-msg';}
+else{msg.textContent=(res.data&&res.data.message)?res.data.message:'Something went wrong. Please try again.';msg.className='sil-notify-msg is-warn';}
+}).catch(function(){msg.textContent='Network error. Please try again.';msg.className='sil-notify-msg is-warn';})
+.then(function(){if(btn)btn.disabled=false;});
+});
 })();
 </script>

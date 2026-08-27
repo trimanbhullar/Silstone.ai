@@ -93,7 +93,7 @@ PAGES_META = [
     {
         "slug": "live-demos", "dir": "live-demos",
         "title": "Live Demos | Try Healthcare AI Agents | Silstone.AI",
-        "desc": "Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, triage a pile of inbound faxes by clinical urgency, and clear a morning of prescription refills in one click. Built on Claude.",
+        "desc": "Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and turn a pile of inbound faxes into finished work — refills checked against protocol and cleared in one click, denials assembled into an appeal. Built on Claude.",
         "priority": "0.8",
     },
     {
