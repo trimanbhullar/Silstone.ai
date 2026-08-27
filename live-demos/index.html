@@ -1239,11 +1239,22 @@ if(document.readyState==='loading'){
           <div class="trg-stat"><div class="v trg-c-teal" id="trgVTime">0h</div><div class="l">Staff time saved</div></div>
         </div>
 
+        <!-- actions ledger -->
+        <div class="trg-board" id="trgLedger" hidden>
+          <div class="trg-bhead">
+            <span class="trg-ldlbl">Where each action goes</span>
+            <span class="trg-btotal" id="trgBTotal">nothing actioned yet</span>
+            <button type="button" class="trg-btn-clear" id="trgClear">Approve all &amp; clear the pile <span class="arw">&rarr;</span></button>
+          </div>
+          <div class="trg-dests" id="trgDests"></div>
+        </div>
+
         <!-- panel: queue + detail -->
         <div class="trg-panel">
           <div class="trg-queuewrap">
             <div class="trg-qhead">
-              <span class="trg-qtitle">Priority queue</span>
+              <button type="button" class="trg-back" id="trgBack" hidden>&larr; back</button>
+              <span class="trg-qtitle" id="trgQTitle">Priority queue</span>
               <span class="trg-prog" id="trgProg">idle</span>
             </div>
             <ul class="trg-queue" id="trgQueue">
@@ -1255,6 +1266,7 @@ if(document.readyState==='loading'){
                 <p>Hit &ldquo;Simulate a busy morning&rdquo; &mdash; or paste your own fax &mdash; to watch the pipeline work.</p>
               </div>
             </ul>
+            <div class="trg-boxview" id="trgBoxView" hidden></div>
           </div>
 
           <aside class="trg-detail" id="trgDetail">
@@ -1351,8 +1363,8 @@ if(document.readyState==='loading'){
 .trg-stat.trg-flash .v{animation:trgFlash 1s ease}
 @keyframes trgFlash{0%,100%{color:var(--coral-500)}50%{color:#fff}}
 
-.trg-panel{display:grid;grid-template-columns:1fr 376px;gap:16px}
-.trg-queuewrap,.trg-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:580px;display:flex;flex-direction:column;overflow:hidden}
+.trg-panel{display:grid;grid-template-columns:1fr 440px;gap:16px}
+.trg-queuewrap,.trg-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:700px;display:flex;flex-direction:column;overflow:hidden}
 .trg-qhead{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
 .trg-qtitle{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary)}
 .trg-prog{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
@@ -1404,6 +1416,9 @@ if(document.readyState==='loading'){
 .trg-page{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:15px 16px;font-size:12px;line-height:1.6;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word}
 .trg-page .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--text-primary);margin-bottom:2px}
 .trg-page .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
+.trg-page.clip{max-height:184px;overflow:hidden;position:relative}
+.trg-page.clip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:66px;background:linear-gradient(to bottom,transparent,var(--bg-surface-3))}
+.trg-demo .trg-pagemore{display:block;margin:8px 0 0;padding:6px 0;background:none;border:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;color:var(--violet-300);cursor:pointer}
 .trg-mk{background:var(--p1w);color:var(--coral-500);padding:1px 5px;border-radius:4px;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px}
 .trg-fields{list-style:none;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--border-subtle);display:grid;gap:11px}
 .trg-fields li{display:grid;grid-template-columns:108px 1fr;gap:12px;align-items:baseline}
@@ -1414,8 +1429,92 @@ if(document.readyState==='loading'){
 .trg-why .wv{font-size:13px;color:var(--text-primary)}
 .trg-why .sla{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary)}
 
+
+/* ---- action layer: what happens next + ledger ---- */
+.trg-board{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:13px 15px 15px;margin-bottom:16px;display:flex;flex-direction:column;gap:12px}
+.trg-board[hidden]{display:none}
+.trg-bhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.trg-demo .trg-ldlbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-quaternary);flex:none}
+.trg-demo .trg-btotal{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary);flex:1;min-width:120px}
+.trg-dests{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.trg-demo .trg-dest{background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:12px;padding:11px 12px;display:flex;flex-direction:column;gap:5px;min-width:0;transition:border-color .3s,transform .3s}
+.trg-demo .trg-dest .dtop{display:flex;align-items:center;gap:7px;min-width:0}
+.trg-demo .trg-dest .di{width:15px;height:15px;flex:none;display:flex}
+.trg-demo .trg-dest .di svg{width:15px;height:15px}
+.trg-demo .trg-dest .dl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trg-demo .trg-dest .dv{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.4rem;line-height:1;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.trg-demo .trg-dest .dlast{font-size:10.5px;line-height:1.35;color:var(--text-quaternary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:14px}
+.trg-dest.aim{border-color:currentColor;transform:translateY(-2px)}
+.trg-dest.hit{animation:trgHit .8s cubic-bezier(.3,.8,.3,1)}
+@keyframes trgHit{0%{border-color:var(--border-subtle)}14%{border-color:currentColor;transform:translateY(-3px)}100%{border-color:var(--border-subtle);transform:none}}
+.trg-fly{position:fixed;z-index:9999;pointer-events:none;font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:5px 9px;border-radius:7px;background:var(--bg-surface-3);border:1px solid var(--border-default);color:var(--text-primary);white-space:nowrap;max-width:190px;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.trg-fly.filed{border-color:var(--teal-500)} .trg-fly.sign{border-color:var(--violet-500)}
+.trg-fly.out{border-color:var(--mint-400)} .trg-fly.task{border-color:var(--coral-500)}
+
+/* boxes are openable */
+.trg-demo .trg-dest{cursor:pointer;text-align:left;font-family:var(--font-body);width:100%}
+.trg-demo .trg-dest:hover{border-color:currentColor}
+.trg-demo .trg-dest.open{border-color:currentColor;background:var(--bg-surface-3)}
+.trg-demo .trg-dest .dgo{margin-left:auto;flex:none;display:flex;opacity:0;transition:opacity .2s;color:currentColor}
+.trg-demo .trg-dest .dgo svg{width:13px;height:13px}
+.trg-demo .trg-dest:hover .dgo,.trg-demo .trg-dest.open .dgo{opacity:1}
+.trg-demo .trg-dest.pending .dlast{color:currentColor}
+.trg-demo .trg-dest .dv{display:inline-block;transform-origin:left center}
+.trg-demo .trg-dest .dv.pop{animation:trgPop .45s cubic-bezier(.3,1.4,.4,1)}
+@keyframes trgPop{0%{transform:scale(1)}35%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+/* inside a box */
+.trg-boxview{padding:8px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:6px}
+.trg-boxview[hidden]{display:none}
+.trg-demo .trg-qtitle{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trg-demo .trg-back{background:none;border:0;padding:0;flex:none;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--violet-300);cursor:pointer}
+.trg-demo .trg-back[hidden]{display:none}
+.trg-demo .trg-task{display:grid;grid-template-columns:9px 1fr 14px;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:11px;padding:11px 13px;cursor:pointer;font-family:var(--font-body);color:var(--text-primary)}
+.trg-demo .trg-task:hover{background:var(--bg-surface-raised);border-color:var(--border-subtle)}
+.trg-demo .trg-task.sel{background:var(--bg-surface-raised);border-color:var(--border-default)}
+.trg-demo .trg-task .tdot{width:9px;height:9px;border-radius:50%;flex:none}
+.trg-demo .trg-task .tt{display:block;font-size:13.5px;font-weight:600;line-height:1.4}
+.trg-demo .trg-task .ts{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trg-demo .trg-task .tgo{display:flex;color:var(--text-quaternary)}
+.trg-demo .trg-task .tgo svg{width:14px;height:14px}
+.trg-demo .trg-task.is-done .tt{font-weight:500;color:var(--text-secondary)}
+.trg-demo .trg-task.is-done .tgo{color:var(--mint-400)}
+.trg-demo .trg-boxempty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:36px 24px;color:var(--text-quaternary)}
+.trg-demo .trg-boxempty h3{margin:0 0 6px;color:var(--text-secondary);font-size:15px;font-weight:600}
+.trg-demo .trg-boxempty p{margin:0;font-size:13.5px;max-width:34ch}
+.trg-demo .trg-dbadge{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:4px 8px;border-radius:6px;border:1px solid currentColor}
+.trg-demo .trg-btn-clear{flex:none;display:inline-flex;align-items:center;gap:7px;padding:9px 17px;border-radius:var(--radius-pill);border:1px solid var(--violet-500);background:var(--vw);color:var(--violet-300);font-family:var(--font-body);font-weight:600;font-size:13px;cursor:pointer;transition:background .2s}
+.trg-demo .trg-btn-clear:hover:not(:disabled){background:rgba(110,86,207,.3)}
+.trg-demo .trg-btn-clear:disabled{opacity:.45;cursor:default}
+
+.trg-acts{display:flex;flex-direction:column;gap:8px}
+.trg-demo .trg-act{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;width:100%;text-align:left;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:11px;padding:11px 13px;cursor:pointer;font-family:var(--font-body);color:var(--text-primary);transition:border-color .18s,background .18s}
+.trg-demo .trg-act:hover:not(:disabled){border-color:var(--violet-500);background:var(--vw)}
+.trg-demo .trg-act.is-primary{border-color:rgba(110,86,207,.5);background:var(--vw)}
+.trg-demo .trg-act .aic{width:18px;height:18px;border-radius:6px;border:1.5px solid var(--border-default);display:flex;align-items:center;justify-content:center;margin-top:1px;color:var(--text-quaternary)}
+.trg-demo .trg-act .aic svg{width:11px;height:11px}
+.trg-demo .trg-act .al{display:block;font-size:13.5px;font-weight:600;line-height:1.4}
+.trg-demo .trg-act .ak{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-top:4px}
+.trg-demo .trg-act.is-done{cursor:default;border-color:rgba(94,224,168,.35);background:rgba(94,224,168,.07)}
+.trg-demo .trg-act.is-done .aic{border-color:var(--mint-400);color:var(--mint-400);background:rgba(94,224,168,.14)}
+.trg-demo .trg-act.is-done .al{font-weight:500;color:var(--text-secondary)}
+.trg-demo .trg-act.is-done .ak{color:var(--mint-400)}
+.trg-demo .trg-actnote{margin:11px 0 0;font-size:12px;line-height:1.55;color:var(--text-quaternary)}
+.trg-demo .trg-why .sla.done{color:var(--mint-400)}
+.trg-demo .trg-clearnote{margin:10px 0 0;font-size:12.5px;color:var(--violet-300)}
+.trg-row.is-done{opacity:.6}
+.trg-row.is-done .trg-band{background:var(--p4w);color:var(--p4)}
+.trg-row.is-clearing{animation:trgOut .3s ease forwards;pointer-events:none}
+@keyframes trgOut{to{opacity:0;transform:translateX(30px)}}
+
+@media (max-width:1040px){
+  .trg-panel{grid-template-columns:1fr 372px}
+  .trg-queuewrap,.trg-detail{height:640px}
+}
 @media (max-width:820px){
   .trg-stats{grid-template-columns:repeat(2,1fr)}
+  .trg-dests{grid-template-columns:repeat(2,1fr)}
+  .trg-demo .trg-btn-clear{width:100%;justify-content:center}
   .trg-panel{grid-template-columns:1fr}
   .trg-queuewrap{height:auto;max-height:66vh} .trg-detail{height:auto}
 }
@@ -1539,6 +1638,403 @@ if(document.readyState==='loading'){
   var DOT={P1:"var(--coral-500)",P2:"var(--amber-400)",P3:"var(--teal-500)",P4:"var(--mint-400)",FILTER:"var(--text-quaternary)"};
   var SLA={P1:"Act within 30–60 min",P2:"Act same day",P3:"Act within 24–48 h",P4:"Batch / low priority",FILTER:"No action — quarantined"};
 
+  /* ---------- ACTION LAYER ----------
+     Triage sorts the pile; this is what makes it go away. One chain per
+     document lane: match -> draft -> ONE human click -> deliver -> close.
+     Every action below is held until a person clicks it. Nothing self-sends. */
+  var CHECK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg>';
+  var ledger={filed:0,sign:0,out:0,task:0,junk:0};
+  // every action that lands is kept as a task inside its box
+  var inbox={filed:[],sign:[],out:[],task:[],junk:[]}, openBox=null, selTask=null, seqT=0;
+  var CHEV='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.4 2.8L9.6 7l-4.2 4.2"/></svg>';
+  function nowStamp(){
+    var d=new Date(), h=d.getHours(), m=d.getMinutes(), ap=h<12?"AM":"PM";
+    h=h%12; if(!h)h=12; return h+":"+(m<10?"0"+m:m)+" "+ap;
+  }
+  // filed / sent / quarantined are finished when they land; signatures and
+  // escalations are work a person still has to do.
+  function mkItem(f,a){
+    return {tid:"t"+(seqT++), b:a.b, label:f.type, title:fill(a.d,f), hint:fill(a.h,f),
+            fax:f, at:nowStamp(), done:(a.b!=="sign"&&a.b!=="task")};
+  }
+  function findTask(tid){
+    for(var i=0;i<ORDER.length;i++){ var l=inbox[ORDER[i]];
+      for(var j=0;j<l.length;j++){ if(l[j].tid===tid) return l[j]; } }
+    return null;
+  }
+
+  function fval(f,k){ var v=""; (f.fields||[]).some(function(x){
+      if(String(x[0]).toLowerCase().indexOf(k)>-1){ v=String(x[1]); return true; } return false; }); return v; }
+  function fill(str,f){
+    var due=fval(f,"appeal by")||fval(f,"due")||fval(f,"deadline");
+    due = due ? (due+" left") : "before the deadline";   // no field -> still reads
+    return String(str)
+      .replace(/\{sender\}/g, f.sender||"the sender")
+      .replace(/\{md\}/g, fval(f,"ordering")||fval(f,"referring")||fval(f,"from")||"the ordering provider")
+      .replace(/\{drug\}/g, fval(f,"drug")||"the medication")
+      .replace(/\{pharmacy\}/g, fval(f,"pharmacy")||f.sender||"the pharmacy")
+      .replace(/\{refto\}/g, fval(f,"refer to")||"the specialist")
+      .replace(/\{due\}/g, due);
+  }
+
+  /* Each action names the destination it lands in: -> board target - detail. */
+  var DEST={
+    filed:{n:"Patient chart",c:"var(--teal-500)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M3.4 1.4h4.2l3 3v8.2H3.4z"/><path d="M7.6 1.4v3h3"/></svg>'},
+    sign:{n:"Signature queue",c:"var(--violet-300)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M9.5 1.8l2.7 2.7-7.1 7.1-3.4.7.7-3.4z"/><path d="M8.2 3.1l2.7 2.7"/></svg>'},
+    out:{n:"Outbound",c:"var(--mint-400)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M2.2 11.8L11.8 2.2"/><path d="M5 2.2h6.8V9"/></svg>'},
+    task:{n:"Escalations",c:"var(--coral-500)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M3.3 10.1h7.4l-1-1.7V6.1a2.7 2.7 0 0 0-5.4 0v2.3z"/><path d="M5.7 11.5a1.35 1.35 0 0 0 2.6 0"/></svg>'},
+    junk:{n:"Quarantine",c:"var(--text-quaternary)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7" cy="7" r="5.3"/><line x1="3.2" y1="3.2" x2="10.8" y2="10.8"/></svg>'}
+  };
+  var ORDER=["filed","sign","out","task","junk"];
+
+  var ACTIONS={
+    crit:{note:"The agent never interprets a result and never contacts the patient \u2014 it makes sure a clinician sees it, with the clock running.",acts:[
+      {p:1,l:"Page {md} with the value",h:"\u2192 Escalations \u00b7 acknowledgement clock",d:"Paged {md} \u2014 acknowledgement clock running",b:"task"},
+      {l:"Draft the result note + callback stub",h:"\u2192 Signature queue \u00b7 needs one clinician",d:"Result note drafted \u2014 waiting on sign-off",b:"sign"},
+      {l:"File to chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Filed to chart",b:"filed"}]},
+    discharge:{note:"Transitional care is billable work most practices are already half-doing and never capturing.",acts:[
+      {p:1,l:"Open the TCM task \u00b7 2-business-day clock",h:"\u2192 Escalations \u00b7 contact window",d:"TCM task opened \u2014 contact due in 2 business days",b:"task"},
+      {l:"Build the medication reconciliation diff",h:"\u2192 Signature queue \u00b7 needs the provider",d:"Med-rec diff built \u2014 waiting on sign-off",b:"sign"},
+      {l:"Offer the follow-up appointment",h:"\u2192 Outbound \u00b7 to the patient",d:"Follow-up slots offered to the patient",b:"out"}]},
+    referral:{note:"A same-hour response is what stops a referral leaking to whichever specialist calls the patient first.",acts:[
+      {p:1,l:"Fax the missing-items request to {sender}",h:"\u2192 Outbound \u00b7 fax to {sender}",d:"Missing-items request faxed to {sender}",b:"out"},
+      {l:"Check eligibility and offer appointment slots",h:"\u2192 Outbound \u00b7 to the patient",d:"Eligibility checked \u2014 slots offered",b:"out"},
+      {l:"Create the chart and file the packet",h:"\u2192 Patient chart \u00b7 new record",d:"Chart created \u2014 referral packet filed",b:"filed"}]},
+    denial:{note:"The appeal deadline is the whole game \u2014 a denial that sits four days in the pile is revenue written off.",acts:[
+      {p:1,l:"Start the appeal \u2014 {due}",h:"\u2192 Signature queue \u00b7 medical necessity",d:"Appeal packet drafted \u2014 waiting on signature",b:"sign"},
+      {l:"Pull the payer's policy criteria",h:"\u2192 Escalations \u00b7 criteria matched to the chart",d:"Policy criteria matched to the chart evidence",b:"task"},
+      {l:"File the determination to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Determination filed to chart",b:"filed"}]},
+    rfi:{note:"A pended authorization is usually held up by one missing item. The agent names it instead of re-reading the letter.",acts:[
+      {p:1,l:"Send the payer the notes it asked for",h:"\u2192 Outbound \u00b7 to the payer",d:"Requested progress notes sent to the payer",b:"out"},
+      {l:"Re-open the auth with a due-date clock",h:"\u2192 Escalations \u00b7 due-date clock",d:"Authorization re-opened \u2014 due-date clock running",b:"task"}]},
+    refill:{note:"Protocol-clean refills batch onto one screen. Controlled substances always route to manual \u2014 no exceptions.",acts:[
+      {p:1,l:"Approve \u2014 protocol clean \u00b7 fax to {pharmacy}",h:"\u2192 Outbound \u00b7 fax to {pharmacy}",d:"{drug} authorized \u2014 sent to {pharmacy}",b:"out"},
+      {l:"Hold for the prescriber with the evidence",h:"\u2192 Signature queue \u00b7 needs the prescriber",d:"Held for the prescriber \u2014 evidence attached",b:"sign"},
+      {l:"Log the refill to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill logged to chart",b:"filed"}]},
+    roi:{note:"This gate never automates. The agent validates and assembles; a human decides what is released.",acts:[
+      {p:1,l:"Validate the authorization and scope",h:"\u2192 Escalations \u00b7 scope check",d:"Authorization validated \u2014 scope matches the request",b:"task"},
+      {l:"Assemble the records and draft the cover letter",h:"\u2192 Signature queue \u00b7 needs a release approval",d:"Record set assembled \u2014 waiting on release approval",b:"sign"},
+      {l:"Log the disclosure",h:"\u2192 Patient chart \u00b7 disclosure log",d:"Disclosure logged for accounting",b:"filed"}]},
+    eob:{note:"Underpayments hide in this lane \u2014 it feeds straight into the recovery agent instead of a filing cabinet.",acts:[
+      {p:1,l:"Check paid against the contracted rate",h:"\u2192 Escalations \u00b7 recovery queue",d:"Variance checked \u2014 sent to the recovery queue",b:"task"},
+      {l:"File to the billing record",h:"\u2192 Patient chart \u00b7 billing record",d:"Filed to the billing record",b:"filed"}]},
+    result:{note:"Routine results still need to reach the chart and the patient \u2014 they just never need to interrupt anyone.",acts:[
+      {p:1,l:"File to chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Filed to chart",b:"filed"},
+      {l:"Release the routine result to the patient",h:"\u2192 Outbound \u00b7 to the patient",d:"Routine result released to the patient",b:"out"}]},
+    junk:{note:"Quarantined automatically \u2014 recoverable for 30 days. This is the one lane where nobody in the practice has to look.",acts:[
+      {l:"Fax a removal request to {sender}",h:"\u2192 Outbound \u00b7 fax to {sender}",d:"Removal request faxed to {sender}",b:"out"}]},
+    doc:{note:"Anything the agent is unsure about is routed, never guessed \u2014 low-confidence reads go to a person off the hot path.",acts:[
+      {p:1,l:"File to chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Filed to chart",b:"filed"},
+      {l:"Route to the queue that owns it",h:"\u2192 Escalations \u00b7 owner assigned",d:"Routed to the owning queue",b:"task"}]}
+  };
+
+  function laneFor(f){
+    var t=(f.type||"").toLowerCase();
+    if(f.cat==="FILTER") return "junk";
+    if(/refill|prescription/.test(t)) return "refill";
+    if(/deni/.test(t)) return "denial";
+    if(/info request|rfi|pend/.test(t)) return "rfi";
+    if(/prior-?auth|authorization|appeal/.test(t)) return "denial";
+    if(/discharge/.test(t)) return "discharge";
+    if(/referral|consult/.test(t)) return "referral";
+    if(/records|roi|release/.test(t)) return "roi";
+    if(/eob|benefit|remittance|insurance|billing/.test(t)) return "eob";
+    if(f.cat==="P1"||/critical|stat|panic|abnormal|patholog|malignan/.test(t)) return "crit";
+    if(/result|imaging|lab|x-ray|report/.test(t)) return "result";
+    return "doc";
+  }
+  function laneOf(f){ return ACTIONS[laneFor(f)]||ACTIONS.doc; }
+
+  // the fax page is the longest thing in the pane - clip it so the actions stay
+  // above the fold, but keep the whole document one click away
+  function pageHtml(sender,recv,bodyHtml,raw){
+    var long=(raw||"").length>360;
+    return '<div class="trg-page'+(long?" clip":"")+'">'+
+      '<div class="lh">'+esc(sender||"")+'</div>'+
+      '<div class="lh-sub">inbound fax \u00b7 '+esc(recv||"")+'</div>'+bodyHtml+'</div>'+
+      (long?'<button type="button" class="trg-pagemore">Show the full page</button>':'');
+  }
+  function onPageMore(ev){
+    var n=ev.target;
+    while(n&&n!==detailEl&&!(n.classList&&n.classList.contains("trg-pagemore"))) n=n.parentNode;
+    if(!n||n===detailEl) return;
+    var pg=n.previousSibling;
+    while(pg&&!(pg.classList&&pg.classList.contains("trg-page"))) pg=pg.previousSibling;
+    if(!pg) return;
+    n.textContent = pg.classList.toggle("clip") ? "Show the full page" : "Hide the full page";
+  }
+  function actsHtml(f){
+    var lane=laneOf(f), done=f.acts||{};
+    var rows=lane.acts.map(function(a,i){
+      var isDone=!!done[i];
+      return '<button type="button" class="trg-act'+((a.p&&!isDone)?" is-primary":"")+(isDone?" is-done":"")+
+        '" data-ai="'+i+'" data-b="'+a.b+'"'+(isDone?' disabled':'')+'>'+
+        '<span class="aic">'+(isDone?CHECK:"")+'</span>'+
+        '<span><span class="al">'+esc(fill(isDone?a.d:a.l,f))+'</span>'+
+        '<span class="ak">'+(isDone?"Approved by you \u00b7 just now":esc(fill(a.h,f)))+'</span></span></button>';
+    }).join("");
+    return '<div class="trg-dsec" style="margin-top:18px">What happens next</div>'+
+      '<div class="trg-acts">'+rows+'</div>'+
+      '<p class="trg-actnote">'+esc(lane.note)+'</p>';
+  }
+
+  function allDone(f){ var a=laneOf(f).acts, d=f.acts||{};
+    for(var i=0;i<a.length;i++){ if(!d[i]) return false; } return true; }
+  function markRowDone(f){
+    var li=nodes[f.id]; if(!li) return;
+    li.classList.add("is-done"); f.cleared=true;
+    var r=li.querySelector(".trg-rreason");
+    if(r) r.innerHTML='<span class="trg-dot" style="background:var(--mint-400)"></span>Actioned \u00b7 SLA met';
+  }
+  function buildBoard(){
+    var el=$("trgDests"); if(!el||el.firstChild) return;
+    el.innerHTML=ORDER.map(function(b){ var d=DEST[b];
+      return '<button type="button" class="trg-dest" id="dest-'+b+'" data-box="'+b+'" style="color:'+d.c+'">'+
+        '<span class="dtop"><span class="di">'+d.ic+'</span><span class="dl">'+d.n+'</span>'+
+        '<span class="dgo">'+CHEV+'</span></span>'+
+        '<span class="dv" id="dv-'+b+'">0</span>'+
+        '<span class="dlast" id="dl-'+b+'">&mdash;</span></button>';
+    }).join("");
+  }
+  function renderLedger(){
+    ORDER.forEach(function(b){
+      var list=inbox[b]||[]; ledger[b]=list.length;
+      var e=$("dv-"+b); if(e) e.textContent=list.length;
+      var pend=0; list.forEach(function(x){ if(!x.done) pend++; });
+      var c=$("dest-"+b); if(c) c.classList.toggle("pending", pend>0);
+      var l=$("dl-"+b);
+      if(l) l.textContent = pend ? (pend+" need"+(pend===1?"s":"")+" you")
+                          : (list.length ? list[list.length-1].label : "\u2014");
+    });
+    var t=ledger.filed+ledger.sign+ledger.out+ledger.task, el=$("trgBTotal");
+    if(el) el.textContent = t ? (t+" action"+(t===1?"":"s")+" taken"+(ledger.junk?" \u00b7 "+ledger.junk+" quarantined":""))
+                              : "nothing actioned yet";
+  }
+  // land an action in its box: file the task, tick the count, flash the card
+  function hitDest(b,item){
+    (inbox[b]=inbox[b]||[]).push(item); renderLedger();
+    var c=$("dest-"+b);
+    if(c){ c.classList.remove("hit"); void c.offsetWidth; c.classList.add("hit");
+      var v=$("dv-"+b); if(v){ v.classList.remove("pop"); void v.offsetWidth; v.classList.add("pop"); } }
+    if(openBox===b) renderBox(b);
+  }
+  // fly a chip from wherever the action was taken into the card it lands in
+  function flyFrom(rect,b,item){
+    showLedger();
+    var dest=$("dest-"+b);
+    if(reduce||!rect||!dest){ hitDest(b,item); return; }
+    var chip=document.createElement("div");
+    chip.className="trg-fly "+b; chip.textContent=item.label||DEST[b].n;
+    document.body.appendChild(chip);
+    if(!chip.animate){ chip.parentNode.removeChild(chip); hitDest(b,item); return; }
+    var r2=dest.getBoundingClientRect();
+    chip.style.left=(rect.left+rect.width/2)+"px";
+    chip.style.top=(rect.top+rect.height/2)+"px";
+    var dx=(r2.left+r2.width/2)-(rect.left+rect.width/2);
+    var dy=(r2.top+r2.height/2)-(rect.top+rect.height/2);
+    var an=chip.animate([
+      {transform:"translate(-50%,-50%) scale(.85)",opacity:0},
+      {transform:"translate(-50%,-50%) scale(1)",opacity:1,offset:.18},
+      {transform:"translate(-50%,-50%) translate("+dx+"px,"+dy+"px) scale(.66)",opacity:0}
+    ],{duration:620,easing:"cubic-bezier(.4,.08,.25,1)"});
+    var landed=false;
+    function land(){ if(landed)return; landed=true;
+      if(chip.parentNode) chip.parentNode.removeChild(chip); hitDest(b,item); }
+    an.onfinish=land; setTimeout(land,950);
+  }
+  function showLedger(){ var el=$("trgLedger"); if(el&&el.hasAttribute("hidden")) el.removeAttribute("hidden"); renderLedger(); }
+  function doAction(id,i,srcRect){
+    var f=data[id]; if(!f||f.reading) return;
+    var a=laneOf(f).acts[i]; if(!a) return;
+    f.acts=f.acts||{}; if(f.acts[i]) return;
+    f.acts[i]=true;
+    if(allDone(f)) markRowDone(f);
+    select(id,true);
+    flyFrom(srcRect,a.b,mkItem(f,a));   // the task files itself when the chip lands
+  }
+  function onActClick(ev){
+    var n=ev.target;
+    while(n && n!==detailEl && !(n.classList&&n.classList.contains("trg-act"))) n=n.parentNode;
+    if(!n||n===detailEl||n.disabled) return;
+    if(n.getAttribute("data-do")){ completeTask(n.getAttribute("data-do")); return; }
+    if(n.getAttribute("data-ai")===null||!selected) return;
+    doAction(selected, parseInt(n.getAttribute("data-ai"),10), n.getBoundingClientRect());
+  }
+  /* ---------- inside a box ---------- */
+  function openBoxView(b){
+    openBox=b; selTask=null;
+    ORDER.forEach(function(k){ var c=$("dest-"+k); if(c) c.classList.toggle("open", k===b); });
+    queueEl.setAttribute("hidden",""); $("trgBoxView").removeAttribute("hidden");
+    $("trgBack").removeAttribute("hidden");
+    renderBox(b);
+    detailEl.innerHTML='<div class="trg-dempty"><h3>'+esc(DEST[b].n)+'</h3>'+
+      '<p>Pick a task to see the action taken and the fax it came from.</p></div>';
+  }
+  function closeBoxView(){
+    openBox=null; selTask=null;
+    ORDER.forEach(function(k){ var c=$("dest-"+k); if(c) c.classList.remove("open"); });
+    $("trgBoxView").setAttribute("hidden",""); queueEl.removeAttribute("hidden");
+    $("trgBack").setAttribute("hidden","");
+    $("trgQTitle").textContent="Priority queue";
+    progEl.textContent=count.read?(count.read+" read \u00b7 "+count.P1+" critical up top"):"idle";
+    detailEl.innerHTML='<div class="trg-dempty"><h3>Nothing selected</h3>'+
+      '<p>Select a fax to see the original page beside the fields the agent pulled out.</p></div>';
+  }
+  function renderBox(b){
+    var list=inbox[b]||[], d=DEST[b], el=$("trgBoxView");
+    var pend=0; list.forEach(function(x){ if(!x.done) pend++; });
+    $("trgQTitle").textContent=d.n;
+    progEl.textContent=list.length ? (list.length+" item"+(list.length===1?"":"s")+
+        (pend?" \u00b7 "+pend+" need"+(pend===1?"s":"")+" you":" \u00b7 all handled")) : "empty";
+    if(!list.length){
+      el.innerHTML='<div class="trg-boxempty"><h3>Nothing in here yet</h3>'+
+        '<p>Approve an action on a fax and it lands in this box.</p></div>';
+      return;
+    }
+    el.innerHTML=list.map(function(x){
+      return '<button type="button" class="trg-task'+(x.done?" is-done":"")+(selTask===x.tid?" sel":"")+
+        '" data-t="'+x.tid+'">'+
+        '<span class="tdot" style="background:'+d.c+'"></span>'+
+        '<span class="tmain"><span class="tt">'+esc(x.title)+'</span>'+
+        '<span class="ts">'+esc(x.label)+' \u00b7 '+esc(x.fax.patient||"\u2014")+' \u00b7 '+esc(x.at)+'</span></span>'+
+        '<span class="tgo">'+(x.done?CHECK:CHEV)+'</span></button>';
+    }).join("");
+  }
+  function selectTask(tid){
+    var x=findTask(tid); if(!x) return;
+    selTask=tid; selected=null;
+    if(openBox) renderBox(openBox);
+    var f=x.fax, d=DEST[x.b];
+    var fieldsHtml=(f.fields||[]).map(function(k){
+      return '<li><span class="k">'+esc(k[0])+'</span><span class="val">'+esc(k[1])+'</span></li>'; }).join("");
+    var cta="";
+    if(!x.done && x.b==="sign")
+      cta='<button type="button" class="trg-act is-primary" data-do="'+x.tid+'" style="margin-top:14px">'+
+          '<span class="aic"></span><span><span class="al">Sign &amp; release</span>'+
+          '<span class="ak">\u2192 Outbound \u00b7 delivered on your signature</span></span></button>';
+    else if(!x.done && x.b==="task")
+      cta='<button type="button" class="trg-act is-primary" data-do="'+x.tid+'" style="margin-top:14px">'+
+          '<span class="aic"></span><span><span class="al">Acknowledge</span>'+
+          '<span class="ak">Stops the clock \u00b7 stamped with your name</span></span></button>';
+    detailEl.innerHTML=
+      '<div class="trg-dhead"><div class="row1">'+
+        '<span class="trg-dbadge" style="color:'+d.c+'">'+esc(d.n)+'</span>'+
+        '<span class="trg-conf">'+esc(x.at)+'</span></div>'+
+        '<div class="trg-dfrom">'+(x.done?"Completed":"Waiting on a person")+'</div></div>'+
+      '<div class="trg-dbody">'+
+        '<div class="trg-dsec">The action</div>'+
+        '<div class="trg-why" style="margin-top:0"><div class="wk">'+esc(x.label)+'</div>'+
+          '<div class="wv">'+esc(x.title)+'</div>'+
+          '<div class="sla">'+esc(x.hint)+'</div></div>'+
+        cta+
+        (fieldsHtml?'<div class="trg-dsec" style="margin-top:20px">What the agent extracted</div>'+
+          '<ul class="trg-fields" style="margin:0;padding:0;border-top:0">'+fieldsHtml+'</ul>':'')+
+        '<div class="trg-dsec" style="margin-top:20px">The fax it came from</div>'+
+        pageHtml(f.sender,f.recv,esc(f.body||"").replace(/\n/g,"<br>"),f.body)+
+      '</div>';
+  }
+  function completeTask(tid){
+    var x=findTask(tid); if(!x||x.done) return;
+    var btn=detailEl.querySelector('[data-do="'+tid+'"]');
+    var rect=btn?btn.getBoundingClientRect():null;
+    x.done=true;
+    if(x.b==="sign"){
+      var it={tid:"t"+(seqT++),b:"out",label:x.label,
+              title:"Signed and released \u2014 "+x.label,
+              hint:"\u2192 Outbound \u00b7 delivered on your signature",
+              fax:x.fax,at:nowStamp(),done:true};
+      flyFrom(rect,"out",it);
+    }
+    renderLedger();
+    if(openBox) renderBox(openBox);
+    selectTask(tid);
+  }
+  function onBoxClick(ev){
+    var n=ev.target;
+    while(n&&!(n.getAttribute&&n.getAttribute("data-box"))) n=n.parentNode;
+    if(!n||!n.getAttribute) return;
+    var b=n.getAttribute("data-box");
+    if(openBox===b) closeBoxView(); else openBoxView(b);
+  }
+  function onTaskClick(ev){
+    var n=ev.target;
+    while(n&&n!==$("trgBoxView")&&!(n.getAttribute&&n.getAttribute("data-t"))) n=n.parentNode;
+    if(!n||!n.getAttribute||!n.getAttribute("data-t")) return;
+    selectTask(n.getAttribute("data-t"));
+  }
+
+  // hovering an action lights up the destination card it will land in
+  function onActHover(ev){
+    var b=null;
+    if(ev.type==="mouseover"||ev.type==="focusin"){
+      var n=ev.target;
+      while(n&&n!==detailEl&&!(n.classList&&n.classList.contains("trg-act"))) n=n.parentNode;
+      if(n&&n!==detailEl) b=n.getAttribute("data-b");
+    }
+    ORDER.forEach(function(k){ var c=$("dest-"+k); if(c) c.classList.toggle("aim", k===b); });
+  }
+  function afterChips(cb){
+    var tries=0;
+    (function chk(){
+      if(reduce||!document.querySelector(".trg-fly")||++tries>30){ cb(); return; }
+      setTimeout(chk,100);
+    })();
+  }
+  function clearPile(){
+    var ids=orderedIds().filter(function(id){ return data[id]&&!data[id].reading; });
+    if(!ids.length) return;
+    $("trgClear").disabled=true; var i=0, n=ids.length;
+    running=false; pending=[];   // stop the sim: anything mid-read is dropped on commit
+    (function step(){
+      if(i>=n){ // let the last chips land before totting up, or the summary undercounts
+        setTimeout(function(){ afterChips(function(){ finishClear(n); }); }, reduce?0:400); return; }
+      var id=ids[i++], f=data[id], li=nodes[id];
+      var rect=li?li.getBoundingClientRect():null;
+      if(f && f.cat!=="FILTER" && !allDone(f)){
+        f.acts=f.acts||{};
+        laneOf(f).acts.forEach(function(a,k){
+          if(f.acts[k]) return;
+          f.acts[k]=true;
+          (function(bucket,item,delay){ setTimeout(function(){ flyFrom(rect,bucket,item); }, delay); })(a.b, mkItem(f,a), k*135);
+        });
+      }
+      if(li){ li.classList.add("is-clearing");
+        setTimeout(function(){ if(li.parentNode) li.parentNode.removeChild(li); }, 300); }
+      delete nodes[id]; delete data[id];
+      setTimeout(step, reduce?8:105);
+    })();
+  }
+  function finishClear(n){
+    selected=null; running=false; active=0; pending=[];
+    $("trgSim").disabled=false; $("trgClear").disabled=false;
+    progEl.textContent="pile cleared";
+    var acted=ledger.filed+ledger.sign+ledger.out+ledger.task;
+    var parts=[];
+    if(ledger.filed) parts.push(ledger.filed+" filed to the chart");
+    if(ledger.out)   parts.push(ledger.out+" sent out");
+    if(ledger.task)  parts.push(ledger.task+" escalated");
+    if(ledger.sign)  parts.push(ledger.sign+" waiting on a single signature");
+    var sentence=parts.join(", "), lastComma=sentence.lastIndexOf(", ");
+    if(lastComma>-1) sentence=sentence.slice(0,lastComma)+" and "+sentence.slice(lastComma+2);
+    queueEl.innerHTML="";
+    var e=document.createElement("div"); e.className="trg-empty";
+    e.innerHTML='<div class="trg-empty-ico" style="color:var(--mint-400);border-color:rgba(94,224,168,.35)">'+
+        '<svg width="24" height="24" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg></div>'+
+      '<h3>The pile is gone</h3>'+
+      '<p>'+acted+' action'+(acted===1?'':'s')+' across '+n+' document'+(n===1?'':'s')+
+      (parts.length?' \u2014 '+sentence:'')+'.'+
+      (ledger.junk?(ledger.junk===1?' One more never reached anyone in the practice at all.':' Another '+ledger.junk+' never reached anyone in the practice at all.'):'')+'</p>'+
+      '<p class="trg-clearnote">Open any box above to see the tasks that landed in it.</p>';
+    queueEl.appendChild(e); emptyEl=e;
+    detailEl.innerHTML='<div class="trg-dempty"><h3>Nothing left to review</h3><p>Run the simulation again to watch a fresh morning arrive \u2014 or paste your own fax.</p></div>';
+  }
+
+
   function instance(ti){
     var t=T[ti], pt=pick(FIRST)+" "+pick(LAST), d=dob(), m=mrn(), mk=t.mk;
     function inj(s){return s.replace(/{{PT}}/g,pt).replace(/{{DOB}}/g,d).replace(/{{MRN}}/g,m).replace(/{{MK}}/g,mk);}
@@ -1578,11 +2074,17 @@ if(document.readyState==='loading'){
   // shape a triage result (from API or local) into a queue instance
   function normalize(d, raw){
     var cat=(["P1","P2","P3","P4","FILTER"].indexOf(d.priority)>-1)?d.priority:"P3";
-    var fields=[];
-    if(cat!=="FILTER"){ fields.push(["Patient",d.patient||"—"]); if(d.dob)fields.push(["DOB",d.dob]); }
-    (d.fields||[]).forEach(function(x){ if(x&&x.key) fields.push([x.key,String(x.value==null?"":x.value)]); });
-    fields.push(["Detected type",d.docType||"Document"]);
-    fields.push(["Priority",cat==="FILTER"?"Filtered":cat]);
+    var fields=[], seenKeys={};
+    function addField(k,v){
+      var key=String(k||"").trim(); if(!key) return;
+      var norm=key.toLowerCase().replace(/[^a-z0-9]/g,"");
+      if(seenKeys[norm]) return;            // the model returns Patient/DOB too
+      seenKeys[norm]=1; fields.push([key,String(v==null?"":v)]);
+    }
+    if(cat!=="FILTER"){ addField("Patient",d.patient||"—"); if(d.dob) addField("DOB",d.dob); }
+    (d.fields||[]).forEach(function(x){ if(x&&x.key) addField(x.key,x.value); });
+    addField("Detected type",d.docType||"Document");
+    addField("Priority",cat==="FILTER"?"Filtered":cat);
     var conf=(typeof d.confidence==="number")?Math.max(0,Math.min(1,d.confidence)):.85;
     return {id:"fx"+(seq++),cat:cat,score:BASE[cat]+Math.random()*3,type:d.docType||"Clinical document",
       sender:(d.sender&&d.sender.toLowerCase()!=="unknown")?d.sender:"Your pasted fax",conf:conf,
@@ -1657,7 +2159,12 @@ if(document.readyState==='loading'){
     for(var i=1;i<STAGES.length;i++){ (function(idx){ setTimeout(function(){ if(status&&status.parentNode&&status.classList.contains("reading")) status.textContent=STAGES[idx]; }, dur*idx/STAGES.length); })(i); }
   }
   function commit(f, li, flashOk){
+    if(!li || !li.parentNode){ delete nodes[f.id]; delete data[f.id]; return; } // row was cleared mid-read
     data[f.id]=f; count.read++; count[f.cat]++; doneCount++;
+    showLedger();
+    if(f.cat==="FILTER") flyFrom(li.getBoundingClientRect(),"junk",
+      {tid:"t"+(seqT++),b:"junk",label:f.type,title:"Quarantined \u2014 "+f.type,
+       hint:"\u2192 Quarantine \u00b7 recoverable for 30 days",fax:f,at:nowStamp(),done:true});
     fillNode(li,f); reorder(); updateStats(f.cat==="P1");
     if(f.mine){ select(f.id); try{ li.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"}); }catch(e){} }
     else if(selected===null && f.cat==="P1"){ select(f.id); }
@@ -1704,8 +2211,9 @@ if(document.readyState==='loading'){
     });
   }
 
-  function select(id){
+  function select(id,keepScroll){
     var f=data[id]; if(!f||f.reading)return; selected=id;
+    var pdb=detailEl.querySelector(".trg-dbody"), prevScroll=pdb?pdb.scrollTop:0;
     Array.prototype.forEach.call(queueEl.querySelectorAll(".trg-row"),function(n){n.classList.toggle("sel",n.getAttribute("data-id")===id);});
     var markBody=esc(f.body).replace(/\n/g,"<br>");
     if(f.mk){var mk=esc(f.mk);if(markBody.indexOf(mk)>-1)markBody=markBody.replace(mk,'<span class="trg-mk">'+mk+'</span>');}
@@ -1719,13 +2227,17 @@ if(document.readyState==='loading'){
         '<span class="trg-conf">'+Math.round(f.conf*100)+'% conf.</span></div>'+
         '<div class="trg-dfrom">From '+esc(f.sender)+' · received '+f.recv+youTag+'</div></div>'+
       '<div class="trg-dbody">'+
-        '<div class="trg-dsec">The fax, as received</div>'+
-        '<div class="trg-page"><div class="lh">'+esc(f.sender)+'</div><div class="lh-sub">inbound fax · '+f.recv+'</div>'+markBody+'</div>'+
-        '<div class="trg-dsec" style="margin-top:18px">What the agent extracted</div>'+
-        '<ul class="trg-fields">'+fieldsHtml+'</ul>'+
-        '<div class="trg-why"><div class="wk">Why this priority</div><div class="wv">'+esc(f.reason)+'</div>'+
-          '<div class="sla"><span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla)+'</div></div>'+
+        '<div class="trg-why" style="margin-top:0"><div class="wk">Why this priority</div><div class="wv">'+esc(f.reason)+'</div>'+
+          '<div class="sla'+(f.cleared?" done":"")+'">'+(f.cleared
+            ? '<span class="trg-dot" style="background:var(--mint-400)"></span>SLA met \u00b7 cleared'
+            : '<span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla))+'</div></div>'+
+        actsHtml(f)+
+        '<div class="trg-dsec" style="margin-top:20px">What the agent extracted</div>'+
+        '<ul class="trg-fields" style="margin:0;padding:0;border-top:0">'+fieldsHtml+'</ul>'+
+        '<div class="trg-dsec" style="margin-top:20px">The fax, as received</div>'+
+        pageHtml(f.sender,f.recv,markBody,f.body)+
       '</div>';
+    if(keepScroll){ var nb=detailEl.querySelector(".trg-dbody"); if(nb) nb.scrollTop=prevScroll; }
   }
 
   function reset(){
@@ -1735,6 +2247,12 @@ if(document.readyState==='loading'){
     e.innerHTML='<div class="trg-empty-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/></svg></div><h3>Queue cleared</h3><p>Run the simulation again — or paste your own fax — to watch it fill and sort.</p>';
     queueEl.appendChild(e); emptyEl=e;
     nodes={};data={};count={read:0,P1:0,P2:0,P3:0,P4:0,FILTER:0};selected=null;
+    inbox={filed:[],sign:[],out:[],task:[],junk:[]}; seqT=0;
+    if(openBox) closeBoxView();
+    ledger={filed:0,sign:0,out:0,task:0,junk:0}; renderLedger();
+    ORDER.forEach(function(b){ var l=$("dl-"+b); if(l) l.innerHTML="&mdash;";
+      var c=$("dest-"+b); if(c) c.classList.remove("hit"); });
+    var ld=$("trgLedger"); if(ld) ld.setAttribute("hidden",""); $("trgClear").disabled=false;
     detailEl.innerHTML='<div class="trg-dempty"><h3>Nothing selected</h3><p>Select a fax to see the original page beside the fields the agent pulled out.</p></div>';
     updateStats(false); progEl.textContent="idle"; $("trgSim").disabled=false;
   }
@@ -1777,6 +2295,17 @@ if(document.readyState==='loading'){
   function bind(){
     $("trgSim").addEventListener("click",simulate);
     $("trgReset").addEventListener("click",reset);
+    buildBoard();
+    $("trgDests").addEventListener("click",onBoxClick);
+    $("trgBoxView").addEventListener("click",onTaskClick);
+    $("trgBack").addEventListener("click",closeBoxView);
+    $("trgClear").addEventListener("click",clearPile);
+    detailEl.addEventListener("click",onActClick);
+    detailEl.addEventListener("click",onPageMore);
+    detailEl.addEventListener("mouseover",onActHover);
+    detailEl.addEventListener("mouseout",onActHover);
+    detailEl.addEventListener("focusin",onActHover);
+    detailEl.addEventListener("focusout",onActHover);
     var pasteBox=$("trgPaste"), toggle=$("trgPasteToggle");
     toggle.addEventListener("click",function(){
       var open=pasteBox.classList.toggle("open"); toggle.classList.toggle("active",open);
