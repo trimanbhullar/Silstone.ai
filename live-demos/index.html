@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Live Demos | Try Healthcare AI Agents | Silstone.AI</title>
-<meta name="description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and triage a pile of inbound faxes by clinical urgency. Built on Claude.">
+<meta name="description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, triage a pile of inbound faxes by clinical urgency, and clear a morning of prescription refills in one click. Built on Claude.">
 <link rel="canonical" href="https://www.silstone.ai/live-demos">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#08080B">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Silstone.AI">
 <meta property="og:title" content="Live Demos | Try Healthcare AI Agents | Silstone.AI">
-<meta property="og:description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and triage a pile of inbound faxes by clinical urgency. Built on Claude.">
+<meta property="og:description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, triage a pile of inbound faxes by clinical urgency, and clear a morning of prescription refills in one click. Built on Claude.">
 <meta property="og:url" content="https://www.silstone.ai/live-demos">
 <meta property="og:image" content="https://www.silstone.ai/assets/og.9e039572.png">
 <meta property="og:image:width" content="1920">
@@ -22,7 +22,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Live Demos | Try Healthcare AI Agents | Silstone.AI">
-<meta name="twitter:description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and triage a pile of inbound faxes by clinical urgency. Built on Claude.">
+<meta name="twitter:description" content="Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, triage a pile of inbound faxes by clinical urgency, and clear a morning of prescription refills in one click. Built on Claude.">
 <meta name="twitter:image" content="https://www.silstone.ai/assets/og.9e039572.png">
 
 <link rel="icon" href="/assets/favicon.018c3355.png">
@@ -1156,9 +1156,9 @@ if(document.readyState==='loading'){
   "Simulate a busy morning" runs a client-side simulation on SYNTHETIC faxes.
   "Paste your own fax" calls the SAME Cloudflare Worker backend as demo 1
   (Claude via /api/triage), with a client-side heuristic fallback if the API
-  is unreachable. Also carries the shared "notify / next demo" signup (moved
-  here so it follows both demos). Markup + trailing <style>/<script> live
-  OUTSIDE the SIL:GLOBAL markers; run build-embeds.py to bake the system in.
+  is unreachable. The shared "notify / next demo" signup lives in block 63 so
+  it stays after every demo. Markup + trailing <style>/<script> live OUTSIDE
+  the SIL:GLOBAL markers; run build-embeds.py to bake the system in.
 -->
 <div class="sil-root">
 
@@ -1280,34 +1280,6 @@ if(document.readyState==='loading'){
     </div>
   </section>
 
-  <!-- ==================== NOTIFY ==================== -->
-  <section class="sil-section has-top">
-    <div class="sil-cursorglow" aria-hidden="true"></div>
-    <div class="sil-container">
-      <div class="sil-card is-hover is-spot sil-reveal">
-        <div class="sil-soon">
-          <div>
-            <span class="sil-tag">More on the way</span>
-            <h2 class="sil-display-s sil-mt-4">New demos land often.</h2>
-            <p class="sil-body-m sil-mt-3 sil-measure">
-              We're building a demo for every piece of admin practices dread.
-              Leave an email and we'll tell you the moment the next one goes live.
-            </p>
-          </div>
-          <form class="sil-notify" id="silNotify" action="https://api.web3forms.com/submit" method="POST" novalidate>
-            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
-            <input type="hidden" name="subject" value="New Live Demo notify signup">
-            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo page">
-            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-            <label class="sil-sr" for="silNotifyEmail">Email address</label>
-            <input id="silNotifyEmail" name="email" type="email" required placeholder="you@practice.com" autocomplete="email">
-            <button type="submit" class="sil-btn sil-btn-primary is-auto">Notify me</button>
-            <p class="sil-notify-msg" id="silNotifyMsg" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 </div>
 
 <style>
@@ -1519,15 +1491,6 @@ if(document.readyState==='loading'){
   .trg-queuewrap{height:auto;max-height:66vh} .trg-detail{height:auto}
 }
 @media (prefers-reduced-motion:reduce){.trg-demo *{animation-duration:.01ms!important}}
-
-/* notify (moved from block 61) */
-.sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
-.sil-notify{display:grid;grid-template-columns:1fr auto;gap:var(--space-3);align-items:start}
-.sil-notify .sil-btn{white-space:nowrap}
-.sil-notify-msg{grid-column:1/-1;margin:0;font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
-.sil-notify-msg.is-warn{color:var(--coral-500)}
-@media(max-width:900px){.sil-soon{grid-template-columns:1fr;gap:var(--space-6)}}
-@media(max-width:520px){.sil-notify{grid-template-columns:1fr}.sil-notify .sil-btn{width:100%}}
 </style>
 
 <script>
@@ -2318,6 +2281,671 @@ if(document.readyState==='loading'){
       submitPaste(txt);
       $("trgPasteText").value=""; pasteBox.classList.remove("open"); toggle.classList.remove("active");
     });
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
+  else bind();
+})();
+</script>
+
+<!--
+  SILSTONE.AI - PAGE: LIVE-DEMOS - BLOCK 63 - REFILL DESK DEMO
+  Hostinger: Embed code block, FULL WIDTH. Third demo in the list.
+  A morning's pharmacy refill requests are checked against the practice's own
+  refill protocol; the protocol-clean batch clears on ONE click and only the
+  exceptions reach the prescriber. Controlled substances never auto-approve.
+  Client-side simulation on SYNTHETIC requests - no backend, no PHI.
+  Also carries the shared "notify / next demo" signup (moved here so it stays
+  after every demo). Markup + trailing <style>/<script> live OUTSIDE the
+  SIL:GLOBAL markers; run build-embeds.py to bake the system in.
+-->
+<div class="sil-root">
+
+  <!-- ==================== SUB-HERO ==================== -->
+  <section class="sil-section is-alt has-tint acc-mint" style="padding:var(--space-16) 0 var(--space-10)">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container sil-center">
+      <span class="sil-eyebrow sil-reveal"><i class="dot"></i>Live demo&nbsp;&middot;&nbsp;Refill Desk</span>
+      <h1 class="sil-display-l sil-mt-4 sil-reveal" style="--d:70ms">Sign the week&rsquo;s refills in <span class="sil-gt">one click.</span></h1>
+      <p class="sil-body-l sil-mt-4 sil-hero-sub sil-reveal" style="--d:140ms">
+        A typical practice fields around 85 refill requests a week, roughly 6.8 minutes each &mdash; about 0.4 of a full-time person doing nothing else. The agent checks every request against your own refill protocol, batches the clean ones onto one screen, and holds back only the ones that genuinely need a clinician.
+      </p>
+      <div class="sil-hero-chips sil-mt-4 sil-reveal" style="--d:210ms">
+        <span class="sil-chip"><i class="dot"></i>Built on Claude</span>
+        <span class="sil-chip"><i class="dot"></i>Synthetic requests &middot; no real PHI</span>
+        <span class="sil-chip"><i class="dot"></i>Controlled substances never auto-approve</span>
+        <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE DEMO ==================== -->
+  <section class="sil-section" style="padding:var(--space-10) 0 var(--space-16)">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container">
+      <div class="rfl-demo" id="rflDemo">
+
+        <div class="rfl-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <span>Every request below is <b>synthetic</b>. The protocol rules shown are a worked example &mdash; in production they are <b>your</b> practice&rsquo;s refill protocol, and a prescriber approves every authorisation.</span>
+        </div>
+
+        <!-- controls -->
+        <div class="rfl-controls">
+          <button type="button" class="rfl-btn-primary" id="rflRun">Run this morning&rsquo;s refill batch <span class="arw">&rarr;</span></button>
+          <button type="button" class="rfl-btn-ghost" id="rflReset">Reset</button>
+          <span class="rfl-prog" id="rflProg">idle</span>
+        </div>
+
+        <!-- stats -->
+        <div class="rfl-stats">
+          <div class="rfl-stat"><div class="v" id="rflVIn">0</div><div class="l">Requests in</div></div>
+          <div class="rfl-stat"><div class="v rfl-c-mint" id="rflVClean">0</div><div class="l">Protocol clean</div></div>
+          <div class="rfl-stat"><div class="v rfl-c-amber" id="rflVRev">0</div><div class="l">Need a clinician</div></div>
+          <div class="rfl-stat"><div class="v rfl-c-coral" id="rflVCtrl">0</div><div class="l">Controlled &middot; manual</div></div>
+          <div class="rfl-stat"><div class="v rfl-c-teal" id="rflVTime">&mdash;</div><div class="l">Prescriber time back</div></div>
+        </div>
+
+        <!-- one-click batch bar -->
+        <div class="rfl-batch" id="rflBatch" hidden>
+          <span class="rfl-blbl">The batch</span>
+          <span class="rfl-bsum" id="rflBSum">&mdash;</span>
+          <button type="button" class="rfl-btn-approve" id="rflApproveAll">Approve all clean <span class="arw">&rarr;</span></button>
+        </div>
+
+        <!-- panel: worklist + protocol check -->
+        <div class="rfl-panel">
+          <div class="rfl-listwrap">
+            <div class="rfl-lhead">
+              <span class="rfl-ltitle" id="rflLTitle">Refill worklist</span>
+              <span class="rfl-lcount" id="rflLCount">&nbsp;</span>
+            </div>
+            <ul class="rfl-list" id="rflList">
+              <div class="rfl-empty" id="rflEmpty">
+                <div class="rfl-empty-ico">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="5"/><line x1="12" y1="7.4" x2="12" y2="16.6"/></svg>
+                </div>
+                <h3>No requests loaded</h3>
+                <p>Run the batch to watch the agent check each refill against the practice protocol.</p>
+              </div>
+            </ul>
+          </div>
+
+          <aside class="rfl-detail" id="rflDetail">
+            <div class="rfl-dempty">
+              <h3>Nothing selected</h3>
+              <p>Pick a request to see every protocol rule the agent checked, and the evidence behind each one.</p>
+            </div>
+          </aside>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NOTIFY ==================== -->
+  <section class="sil-section has-top">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container">
+      <div class="sil-card is-hover is-spot sil-reveal">
+        <div class="sil-soon">
+          <div>
+            <span class="sil-tag">More on the way</span>
+            <h2 class="sil-display-s sil-mt-4">New demos land often.</h2>
+            <p class="sil-body-m sil-mt-3 sil-measure">
+              We're building a demo for every piece of admin practices dread.
+              Leave an email and we'll tell you the moment the next one goes live.
+            </p>
+          </div>
+          <form class="sil-notify" id="silNotify" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
+            <input type="hidden" name="subject" value="New Live Demo notify signup">
+            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo page">
+            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+            <label class="sil-sr" for="silNotifyEmail">Email address</label>
+            <input id="silNotifyEmail" name="email" type="email" required placeholder="you@practice.com" autocomplete="email">
+            <button type="submit" class="sil-btn sil-btn-primary is-auto">Notify me</button>
+            <p class="sil-notify-msg" id="silNotifyMsg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+/* ============ Silstone Refill Desk demo (block-scoped) ============ */
+.rfl-demo{ --clean:var(--mint-400); --rev:var(--amber-400); --ctrl:var(--coral-500);
+  --cleanw:rgba(94,224,168,.14); --revw:rgba(239,193,120,.14); --ctrlw:rgba(240,133,94,.14);
+  --vw:rgba(110,86,207,.16);
+  max-width:1120px; margin:0 auto; }
+.rfl-demo *{box-sizing:border-box}
+.rfl-demo button{font-family:inherit;cursor:pointer;border:none;font-weight:600}
+.rfl-demo button:active{transform:translateY(1px)}
+
+.rfl-note{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;line-height:1.5;color:var(--text-tertiary);background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:11px 15px;margin-bottom:18px}
+.rfl-note svg{flex:none;color:var(--mint-400);margin-top:2px}
+.rfl-note b{color:var(--text-secondary);font-weight:600}
+
+.rfl-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
+.rfl-demo .rfl-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;border-radius:var(--radius-pill);font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--text-on-accent);background:var(--grad-primary);background-size:200% 200%;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s;animation:silGradShift 10s ease-in-out infinite}
+.rfl-demo .rfl-btn-primary:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.rfl-demo .rfl-btn-primary:disabled{opacity:.5;cursor:default;transform:none;animation:none}
+.rfl-demo .rfl-btn-ghost{background:none;border:0;color:var(--text-tertiary);font:inherit;font-size:14px;font-weight:600;padding:8px 4px;transition:color .2s}
+.rfl-demo .rfl-btn-ghost:hover{color:var(--text-primary)}
+.rfl-prog{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
+
+.rfl-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.rfl-stat{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:15px 16px}
+.rfl-stat .v{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.65rem;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--text-primary)}
+.rfl-stat .l{font-size:11.5px;color:var(--text-quaternary);margin-top:7px}
+.rfl-c-mint{color:var(--mint-400)!important} .rfl-c-amber{color:var(--amber-400)!important}
+.rfl-c-coral{color:var(--coral-500)!important} .rfl-c-teal{color:var(--teal-500)!important}
+
+/* one-click batch bar */
+.rfl-batch{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:13px 16px;margin-bottom:16px}
+.rfl-batch[hidden]{display:none}
+.rfl-demo .rfl-blbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-quaternary);flex:none}
+.rfl-demo .rfl-bsum{font-size:13px;color:var(--text-secondary);flex:1;min-width:180px}
+.rfl-demo .rfl-bsum b{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.rfl-demo .rfl-btn-approve{flex:none;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:var(--radius-pill);border:1px solid var(--mint-400);background:rgba(94,224,168,.14);color:var(--mint-400);font-family:var(--font-body);font-weight:600;font-size:13.5px;transition:background .2s}
+.rfl-demo .rfl-btn-approve:hover:not(:disabled){background:rgba(94,224,168,.26)}
+.rfl-demo .rfl-btn-approve:disabled{opacity:.45;cursor:default}
+
+.rfl-panel{display:grid;grid-template-columns:1fr 440px;gap:16px}
+.rfl-listwrap,.rfl-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:700px;display:flex;flex-direction:column;overflow:hidden}
+.rfl-lhead{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
+.rfl-demo .rfl-ltitle{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary);flex:1}
+.rfl-demo .rfl-lcount{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
+.rfl-list{list-style:none;margin:0;padding:8px;overflow-y:auto;flex:1}
+
+.rfl-empty,.rfl-dempty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:40px 24px;color:var(--text-quaternary)}
+.rfl-empty-ico{width:52px;height:52px;border-radius:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.rfl-empty h3,.rfl-dempty h3{margin:0 0 6px;color:var(--text-secondary);font-size:15px;font-weight:600}
+.rfl-empty p,.rfl-dempty p{margin:0;font-size:13.5px;max-width:36ch}
+.rfl-demo .rfl-donenote{margin:10px 0 0;font-size:12.5px;color:var(--violet-300)}
+
+/* rows */
+.rfl-row{display:grid;grid-template-columns:66px 1fr auto;gap:14px;align-items:center;padding:12px 14px;border-radius:11px;cursor:pointer;border:1px solid transparent;position:relative;overflow:hidden}
+.rfl-row:hover{background:var(--bg-surface-raised)}
+.rfl-row.sel{background:var(--bg-surface-raised);border-color:var(--border-default)}
+.rfl-row.enter{animation:rflEnter .34s ease}
+.rfl-row.is-going{animation:rflOut .32s ease forwards;pointer-events:none}
+@keyframes rflEnter{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes rflOut{to{opacity:0;transform:translateX(34px)}}
+.rfl-band{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:5px 0;border-radius:7px;text-align:center;letter-spacing:.04em;text-transform:uppercase}
+.rfl-band.clean{background:var(--cleanw);color:var(--clean)}
+.rfl-band.review{background:var(--revw);color:var(--rev)}
+.rfl-band.ctrl{background:var(--ctrlw);color:var(--ctrl)}
+.rfl-band.checking{background:var(--vw);color:var(--violet-300)}
+.rfl-rmain{min-width:0}
+.rfl-rtitle{font-weight:600;font-size:14px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rfl-rtitle .qty{color:var(--text-quaternary);font-weight:400;margin-left:6px}
+.rfl-rsub{font-size:12.5px;color:var(--text-secondary);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rfl-rsub.checking{color:var(--violet-300);font-family:'IBM Plex Mono',monospace;font-size:12px}
+.rfl-rmeta{text-align:right;white-space:nowrap}
+.rfl-rmeta .ck{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-secondary);font-variant-numeric:tabular-nums}
+.rfl-rmeta .sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:3px}
+.rfl-pbar{height:3px;border-radius:2px;background:var(--bg-surface-3);margin-top:9px;overflow:hidden}
+.rfl-pbar>i{display:block;height:100%;width:6%;border-radius:2px;background:linear-gradient(90deg,var(--violet-500),var(--mint-400))}
+
+/* detail */
+.rfl-dhead{padding:16px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
+.rfl-dhead .row1{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rfl-dtype{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary)}
+.rfl-dconf{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary)}
+.rfl-dfrom{font-size:12.5px;color:var(--text-secondary)}
+.rfl-dbody{overflow-y:auto;padding:16px 18px}
+.rfl-dsec{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quaternary);margin:0 0 10px}
+
+/* the protocol checklist - the point of the whole demo */
+.rfl-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.rfl-checks li{display:grid;grid-template-columns:17px 1fr;gap:10px;align-items:start}
+.rfl-checks .ci{width:17px;height:17px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.rfl-checks .ci svg{width:10px;height:10px}
+.rfl-checks li.ok .ci{background:rgba(94,224,168,.15);color:var(--mint-400)}
+.rfl-checks li.bad .ci{background:var(--ctrlw);color:var(--ctrl)}
+.rfl-checks li.blocked .ci{background:var(--ctrlw);color:var(--ctrl)}
+.rfl-checks .cl{display:block;font-size:13.5px;font-weight:500;color:var(--text-primary);line-height:1.4}
+.rfl-checks li.bad .cl{color:var(--coral-500)}
+.rfl-checks .cd{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:3px;letter-spacing:.02em}
+
+.rfl-verdict{margin-top:15px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--mint-400);border-radius:0 11px 11px 0;padding:12px 14px}
+.rfl-verdict.review{border-left-color:var(--amber-400)}
+.rfl-verdict.ctrl{border-left-color:var(--coral-500)}
+.rfl-verdict .vk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
+.rfl-verdict .vv{font-size:13px;color:var(--text-primary);line-height:1.5}
+
+/* decisions */
+.rfl-acts{display:flex;flex-direction:column;gap:8px}
+.rfl-demo .rfl-act{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;width:100%;text-align:left;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:11px;padding:11px 13px;font-family:var(--font-body);color:var(--text-primary);transition:border-color .18s,background .18s}
+.rfl-demo .rfl-act:hover:not(:disabled){border-color:var(--violet-500);background:var(--vw)}
+.rfl-demo .rfl-act.is-primary{border-color:rgba(94,224,168,.45);background:rgba(94,224,168,.08)}
+.rfl-demo .rfl-act .aic{width:18px;height:18px;border-radius:6px;border:1.5px solid var(--border-default);display:flex;align-items:center;justify-content:center;margin-top:1px;color:var(--text-quaternary)}
+.rfl-demo .rfl-act .aic svg{width:11px;height:11px}
+.rfl-demo .rfl-act .al{display:block;font-size:13.5px;font-weight:600;line-height:1.4}
+.rfl-demo .rfl-act .ak{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-top:4px}
+.rfl-demo .rfl-actnote{margin:11px 0 0;font-size:12px;line-height:1.55;color:var(--text-quaternary)}
+
+/* the request, as received */
+.rfl-page{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:15px 16px;font-size:12px;line-height:1.6;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word}
+.rfl-page .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--text-primary);margin-bottom:2px}
+.rfl-page .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
+
+/* notify (shared signup — lives with the last demo on the page) */
+.sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
+.sil-notify{display:grid;grid-template-columns:1fr auto;gap:var(--space-3);align-items:start}
+.sil-notify .sil-btn{white-space:nowrap}
+.sil-notify-msg{grid-column:1/-1;margin:0;font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
+.sil-notify-msg.is-warn{color:var(--coral-500)}
+@media(max-width:900px){.sil-soon{grid-template-columns:1fr;gap:var(--space-6)}}
+@media(max-width:520px){.sil-notify{grid-template-columns:1fr}.sil-notify .sil-btn{width:100%}}
+
+@media (max-width:1040px){
+  .rfl-panel{grid-template-columns:1fr 372px}
+  .rfl-listwrap,.rfl-detail{height:640px}
+}
+@media (max-width:820px){
+  .rfl-stats{grid-template-columns:repeat(2,1fr)}
+  .rfl-panel{grid-template-columns:1fr}
+  .rfl-listwrap{height:auto;max-height:66vh} .rfl-detail{height:auto}
+  .rfl-prog{margin-left:0;width:100%}
+  .rfl-demo .rfl-btn-approve{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.rfl-demo *{animation-duration:.01ms!important}}
+</style>
+
+<script>
+(function(){
+  "use strict";
+  if(window.__rflInit) return; window.__rflInit=true;
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  var TICK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg>';
+  var CROSS='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4l6 6M10 4l-6 6"/></svg>';
+  var LOCK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6.3" width="8" height="5.4" rx="1.4"/><path d="M5.1 6.3V4.7a1.9 1.9 0 0 1 3.8 0v1.6"/></svg>';
+
+  /* Per-request provider minutes at the 6.8 min industry benchmark. Only the
+     requests a clinician never has to open are counted as time returned. */
+  var MIN_PER_REQ=6.8;
+
+  var FIRST=["Maria","James","Linda","Robert","Aisha","David","Elena","Michael","Priya","John","Sofia","Wei","Grace","Omar","Nina","Carlos","Ruth","Samuel","Ivy","Hassan"];
+  var LAST=["Alvarez","Thompson","Nguyen","Patel","Johnson","Garcia","Kim","O'Brien","Rossi","Cohen","Okafor","Martinez","Singh","Walsh","Fischer","Haddad","Brooks","Delgado","Sato","Reyes"];
+  var PHARM=["Walgreens #4821","CVS #337","Rite Aid #1102","Kroger Pharmacy","Costco #118","Independent Rx on Main"];
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function pad(n){return n<10?"0"+n:""+n;}
+  function dob(){var y=1938+Math.floor(Math.random()*70);return pad(1+Math.floor(Math.random()*12))+"/"+pad(1+Math.floor(Math.random()*28))+"/"+y;}
+  function recvTime(){var h=7+Math.floor(Math.random()*3);return pad(h)+":"+pad(Math.floor(Math.random()*60))+" AM";}
+
+  /* ---- the refill protocol, as a worked example ----
+     Each template carries the checks the agent runs. "ok:false" is what holds
+     a request back, and the reason is written for the prescriber, not the log. */
+  var T=[
+    // ---------- protocol clean ----------
+    {st:"clean",drug:"Metformin 500 mg",qty:"#90 · 3 refills",conf:.97,
+     checks:[["ok","Office visit 4 months ago","protocol: within 12 months"],
+             ["ok","A1c 6.9% on 12 Mar 2026","protocol: within 6 months, at goal"],
+             ["ok","2 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Every rule your practice set for metformin is satisfied, with the evidence attached."},
+    {st:"clean",drug:"Atorvastatin 20 mg",qty:"#90 · 3 refills",conf:.96,
+     checks:[["ok","Office visit 6 months ago","protocol: within 12 months"],
+             ["ok","Lipid panel 08 Jan 2026","protocol: within 12 months"],
+             ["ok","3 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Statin continuation with a current lipid panel on file."},
+    {st:"clean",drug:"Lisinopril 10 mg",qty:"#30 · 5 refills",conf:.97,
+     checks:[["ok","Office visit 3 months ago","protocol: within 12 months"],
+             ["ok","Potassium 4.1 · creatinine 0.9, 02 Feb 2026","protocol: within 12 months"],
+             ["ok","5 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Renal function checked inside the window your protocol requires for an ACE inhibitor."},
+    {st:"clean",drug:"Levothyroxine 50 mcg",qty:"#90 · 1 refill",conf:.95,
+     checks:[["ok","Office visit 5 months ago","protocol: within 12 months"],
+             ["ok","TSH 2.1 mIU/L on 19 Feb 2026","protocol: within 12 months"],
+             ["ok","1 refill left on the original Rx","flagged for renewal at the next visit"],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Last refill on this Rx — the agent has noted a renewal for the next visit."},
+    {st:"clean",drug:"Amlodipine 5 mg",qty:"#30 · 4 refills",conf:.96,
+     checks:[["ok","Office visit 2 months ago","protocol: within 12 months"],
+             ["ok","BP 128/78 recorded at that visit","protocol: reading on file"],
+             ["ok","4 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Blood pressure documented at a recent visit."},
+    {st:"clean",drug:"Omeprazole 20 mg",qty:"#30 · 2 refills",conf:.94,
+     checks:[["ok","Office visit 7 months ago","protocol: within 12 months"],
+             ["ok","No lab gate on this medication",""],
+             ["ok","2 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. No lab requirement for this medication under your protocol."},
+    {st:"clean",drug:"Sertraline 50 mg",qty:"#30 · 3 refills",conf:.93,
+     checks:[["ok","Office visit 3 months ago","protocol: within 6 months for this class"],
+             ["ok","No dose change since the last visit",""],
+             ["ok","3 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Seen inside the tighter six-month window your protocol sets for this class."},
+    {st:"clean",drug:"Albuterol HFA inhaler",qty:"#1 · 2 refills",conf:.95,
+     checks:[["ok","Office visit 9 months ago","protocol: within 12 months"],
+             ["ok","No lab gate on this medication",""],
+             ["ok","2 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Rescue inhaler continuation."},
+
+    // ---------- needs a clinician ----------
+    {st:"review",drug:"Metformin 1000 mg",qty:"#90 · 0 refills",conf:.92,hold:"Lab overdue",
+     checks:[["ok","Office visit 8 months ago","protocol: within 12 months"],
+             ["bad","No A1c since 04 Aug 2024","protocol: within 6 months — 19 months overdue"],
+             ["ok","Refills remain on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Held for you. The agent will not authorise a diabetes medication on a 19-month-old A1c — that is a call for a clinician, not a rule."},
+    {st:"review",drug:"Warfarin 5 mg",qty:"#30 · 1 refill",conf:.94,hold:"INR out of date",
+     checks:[["ok","Office visit 6 weeks ago","protocol: within 12 months"],
+             ["bad","Last INR 9 weeks ago","protocol: within 4 weeks for warfarin"],
+             ["ok","1 refill left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Held for you. Narrow therapeutic index and a stale INR — this one always reaches a prescriber."},
+    {st:"review",drug:"Atorvastatin 40 mg",qty:"#90 · 2 refills",conf:.88,hold:"Dose mismatch",
+     checks:[["ok","Office visit 5 months ago","protocol: within 12 months"],
+             ["ok","Lipid panel 11 Feb 2026","protocol: within 12 months"],
+             ["bad","Pharmacy is requesting 20 mg — the chart says 40 mg since 11 Feb","dose changed at the last visit"],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Held for you. The pharmacy is working from the pre-visit dose. Authorising as requested would quietly undo a change you made."},
+    {st:"review",drug:"Losartan 50 mg",qty:"#30 · 0 refills",conf:.93,hold:"Visit overdue",
+     checks:[["bad","No office visit in 16 months","protocol: within 12 months"],
+             ["ok","Potassium 4.4 · creatinine 1.0, 21 Nov 2025",""],
+             ["bad","Refills exhausted on the original Rx","a new prescription is required"],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Held for you. Two rules missed — the agent proposes a bridging supply and a visit, but that is your decision."},
+    {st:"review",drug:"Gabapentin 300 mg",qty:"#90 · 1 refill",conf:.61,hold:"Chart match unclear",
+     checks:[["bad","No confident chart match","“M. Alvarez” matches 2 active patients"],
+             ["ok","Requesting pharmacy verified",""],
+             ["ok","Not a federally controlled substance","state-monitored in some states"]],
+     verdict:"Held for you. Low match confidence — the agent never guesses which patient a request belongs to. It routes, it does not assume."},
+
+    // ---------- controlled: never automated ----------
+    {st:"ctrl",drug:"Alprazolam 0.5 mg",qty:"#30 · 0 refills",conf:.99,hold:"Schedule IV",
+     checks:[["blocked","Schedule IV controlled substance","protocol: never auto-authorised"],
+             ["ok","Office visit 2 months ago",""],
+             ["ok","Requesting pharmacy verified",""]],
+     verdict:"Controlled substance. The agent stops here every time, whatever the rest of the chart says — this needs a prescriber and the usual EPCS path."},
+    {st:"ctrl",drug:"Oxycodone 5 mg",qty:"#20 · 0 refills",conf:.99,hold:"Schedule II",
+     checks:[["blocked","Schedule II controlled substance","protocol: never auto-authorised, no refills permitted"],
+             ["ok","Office visit 6 weeks ago",""],
+             ["ok","Requesting pharmacy verified",""]],
+     verdict:"Controlled substance. Schedule II cannot be refilled at all — the agent surfaces it as a new-prescription decision for the prescriber."}
+  ];
+  var WEIGHT={clean:5,review:2,ctrl:1};
+  var BAG=[]; T.forEach(function(t,i){var w=WEIGHT[t.st];for(var k=0;k<w;k++)BAG.push(i);});
+
+  var BATCH_N=20;
+  var listEl=$("rflList"), detailEl=$("rflDetail"), emptyEl=$("rflEmpty"), progEl=$("rflProg");
+  var nodes={}, data={}, seq=0, selected=null;
+  var pending=[], active=0, produced=0, running=false;
+  // sent/booked/routed = where it went. batch = never needed a human at all,
+  // touched = the prescriber opened it. Only `batch` is time actually returned.
+  var count={in:0,clean:0,review:0,ctrl:0,sent:0,booked:0,routed:0,batch:0,touched:0};
+  var STAGES=["Matching the chart…","Reading the protocol…","Checking the labs…","Counting refills…"];
+  var MAXC=3;
+
+  function instance(ti){
+    var t=T[ti], pt=pick(FIRST)+" "+pick(LAST);
+    return {id:"rx"+(seq++), st:t.st, drug:t.drug, qty:t.qty, conf:t.conf, hold:t.hold||"",
+            checks:t.checks, verdict:t.verdict, patient:pt, dob:dob(),
+            pharmacy:pick(PHARM), recv:recvTime(), decided:false};
+  }
+  function bandLabel(st){ return st==="clean"?"clean":(st==="review"?"review":"hold"); }
+  function passCount(f){ var n=0; f.checks.forEach(function(c){ if(c[0]==="ok") n++; }); return n; }
+
+  function makeCheckingNode(f){
+    var li=document.createElement("li");
+    li.className="rfl-row enter"; li.setAttribute("data-id",f.id);
+    li.innerHTML='<div class="rfl-band checking">check</div>'+
+      '<div class="rfl-rmain"><div class="rfl-rtitle">Refill request <span class="qty">· '+esc(f.pharmacy)+'</span></div>'+
+      '<div class="rfl-rsub checking rfl-status">'+STAGES[0]+'</div>'+
+      '<div class="rfl-pbar"><i></i></div></div>'+
+      '<div class="rfl-rmeta"><div class="ck">&nbsp;</div><div class="sub">'+f.recv+'</div></div>';
+    return li;
+  }
+  function fillNode(li,f){
+    li.innerHTML='<div class="rfl-band '+f.st+'">'+bandLabel(f.st)+'</div>'+
+      '<div class="rfl-rmain"><div class="rfl-rtitle">'+esc(f.drug)+'<span class="qty">'+esc(f.qty)+'</span></div>'+
+      '<div class="rfl-rsub">'+esc(f.patient)+' · '+esc(f.pharmacy)+(f.hold?' · <b>'+esc(f.hold)+'</b>':'')+'</div></div>'+
+      '<div class="rfl-rmeta"><div class="ck">'+passCount(f)+'/'+f.checks.length+' checks</div>'+
+      '<div class="sub">'+f.recv+'</div></div>';
+    li.addEventListener("click",function(){ select(f.id); });
+    if(selected===f.id) li.classList.add("sel");
+  }
+
+  function updateStats(){
+    $("rflVIn").textContent=count.in;
+    $("rflVClean").textContent=count.clean;
+    $("rflVRev").textContent=count.review;
+    $("rflVCtrl").textContent=count.ctrl;
+    var mins=Math.round(count.batch*MIN_PER_REQ);
+    $("rflVTime").textContent = mins ? (mins>=60 ? (Math.floor(mins/60)+"h "+pad(mins%60)+"m") : (mins+"m")) : "—";
+  }
+  function setApproveLabel(btn,n){
+    btn.textContent = n ? ("Approve all "+n+" clean ") : "Approve all clean ";
+    var arw=document.createElement("span"); arw.className="arw"; arw.innerHTML="&rarr;";
+    btn.appendChild(arw);
+  }
+  function updateBatch(){
+    var bar=$("rflBatch"), btn=$("rflApproveAll");
+    if(!count.in){ bar.setAttribute("hidden",""); return; }
+    bar.removeAttribute("hidden");
+    var cleanLeft=0, revLeft=0, ctrlLeft=0;
+    Object.keys(data).forEach(function(k){ var f=data[k];
+      if(!f||f.checking||f.decided) return;
+      if(f.st==="clean") cleanLeft++; else if(f.st==="review") revLeft++; else ctrlLeft++; });
+    setApproveLabel(btn, cleanLeft);
+    // While the batch is still being checked the clean count is a moving
+    // target - hold the button until every request has been through.
+    if(running){
+      $("rflBSum").innerHTML='Checking the batch &mdash; <b>'+count.in+'</b> of <b>'+BATCH_N+'</b> so far';
+      btn.disabled=true;
+      $("rflLCount").textContent=count.in+" checked";
+      return;
+    }
+    $("rflBSum").innerHTML='<b>'+cleanLeft+'</b> protocol clean · <b>'+revLeft+'</b> need a clinician · <b>'+ctrlLeft+'</b> controlled';
+    btn.disabled = cleanLeft===0;
+    var left=cleanLeft+revLeft+ctrlLeft;
+    $("rflLCount").textContent = left ? (left+" open") : "all clear";
+  }
+
+  function select(id){
+    var f=data[id]; if(!f||f.checking) return; selected=id;
+    Array.prototype.forEach.call(listEl.querySelectorAll(".rfl-row"),function(n){
+      n.classList.toggle("sel", n.getAttribute("data-id")===id); });
+    var checks=f.checks.map(function(c){
+      var ico = c[0]==="ok"?TICK:(c[0]==="blocked"?LOCK:CROSS);
+      return '<li class="'+c[0]+'"><span class="ci">'+ico+'</span>'+
+        '<span><span class="cl">'+esc(c[1])+'</span>'+
+        (c[2]?'<span class="cd">'+esc(c[2])+'</span>':'')+'</span></li>';
+    }).join("");
+    var vClass = f.st==="clean"?"":(f.st==="review"?" review":" ctrl");
+    var vKey = f.st==="clean"?"Verdict · safe to authorise":(f.st==="review"?"Verdict · held for a clinician":"Verdict · controlled substance");
+    detailEl.innerHTML=
+      '<div class="rfl-dhead"><div class="row1">'+
+        '<span class="rfl-band '+f.st+'" style="padding:5px 10px">'+bandLabel(f.st)+'</span>'+
+        '<span class="rfl-dtype">'+esc(f.drug)+'</span>'+
+        '<span class="rfl-dconf">'+Math.round(f.conf*100)+'% conf.</span></div>'+
+        '<div class="rfl-dfrom">'+esc(f.patient)+' · DOB '+esc(f.dob)+' · '+esc(f.pharmacy)+'</div></div>'+
+      '<div class="rfl-dbody">'+
+        '<div class="rfl-dsec">Protocol check</div>'+
+        '<ul class="rfl-checks">'+checks+'</ul>'+
+        '<div class="rfl-verdict'+vClass+'"><div class="vk">'+vKey+'</div>'+
+          '<div class="vv">'+esc(f.verdict)+'</div></div>'+
+        '<div class="rfl-dsec" style="margin-top:20px">'+(f.decided?"What you did":"Your decision")+'</div>'+
+        actsHtml(f)+
+        '<div class="rfl-dsec" style="margin-top:20px">The request, as received</div>'+
+        '<div class="rfl-page"><div class="lh">'+esc(f.pharmacy)+'</div>'+
+          '<div class="lh-sub">inbound refill request · '+f.recv+'</div>'+
+          esc("REFILL AUTHORIZATION REQUEST\nPatient: "+f.patient+"   DOB: "+f.dob+
+              "\nDrug: "+f.drug+", "+f.qty.replace(/ · /g,", ")+
+              "\nPharmacy: "+f.pharmacy+"\nPlease approve or deny.").replace(/\n/g,"<br>")+
+        '</div>'+
+      '</div>';
+  }
+
+  /* ---- the decisions a human actually makes ---- */
+  function actionsFor(f){
+    if(f.st==="clean") return [
+      {p:1,l:"Approve · send to "+f.pharmacy,k:"Authorised on your signature",d:"Sent to "+f.pharmacy,b:"sent"},
+      {l:"Hold for a visit instead",k:"Booking link goes to the patient",d:"Held — visit offered to the patient",b:"booked"}];
+    if(f.st==="review") return [
+      {p:1,l:"Approve anyway — I have the context",k:"Overrides the protocol · logged with your name",d:"Approved on your override — sent to "+f.pharmacy,b:"sent"},
+      {l:"Deny — book the visit first",k:"Booking link goes to the patient",d:"Denied — visit offered to the patient",b:"booked"},
+      {l:"Ask the pharmacy for the missing item",k:"Fax back to "+f.pharmacy,d:"Query faxed to "+f.pharmacy,b:"routed"}];
+    return [
+      {p:1,l:"Route to the prescriber",k:"Controlled · EPCS, never automated",d:"Routed to the prescriber for EPCS",b:"routed"}];
+  }
+  function actsHtml(f){
+    var acts=actionsFor(f);
+    if(f.decided) return '<div class="rfl-acts"><button type="button" class="rfl-act" disabled>'+
+      '<span class="aic" style="border-color:var(--mint-400);color:var(--mint-400);background:rgba(94,224,168,.14)">'+TICK+'</span>'+
+      '<span><span class="al">'+esc(f.decidedLabel)+'</span>'+
+      '<span class="ak">Decided by you · '+esc(f.decidedAt)+'</span></span></button></div>';
+    var rows=acts.map(function(a,i){
+      return '<button type="button" class="rfl-act'+(a.p?" is-primary":"")+'" data-ai="'+i+'">'+
+        '<span class="aic"></span><span><span class="al">'+esc(a.l)+'</span>'+
+        '<span class="ak">'+esc(a.k)+'</span></span></button>';
+    }).join("");
+    var note = f.st==="ctrl"
+      ? "Controlled substances are the one lane with no automatic path, by design. The agent files the paperwork and gets out of the way."
+      : (f.st==="review"
+        ? "Nothing here was decided for you. The agent did the checking and the assembling; the judgement stays yours."
+        : "One click authorises and delivers. Nothing is sent to a pharmacy without it.");
+    return '<div class="rfl-acts">'+rows+'</div><p class="rfl-actnote">'+esc(note)+'</p>';
+  }
+  function nowStamp(){
+    var d=new Date(), h=d.getHours(), m=d.getMinutes(), ap=h<12?"AM":"PM";
+    h=h%12; if(!h)h=12; return h+":"+(m<10?"0"+m:m)+" "+ap;
+  }
+  function decide(id,i){
+    var f=data[id]; if(!f||f.checking||f.decided) return;
+    var a=actionsFor(f)[i]; if(!a) return;
+    f.decided=true; f.decidedLabel=a.d; f.decidedAt=nowStamp();
+    count[a.b]++; count.touched++;
+    removeRow(id);
+    updateStats(); updateBatch();
+    select(id);
+    checkAllClear();
+  }
+  function removeRow(id){
+    var li=nodes[id]; if(!li) return;
+    li.classList.add("is-going");
+    setTimeout(function(){ if(li.parentNode) li.parentNode.removeChild(li); }, reduce?10:300);
+    delete nodes[id];
+  }
+  function onActClick(ev){
+    var n=ev.target;
+    while(n&&n!==detailEl&&!(n.classList&&n.classList.contains("rfl-act"))) n=n.parentNode;
+    if(!n||n===detailEl||n.disabled||!selected) return;
+    decide(selected, parseInt(n.getAttribute("data-ai"),10));
+  }
+
+  function approveAllClean(){
+    var ids=Object.keys(data).filter(function(k){
+      var f=data[k]; return f&&!f.checking&&!f.decided&&f.st==="clean"; });
+    if(!ids.length) return;
+    $("rflApproveAll").disabled=true;
+    var i=0;
+    (function step(){
+      if(i>=ids.length){ updateStats(); updateBatch(); checkAllClear(); return; }
+      var f=data[ids[i++]];
+      f.decided=true; f.decidedLabel="Sent to "+f.pharmacy; f.decidedAt=nowStamp();
+      count.sent++; count.batch++;
+      removeRow(f.id);
+      updateStats(); updateBatch();
+      setTimeout(step, reduce?8:70);
+    })();
+  }
+  function checkAllClear(){
+    var left=Object.keys(data).filter(function(k){ var f=data[k]; return f&&!f.checking&&!f.decided; }).length;
+    if(left||running) return;
+    var mins=Math.round(count.batch*MIN_PER_REQ);
+    var went=[];
+    if(count.sent)   went.push(count.sent+" went to the pharmacy");
+    if(count.booked) went.push(count.booked+" turned into a visit");
+    if(count.routed) went.push(count.routed+" routed to the prescriber");
+    var wentTxt=went.join(", "), lc=wentTxt.lastIndexOf(", ");
+    if(lc>-1) wentTxt=wentTxt.slice(0,lc)+" and "+wentTxt.slice(lc+2);
+    listEl.innerHTML="";
+    var e=document.createElement("div"); e.className="rfl-empty";
+    e.innerHTML='<div class="rfl-empty-ico" style="color:var(--mint-400);border-color:rgba(94,224,168,.35)">'+
+        '<svg width="24" height="24" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg></div>'+
+      '<h3>Refill desk clear</h3>'+
+      '<p>'+count.in+' requests came in. You opened '+count.touched+
+      (count.batch?' \u2014 the other '+count.batch+' cleared on a single click':'')+'. '+
+      (wentTxt?wentTxt.charAt(0).toUpperCase()+wentTxt.slice(1)+'.':'')+'</p>'+
+      (count.batch?'<p class="rfl-donenote">About '+(mins>=60?(Math.floor(mins/60)+"h "+pad(mins%60)+"m"):(mins+"m"))+
+      ' of prescriber time returned, at the 6.8-minute-per-request benchmark.</p>':'');
+    listEl.appendChild(e); emptyEl=e;
+    $("rflLCount").textContent="all clear";
+    progEl.textContent="desk clear";
+    $("rflRun").disabled=false;
+  }
+
+  /* ---- run the batch ---- */
+  function spawn(f){
+    if(emptyEl){ emptyEl.parentNode&&emptyEl.parentNode.removeChild(emptyEl); emptyEl=null; }
+    var li=makeCheckingNode(f); nodes[f.id]=li; data[f.id]={checking:true,id:f.id};
+    listEl.appendChild(li);
+    return {li:li,status:li.querySelector(".rfl-status"),bar:li.querySelector(".rfl-pbar>i")};
+  }
+  function startCheck(f){
+    active++;
+    var r=spawn(f);
+    var dur=reduce?260:(1100+Math.random()*900);
+    if(r.bar) requestAnimationFrame(function(){
+      r.bar.style.transition="width "+dur+"ms cubic-bezier(.3,.6,.3,1)"; r.bar.style.width="100%"; });
+    for(var s=1;s<STAGES.length;s++){ (function(idx){ setTimeout(function(){
+      if(r.status&&r.status.parentNode&&r.status.classList.contains("checking")) r.status.textContent=STAGES[idx];
+    }, dur*idx/STAGES.length); })(s); }
+    setTimeout(function(){
+      data[f.id]=f; count.in++; count[f.st]++;
+      r.status.classList.remove("checking");
+      fillNode(r.li,f);
+      updateStats();
+      active--; pump();
+      if(running && produced>=BATCH_N && !pending.length && !active){
+        running=false; $("rflRun").disabled=false;
+        progEl.textContent=count.in+" checked · "+count.clean+" clean";
+      } else if(running){ progEl.textContent=count.in+" / "+BATCH_N+" checked"; }
+      updateBatch();   // after `running` is settled, so the button unlocks
+    }, dur);
+  }
+  function pump(){ while(active<MAXC && pending.length) startCheck(pending.shift()); }
+  function run(){
+    if(running) return;
+    reset(true); running=true; produced=0;
+    $("rflRun").disabled=true;
+    for(var i=0;i<BATCH_N;i++){ pending.push(instance(pick(BAG))); produced++; }
+    progEl.textContent="0 / "+BATCH_N+" checked";
+    pump();
+  }
+  function reset(quiet){
+    pending=[]; active=0; running=false; produced=0;
+    nodes={}; data={}; selected=null;
+    count={in:0,clean:0,review:0,ctrl:0,sent:0,booked:0,routed:0,batch:0,touched:0};
+    listEl.innerHTML="";
+    var e=document.createElement("div"); e.className="rfl-empty";
+    e.innerHTML='<div class="rfl-empty-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="5"/><line x1="12" y1="7.4" x2="12" y2="16.6"/></svg></div>'+
+      '<h3>No requests loaded</h3><p>Run the batch to watch the agent check each refill against the practice protocol.</p>';
+    listEl.appendChild(e); emptyEl=e;
+    detailEl.innerHTML='<div class="rfl-dempty"><h3>Nothing selected</h3><p>Pick a request to see every protocol rule the agent checked, and the evidence behind each one.</p></div>';
+    $("rflBatch").setAttribute("hidden",""); $("rflApproveAll").disabled=false;
+    $("rflLCount").textContent=" ";
+    updateStats();
+    if(!quiet){ progEl.textContent="idle"; $("rflRun").disabled=false; }
+  }
+
+  function bind(){
+    $("rflRun").addEventListener("click",run);
+    $("rflReset").addEventListener("click",function(){ reset(false); });
+    $("rflApproveAll").addEventListener("click",approveAllClean);
+    detailEl.addEventListener("click",onActClick);
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
   else bind();
