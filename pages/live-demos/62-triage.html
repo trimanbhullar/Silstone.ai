@@ -1104,9 +1104,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   "Simulate a busy morning" runs a client-side simulation on SYNTHETIC faxes.
   "Paste your own fax" calls the SAME Cloudflare Worker backend as demo 1
   (Claude via /api/triage), with a client-side heuristic fallback if the API
-  is unreachable. Also carries the shared "notify / next demo" signup (moved
-  here so it follows both demos). Markup + trailing <style>/<script> live
-  OUTSIDE the SIL:GLOBAL markers; run build-embeds.py to bake the system in.
+  is unreachable. The shared "notify / next demo" signup lives in block 63 so
+  it stays after every demo. Markup + trailing <style>/<script> live OUTSIDE
+  the SIL:GLOBAL markers; run build-embeds.py to bake the system in.
 -->
 <div class="sil-root">
 
@@ -1228,34 +1228,6 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     </div>
   </section>
 
-  <!-- ==================== NOTIFY ==================== -->
-  <section class="sil-section has-top">
-    <div class="sil-cursorglow" aria-hidden="true"></div>
-    <div class="sil-container">
-      <div class="sil-card is-hover is-spot sil-reveal">
-        <div class="sil-soon">
-          <div>
-            <span class="sil-tag">More on the way</span>
-            <h2 class="sil-display-s sil-mt-4">New demos land often.</h2>
-            <p class="sil-body-m sil-mt-3 sil-measure">
-              We're building a demo for every piece of admin practices dread.
-              Leave an email and we'll tell you the moment the next one goes live.
-            </p>
-          </div>
-          <form class="sil-notify" id="silNotify" action="https://api.web3forms.com/submit" method="POST" novalidate>
-            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
-            <input type="hidden" name="subject" value="New Live Demo notify signup">
-            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo page">
-            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-            <label class="sil-sr" for="silNotifyEmail">Email address</label>
-            <input id="silNotifyEmail" name="email" type="email" required placeholder="you@practice.com" autocomplete="email">
-            <button type="submit" class="sil-btn sil-btn-primary is-auto">Notify me</button>
-            <p class="sil-notify-msg" id="silNotifyMsg" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 </div>
 
 <style>
@@ -1467,15 +1439,6 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   .trg-queuewrap{height:auto;max-height:66vh} .trg-detail{height:auto}
 }
 @media (prefers-reduced-motion:reduce){.trg-demo *{animation-duration:.01ms!important}}
-
-/* notify (moved from block 61) */
-.sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
-.sil-notify{display:grid;grid-template-columns:1fr auto;gap:var(--space-3);align-items:start}
-.sil-notify .sil-btn{white-space:nowrap}
-.sil-notify-msg{grid-column:1/-1;margin:0;font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
-.sil-notify-msg.is-warn{color:var(--coral-500)}
-@media(max-width:900px){.sil-soon{grid-template-columns:1fr;gap:var(--space-6)}}
-@media(max-width:520px){.sil-notify{grid-template-columns:1fr}.sil-notify .sil-btn{width:100%}}
 </style>
 
 <script>
@@ -2269,28 +2232,5 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
   else bind();
-})();
-</script>
-
-<script>
-(function(){
-var f=document.getElementById('silNotify');
-if(!f||f.__init)return;f.__init=true;
-var msg=document.getElementById('silNotifyMsg');
-var btn=f.querySelector('button[type=submit]');
-f.addEventListener('submit',function(e){
-e.preventDefault();
-var email=f.querySelector('input[type=email]');
-if(!email.value||email.validity.typeMismatch){msg.textContent='Please enter a valid email address.';msg.className='sil-notify-msg is-warn';return;}
-msg.textContent='Sending…';msg.className='sil-notify-msg';
-if(btn)btn.disabled=true;
-fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
-.then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
-.then(function(res){
-if(res.ok&&res.data&&res.data.success){f.reset();msg.textContent="You're on the list. We'll email you the moment the next demo lands.";msg.className='sil-notify-msg';}
-else{msg.textContent=(res.data&&res.data.message)?res.data.message:'Something went wrong. Please try again.';msg.className='sil-notify-msg is-warn';}
-}).catch(function(){msg.textContent='Network error. Please try again.';msg.className='sil-notify-msg is-warn';})
-.then(function(){if(btn)btn.disabled=false;});
-});
 })();
 </script>

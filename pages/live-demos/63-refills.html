@@ -1,0 +1,1787 @@
+<!-- SIL:GLOBAL START -- generated from assets/ by build-embeds.py. Everything between these markers is baked in; edit assets/silstone.css or assets/silstone.js and re-run, not here. -->
+<style>
+/* ===========================================================================
+   1. FONTS
+   Poppins/Inter are the design system's documented SUBSTITUTES; real brand font
+   files were never supplied. Swap this @import for @font-face and the rest of
+   the system follows automatically.
+   =========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ===========================================================================
+   2. PALETTE
+   =========================================================================== */
+:root {
+  /* ---- Canvas & surfaces ---- */
+  --bg-canvas:      #08080B;
+  --bg-canvas-alt:  #0C0C12;   /* the alternating section tone */
+  --bg-surface:     #101014;
+  --bg-surface-raised: #16161D;
+  --bg-surface-3:   #1C1C25;
+
+  /* ---- Lines ---- */
+  --border-subtle:  rgba(255,255,255,0.07);
+  --border-default: rgba(255,255,255,0.12);
+  --border-strong:  rgba(255,255,255,0.18);
+
+  /* ---- Type ---- */
+  --text-primary:    #F6F6F8;
+  --text-secondary:  #9B9BA6;
+  --text-tertiary:   #8B8B95;
+  /* Lifted from the original #6A6A75, which measured 3.7:1 on the canvas.
+     #7A7A86 reaches 4.7:1 and still reads as a quiet label colour. */
+  --text-quaternary: #7A7A86;
+
+  /* ---- Violet: the lead ---- */
+  --violet-100: #E4DEFF;
+  --violet-200: #C2B6FF;
+  --violet-300: #A594FF;
+  --violet-400: #8B7CF6;
+  --violet-500: #7C6BF0;
+  --violet-600: #6E56CF;
+  --violet-700: #5B44B8;
+
+  /* ---- Warm ---- */
+  --coral-200: #FFD8C6;
+  --coral-300: #FFC0A6;
+  --coral-400: #FF9E7A;
+  --coral-500: #F0855E;
+  --amber-200: #F7E3BE;
+  --amber-300: #F5D9A8;
+  --amber-400: #EFC178;
+  --amber-500: #E0A855;
+
+  /* ---- Cool ---- */
+  --mint-300: #93EFD0;
+  --mint-400: #5EE0A8;
+  --mint-500: #3FC48C;
+
+  /* ---- Brand teal ----
+     Threaded through in small doses so the wordmark belongs: nav active state,
+     the LIVE pill, the "Built on Claude" chip, footer badges, one stop in the
+     headline gradient, and the whole Trust & security page. Never the lead. */
+  --teal-300: #5FE6D9;
+  --teal-400: #3BDECE;
+  --teal-500: #2DD9D3;
+  --teal-600: #21B4AF;
+  --teal-700: #178C88;
+  --teal-soft:        rgba(45,217,211,0.10);
+  --teal-soft-border: rgba(45,217,211,0.28);
+
+  /* ---- Semantic ---- */
+  --accent:         var(--violet-600);   /* solid CTA: 5.3:1 against white */
+  --accent-hover:   #7A62DE;             /* still 4.5:1 against white      */
+  --accent-active:  var(--violet-700);
+  --text-accent:    var(--violet-300);   /* 7.8:1 on the canvas            */
+  --text-on-accent: #FFFFFF;
+  --focus-ring:     var(--violet-300);
+
+  --accent-soft:        rgba(124,107,240,0.11);
+  --accent-soft-border: rgba(124,107,240,0.28);
+
+  /* ---- Gradients ---- */
+  --grad-primary: linear-gradient(120deg, #7A62DE 0%, #5B44B8 100%);
+  --grad-vivid:   linear-gradient(120deg, var(--violet-400) 0%, var(--violet-600) 55%, #4E3AA6 100%);
+  /* The teal stop is what ties the wordmark to the rest of the page: headline
+     gradients sweep violet -> teal -> coral, so the logo reads as part of the
+     system rather than a leftover. */
+  --grad-text:    linear-gradient(100deg, var(--violet-200) 0%, var(--violet-400) 26%, var(--teal-300) 52%, var(--coral-300) 78%, var(--violet-200) 100%);
+  --grad-line:    linear-gradient(90deg, transparent, var(--violet-500), var(--coral-400), transparent);
+  --grad-warm:    linear-gradient(120deg, var(--coral-400) 0%, var(--amber-400) 100%);
+
+  /* ---- Type scale ---- */
+  --font-display:'Poppins',-apple-system,sans-serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono','SFMono-Regular',Menlo,monospace;
+
+  --text-display-xl-size:4rem;    --text-display-xl-weight:700; --text-display-xl-leading:1.05;
+  --text-display-l-size:3rem;     --text-display-l-weight:700;  --text-display-l-leading:1.1;
+  --text-display-m-size:2.25rem;  --text-display-m-weight:600;  --text-display-m-leading:1.15;
+  --text-display-s-size:1.5rem;   --text-display-s-weight:600;  --text-display-s-leading:1.25;
+
+  --text-body-l-size:1.25rem;    --text-body-l-leading:1.6;
+  --text-body-m-size:1.0625rem;  --text-body-m-leading:1.6;
+  --text-body-s-size:0.9375rem;  --text-body-s-leading:1.55;
+  --text-caption-size:0.8125rem; --text-caption-leading:1.4;
+
+  --tracking-tight:-0.02em; --tracking-normal:0em;
+  --tracking-wide:0.04em;   --tracking-widest:0.18em;
+
+  --font-weight-regular:400; --font-weight-medium:500;
+  --font-weight-semibold:600; --font-weight-bold:700;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1:4px;  --space-2:8px;  --space-3:12px; --space-4:16px;
+  --space-5:20px; --space-6:24px; --space-8:32px; --space-10:40px;
+  --space-12:48px; --space-16:64px; --space-20:80px; --space-24:96px; --space-32:128px;
+
+  /* ---- Radius ---- */
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-xl:24px; --radius-pill:999px;
+
+  /* ---- Shadow ---- */
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.45);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.5);
+
+  /* ---- Motion ---- */
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --duration-fast:120ms; --duration-base:200ms; --duration-slow:360ms;
+
+  /* ---- Layout ---- */
+  --container-max:1320px;
+  --container-pad:clamp(20px,5vw,80px);
+}
+
+/* ===========================================================================
+   3. PER-SECTION ACCENT
+   Put one of these classes on a .sil-section and everything inside re-tints.
+   A single card can override too: style="--sec-rgb:255,158,122".
+   =========================================================================== */
+.sil-section, .sil-root {
+  --sec-rgb: 124,107,240;              /* violet, the default            */
+  --sec-text: var(--violet-300);       /* legible tint for small type    */
+}
+.sil-section.acc-peri  { --sec-rgb: 165,148,255; --sec-text: var(--violet-200); }
+.sil-section.acc-coral { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-section.acc-amber { --sec-rgb: 239,193,120; --sec-text: var(--amber-300);  }
+.sil-section.acc-mint  { --sec-rgb:  94,224,168; --sec-text: var(--mint-300);   }
+.sil-section.acc-teal  { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* Each accent also gets its own ambient-mesh trio, so a warm section drifts
+   warm rather than sitting under a violet haze. */
+.sil-section.acc-coral { --m1: var(--coral-400); --m2: var(--violet-600); --m3: var(--amber-400); }
+.sil-section.acc-amber { --m1: var(--amber-400); --m2: var(--violet-700); --m3: var(--coral-400); }
+.sil-section.acc-mint  { --m1: var(--mint-400);  --m2: var(--violet-600); --m3: var(--teal-500);  }
+.sil-section.acc-peri  { --m1: var(--violet-300);--m2: var(--violet-600); --m3: var(--coral-400); }
+
+/* ---- Trios -------------------------------------------------------------
+   A group of three reads better as a set than as one colour repeated. Put
+   .sil-trio on the container and its three children cycle violet / coral /
+   teal, each re-deriving --sec-* from its own hue.
+
+   Use .sil-trio-1 / -2 / -3 directly on the items instead when something sits
+   between them in the DOM (the How it works steps have connector arrows), or
+   when you want to pick the order by hand.
+   ---------------------------------------------------------------------- */
+.sil-trio > *:nth-child(1), .sil-trio-1 { --sec-rgb: 124,107,240; --sec-text: var(--violet-300); }
+.sil-trio > *:nth-child(2), .sil-trio-2 { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-trio > *:nth-child(3), .sil-trio-3 { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* ---- Sequences ---------------------------------------------------------
+   Longer runs (the six-step engagement timeline) walk the full palette
+   cool -> warm -> cool, so each step is distinct and the row reads as
+   progress rather than repetition. Repeats every six items.
+   ---------------------------------------------------------------------- */
+.sil-seq > *:nth-child(6n+1) { --sec-rgb: 124,107,240; --sec-text: var(--violet-300); }
+.sil-seq > *:nth-child(6n+2) { --sec-rgb: 165,148,255; --sec-text: var(--violet-200); }
+.sil-seq > *:nth-child(6n+3) { --sec-rgb: 255,158,122; --sec-text: var(--coral-300);  }
+.sil-seq > *:nth-child(6n+4) { --sec-rgb: 239,193,120; --sec-text: var(--amber-300);  }
+.sil-seq > *:nth-child(6n+5) { --sec-rgb:  94,224,168; --sec-text: var(--mint-300);   }
+.sil-seq > *:nth-child(6n+6) { --sec-rgb:  45,217,211; --sec-text: var(--teal-300);   }
+
+/* Derived once, for every accent scope, so components never repeat an rgba()
+   literal. Whatever sets --sec-rgb above (section class, trio slot, seq slot,
+   or an inline style="--sec-rgb:...") flows through these. */
+.sil-section, .sil-root,
+.sil-trio > *, .sil-trio-1, .sil-trio-2, .sil-trio-3,
+.sil-seq > * {
+  --sec:        rgb(var(--sec-rgb));
+  --sec-soft:   rgba(var(--sec-rgb), 0.10);
+  --sec-softer: rgba(var(--sec-rgb), 0.05);
+  --sec-border: rgba(var(--sec-rgb), 0.26);
+  --sec-glow:   0 0 30px rgba(var(--sec-rgb), 0.20);
+}
+
+/* ===========================================================================
+   4. BASE  (scoped to .sil-root so Hostinger's own chrome is untouched)
+   =========================================================================== */
+.sil-root, .sil-root * { box-sizing: border-box; }
+.sil-root {
+  font-family: var(--font-body);
+  font-size: var(--text-body-m-size);
+  line-height: var(--text-body-m-leading);
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  position: relative; overflow-x: clip;
+  /* Fill the section container edge to edge. Hostinger caps its grid container
+     width by default; lifting that cap is a one-time snippet in Settings >
+     Integrations (see README > "Full-width sections in Hostinger"). Once the
+     container is uncapped this fills it; .sil-container re-centres the content. */
+  width: 100%;
+}
+.sil-root img, .sil-root svg, .sil-root canvas { display: block; max-width: 100%; }
+.sil-root p { margin: 0; }
+.sil-root h1, .sil-root h2, .sil-root h3, .sil-root h4 { margin: 0; font-family: var(--font-display); }
+.sil-root ul, .sil-root ol { margin: 0; padding: 0; list-style: none; }
+.sil-root a { color: var(--text-accent); text-decoration: none; transition: color var(--duration-base) var(--ease-standard); }
+.sil-root a:hover { color: var(--violet-200); }
+.sil-root button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+.sil-root ::selection { background: var(--violet-500); color: #fff; }
+
+.sil-root input, .sil-root textarea, .sil-root select {
+  font-family: var(--font-body); font-size: var(--text-body-s-size);
+  color: var(--text-primary); width: 100%;
+  background: var(--bg-surface); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 12px 16px; outline: none;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-root input:focus, .sil-root textarea:focus, .sil-root select:focus {
+  border-color: var(--sec); box-shadow: 0 0 0 3px var(--sec-soft);
+}
+.sil-root input::placeholder, .sil-root textarea::placeholder { color: var(--text-quaternary); }
+
+/* ===========================================================================
+   5. LAYOUT
+   =========================================================================== */
+.sil-section {
+  position: relative; width: 100%;
+  padding: var(--space-24) 0;
+  background: var(--bg-canvas); overflow: hidden;
+}
+.sil-section.is-alt   { background: var(--bg-canvas-alt); }
+.sil-section.is-tight { padding: var(--space-12) 0; }
+.sil-section.is-flush { padding: 0; }
+.sil-section.has-top    { border-top: 1px solid var(--border-subtle); }
+.sil-section.has-bottom { border-bottom: 1px solid var(--border-subtle); }
+
+/* A very faint wash of the section's own accent. Subtle by design: it should
+   read as a change of temperature, not as a coloured panel. */
+.sil-section.has-tint::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 88% 54% at 50% 0%, rgba(var(--sec-rgb), 0.03), transparent 66%);
+}
+
+.sil-container {
+  width: 100%; max-width: var(--container-max);
+  margin: 0 auto; padding: 0 var(--container-pad);
+  position: relative; z-index: 2;
+}
+.sil-container.is-narrow { max-width: 860px; }
+
+.sil-grid { display: grid; gap: var(--space-6); }
+.sil-grid.c2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.sil-grid.c3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.sil-grid.c4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.sil-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center; }
+
+.sil-center { text-align: center; }
+/* Scoped to .sil-root (0,2,0) on purpose: the element resets above
+   (`.sil-root p/ul/ol/h1-4 { margin: 0 }`, 0,1,1) would otherwise outrank a bare
+   `.sil-mt-*` (0,1,0) and silently zero it on every paragraph, list and heading.
+   Still below the compound rhythm rules (section 15, also 0,2,0) in source order,
+   so those keep priority where they apply -- utilities remain the floor. */
+.sil-root .sil-mt-2{margin-top:var(--space-2);}   .sil-root .sil-mt-3{margin-top:var(--space-3);}
+.sil-root .sil-mt-4{margin-top:var(--space-4);}   .sil-root .sil-mt-5{margin-top:var(--space-5);}
+.sil-root .sil-mt-6{margin-top:var(--space-6);}   .sil-root .sil-mt-8{margin-top:var(--space-8);}
+.sil-root .sil-mt-10{margin-top:var(--space-10);} .sil-root .sil-mt-12{margin-top:var(--space-12);}
+.sil-root .sil-mt-16{margin-top:var(--space-16);} .sil-root .sil-mt-20{margin-top:var(--space-20);}
+
+/* ===========================================================================
+   6. TYPOGRAPHY
+   =========================================================================== */
+.sil-display-xl,.sil-display-l,.sil-display-m,.sil-display-s {
+  font-family: var(--font-display); letter-spacing: var(--tracking-tight); color: var(--text-primary);
+}
+.sil-display-xl{font-size:var(--text-display-xl-size);font-weight:var(--text-display-xl-weight);line-height:var(--text-display-xl-leading);}
+.sil-display-l {font-size:var(--text-display-l-size); font-weight:var(--text-display-l-weight); line-height:var(--text-display-l-leading);}
+.sil-display-m {font-size:var(--text-display-m-size); font-weight:var(--text-display-m-weight); line-height:var(--text-display-m-leading);}
+.sil-display-s {font-size:var(--text-display-s-size); font-weight:var(--text-display-s-weight); line-height:var(--text-display-s-leading);}
+
+.sil-body-l{font-size:var(--text-body-l-size);line-height:var(--text-body-l-leading);color:var(--text-secondary);}
+.sil-body-m{font-size:var(--text-body-m-size);line-height:var(--text-body-m-leading);color:var(--text-secondary);}
+.sil-body-s{font-size:var(--text-body-s-size);line-height:var(--text-body-s-leading);color:var(--text-secondary);}
+.sil-caption{font-size:var(--text-caption-size);line-height:var(--text-caption-leading);color:var(--text-tertiary);}
+.sil-mono{font-family:var(--font-mono);font-size:var(--text-caption-size);letter-spacing:var(--tracking-wide);color:var(--text-quaternary);}
+.sil-measure{max-width:65ch;}
+
+.sil-root strong, .sil-em { font-weight: var(--font-weight-bold); color: var(--text-primary); }
+.sil-em-accent { color: var(--sec-text); font-weight: var(--font-weight-bold); }
+
+.sil-gt {
+  background: var(--grad-text); background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: silGradShift 13s ease-in-out infinite;
+}
+@keyframes silGradShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+
+.sil-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 5px 13px; border-radius: var(--radius-pill);
+  font-family: var(--font-body); font-size: var(--text-caption-size);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  background: var(--sec-soft); color: var(--sec-text); border: 1px solid var(--sec-border);
+}
+.sil-eyebrow.is-neutral { background: var(--bg-surface-raised); color: var(--text-secondary); border-color: var(--border-subtle); }
+.sil-eyebrow .dot { width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;flex:none; }
+
+.sil-wordmark {
+  font-family: var(--font-display); font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-primary);
+}
+.sil-wordmark em { font-style: normal; color: var(--teal-500); }
+
+@media (max-width: 900px) {
+  :root {
+    --text-display-xl-size:2.75rem; --text-display-l-size:2.25rem;
+    --text-display-m-size:1.75rem;  --text-display-s-size:1.25rem;
+    --text-body-l-size:1.0625rem;
+  }
+  .sil-section { padding: var(--space-16) 0; }
+}
+@media (max-width: 520px) { :root { --text-display-xl-size:2.25rem; --text-display-l-size:1.875rem; } }
+
+/* ===========================================================================
+   7. BUTTONS
+   Prefixed with .sil-root because most buttons are <a> elements, and the base
+   `.sil-root a` rule (0,1,1) would otherwise outrank a bare `.sil-btn-*` (0,1,0)
+   and repaint the label with the link colour.
+   =========================================================================== */
+.sil-btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  font-family: var(--font-body); font-weight: var(--font-weight-semibold);
+  font-size: var(--text-body-m-size);
+  padding: 12px 24px; border-radius: var(--radius-pill);
+  border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.sil-btn-sm { padding: 8px 16px; font-size: var(--text-body-s-size); }
+.sil-btn-lg { padding: 16px 32px; font-size: var(--text-body-l-size); }
+.sil-btn .arw { transition: transform var(--duration-base) var(--ease-standard); flex: none; }
+.sil-btn:hover .arw { transform: translateX(3px); }
+
+.sil-root .sil-btn-primary { background: var(--accent); color: var(--text-on-accent); box-shadow: var(--shadow-sm); }
+.sil-root .sil-btn-primary:hover  { background: var(--accent-hover); color: var(--text-on-accent); box-shadow: 0 6px 24px rgba(124,107,240,0.28); transform: translateY(-1px); }
+.sil-root .sil-btn-primary:active { background: var(--accent-active); color: var(--text-on-accent); transform: none; }
+
+.sil-root .sil-btn-gradient {
+  color: var(--text-on-accent);
+  background: var(--grad-primary); background-size: 200% 200%;
+  animation: silGradShift 10s ease-in-out infinite;
+  box-shadow: var(--shadow-sm);
+}
+.sil-btn-gradient::before {
+  content:''; position:absolute; inset:0; z-index:-1;
+  background: radial-gradient(120px circle at var(--bx,50%) var(--by,50%), rgba(255,255,255,.30), transparent 65%);
+  opacity:0; transition: opacity var(--duration-base) var(--ease-standard);
+}
+.sil-root .sil-btn-gradient:hover { color: var(--text-on-accent); box-shadow: 0 8px 28px rgba(124,107,240,0.32); transform: translateY(-1px); }
+.sil-btn-gradient:hover::before { opacity: 1; }
+
+.sil-root .sil-btn-secondary { background: transparent; color: var(--text-primary); border-color: var(--border-default); }
+.sil-root .sil-btn-secondary:hover  { border-color: var(--sec); color: var(--sec-text); }
+.sil-root .sil-btn-secondary:active { border-color: var(--sec); color: var(--sec-text); }
+
+.sil-root .sil-btn-ghost {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  padding:4px 0; background:transparent; color:var(--sec-text);
+  font-weight:var(--font-weight-semibold); font-size:var(--text-body-m-size);
+}
+.sil-root .sil-btn-ghost:hover { color: var(--violet-100); }
+.sil-btn-ghost .arw { transition: transform var(--duration-base) var(--ease-standard); }
+.sil-btn-ghost:hover .arw { transform: translateX(3px); }
+
+/* ===========================================================================
+   8. CARDS
+   =========================================================================== */
+.sil-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: border-color var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-card.is-hover:hover { border-color: var(--sec-border); }
+.sil-card.is-lift:hover  { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.sil-card.is-raised { background: var(--bg-surface-raised); }
+.sil-card.is-bare   { background: transparent; }
+
+.sil-card.is-spot::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0; border-radius:inherit;
+  background: radial-gradient(340px circle at var(--mx,50%) var(--my,50%), rgba(var(--sec-rgb),0.07), transparent 62%);
+  opacity:0; transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.sil-card.is-spot::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:1; border-radius:inherit; padding:1px;
+  background: radial-gradient(300px circle at var(--mx,50%) var(--my,50%), rgba(var(--sec-rgb),0.55), transparent 68%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity:0; transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.sil-card.is-spot:hover::before, .sil-card.is-spot:hover::after { opacity: 1; }
+.sil-card > * { position: relative; z-index: 2; }
+
+.sil-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-md); flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sec-soft); border: 1px solid var(--sec-border); color: var(--sec-text);
+  font-family: var(--font-mono); font-size: 15px; font-weight: 500;
+  transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-card:hover .sil-icon { box-shadow: var(--sec-glow); }
+
+/* ===========================================================================
+   9. TAGS / CHIPS
+   =========================================================================== */
+.sil-tag {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  padding:4px 12px; border-radius:var(--radius-pill);
+  font-family:var(--font-body); font-size:var(--text-caption-size);
+  font-weight:var(--font-weight-semibold); letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;
+  background:var(--bg-surface-raised); color:var(--text-secondary);
+  border:1px solid var(--border-subtle);
+}
+.sil-tag.is-accent { background:var(--sec-soft); color:var(--sec-text); border-color:var(--sec-border); }
+.sil-chip {
+  display:inline-flex; align-items:center; gap:var(--space-2);
+  font-family:var(--font-mono); font-size:var(--text-caption-size);
+  letter-spacing:var(--tracking-wide); color:var(--text-secondary);
+}
+.sil-chip .dot {
+  width:6px;height:6px;border-radius:50%;flex:none;
+  background:var(--chip, var(--sec)); box-shadow:0 0 8px var(--chip, var(--sec));
+}
+
+.sil-rule { height:1px; background:var(--border-subtle); border:0; }
+
+/* ===========================================================================
+   10. AMBIENT BACKGROUND
+   Deliberately faint: the canvas must still read as near-black.
+   =========================================================================== */
+.sil-mesh { position:absolute; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.sil-mesh i {
+  position:absolute; display:block; border-radius:50%;
+  filter: blur(100px); mix-blend-mode: screen; will-change: transform;
+}
+.sil-mesh i:nth-child(1){width:46vw;height:46vw;left:-12%;top:-24%;background:var(--m1,var(--violet-500));opacity:.08;animation:silDrift 26s ease-in-out infinite;}
+.sil-mesh i:nth-child(2){width:34vw;height:34vw;right:-8%;top:4%;background:var(--m2,var(--violet-700));opacity:.07;animation:silDrift 33s ease-in-out infinite reverse;}
+.sil-mesh i:nth-child(3){width:30vw;height:30vw;left:34%;bottom:-20%;background:var(--m3,var(--coral-400));opacity:.05;animation:silDrift 39s ease-in-out infinite;}
+@keyframes silDrift {
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%    {transform:translate(4vw,3vw) scale(1.08);}
+  66%    {transform:translate(-3vw,2vw) scale(0.95);}
+}
+
+.sil-gridlines {
+  position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.020) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.020) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 35%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 35%, transparent 78%);
+}
+
+.sil-cursorglow {
+  position:absolute; inset:0; pointer-events:none; z-index:1;
+  background: radial-gradient(520px circle at var(--gx,50%) var(--gy,40%), rgba(var(--sec-rgb),0.07), transparent 60%);
+  transition: background var(--duration-fast) linear;
+}
+.sil-hairline { position:absolute; top:0; left:0; right:0; height:1px; z-index:2; background: var(--grad-line); opacity:.45; }
+
+/* ===========================================================================
+   11. SCROLL REVEAL
+   =========================================================================== */
+/* Start hidden ONLY when the runtime is present (it adds .sil-js). If the
+   script never runs -- Hostinger's editor canvas, a sandboxed embed, JS off --
+   the content stays fully visible instead of stuck at opacity:0. */
+.sil-js .sil-reveal { opacity:0; transform: translateY(14px); }
+.sil-reveal.is-in {
+  opacity:1; transform:none;
+  transition: opacity var(--duration-slow) var(--ease-standard),
+              transform var(--duration-slow) var(--ease-standard);
+  transition-delay: var(--d, 0ms);
+}
+
+/* ===========================================================================
+   12. DATA VISUALISATION
+   Series colours come from --sec plus the warm ramp, never from a fixed hue,
+   so charts follow whatever accent their section carries.
+   =========================================================================== */
+.sil-chart { width:100%; display:block; overflow:visible; }
+.sil-chart .axis   { stroke: rgba(255,255,255,0.07); stroke-width:1; }
+.sil-chart .glabel { font-family:var(--font-mono); font-size:10px; fill:var(--text-quaternary); letter-spacing:.04em; }
+.sil-chart .vlabel { font-family:var(--font-display); font-size:12px; font-weight:600; fill:var(--text-secondary); }
+
+/* Chart/meter "start" states are also gated behind .sil-js, so without the
+   runtime the charts render in their finished state rather than blank. */
+.sil-chart .bar { transform-origin:bottom; }
+.sil-js .sil-chart .bar { transform:scaleY(0); }
+.is-in .sil-chart .bar { transform:scaleY(1); transition:transform 700ms var(--ease-out); transition-delay:var(--d,0ms); }
+.sil-chart .line { stroke-dasharray:var(--len,2000); }
+.sil-js .sil-chart .line { stroke-dashoffset:var(--len,2000); }
+.is-in .sil-chart .line { stroke-dashoffset:0; transition:stroke-dashoffset 1500ms var(--ease-out); transition-delay:var(--d,0ms); }
+.sil-js .sil-chart .area, .sil-js .sil-chart .pt { opacity:0; }
+.is-in .sil-chart .area { opacity:1; transition:opacity var(--duration-slow) ease 400ms; }
+.is-in .sil-chart .pt   { opacity:1; transition:opacity var(--duration-base) ease; transition-delay:var(--d,0ms); }
+
+.sil-meter { height:5px; border-radius:var(--radius-pill); background:rgba(255,255,255,0.06); overflow:hidden; }
+.sil-meter > span { display:block; height:100%; border-radius:inherit; width:var(--w,0%); background:var(--acc, var(--sec)); }
+.sil-js .sil-meter > span { width:0; }
+.is-in .sil-meter > span { width:var(--w,0%); transition:width 700ms var(--ease-out); transition-delay:var(--d,0ms); }
+
+/* ===========================================================================
+   13. FAQ
+   =========================================================================== */
+.sil-faq { border-top:1px solid var(--border-subtle); }
+.sil-faq-item { border-bottom:1px solid var(--border-subtle); }
+.sil-faq-q {
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  gap:var(--space-4); padding:var(--space-6) 0; text-align:left;
+  font-family:var(--font-body); font-weight:var(--font-weight-bold);
+  font-size:var(--text-body-l-size); color:var(--text-primary);
+  transition:color var(--duration-base) var(--ease-standard);
+}
+.sil-faq-q:hover { color:var(--sec-text); }
+.sil-faq-sign {
+  flex-shrink:0; width:24px; height:24px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--sec-text); font-size:20px; line-height:1;
+  transition:transform var(--duration-base) var(--ease-standard);
+}
+.sil-faq-item.is-open .sil-faq-sign { transform:rotate(45deg); }
+.sil-faq-a { overflow:hidden; height:0; transition:height var(--duration-base) var(--ease-standard); }
+.sil-faq-a .inner {
+  padding-bottom:var(--space-6); max-width:65ch;
+  color:var(--text-secondary);
+  font-size:var(--text-body-m-size); line-height:var(--text-body-m-leading);
+}
+
+/* ===========================================================================
+   14. MARQUEE
+   =========================================================================== */
+.sil-marquee {
+  position:relative; overflow:hidden; width:100%;
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+}
+.sil-marquee-track { display:flex; align-items:center; gap:var(--space-10); width:max-content; animation:silMarquee 42s linear infinite; }
+.sil-marquee:hover .sil-marquee-track { animation-play-state:paused; }
+@keyframes silMarquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ===========================================================================
+   15. VERTICAL RHYTHM
+   Spacing between adjacent text and elements, set in one place.
+   These use compound sibling selectors (0,2,0), which outrank the .sil-mt-*
+   utilities (0,1,0) on purpose: the utilities set a floor, this sets the real
+   rhythm. Change the four --rhythm values to retune the whole site.
+   =========================================================================== */
+:root {
+  --rhythm-tight: var(--space-4);
+  --rhythm:       var(--space-5);
+  --rhythm-loose: var(--space-6);
+  --rhythm-block: clamp(48px, 5.5vw, 72px);
+}
+
+.sil-eyebrow + .sil-display-xl, .sil-eyebrow + .sil-display-l,
+.sil-eyebrow + .sil-display-m,  .sil-eyebrow + .sil-display-s,
+.sil-tag + .sil-display-xl, .sil-tag + .sil-display-l,
+.sil-tag + .sil-display-m,  .sil-tag + .sil-display-s,
+.sil-icon + .sil-display-xl, .sil-icon + .sil-display-l,
+.sil-icon + .sil-display-m,  .sil-icon + .sil-display-s,
+.sil-icon + h2, .sil-icon + h3 { margin-top: var(--rhythm-loose); }
+
+.sil-display-xl + .sil-body-l, .sil-display-xl + .sil-body-m, .sil-display-xl + .sil-body-s,
+.sil-display-l  + .sil-body-l, .sil-display-l  + .sil-body-m, .sil-display-l  + .sil-body-s {
+  margin-top: var(--rhythm-loose);
+}
+.sil-display-m + .sil-body-l, .sil-display-m + .sil-body-m, .sil-display-m + .sil-body-s,
+.sil-display-s + .sil-body-l, .sil-display-s + .sil-body-m, .sil-display-s + .sil-body-s {
+  margin-top: var(--rhythm);
+}
+.sil-body-l + .sil-body-l, .sil-body-l + .sil-body-m, .sil-body-l + .sil-body-s,
+.sil-body-m + .sil-body-l, .sil-body-m + .sil-body-m, .sil-body-m + .sil-body-s,
+.sil-body-s + .sil-body-l, .sil-body-s + .sil-body-m, .sil-body-s + .sil-body-s,
+.sil-body-l + .sil-ticks,  .sil-body-m + .sil-ticks,  .sil-body-s + .sil-ticks {
+  margin-top: var(--rhythm);
+}
+.sil-body-l + .sil-mono, .sil-body-m + .sil-mono, .sil-body-s + .sil-mono,
+.sil-display-s + .sil-mono, .sil-card ul + .sil-mono, .sil-card ol + .sil-mono,
+.sil-table + .sil-mono, .sil-chart + .sil-mono { margin-top: var(--rhythm-loose); }
+
+.sil-direct { gap: var(--space-5); }
+.sil-ticks  { gap: var(--space-4); }
+
+.sil-container > .sil-center + .sil-grid,
+.sil-container > .sil-center + .sil-steps,
+.sil-container > .sil-center + .sil-faq,
+.sil-container > .sil-center + .sil-table,
+.sil-container > .sil-center + .sil-card,
+.sil-container > .sil-center + .sil-outcomes-charts,
+.sil-container > .sil-reveal + .sil-table,
+.sil-container > .sil-reveal + .sil-grid { margin-top: var(--rhythm-block); }
+
+.sil-card { padding: clamp(24px, 2.6vw, 36px); }
+.sil-grid { gap: clamp(20px, 2.2vw, 28px); }
+
+.sil-body-l + .sil-btn, .sil-body-m + .sil-btn, .sil-body-s + .sil-btn,
+.sil-body-l + .sil-btn-ghost, .sil-body-m + .sil-btn-ghost, .sil-body-s + .sil-btn-ghost,
+.sil-ticks + .sil-btn, .sil-mono + .sil-btn { margin-top: var(--space-8); }
+
+/* A caption sitting under a button needs real clearance. A pill button has no
+   optical margin below it, so the default 20px reads as almost touching.
+   The :has() rule covers captions after a button wrapped in its own row div. */
+.sil-btn + .sil-mono, .sil-btn + .sil-caption, .sil-btn + .sil-body-s,
+.sil-btn-ghost + .sil-mono, .sil-btn-ghost + .sil-caption {
+  margin-top: var(--space-6);
+}
+.sil-root *:has(> .sil-btn) + .sil-mono,
+.sil-root *:has(> .sil-btn) + .sil-caption,
+.sil-root *:has(> .sil-btn) + .sil-body-s {
+  margin-top: var(--space-6);
+}
+
+/* ===========================================================================
+   16. RESPONSIVE
+   =========================================================================== */
+@media (max-width:1024px){
+  .sil-split{grid-template-columns:1fr;gap:var(--space-12);}
+  .sil-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:760px){
+  .sil-grid.c2,.sil-grid.c3,.sil-grid.c4{grid-template-columns:1fr;}
+  .sil-btn{width:100%;}
+  .sil-btn.is-auto{width:auto;}
+  .sil-mesh i{filter:blur(70px);}
+}
+
+/* ===========================================================================
+   17. ACCESSIBILITY
+   =========================================================================== */
+.sil-root :focus-visible { outline:2px solid var(--focus-ring); outline-offset:3px; border-radius:var(--radius-sm); }
+.sil-sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+@media (prefers-reduced-motion: reduce){
+  .sil-root *, .sil-root *::before, .sil-root *::after {
+    animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;
+  }
+  .sil-reveal{opacity:1 !important;transform:none !important;}
+  .sil-chart .bar{transform:scaleY(1) !important;}
+  .sil-chart .line{stroke-dashoffset:0 !important;}
+  .sil-chart .area,.sil-chart .pt{opacity:1 !important;}
+  .sil-meter > span{width:var(--w,0%) !important;}
+}
+
+/* ===========================================================================
+   BLOG  (index cards + article) — used by build-site.py generated pages
+   =========================================================================== */
+.sil-blog-wrap { max-width: var(--container-max); margin: 0 auto; padding: var(--space-12) var(--container-pad) var(--space-16); }
+.sil-blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-6); }
+.sil-blog-card { display: flex; flex-direction: column; overflow: hidden; text-decoration: none;
+  background: var(--bg-surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
+  transition: transform var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard); }
+.sil-blog-card:hover { transform: translateY(-3px); border-color: var(--teal-700); }
+/* aspect-ratio on the WRAPPER (no height attr to fight); image fills + crops */
+.sil-blog-thumb, .sil-blog-featured-img { aspect-ratio: 16 / 9; overflow: hidden; display: block; }
+.sil-blog-thumb img, .sil-blog-featured-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform var(--duration-slow, .4s) var(--ease-standard); }
+.sil-blog-card:hover .sil-blog-thumb img,
+.sil-blog-featured:hover .sil-blog-featured-img img { transform: scale(1.045); }
+.sil-blog-card-body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); flex: 1; }
+
+/* Featured (newest) post — large horizontal card above the grid */
+.sil-blog-featured {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: var(--space-8); align-items: center;
+  margin-bottom: var(--space-10); padding: var(--space-6); text-decoration: none;
+  background: var(--bg-surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
+  transition: border-color var(--duration-base) var(--ease-standard); }
+.sil-blog-featured:hover { border-color: var(--teal-700); }
+.sil-blog-featured-img { border-radius: var(--radius-md); }
+.sil-blog-featured .sil-blog-card-body { padding: var(--space-2) var(--space-4); gap: var(--space-3); }
+.sil-blog-featured h2 { font-family: var(--font-family-display, inherit); font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.2; margin: 0; color: var(--text-primary); }
+.sil-blog-featured p { font-size: var(--text-body-m-size, 16px); -webkit-line-clamp: 3; }
+@media (max-width: 820px) {
+  .sil-blog-featured { grid-template-columns: 1fr; gap: var(--space-4); padding: 0; background: none; border: 0; }
+  .sil-blog-featured-img { border-radius: var(--radius-lg); }
+  .sil-blog-featured .sil-blog-card-body { padding: 0; }
+}
+.sil-blog-date { font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-tertiary); }
+.sil-blog-card h3 { font-family: var(--font-family-display, inherit); font-size: 20px; line-height: 1.3; margin: 0; color: var(--text-primary); }
+.sil-blog-card p { font-size: var(--text-body-s-size); line-height: 1.55; margin: 0; color: var(--text-secondary);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.sil-blog-more { margin-top: auto; padding-top: var(--space-2); color: var(--teal-300); font-weight: var(--font-weight-semibold); font-size: var(--text-body-s-size); }
+
+.sil-article-page { max-width: 1200px; margin: 0 auto; padding: var(--space-12) var(--container-pad) var(--space-16); }
+.sil-article-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); }
+.sil-article-back { color: var(--text-secondary); font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium); }
+.sil-article-back:hover { color: var(--teal-300); }
+.sil-article-title { font-family: var(--font-family-display, inherit); font-size: clamp(28px, 5vw, 44px); line-height: 1.15; margin: 0 0 var(--space-3); color: var(--text-primary); }
+/* byline: author + date + reading time */
+.sil-article-byline { margin: 0 0 var(--space-8); color: var(--text-tertiary); font-size: var(--text-body-s-size); }
+.sil-byline-author { color: var(--text-secondary); font-weight: var(--font-weight-semibold); }
+/* hero: 16:9 wrapper so the image can't fall back to a square (height attr bug) */
+.sil-article-hero { aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius-lg); display: block; margin: 0 0 var(--space-8); }
+.sil-article-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Read next — related posts at the end of an article */
+.sil-readnext { border-top: 1px solid var(--border-subtle); padding-top: var(--space-12); margin-top: var(--space-8); }
+.sil-readnext-title { font-family: var(--font-family-display, inherit); font-size: 24px; line-height: 1.2; color: var(--text-primary); margin: 0 0 var(--space-6); }
+.sil-article { max-width: 760px; font-size: 17px; line-height: 1.75; color: var(--text-secondary); }
+.sil-article h2 { font-family: var(--font-family-display, inherit); font-size: 26px; line-height: 1.3; margin: var(--space-9) 0 var(--space-3); color: var(--text-primary); }
+.sil-article h3 { font-size: 21px; line-height: 1.35; margin: var(--space-7) 0 var(--space-2); color: var(--text-primary); }
+.sil-article p { margin: 0 0 var(--space-4); }
+.sil-article ul, .sil-article ol { margin: 0 0 var(--space-4); padding-left: var(--space-5); }
+.sil-article li { margin-bottom: var(--space-2); }
+.sil-article a { color: var(--teal-300); text-decoration: underline; text-underline-offset: 2px; }
+.sil-article strong { color: var(--text-primary); font-weight: var(--font-weight-semibold); }
+.sil-article h4 { font-size: 18px; line-height: 1.4; margin: var(--space-6) 0 var(--space-2); color: var(--text-primary); }
+.sil-article img { max-width: 100%; height: auto; border-radius: var(--radius-md); margin: var(--space-4) 0; display: block; }
+.sil-article blockquote { margin: 0 0 var(--space-4); padding: var(--space-2) 0 var(--space-2) var(--space-5);
+  border-left: 3px solid var(--teal-700); color: var(--text-primary); font-style: italic; }
+.sil-article code { font-family: var(--font-family-mono, monospace); font-size: .9em;
+  background: var(--bg-surface-3); padding: 2px 6px; border-radius: 6px; }
+.sil-article hr { border: 0; border-top: 1px solid var(--border-subtle); margin: var(--space-8) 0; }
+
+/* ===========================================================================
+   BLOG ENGAGEMENT: TOC, tags + filter, share, author box, progress bar
+   =========================================================================== */
+html { scroll-behavior: smooth; }
+.sil-article h2, .sil-article h3 { scroll-margin-top: 90px; }
+
+.sil-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--teal-500), var(--violet-500)); z-index: 1000; transition: width .1s linear; }
+
+.sil-toc { max-width: 760px; margin: 0 0 var(--space-8); padding: var(--space-4) var(--space-5);
+  background: var(--bg-surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); }
+.sil-toc-label { margin: 0 0 var(--space-2); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-tertiary); }
+.sil-toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.sil-toc a { color: var(--text-secondary); font-size: var(--text-body-s-size); text-decoration: none; }
+.sil-toc a:hover { color: var(--teal-300); }
+
+.sil-tag { display: inline-block; padding: 3px 10px; border-radius: var(--radius-pill);
+  background: var(--teal-soft); border: 1px solid var(--teal-soft-border); color: var(--teal-300);
+  font-size: 12px; font-weight: var(--font-weight-medium); text-decoration: none; line-height: 1.5; }
+a.sil-tag:hover { background: var(--teal-soft-border); }
+.sil-card-tags, .sil-article-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.sil-card-tags { margin-top: var(--space-1); }
+.sil-article-tags { max-width: 760px; margin: var(--space-8) 0 var(--space-6); }
+
+.sil-tagfilter { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-8); }
+.sil-tagfilter-btn { padding: 6px 14px; border-radius: var(--radius-pill); cursor: pointer;
+  background: transparent; border: 1px solid var(--border-default); color: var(--text-secondary);
+  font-family: inherit; font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium);
+  transition: color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard); }
+.sil-tagfilter-btn:hover { border-color: var(--teal-500); color: var(--teal-300); }
+.sil-tagfilter-btn.is-active { background: var(--teal-500); border-color: var(--teal-500); color: #04120f; }
+
+.sil-share { max-width: 760px; display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
+  margin: var(--space-8) 0 0; padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); }
+.sil-share-label { font-size: var(--text-body-s-size); color: var(--text-tertiary); font-weight: var(--font-weight-semibold); }
+.sil-share-btn { padding: 7px 14px; border-radius: var(--radius-md); cursor: pointer; text-decoration: none;
+  background: var(--bg-surface-3); border: 1px solid var(--border-default); color: var(--text-secondary);
+  font-family: inherit; font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium);
+  transition: color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard); }
+.sil-share-btn:hover { border-color: var(--teal-500); color: var(--teal-300); }
+
+.sil-author-box { max-width: 760px; display: flex; align-items: center; gap: var(--space-4);
+  margin: var(--space-8) 0 0; padding: var(--space-5); background: var(--bg-surface-raised);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); }
+.sil-author-avatar { flex: none; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--grad-primary); color: #fff; font-weight: var(--font-weight-bold); font-size: 16px; }
+.sil-author-name { margin: 0 0 2px; color: var(--text-primary); font-weight: var(--font-weight-semibold); }
+.sil-author-desc { margin: 0; color: var(--text-secondary); font-size: var(--text-body-s-size); line-height: 1.5; }
+a.sil-byline-author { text-decoration: none; }
+a.sil-byline-author:hover { color: var(--teal-300); }
+.sil-author-name a { color: inherit; text-decoration: none; }
+.sil-author-name a:hover { color: var(--teal-300); }
+.sil-author-linkedin { display: inline-block; margin-top: var(--space-2); color: var(--teal-300); font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium); text-decoration: none; }
+.sil-author-linkedin:hover { text-decoration: underline; }
+
+/* ===========================================================================
+   ARTICLE LAYOUT: sticky TOC sidebar (desktop) + scroll-spy
+   =========================================================================== */
+.sil-article-main { min-width: 0; }
+.sil-article-main--full { max-width: 820px; margin: 0 auto; }
+.sil-toc { display: none; }   /* hidden on mobile; becomes a sidebar on desktop */
+
+@media (min-width: 981px) {
+  .sil-article-layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: var(--space-12); align-items: start; }
+  .sil-toc { display: block; position: sticky; top: 96px; align-self: start;
+    max-width: none; margin: 0; padding: 0; background: none; border: 0; border-radius: 0;
+    max-height: calc(100vh - 120px); overflow-y: auto; }
+  .sil-toc-label { margin: 0 0 var(--space-3); }
+  .sil-toc ul { border-left: 1px solid var(--border-subtle); gap: 0; }
+  .sil-toc a { display: block; padding: 6px 0 6px var(--space-4); margin-left: -1px;
+    border-left: 2px solid transparent; transition: color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard); }
+  .sil-toc a.is-active { color: var(--teal-300); border-left-color: var(--teal-500); }
+}
+</style>
+<script>
+/* ===========================================================================
+   SILSTONE.AI SHARED RUNTIME
+   Idempotent and re-scannable, so it works regardless of the order Hostinger
+   renders the embed blocks in.
+   =========================================================================== */
+(function () {
+  // Mark that the runtime is live. CSS gates every "start hidden" state behind
+  // this class, so if the script never runs the content stays visible.
+  document.documentElement.classList.add('sil-js');
+
+  if (window.__silstoneInit) return;
+  window.__silstoneInit = true;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = new WeakSet();
+
+  function initReveal() {
+    var els = document.querySelectorAll('.sil-reveal, .sil-section');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    els.forEach(function (el) {
+      if (seen.has(el)) return;
+      seen.add(el);
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('is-in');
+      else io.observe(el);
+    });
+  }
+
+  function initSpotlight() {
+    document.querySelectorAll('.sil-card.is-spot').forEach(function (card) {
+      if (card.__spot) return;
+      card.__spot = true;
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+    document.querySelectorAll('.sil-btn-gradient').forEach(function (b) {
+      if (b.__spot) return;
+      b.__spot = true;
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.setProperty('--bx', (e.clientX - r.left) + 'px');
+        b.style.setProperty('--by', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    });
+  }
+
+  function initSectionGlow() {
+    document.querySelectorAll('.sil-section').forEach(function (sec) {
+      if (sec.__glow || !sec.querySelector('.sil-cursorglow')) return;
+      sec.__glow = true;
+      sec.addEventListener('pointermove', function (e) {
+        var r = sec.getBoundingClientRect();
+        sec.style.setProperty('--gx', ((e.clientX - r.left) / r.width * 100) + '%');
+        sec.style.setProperty('--gy', ((e.clientY - r.top) / r.height * 100) + '%');
+      }, { passive: true });
+    });
+  }
+
+  /* <span class="sil-count" data-to="312" data-prefix="$" data-suffix="K"> */
+  function initCounters() {
+    var els = document.querySelectorAll('.sil-count');
+    if (!els.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        run(e.target);
+      });
+    }, { threshold: 0.4 });
+
+    els.forEach(function (el) {
+      if (el.__count) return;
+      el.__count = true;
+      el.textContent = (el.dataset.prefix || '') + '0' + (el.dataset.suffix || '');
+      io.observe(el);
+    });
+
+    function run(el) {
+      var to  = parseFloat(el.dataset.to || '0');
+      var dec = parseInt(el.dataset.dec || '0', 10);
+      var pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+      var sep = el.dataset.sep === '1';
+      function fmt(v) {
+        var s = v.toFixed(dec);
+        return sep ? Number(s).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) : s;
+      }
+      if (reduced) { el.textContent = pre + fmt(to) + suf; return; }
+      var dur = 1200, t0 = performance.now();
+      (function tick(now) {
+        var p = Math.min((now - t0) / dur, 1);
+        el.textContent = pre + fmt(to * (1 - Math.pow(1 - p, 3))) + suf;
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+  }
+
+  function initFaq() {
+    document.querySelectorAll('.sil-faq').forEach(function (faq) {
+      if (faq.__faq) return;
+      faq.__faq = true;
+      var single = faq.dataset.single !== '0';
+
+      faq.querySelectorAll('.sil-faq-item').forEach(function (item) {
+        var q = item.querySelector('.sil-faq-q');
+        var a = item.querySelector('.sil-faq-a');
+        if (!q || !a) return;
+        q.setAttribute('aria-expanded', item.classList.contains('is-open') ? 'true' : 'false');
+        if (item.classList.contains('is-open')) a.style.height = a.firstElementChild.offsetHeight + 'px';
+
+        q.addEventListener('click', function () {
+          var open = item.classList.contains('is-open');
+          if (single && !open) {
+            faq.querySelectorAll('.sil-faq-item.is-open').forEach(function (o) {
+              o.classList.remove('is-open');
+              o.querySelector('.sil-faq-a').style.height = '0px';
+              o.querySelector('.sil-faq-q').setAttribute('aria-expanded', 'false');
+            });
+          }
+          item.classList.toggle('is-open', !open);
+          q.setAttribute('aria-expanded', String(!open));
+          a.style.height = open ? '0px' : a.firstElementChild.offsetHeight + 'px';
+        });
+      });
+    });
+
+    if (!window.__silFaqResize) {
+      window.__silFaqResize = true;
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(function () {
+          document.querySelectorAll('.sil-faq-item.is-open .sil-faq-a').forEach(function (a) {
+            a.style.height = a.firstElementChild.offsetHeight + 'px';
+          });
+        }, 120);
+      }, { passive: true });
+    }
+  }
+
+  function initCharts() {
+    document.querySelectorAll('.sil-chart .line').forEach(function (p) {
+      if (p.__len) return;
+      p.__len = true;
+      try { p.style.setProperty('--len', Math.ceil(p.getTotalLength())); } catch (err) {}
+    });
+  }
+
+  /* Hostinger sizes each "Embed code" block by watching this document's body
+     with a ResizeObserver and matching the iframe to its content height. If it
+     measures before the webfont swaps in, the stored height can be left stale
+     -- content ends up shorter than the reserved box and a blank band shows
+     below the block. Poking the body's size makes the observer re-fire and the
+     host re-measures, so any stale height self-corrects. Harmless outside an
+     embed (the preview pages have no such observer). */
+  function nudgeHostResize() {
+    var b = document.body;
+    if (!b) return;
+    try {
+      var prev = b.style.minHeight;
+      b.style.minHeight = (b.offsetHeight + 1) + 'px';
+      void b.offsetHeight;            // force reflow so the +1 is observed
+      requestAnimationFrame(function () { b.style.minHeight = prev; });
+    } catch (e) {}
+    try { window.dispatchEvent(new Event('resize')); } catch (e) {}
+  }
+
+  function initHostResizeSync() {
+    if (window.__silResizeSync) return;
+    window.__silResizeSync = true;
+    // Re-measure once the real fonts are in (the common stale-height cause)...
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(nudgeHostResize).catch(function () {});
+    }
+    // ...plus a few settling passes for late images / slow font delivery.
+    [300, 900, 2000].forEach(function (t) { setTimeout(nudgeHostResize, t); });
+  }
+
+  function boot() { initReveal(); initSpotlight(); initSectionGlow(); initCounters(); initFaq(); initCharts(); }
+  window.silstoneRefresh = boot;
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  initHostResizeSync();
+
+  var mo = new MutationObserver(function () {
+    clearTimeout(window.__silMo);
+    window.__silMo = setTimeout(boot, 140);
+  });
+  mo.observe(document.body || document.documentElement, { childList: true, subtree: true });
+  [400, 1200, 2600].forEach(function (t) { setTimeout(boot, t); });
+})();
+
+/* ===== BLOG: reading progress bar, tag filter, copy-link (guarded) ===== */
+(function () {
+  // reading progress bar
+  var bar = document.getElementById('silProgress');
+  var article = document.querySelector('.sil-article-page');
+  if (bar && article) {
+    var update = function () {
+      var total = article.offsetHeight - window.innerHeight;
+      var scrolled = Math.min(Math.max(-article.getBoundingClientRect().top, 0), Math.max(total, 1));
+      bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  // tag filtering on the listing
+  var filter = document.querySelector('.sil-tagfilter');
+  if (filter) {
+    var cards = [].slice.call(document.querySelectorAll('.sil-blog-card, .sil-blog-featured'));
+    var apply = function (tag) {
+      cards.forEach(function (c) {
+        var tags = (c.getAttribute('data-tags') || '').split(',');
+        c.style.display = (!tag || tags.indexOf(tag) !== -1) ? '' : 'none';
+      });
+      [].forEach.call(filter.querySelectorAll('.sil-tagfilter-btn'), function (b) {
+        b.classList.toggle('is-active', (b.getAttribute('data-tag') || '') === tag);
+      });
+    };
+    filter.addEventListener('click', function (e) {
+      var btn = e.target.closest('.sil-tagfilter-btn');
+      if (btn) apply(btn.getAttribute('data-tag') || '');
+    });
+    var m = location.search.match(/[?&]tag=([^&]+)/);
+    if (m) apply(decodeURIComponent(m[1]));
+  }
+
+  // copy-link buttons
+  [].forEach.call(document.querySelectorAll('.sil-copy-link'), function (btn) {
+    btn.addEventListener('click', function () {
+      var url = btn.getAttribute('data-url') || location.href;
+      var done = function () {
+        var t = btn.textContent; btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = t; }, 1600);
+      };
+      if (navigator.clipboard) { navigator.clipboard.writeText(url).then(done).catch(function () {}); }
+    });
+  });
+})();
+
+/* ===== BLOG: TOC scroll-spy (highlight current section) ===== */
+(function () {
+  var toc = document.querySelector('.sil-toc');
+  if (!toc) return;
+  var links = {};
+  [].forEach.call(toc.querySelectorAll('a'), function (a) {
+    links[a.getAttribute('href').slice(1)] = a;
+  });
+  var headings = [].slice.call(document.querySelectorAll('.sil-article h2[id]'));
+  if (!headings.length) return;
+  var spy = function () {
+    var pos = window.scrollY + 120, current = headings[0];
+    headings.forEach(function (h) {
+      if (h.getBoundingClientRect().top + window.scrollY <= pos) current = h;
+    });
+    Object.keys(links).forEach(function (id) {
+      links[id].classList.toggle('is-active', id === current.id);
+    });
+  };
+  window.addEventListener('scroll', spy, { passive: true });
+  spy();
+})();
+</script>
+<!-- SIL:GLOBAL END -->
+
+<!--
+  SILSTONE.AI - PAGE: LIVE-DEMOS - BLOCK 63 - REFILL DESK DEMO
+  Hostinger: Embed code block, FULL WIDTH. Third demo in the list.
+  A morning's pharmacy refill requests are checked against the practice's own
+  refill protocol; the protocol-clean batch clears on ONE click and only the
+  exceptions reach the prescriber. Controlled substances never auto-approve.
+  Client-side simulation on SYNTHETIC requests - no backend, no PHI.
+  Also carries the shared "notify / next demo" signup (moved here so it stays
+  after every demo). Markup + trailing <style>/<script> live OUTSIDE the
+  SIL:GLOBAL markers; run build-embeds.py to bake the system in.
+-->
+<div class="sil-root">
+
+  <!-- ==================== SUB-HERO ==================== -->
+  <section class="sil-section is-alt has-tint acc-mint" style="padding:var(--space-16) 0 var(--space-10)">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container sil-center">
+      <span class="sil-eyebrow sil-reveal"><i class="dot"></i>Live demo&nbsp;&middot;&nbsp;Refill Desk</span>
+      <h1 class="sil-display-l sil-mt-4 sil-reveal" style="--d:70ms">Sign the week&rsquo;s refills in <span class="sil-gt">one click.</span></h1>
+      <p class="sil-body-l sil-mt-4 sil-hero-sub sil-reveal" style="--d:140ms">
+        A typical practice fields around 85 refill requests a week, roughly 6.8 minutes each &mdash; about 0.4 of a full-time person doing nothing else. The agent checks every request against your own refill protocol, batches the clean ones onto one screen, and holds back only the ones that genuinely need a clinician.
+      </p>
+      <div class="sil-hero-chips sil-mt-4 sil-reveal" style="--d:210ms">
+        <span class="sil-chip"><i class="dot"></i>Built on Claude</span>
+        <span class="sil-chip"><i class="dot"></i>Synthetic requests &middot; no real PHI</span>
+        <span class="sil-chip"><i class="dot"></i>Controlled substances never auto-approve</span>
+        <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE DEMO ==================== -->
+  <section class="sil-section" style="padding:var(--space-10) 0 var(--space-16)">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container">
+      <div class="rfl-demo" id="rflDemo">
+
+        <div class="rfl-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <span>Every request below is <b>synthetic</b>. The protocol rules shown are a worked example &mdash; in production they are <b>your</b> practice&rsquo;s refill protocol, and a prescriber approves every authorisation.</span>
+        </div>
+
+        <!-- controls -->
+        <div class="rfl-controls">
+          <button type="button" class="rfl-btn-primary" id="rflRun">Run this morning&rsquo;s refill batch <span class="arw">&rarr;</span></button>
+          <button type="button" class="rfl-btn-ghost" id="rflReset">Reset</button>
+          <span class="rfl-prog" id="rflProg">idle</span>
+        </div>
+
+        <!-- stats -->
+        <div class="rfl-stats">
+          <div class="rfl-stat"><div class="v" id="rflVIn">0</div><div class="l">Requests in</div></div>
+          <div class="rfl-stat"><div class="v rfl-c-mint" id="rflVClean">0</div><div class="l">Protocol clean</div></div>
+          <div class="rfl-stat"><div class="v rfl-c-amber" id="rflVRev">0</div><div class="l">Need a clinician</div></div>
+          <div class="rfl-stat"><div class="v rfl-c-coral" id="rflVCtrl">0</div><div class="l">Controlled &middot; manual</div></div>
+          <div class="rfl-stat"><div class="v rfl-c-teal" id="rflVTime">&mdash;</div><div class="l">Prescriber time back</div></div>
+        </div>
+
+        <!-- one-click batch bar -->
+        <div class="rfl-batch" id="rflBatch" hidden>
+          <span class="rfl-blbl">The batch</span>
+          <span class="rfl-bsum" id="rflBSum">&mdash;</span>
+          <button type="button" class="rfl-btn-approve" id="rflApproveAll">Approve all clean <span class="arw">&rarr;</span></button>
+        </div>
+
+        <!-- panel: worklist + protocol check -->
+        <div class="rfl-panel">
+          <div class="rfl-listwrap">
+            <div class="rfl-lhead">
+              <span class="rfl-ltitle" id="rflLTitle">Refill worklist</span>
+              <span class="rfl-lcount" id="rflLCount">&nbsp;</span>
+            </div>
+            <ul class="rfl-list" id="rflList">
+              <div class="rfl-empty" id="rflEmpty">
+                <div class="rfl-empty-ico">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="5"/><line x1="12" y1="7.4" x2="12" y2="16.6"/></svg>
+                </div>
+                <h3>No requests loaded</h3>
+                <p>Run the batch to watch the agent check each refill against the practice protocol.</p>
+              </div>
+            </ul>
+          </div>
+
+          <aside class="rfl-detail" id="rflDetail">
+            <div class="rfl-dempty">
+              <h3>Nothing selected</h3>
+              <p>Pick a request to see every protocol rule the agent checked, and the evidence behind each one.</p>
+            </div>
+          </aside>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== NOTIFY ==================== -->
+  <section class="sil-section has-top">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container">
+      <div class="sil-card is-hover is-spot sil-reveal">
+        <div class="sil-soon">
+          <div>
+            <span class="sil-tag">More on the way</span>
+            <h2 class="sil-display-s sil-mt-4">New demos land often.</h2>
+            <p class="sil-body-m sil-mt-3 sil-measure">
+              We're building a demo for every piece of admin practices dread.
+              Leave an email and we'll tell you the moment the next one goes live.
+            </p>
+          </div>
+          <form class="sil-notify" id="silNotify" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
+            <input type="hidden" name="subject" value="New Live Demo notify signup">
+            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo page">
+            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+            <label class="sil-sr" for="silNotifyEmail">Email address</label>
+            <input id="silNotifyEmail" name="email" type="email" required placeholder="you@practice.com" autocomplete="email">
+            <button type="submit" class="sil-btn sil-btn-primary is-auto">Notify me</button>
+            <p class="sil-notify-msg" id="silNotifyMsg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+/* ============ Silstone Refill Desk demo (block-scoped) ============ */
+.rfl-demo{ --clean:var(--mint-400); --rev:var(--amber-400); --ctrl:var(--coral-500);
+  --cleanw:rgba(94,224,168,.14); --revw:rgba(239,193,120,.14); --ctrlw:rgba(240,133,94,.14);
+  --vw:rgba(110,86,207,.16);
+  max-width:1120px; margin:0 auto; }
+.rfl-demo *{box-sizing:border-box}
+.rfl-demo button{font-family:inherit;cursor:pointer;border:none;font-weight:600}
+.rfl-demo button:active{transform:translateY(1px)}
+
+.rfl-note{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;line-height:1.5;color:var(--text-tertiary);background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:11px 15px;margin-bottom:18px}
+.rfl-note svg{flex:none;color:var(--mint-400);margin-top:2px}
+.rfl-note b{color:var(--text-secondary);font-weight:600}
+
+.rfl-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
+.rfl-demo .rfl-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;border-radius:var(--radius-pill);font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--text-on-accent);background:var(--grad-primary);background-size:200% 200%;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s;animation:silGradShift 10s ease-in-out infinite}
+.rfl-demo .rfl-btn-primary:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.rfl-demo .rfl-btn-primary:disabled{opacity:.5;cursor:default;transform:none;animation:none}
+.rfl-demo .rfl-btn-ghost{background:none;border:0;color:var(--text-tertiary);font:inherit;font-size:14px;font-weight:600;padding:8px 4px;transition:color .2s}
+.rfl-demo .rfl-btn-ghost:hover{color:var(--text-primary)}
+.rfl-prog{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
+
+.rfl-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.rfl-stat{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:15px 16px}
+.rfl-stat .v{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.65rem;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--text-primary)}
+.rfl-stat .l{font-size:11.5px;color:var(--text-quaternary);margin-top:7px}
+.rfl-c-mint{color:var(--mint-400)!important} .rfl-c-amber{color:var(--amber-400)!important}
+.rfl-c-coral{color:var(--coral-500)!important} .rfl-c-teal{color:var(--teal-500)!important}
+
+/* one-click batch bar */
+.rfl-batch{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:13px 16px;margin-bottom:16px}
+.rfl-batch[hidden]{display:none}
+.rfl-demo .rfl-blbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-quaternary);flex:none}
+.rfl-demo .rfl-bsum{font-size:13px;color:var(--text-secondary);flex:1;min-width:180px}
+.rfl-demo .rfl-bsum b{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.rfl-demo .rfl-btn-approve{flex:none;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:var(--radius-pill);border:1px solid var(--mint-400);background:rgba(94,224,168,.14);color:var(--mint-400);font-family:var(--font-body);font-weight:600;font-size:13.5px;transition:background .2s}
+.rfl-demo .rfl-btn-approve:hover:not(:disabled){background:rgba(94,224,168,.26)}
+.rfl-demo .rfl-btn-approve:disabled{opacity:.45;cursor:default}
+
+.rfl-panel{display:grid;grid-template-columns:1fr 440px;gap:16px}
+.rfl-listwrap,.rfl-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:700px;display:flex;flex-direction:column;overflow:hidden}
+.rfl-lhead{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
+.rfl-demo .rfl-ltitle{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary);flex:1}
+.rfl-demo .rfl-lcount{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
+.rfl-list{list-style:none;margin:0;padding:8px;overflow-y:auto;flex:1}
+
+.rfl-empty,.rfl-dempty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:40px 24px;color:var(--text-quaternary)}
+.rfl-empty-ico{width:52px;height:52px;border-radius:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.rfl-empty h3,.rfl-dempty h3{margin:0 0 6px;color:var(--text-secondary);font-size:15px;font-weight:600}
+.rfl-empty p,.rfl-dempty p{margin:0;font-size:13.5px;max-width:36ch}
+.rfl-demo .rfl-donenote{margin:10px 0 0;font-size:12.5px;color:var(--violet-300)}
+
+/* rows */
+.rfl-row{display:grid;grid-template-columns:66px 1fr auto;gap:14px;align-items:center;padding:12px 14px;border-radius:11px;cursor:pointer;border:1px solid transparent;position:relative;overflow:hidden}
+.rfl-row:hover{background:var(--bg-surface-raised)}
+.rfl-row.sel{background:var(--bg-surface-raised);border-color:var(--border-default)}
+.rfl-row.enter{animation:rflEnter .34s ease}
+.rfl-row.is-going{animation:rflOut .32s ease forwards;pointer-events:none}
+@keyframes rflEnter{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes rflOut{to{opacity:0;transform:translateX(34px)}}
+.rfl-band{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:5px 0;border-radius:7px;text-align:center;letter-spacing:.04em;text-transform:uppercase}
+.rfl-band.clean{background:var(--cleanw);color:var(--clean)}
+.rfl-band.review{background:var(--revw);color:var(--rev)}
+.rfl-band.ctrl{background:var(--ctrlw);color:var(--ctrl)}
+.rfl-band.checking{background:var(--vw);color:var(--violet-300)}
+.rfl-rmain{min-width:0}
+.rfl-rtitle{font-weight:600;font-size:14px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rfl-rtitle .qty{color:var(--text-quaternary);font-weight:400;margin-left:6px}
+.rfl-rsub{font-size:12.5px;color:var(--text-secondary);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rfl-rsub.checking{color:var(--violet-300);font-family:'IBM Plex Mono',monospace;font-size:12px}
+.rfl-rmeta{text-align:right;white-space:nowrap}
+.rfl-rmeta .ck{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-secondary);font-variant-numeric:tabular-nums}
+.rfl-rmeta .sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:3px}
+.rfl-pbar{height:3px;border-radius:2px;background:var(--bg-surface-3);margin-top:9px;overflow:hidden}
+.rfl-pbar>i{display:block;height:100%;width:6%;border-radius:2px;background:linear-gradient(90deg,var(--violet-500),var(--mint-400))}
+
+/* detail */
+.rfl-dhead{padding:16px 18px;border-bottom:1px solid var(--border-subtle);flex:none}
+.rfl-dhead .row1{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rfl-dtype{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary)}
+.rfl-dconf{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary)}
+.rfl-dfrom{font-size:12.5px;color:var(--text-secondary)}
+.rfl-dbody{overflow-y:auto;padding:16px 18px}
+.rfl-dsec{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quaternary);margin:0 0 10px}
+
+/* the protocol checklist - the point of the whole demo */
+.rfl-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.rfl-checks li{display:grid;grid-template-columns:17px 1fr;gap:10px;align-items:start}
+.rfl-checks .ci{width:17px;height:17px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.rfl-checks .ci svg{width:10px;height:10px}
+.rfl-checks li.ok .ci{background:rgba(94,224,168,.15);color:var(--mint-400)}
+.rfl-checks li.bad .ci{background:var(--ctrlw);color:var(--ctrl)}
+.rfl-checks li.blocked .ci{background:var(--ctrlw);color:var(--ctrl)}
+.rfl-checks .cl{display:block;font-size:13.5px;font-weight:500;color:var(--text-primary);line-height:1.4}
+.rfl-checks li.bad .cl{color:var(--coral-500)}
+.rfl-checks .cd{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:3px;letter-spacing:.02em}
+
+.rfl-verdict{margin-top:15px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--mint-400);border-radius:0 11px 11px 0;padding:12px 14px}
+.rfl-verdict.review{border-left-color:var(--amber-400)}
+.rfl-verdict.ctrl{border-left-color:var(--coral-500)}
+.rfl-verdict .vk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
+.rfl-verdict .vv{font-size:13px;color:var(--text-primary);line-height:1.5}
+
+/* decisions */
+.rfl-acts{display:flex;flex-direction:column;gap:8px}
+.rfl-demo .rfl-act{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;width:100%;text-align:left;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:11px;padding:11px 13px;font-family:var(--font-body);color:var(--text-primary);transition:border-color .18s,background .18s}
+.rfl-demo .rfl-act:hover:not(:disabled){border-color:var(--violet-500);background:var(--vw)}
+.rfl-demo .rfl-act.is-primary{border-color:rgba(94,224,168,.45);background:rgba(94,224,168,.08)}
+.rfl-demo .rfl-act .aic{width:18px;height:18px;border-radius:6px;border:1.5px solid var(--border-default);display:flex;align-items:center;justify-content:center;margin-top:1px;color:var(--text-quaternary)}
+.rfl-demo .rfl-act .aic svg{width:11px;height:11px}
+.rfl-demo .rfl-act .al{display:block;font-size:13.5px;font-weight:600;line-height:1.4}
+.rfl-demo .rfl-act .ak{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-top:4px}
+.rfl-demo .rfl-actnote{margin:11px 0 0;font-size:12px;line-height:1.55;color:var(--text-quaternary)}
+
+/* the request, as received */
+.rfl-page{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:15px 16px;font-size:12px;line-height:1.6;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word}
+.rfl-page .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--text-primary);margin-bottom:2px}
+.rfl-page .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
+
+/* notify (shared signup — lives with the last demo on the page) */
+.sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
+.sil-notify{display:grid;grid-template-columns:1fr auto;gap:var(--space-3);align-items:start}
+.sil-notify .sil-btn{white-space:nowrap}
+.sil-notify-msg{grid-column:1/-1;margin:0;font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
+.sil-notify-msg.is-warn{color:var(--coral-500)}
+@media(max-width:900px){.sil-soon{grid-template-columns:1fr;gap:var(--space-6)}}
+@media(max-width:520px){.sil-notify{grid-template-columns:1fr}.sil-notify .sil-btn{width:100%}}
+
+@media (max-width:1040px){
+  .rfl-panel{grid-template-columns:1fr 372px}
+  .rfl-listwrap,.rfl-detail{height:640px}
+}
+@media (max-width:820px){
+  .rfl-stats{grid-template-columns:repeat(2,1fr)}
+  .rfl-panel{grid-template-columns:1fr}
+  .rfl-listwrap{height:auto;max-height:66vh} .rfl-detail{height:auto}
+  .rfl-prog{margin-left:0;width:100%}
+  .rfl-demo .rfl-btn-approve{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.rfl-demo *{animation-duration:.01ms!important}}
+</style>
+
+<script>
+(function(){
+  "use strict";
+  if(window.__rflInit) return; window.__rflInit=true;
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  var TICK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg>';
+  var CROSS='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4l6 6M10 4l-6 6"/></svg>';
+  var LOCK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6.3" width="8" height="5.4" rx="1.4"/><path d="M5.1 6.3V4.7a1.9 1.9 0 0 1 3.8 0v1.6"/></svg>';
+
+  /* Per-request provider minutes at the 6.8 min industry benchmark. Only the
+     requests a clinician never has to open are counted as time returned. */
+  var MIN_PER_REQ=6.8;
+
+  var FIRST=["Maria","James","Linda","Robert","Aisha","David","Elena","Michael","Priya","John","Sofia","Wei","Grace","Omar","Nina","Carlos","Ruth","Samuel","Ivy","Hassan"];
+  var LAST=["Alvarez","Thompson","Nguyen","Patel","Johnson","Garcia","Kim","O'Brien","Rossi","Cohen","Okafor","Martinez","Singh","Walsh","Fischer","Haddad","Brooks","Delgado","Sato","Reyes"];
+  var PHARM=["Walgreens #4821","CVS #337","Rite Aid #1102","Kroger Pharmacy","Costco #118","Independent Rx on Main"];
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function pad(n){return n<10?"0"+n:""+n;}
+  function dob(){var y=1938+Math.floor(Math.random()*70);return pad(1+Math.floor(Math.random()*12))+"/"+pad(1+Math.floor(Math.random()*28))+"/"+y;}
+  function recvTime(){var h=7+Math.floor(Math.random()*3);return pad(h)+":"+pad(Math.floor(Math.random()*60))+" AM";}
+
+  /* ---- the refill protocol, as a worked example ----
+     Each template carries the checks the agent runs. "ok:false" is what holds
+     a request back, and the reason is written for the prescriber, not the log. */
+  var T=[
+    // ---------- protocol clean ----------
+    {st:"clean",drug:"Metformin 500 mg",qty:"#90 · 3 refills",conf:.97,
+     checks:[["ok","Office visit 4 months ago","protocol: within 12 months"],
+             ["ok","A1c 6.9% on 12 Mar 2026","protocol: within 6 months, at goal"],
+             ["ok","2 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Every rule your practice set for metformin is satisfied, with the evidence attached."},
+    {st:"clean",drug:"Atorvastatin 20 mg",qty:"#90 · 3 refills",conf:.96,
+     checks:[["ok","Office visit 6 months ago","protocol: within 12 months"],
+             ["ok","Lipid panel 08 Jan 2026","protocol: within 12 months"],
+             ["ok","3 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Statin continuation with a current lipid panel on file."},
+    {st:"clean",drug:"Lisinopril 10 mg",qty:"#30 · 5 refills",conf:.97,
+     checks:[["ok","Office visit 3 months ago","protocol: within 12 months"],
+             ["ok","Potassium 4.1 · creatinine 0.9, 02 Feb 2026","protocol: within 12 months"],
+             ["ok","5 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Renal function checked inside the window your protocol requires for an ACE inhibitor."},
+    {st:"clean",drug:"Levothyroxine 50 mcg",qty:"#90 · 1 refill",conf:.95,
+     checks:[["ok","Office visit 5 months ago","protocol: within 12 months"],
+             ["ok","TSH 2.1 mIU/L on 19 Feb 2026","protocol: within 12 months"],
+             ["ok","1 refill left on the original Rx","flagged for renewal at the next visit"],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Last refill on this Rx — the agent has noted a renewal for the next visit."},
+    {st:"clean",drug:"Amlodipine 5 mg",qty:"#30 · 4 refills",conf:.96,
+     checks:[["ok","Office visit 2 months ago","protocol: within 12 months"],
+             ["ok","BP 128/78 recorded at that visit","protocol: reading on file"],
+             ["ok","4 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Blood pressure documented at a recent visit."},
+    {st:"clean",drug:"Omeprazole 20 mg",qty:"#30 · 2 refills",conf:.94,
+     checks:[["ok","Office visit 7 months ago","protocol: within 12 months"],
+             ["ok","No lab gate on this medication",""],
+             ["ok","2 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. No lab requirement for this medication under your protocol."},
+    {st:"clean",drug:"Sertraline 50 mg",qty:"#30 · 3 refills",conf:.93,
+     checks:[["ok","Office visit 3 months ago","protocol: within 6 months for this class"],
+             ["ok","No dose change since the last visit",""],
+             ["ok","3 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Seen inside the tighter six-month window your protocol sets for this class."},
+    {st:"clean",drug:"Albuterol HFA inhaler",qty:"#1 · 2 refills",conf:.95,
+     checks:[["ok","Office visit 9 months ago","protocol: within 12 months"],
+             ["ok","No lab gate on this medication",""],
+             ["ok","2 refills left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Protocol clean. Rescue inhaler continuation."},
+
+    // ---------- needs a clinician ----------
+    {st:"review",drug:"Metformin 1000 mg",qty:"#90 · 0 refills",conf:.92,hold:"Lab overdue",
+     checks:[["ok","Office visit 8 months ago","protocol: within 12 months"],
+             ["bad","No A1c since 04 Aug 2024","protocol: within 6 months — 19 months overdue"],
+             ["ok","Refills remain on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Held for you. The agent will not authorise a diabetes medication on a 19-month-old A1c — that is a call for a clinician, not a rule."},
+    {st:"review",drug:"Warfarin 5 mg",qty:"#30 · 1 refill",conf:.94,hold:"INR out of date",
+     checks:[["ok","Office visit 6 weeks ago","protocol: within 12 months"],
+             ["bad","Last INR 9 weeks ago","protocol: within 4 weeks for warfarin"],
+             ["ok","1 refill left on the original Rx",""],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Held for you. Narrow therapeutic index and a stale INR — this one always reaches a prescriber."},
+    {st:"review",drug:"Atorvastatin 40 mg",qty:"#90 · 2 refills",conf:.88,hold:"Dose mismatch",
+     checks:[["ok","Office visit 5 months ago","protocol: within 12 months"],
+             ["ok","Lipid panel 11 Feb 2026","protocol: within 12 months"],
+             ["bad","Pharmacy is requesting 20 mg — the chart says 40 mg since 11 Feb","dose changed at the last visit"],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Held for you. The pharmacy is working from the pre-visit dose. Authorising as requested would quietly undo a change you made."},
+    {st:"review",drug:"Losartan 50 mg",qty:"#30 · 0 refills",conf:.93,hold:"Visit overdue",
+     checks:[["bad","No office visit in 16 months","protocol: within 12 months"],
+             ["ok","Potassium 4.4 · creatinine 1.0, 21 Nov 2025",""],
+             ["bad","Refills exhausted on the original Rx","a new prescription is required"],
+             ["ok","Not a controlled substance",""]],
+     verdict:"Held for you. Two rules missed — the agent proposes a bridging supply and a visit, but that is your decision."},
+    {st:"review",drug:"Gabapentin 300 mg",qty:"#90 · 1 refill",conf:.61,hold:"Chart match unclear",
+     checks:[["bad","No confident chart match","“M. Alvarez” matches 2 active patients"],
+             ["ok","Requesting pharmacy verified",""],
+             ["ok","Not a federally controlled substance","state-monitored in some states"]],
+     verdict:"Held for you. Low match confidence — the agent never guesses which patient a request belongs to. It routes, it does not assume."},
+
+    // ---------- controlled: never automated ----------
+    {st:"ctrl",drug:"Alprazolam 0.5 mg",qty:"#30 · 0 refills",conf:.99,hold:"Schedule IV",
+     checks:[["blocked","Schedule IV controlled substance","protocol: never auto-authorised"],
+             ["ok","Office visit 2 months ago",""],
+             ["ok","Requesting pharmacy verified",""]],
+     verdict:"Controlled substance. The agent stops here every time, whatever the rest of the chart says — this needs a prescriber and the usual EPCS path."},
+    {st:"ctrl",drug:"Oxycodone 5 mg",qty:"#20 · 0 refills",conf:.99,hold:"Schedule II",
+     checks:[["blocked","Schedule II controlled substance","protocol: never auto-authorised, no refills permitted"],
+             ["ok","Office visit 6 weeks ago",""],
+             ["ok","Requesting pharmacy verified",""]],
+     verdict:"Controlled substance. Schedule II cannot be refilled at all — the agent surfaces it as a new-prescription decision for the prescriber."}
+  ];
+  var WEIGHT={clean:5,review:2,ctrl:1};
+  var BAG=[]; T.forEach(function(t,i){var w=WEIGHT[t.st];for(var k=0;k<w;k++)BAG.push(i);});
+
+  var BATCH_N=20;
+  var listEl=$("rflList"), detailEl=$("rflDetail"), emptyEl=$("rflEmpty"), progEl=$("rflProg");
+  var nodes={}, data={}, seq=0, selected=null;
+  var pending=[], active=0, produced=0, running=false;
+  // sent/booked/routed = where it went. batch = never needed a human at all,
+  // touched = the prescriber opened it. Only `batch` is time actually returned.
+  var count={in:0,clean:0,review:0,ctrl:0,sent:0,booked:0,routed:0,batch:0,touched:0};
+  var STAGES=["Matching the chart…","Reading the protocol…","Checking the labs…","Counting refills…"];
+  var MAXC=3;
+
+  function instance(ti){
+    var t=T[ti], pt=pick(FIRST)+" "+pick(LAST);
+    return {id:"rx"+(seq++), st:t.st, drug:t.drug, qty:t.qty, conf:t.conf, hold:t.hold||"",
+            checks:t.checks, verdict:t.verdict, patient:pt, dob:dob(),
+            pharmacy:pick(PHARM), recv:recvTime(), decided:false};
+  }
+  function bandLabel(st){ return st==="clean"?"clean":(st==="review"?"review":"hold"); }
+  function passCount(f){ var n=0; f.checks.forEach(function(c){ if(c[0]==="ok") n++; }); return n; }
+
+  function makeCheckingNode(f){
+    var li=document.createElement("li");
+    li.className="rfl-row enter"; li.setAttribute("data-id",f.id);
+    li.innerHTML='<div class="rfl-band checking">check</div>'+
+      '<div class="rfl-rmain"><div class="rfl-rtitle">Refill request <span class="qty">· '+esc(f.pharmacy)+'</span></div>'+
+      '<div class="rfl-rsub checking rfl-status">'+STAGES[0]+'</div>'+
+      '<div class="rfl-pbar"><i></i></div></div>'+
+      '<div class="rfl-rmeta"><div class="ck">&nbsp;</div><div class="sub">'+f.recv+'</div></div>';
+    return li;
+  }
+  function fillNode(li,f){
+    li.innerHTML='<div class="rfl-band '+f.st+'">'+bandLabel(f.st)+'</div>'+
+      '<div class="rfl-rmain"><div class="rfl-rtitle">'+esc(f.drug)+'<span class="qty">'+esc(f.qty)+'</span></div>'+
+      '<div class="rfl-rsub">'+esc(f.patient)+' · '+esc(f.pharmacy)+(f.hold?' · <b>'+esc(f.hold)+'</b>':'')+'</div></div>'+
+      '<div class="rfl-rmeta"><div class="ck">'+passCount(f)+'/'+f.checks.length+' checks</div>'+
+      '<div class="sub">'+f.recv+'</div></div>';
+    li.addEventListener("click",function(){ select(f.id); });
+    if(selected===f.id) li.classList.add("sel");
+  }
+
+  function updateStats(){
+    $("rflVIn").textContent=count.in;
+    $("rflVClean").textContent=count.clean;
+    $("rflVRev").textContent=count.review;
+    $("rflVCtrl").textContent=count.ctrl;
+    var mins=Math.round(count.batch*MIN_PER_REQ);
+    $("rflVTime").textContent = mins ? (mins>=60 ? (Math.floor(mins/60)+"h "+pad(mins%60)+"m") : (mins+"m")) : "—";
+  }
+  function setApproveLabel(btn,n){
+    btn.textContent = n ? ("Approve all "+n+" clean ") : "Approve all clean ";
+    var arw=document.createElement("span"); arw.className="arw"; arw.innerHTML="&rarr;";
+    btn.appendChild(arw);
+  }
+  function updateBatch(){
+    var bar=$("rflBatch"), btn=$("rflApproveAll");
+    if(!count.in){ bar.setAttribute("hidden",""); return; }
+    bar.removeAttribute("hidden");
+    var cleanLeft=0, revLeft=0, ctrlLeft=0;
+    Object.keys(data).forEach(function(k){ var f=data[k];
+      if(!f||f.checking||f.decided) return;
+      if(f.st==="clean") cleanLeft++; else if(f.st==="review") revLeft++; else ctrlLeft++; });
+    setApproveLabel(btn, cleanLeft);
+    // While the batch is still being checked the clean count is a moving
+    // target - hold the button until every request has been through.
+    if(running){
+      $("rflBSum").innerHTML='Checking the batch &mdash; <b>'+count.in+'</b> of <b>'+BATCH_N+'</b> so far';
+      btn.disabled=true;
+      $("rflLCount").textContent=count.in+" checked";
+      return;
+    }
+    $("rflBSum").innerHTML='<b>'+cleanLeft+'</b> protocol clean · <b>'+revLeft+'</b> need a clinician · <b>'+ctrlLeft+'</b> controlled';
+    btn.disabled = cleanLeft===0;
+    var left=cleanLeft+revLeft+ctrlLeft;
+    $("rflLCount").textContent = left ? (left+" open") : "all clear";
+  }
+
+  function select(id){
+    var f=data[id]; if(!f||f.checking) return; selected=id;
+    Array.prototype.forEach.call(listEl.querySelectorAll(".rfl-row"),function(n){
+      n.classList.toggle("sel", n.getAttribute("data-id")===id); });
+    var checks=f.checks.map(function(c){
+      var ico = c[0]==="ok"?TICK:(c[0]==="blocked"?LOCK:CROSS);
+      return '<li class="'+c[0]+'"><span class="ci">'+ico+'</span>'+
+        '<span><span class="cl">'+esc(c[1])+'</span>'+
+        (c[2]?'<span class="cd">'+esc(c[2])+'</span>':'')+'</span></li>';
+    }).join("");
+    var vClass = f.st==="clean"?"":(f.st==="review"?" review":" ctrl");
+    var vKey = f.st==="clean"?"Verdict · safe to authorise":(f.st==="review"?"Verdict · held for a clinician":"Verdict · controlled substance");
+    detailEl.innerHTML=
+      '<div class="rfl-dhead"><div class="row1">'+
+        '<span class="rfl-band '+f.st+'" style="padding:5px 10px">'+bandLabel(f.st)+'</span>'+
+        '<span class="rfl-dtype">'+esc(f.drug)+'</span>'+
+        '<span class="rfl-dconf">'+Math.round(f.conf*100)+'% conf.</span></div>'+
+        '<div class="rfl-dfrom">'+esc(f.patient)+' · DOB '+esc(f.dob)+' · '+esc(f.pharmacy)+'</div></div>'+
+      '<div class="rfl-dbody">'+
+        '<div class="rfl-dsec">Protocol check</div>'+
+        '<ul class="rfl-checks">'+checks+'</ul>'+
+        '<div class="rfl-verdict'+vClass+'"><div class="vk">'+vKey+'</div>'+
+          '<div class="vv">'+esc(f.verdict)+'</div></div>'+
+        '<div class="rfl-dsec" style="margin-top:20px">'+(f.decided?"What you did":"Your decision")+'</div>'+
+        actsHtml(f)+
+        '<div class="rfl-dsec" style="margin-top:20px">The request, as received</div>'+
+        '<div class="rfl-page"><div class="lh">'+esc(f.pharmacy)+'</div>'+
+          '<div class="lh-sub">inbound refill request · '+f.recv+'</div>'+
+          esc("REFILL AUTHORIZATION REQUEST\nPatient: "+f.patient+"   DOB: "+f.dob+
+              "\nDrug: "+f.drug+", "+f.qty.replace(/ · /g,", ")+
+              "\nPharmacy: "+f.pharmacy+"\nPlease approve or deny.").replace(/\n/g,"<br>")+
+        '</div>'+
+      '</div>';
+  }
+
+  /* ---- the decisions a human actually makes ---- */
+  function actionsFor(f){
+    if(f.st==="clean") return [
+      {p:1,l:"Approve · send to "+f.pharmacy,k:"Authorised on your signature",d:"Sent to "+f.pharmacy,b:"sent"},
+      {l:"Hold for a visit instead",k:"Booking link goes to the patient",d:"Held — visit offered to the patient",b:"booked"}];
+    if(f.st==="review") return [
+      {p:1,l:"Approve anyway — I have the context",k:"Overrides the protocol · logged with your name",d:"Approved on your override — sent to "+f.pharmacy,b:"sent"},
+      {l:"Deny — book the visit first",k:"Booking link goes to the patient",d:"Denied — visit offered to the patient",b:"booked"},
+      {l:"Ask the pharmacy for the missing item",k:"Fax back to "+f.pharmacy,d:"Query faxed to "+f.pharmacy,b:"routed"}];
+    return [
+      {p:1,l:"Route to the prescriber",k:"Controlled · EPCS, never automated",d:"Routed to the prescriber for EPCS",b:"routed"}];
+  }
+  function actsHtml(f){
+    var acts=actionsFor(f);
+    if(f.decided) return '<div class="rfl-acts"><button type="button" class="rfl-act" disabled>'+
+      '<span class="aic" style="border-color:var(--mint-400);color:var(--mint-400);background:rgba(94,224,168,.14)">'+TICK+'</span>'+
+      '<span><span class="al">'+esc(f.decidedLabel)+'</span>'+
+      '<span class="ak">Decided by you · '+esc(f.decidedAt)+'</span></span></button></div>';
+    var rows=acts.map(function(a,i){
+      return '<button type="button" class="rfl-act'+(a.p?" is-primary":"")+'" data-ai="'+i+'">'+
+        '<span class="aic"></span><span><span class="al">'+esc(a.l)+'</span>'+
+        '<span class="ak">'+esc(a.k)+'</span></span></button>';
+    }).join("");
+    var note = f.st==="ctrl"
+      ? "Controlled substances are the one lane with no automatic path, by design. The agent files the paperwork and gets out of the way."
+      : (f.st==="review"
+        ? "Nothing here was decided for you. The agent did the checking and the assembling; the judgement stays yours."
+        : "One click authorises and delivers. Nothing is sent to a pharmacy without it.");
+    return '<div class="rfl-acts">'+rows+'</div><p class="rfl-actnote">'+esc(note)+'</p>';
+  }
+  function nowStamp(){
+    var d=new Date(), h=d.getHours(), m=d.getMinutes(), ap=h<12?"AM":"PM";
+    h=h%12; if(!h)h=12; return h+":"+(m<10?"0"+m:m)+" "+ap;
+  }
+  function decide(id,i){
+    var f=data[id]; if(!f||f.checking||f.decided) return;
+    var a=actionsFor(f)[i]; if(!a) return;
+    f.decided=true; f.decidedLabel=a.d; f.decidedAt=nowStamp();
+    count[a.b]++; count.touched++;
+    removeRow(id);
+    updateStats(); updateBatch();
+    select(id);
+    checkAllClear();
+  }
+  function removeRow(id){
+    var li=nodes[id]; if(!li) return;
+    li.classList.add("is-going");
+    setTimeout(function(){ if(li.parentNode) li.parentNode.removeChild(li); }, reduce?10:300);
+    delete nodes[id];
+  }
+  function onActClick(ev){
+    var n=ev.target;
+    while(n&&n!==detailEl&&!(n.classList&&n.classList.contains("rfl-act"))) n=n.parentNode;
+    if(!n||n===detailEl||n.disabled||!selected) return;
+    decide(selected, parseInt(n.getAttribute("data-ai"),10));
+  }
+
+  function approveAllClean(){
+    var ids=Object.keys(data).filter(function(k){
+      var f=data[k]; return f&&!f.checking&&!f.decided&&f.st==="clean"; });
+    if(!ids.length) return;
+    $("rflApproveAll").disabled=true;
+    var i=0;
+    (function step(){
+      if(i>=ids.length){ updateStats(); updateBatch(); checkAllClear(); return; }
+      var f=data[ids[i++]];
+      f.decided=true; f.decidedLabel="Sent to "+f.pharmacy; f.decidedAt=nowStamp();
+      count.sent++; count.batch++;
+      removeRow(f.id);
+      updateStats(); updateBatch();
+      setTimeout(step, reduce?8:70);
+    })();
+  }
+  function checkAllClear(){
+    var left=Object.keys(data).filter(function(k){ var f=data[k]; return f&&!f.checking&&!f.decided; }).length;
+    if(left||running) return;
+    var mins=Math.round(count.batch*MIN_PER_REQ);
+    var went=[];
+    if(count.sent)   went.push(count.sent+" went to the pharmacy");
+    if(count.booked) went.push(count.booked+" turned into a visit");
+    if(count.routed) went.push(count.routed+" routed to the prescriber");
+    var wentTxt=went.join(", "), lc=wentTxt.lastIndexOf(", ");
+    if(lc>-1) wentTxt=wentTxt.slice(0,lc)+" and "+wentTxt.slice(lc+2);
+    listEl.innerHTML="";
+    var e=document.createElement("div"); e.className="rfl-empty";
+    e.innerHTML='<div class="rfl-empty-ico" style="color:var(--mint-400);border-color:rgba(94,224,168,.35)">'+
+        '<svg width="24" height="24" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg></div>'+
+      '<h3>Refill desk clear</h3>'+
+      '<p>'+count.in+' requests came in. You opened '+count.touched+
+      (count.batch?' \u2014 the other '+count.batch+' cleared on a single click':'')+'. '+
+      (wentTxt?wentTxt.charAt(0).toUpperCase()+wentTxt.slice(1)+'.':'')+'</p>'+
+      (count.batch?'<p class="rfl-donenote">About '+(mins>=60?(Math.floor(mins/60)+"h "+pad(mins%60)+"m"):(mins+"m"))+
+      ' of prescriber time returned, at the 6.8-minute-per-request benchmark.</p>':'');
+    listEl.appendChild(e); emptyEl=e;
+    $("rflLCount").textContent="all clear";
+    progEl.textContent="desk clear";
+    $("rflRun").disabled=false;
+  }
+
+  /* ---- run the batch ---- */
+  function spawn(f){
+    if(emptyEl){ emptyEl.parentNode&&emptyEl.parentNode.removeChild(emptyEl); emptyEl=null; }
+    var li=makeCheckingNode(f); nodes[f.id]=li; data[f.id]={checking:true,id:f.id};
+    listEl.appendChild(li);
+    return {li:li,status:li.querySelector(".rfl-status"),bar:li.querySelector(".rfl-pbar>i")};
+  }
+  function startCheck(f){
+    active++;
+    var r=spawn(f);
+    var dur=reduce?260:(1100+Math.random()*900);
+    if(r.bar) requestAnimationFrame(function(){
+      r.bar.style.transition="width "+dur+"ms cubic-bezier(.3,.6,.3,1)"; r.bar.style.width="100%"; });
+    for(var s=1;s<STAGES.length;s++){ (function(idx){ setTimeout(function(){
+      if(r.status&&r.status.parentNode&&r.status.classList.contains("checking")) r.status.textContent=STAGES[idx];
+    }, dur*idx/STAGES.length); })(s); }
+    setTimeout(function(){
+      data[f.id]=f; count.in++; count[f.st]++;
+      r.status.classList.remove("checking");
+      fillNode(r.li,f);
+      updateStats();
+      active--; pump();
+      if(running && produced>=BATCH_N && !pending.length && !active){
+        running=false; $("rflRun").disabled=false;
+        progEl.textContent=count.in+" checked · "+count.clean+" clean";
+      } else if(running){ progEl.textContent=count.in+" / "+BATCH_N+" checked"; }
+      updateBatch();   // after `running` is settled, so the button unlocks
+    }, dur);
+  }
+  function pump(){ while(active<MAXC && pending.length) startCheck(pending.shift()); }
+  function run(){
+    if(running) return;
+    reset(true); running=true; produced=0;
+    $("rflRun").disabled=true;
+    for(var i=0;i<BATCH_N;i++){ pending.push(instance(pick(BAG))); produced++; }
+    progEl.textContent="0 / "+BATCH_N+" checked";
+    pump();
+  }
+  function reset(quiet){
+    pending=[]; active=0; running=false; produced=0;
+    nodes={}; data={}; selected=null;
+    count={in:0,clean:0,review:0,ctrl:0,sent:0,booked:0,routed:0,batch:0,touched:0};
+    listEl.innerHTML="";
+    var e=document.createElement("div"); e.className="rfl-empty";
+    e.innerHTML='<div class="rfl-empty-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="5"/><line x1="12" y1="7.4" x2="12" y2="16.6"/></svg></div>'+
+      '<h3>No requests loaded</h3><p>Run the batch to watch the agent check each refill against the practice protocol.</p>';
+    listEl.appendChild(e); emptyEl=e;
+    detailEl.innerHTML='<div class="rfl-dempty"><h3>Nothing selected</h3><p>Pick a request to see every protocol rule the agent checked, and the evidence behind each one.</p></div>';
+    $("rflBatch").setAttribute("hidden",""); $("rflApproveAll").disabled=false;
+    $("rflLCount").textContent=" ";
+    updateStats();
+    if(!quiet){ progEl.textContent="idle"; $("rflRun").disabled=false; }
+  }
+
+  function bind(){
+    $("rflRun").addEventListener("click",run);
+    $("rflReset").addEventListener("click",function(){ reset(false); });
+    $("rflApproveAll").addEventListener("click",approveAllClean);
+    detailEl.addEventListener("click",onActClick);
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
+  else bind();
+})();
+</script>
+
+<script>
+(function(){
+var f=document.getElementById('silNotify');
+if(!f||f.__init)return;f.__init=true;
+var msg=document.getElementById('silNotifyMsg');
+var btn=f.querySelector('button[type=submit]');
+f.addEventListener('submit',function(e){
+e.preventDefault();
+var email=f.querySelector('input[type=email]');
+if(!email.value||email.validity.typeMismatch){msg.textContent='Please enter a valid email address.';msg.className='sil-notify-msg is-warn';return;}
+msg.textContent='Sending…';msg.className='sil-notify-msg';
+if(btn)btn.disabled=true;
+fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+.then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
+.then(function(res){
+if(res.ok&&res.data&&res.data.success){f.reset();msg.textContent="You're on the list. We'll email you the moment the next demo lands.";msg.className='sil-notify-msg';}
+else{msg.textContent=(res.data&&res.data.message)?res.data.message:'Something went wrong. Please try again.';msg.className='sil-notify-msg is-warn';}
+}).catch(function(){msg.textContent='Network error. Please try again.';msg.className='sil-notify-msg is-warn';})
+.then(function(){if(btn)btn.disabled=false;});
+});
+})();
+</script>
