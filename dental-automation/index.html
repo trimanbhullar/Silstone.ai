@@ -145,7 +145,11 @@
 }
 
 .sil-logo { display: inline-flex; align-items: center; flex: none; }
-.sil-logo-img { height: 36px; width: auto; }
+/* The wordmark ships at 375x97, so it is still downscaling at this height and
+   stays crisp. Keep the nav bar under ~88px overall: the blog's headings use
+   scroll-margin-top:90px and its sticky TOC sits at top:96px, both of which
+   assume the nav clears out of the way above them. */
+.sil-logo-img { height: 46px; width: auto; }
 
 .sil-nav-links { display: flex; align-items: center; gap: var(--space-6); margin-left: auto; }
 .sil-nav-links a {
