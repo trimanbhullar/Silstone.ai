@@ -1202,12 +1202,22 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
 
       <nav class="sil-footer-nav" aria-label="Footer">
         <div>
+          <h3 class="sil-footer-h">Solutions</h3>
+          <!-- GENERATED from PAGES_META group "solutions" by build-site.py; the
+               links below are only the embed-paste fallback. -->
+          <ul data-sil-links="solutions">
+            <li><a href="https://www.silstone.ai/what-we-build" target="_top">What we build</a></li>
+            <li><a href="https://www.silstone.ai/dental-automation" target="_top">Dental automation</a></li>
+            <li><a href="https://www.silstone.ai/aesthetics-automation" target="_top">Aesthetics automation</a></li>
+            <li><a href="https://www.silstone.ai/physical-therapy-automation" target="_top">Physical therapy automation</a></li>
+          </ul>
+        </div>
+        <div>
           <h3 class="sil-footer-h">Site</h3>
           <ul>
             <li><a href="https://www.silstone.ai/" target="_top">Home</a></li>
-            <li><a href="https://www.silstone.ai/what-we-build" target="_top">What we build</a></li>
-            <li><a href="https://www.silstone.ai/physical-therapy-automation" target="_top">Physical therapy automation</a></li>
             <li><a href="https://www.silstone.ai/live-demos" target="_top">Live demos</a></li>
+            <li><a href="https://www.silstone.ai/why-silstone" target="_top">Why Silstone</a></li>
             <li><a href="https://www.silstone.ai/trust-and-security" target="_top">Trust and Security</a></li>
             <li><a href="https://www.silstone.ai/pricing" target="_top">Pricing</a></li>
             <li><a href="https://www.silstone.ai/blog" target="_top">Blog</a></li>
@@ -1256,7 +1266,7 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
 
 <style>
 .sil-footer { padding-top: var(--space-16); padding-bottom: var(--space-8); }
-.sil-footer-top { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-12); }
+.sil-footer-top { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-12); }
 .sil-footer-logo { height: 24px; width: auto; }
 .sil-footer-brand .sil-body-s { max-width: 42ch; }
 .sil-footer-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
@@ -1265,7 +1275,10 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
   padding: 5px 10px; border-radius: var(--radius-pill);
   background: var(--sec-softer); border: 1px solid var(--sec-border); color: var(--sec-text);
 }
-.sil-footer-nav { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-12); }
+/* Solutions | Site | Getting started. The two link columns size to their
+   content so a longer vertical name widens its own column rather than
+   squeezing the sign-up form beside it. */
+.sil-footer-nav { display: grid; grid-template-columns: max-content max-content 1fr; gap: var(--space-10); }
 .sil-footer-h {
   font-family: var(--font-mono); font-size: 10px; font-weight: 500;
   letter-spacing: .16em; text-transform: uppercase; color: var(--text-quaternary);
@@ -1401,10 +1414,10 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
   border-top: 1px solid var(--border-subtle);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1080px) {
   .sil-footer-top { grid-template-columns: 1fr; gap: var(--space-12); }
 }
-@media (max-width: 480px) {
+@media (max-width: 620px) {
   .sil-footer-nav { grid-template-columns: 1fr; gap: var(--space-8); }
   .sil-footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
 }
