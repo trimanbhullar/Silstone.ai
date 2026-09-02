@@ -2697,7 +2697,10 @@ else{msg.textContent=(res.data&&res.data.message)?res.data.message:'Something we
 <style>
 .sil-footer { padding-top: var(--space-16); padding-bottom: var(--space-8); }
 .sil-footer-top { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-12); }
-.sil-footer-logo { height: 24px; width: auto; }
+/* Deliberately below the nav's --nav-logo-h: the footer wordmark is a sign-off,
+   not the primary mark, so it reads as related without competing. Source PNG is
+   375x97, so this is still downscaling. */
+.sil-footer-logo { height: 40px; width: auto; }
 .sil-footer-brand .sil-body-s { max-width: 42ch; }
 .sil-footer-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .sil-footer-badges li {
