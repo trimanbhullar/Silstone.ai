@@ -131,6 +131,16 @@
   /* ---- Layout ---- */
   --container-max:1320px;
   --container-pad:clamp(20px,5vw,80px);
+
+  /* ---- Sticky nav ----
+     The nav bar is sticky, so anything that scrolls to a fixed offset has to
+     clear it. --nav-logo-h is the only value to change; --nav-h derives the bar
+     height from it (logo + 16px padding top and bottom + the 1px border) and
+     everything that must sit below the bar is measured from that. Holds while
+     the logo is the tallest thing in the bar -- below roughly 40px the CTA
+     button takes over and --nav-h would understate the real height. */
+  --nav-logo-h:55px;
+  --nav-h:calc(var(--nav-logo-h) + 33px);
 }
 
 /* ===========================================================================
@@ -749,7 +759,7 @@
    BLOG ENGAGEMENT: TOC, tags + filter, share, author box, progress bar
    =========================================================================== */
 html { scroll-behavior: smooth; }
-.sil-article h2, .sil-article h3 { scroll-margin-top: 90px; }
+.sil-article h2, .sil-article h3 { scroll-margin-top: calc(var(--nav-h) + 16px); }
 
 .sil-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
   background: linear-gradient(90deg, var(--teal-500), var(--violet-500)); z-index: 1000; transition: width .1s linear; }
@@ -809,9 +819,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
 @media (min-width: 981px) {
   .sil-article-layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: var(--space-12); align-items: start; }
-  .sil-toc { display: block; position: sticky; top: 96px; align-self: start;
+  .sil-toc { display: block; position: sticky; top: calc(var(--nav-h) + 20px); align-self: start;
     max-width: none; margin: 0; padding: 0; background: none; border: 0; border-radius: 0;
-    max-height: calc(100vh - 120px); overflow-y: auto; }
+    max-height: calc(100vh - var(--nav-h) - 40px); overflow-y: auto; }
   .sil-toc-label { margin: 0 0 var(--space-3); }
   .sil-toc ul { border-left: 1px solid var(--border-subtle); gap: 0; }
   .sil-toc a { display: block; padding: 6px 0 6px var(--space-4); margin-left: -1px;
@@ -1177,20 +1187,44 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .sil-ptstep-track {
   position: absolute; left: 10%; right: 10%; top: 21px; height: 2px;
   border-radius: 2px; background: rgba(255,255,255,0.07); overflow: hidden;
+  /* Cut away behind every node so the rail reads as connectors BETWEEN the
+     steps. The nodes are translucent until they light, so an unbroken line
+     showed straight through the middle of each one. Five stops at
+     0/25/50/75/100% because the track spans step one's centre to step five's.
+     `intersect` keeps only what is opaque in every layer, so any one circle
+     punches a hole. Same treatment as the hero rail in block 80. */
+  --hole: 30px;
+  -webkit-mask-image:
+    radial-gradient(circle var(--hole) at 0%   50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 25%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 50%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 75%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 100% 50%, transparent 0 100%, #000 100%);
+  mask-image:
+    radial-gradient(circle var(--hole) at 0%   50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 25%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 50%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 75%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 100% 50%, transparent 0 100%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 .sil-ptstep-fill {
   display: block; height: 100%; width: 0%; border-radius: inherit;
   background: linear-gradient(90deg, var(--sec), var(--coral-400));
-  box-shadow: 0 0 12px rgba(var(--sec-rgb), .5);
   transition: width 520ms var(--ease-out);
 }
 .sil-ptstep-nodes {
   position: relative; z-index: 2;
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-3);
+  /* No column gap: with five equal columns and none, step k's centre sits at
+     exactly (k + 0.5)/5, which is where the track's 10% inset and the mask
+     holes assume it is. A gap pulls every centre inward and the line stops
+     landing on the nodes. Spacing comes from padding inside the cell. */
+  display: grid; grid-template-columns: repeat(5, 1fr); column-gap: 0; row-gap: 0;
 }
 .sil-root .sil-ptstep-nodes button {
   width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--space-3);
-  padding: 0; background: none; border: 0; text-align: center;
+  padding: 0 var(--space-2); background: none; border: 0; text-align: center;
 }
 .sil-ptstep-nodes .n {
   width: 44px; height: 44px; border-radius: 50%; flex: none;
@@ -1265,7 +1299,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
 @media (max-width: 900px) {
   .sil-ptstep-track { display: none; }
-  .sil-ptstep-nodes { grid-template-columns: repeat(3, 1fr); row-gap: var(--space-8); }
+  .sil-ptstep-nodes { grid-template-columns: repeat(3, 1fr); row-gap: var(--space-8); column-gap: var(--space-3); }
 }
 @media (max-width: 620px) {
   .sil-ptstep-nodes { grid-template-columns: repeat(2, 1fr); }

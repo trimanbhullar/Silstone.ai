@@ -131,6 +131,16 @@
   /* ---- Layout ---- */
   --container-max:1320px;
   --container-pad:clamp(20px,5vw,80px);
+
+  /* ---- Sticky nav ----
+     The nav bar is sticky, so anything that scrolls to a fixed offset has to
+     clear it. --nav-logo-h is the only value to change; --nav-h derives the bar
+     height from it (logo + 16px padding top and bottom + the 1px border) and
+     everything that must sit below the bar is measured from that. Holds while
+     the logo is the tallest thing in the bar -- below roughly 40px the CTA
+     button takes over and --nav-h would understate the real height. */
+  --nav-logo-h:55px;
+  --nav-h:calc(var(--nav-logo-h) + 33px);
 }
 
 /* ===========================================================================
@@ -749,7 +759,7 @@
    BLOG ENGAGEMENT: TOC, tags + filter, share, author box, progress bar
    =========================================================================== */
 html { scroll-behavior: smooth; }
-.sil-article h2, .sil-article h3 { scroll-margin-top: 90px; }
+.sil-article h2, .sil-article h3 { scroll-margin-top: calc(var(--nav-h) + 16px); }
 
 .sil-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0;
   background: linear-gradient(90deg, var(--teal-500), var(--violet-500)); z-index: 1000; transition: width .1s linear; }
@@ -809,9 +819,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
 @media (min-width: 981px) {
   .sil-article-layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: var(--space-12); align-items: start; }
-  .sil-toc { display: block; position: sticky; top: 96px; align-self: start;
+  .sil-toc { display: block; position: sticky; top: calc(var(--nav-h) + 20px); align-self: start;
     max-width: none; margin: 0; padding: 0; background: none; border: 0; border-radius: 0;
-    max-height: calc(100vh - 120px); overflow-y: auto; }
+    max-height: calc(100vh - var(--nav-h) - 40px); overflow-y: auto; }
   .sil-toc-label { margin: 0 0 var(--space-3); }
   .sil-toc ul { border-left: 1px solid var(--border-subtle); gap: 0; }
   .sil-toc a { display: block; padding: 6px 0 6px var(--space-4); margin-left: -1px;
@@ -1203,11 +1213,11 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 }
 
 .sil-logo { display: inline-flex; align-items: center; flex: none; }
-/* The wordmark ships at 375x97, so it is still downscaling at this height and
-   stays crisp. Keep the nav bar under ~88px overall: the blog's headings use
-   scroll-margin-top:90px and its sticky TOC sits at top:96px, both of which
-   assume the nav clears out of the way above them. */
-.sil-logo-img { height: 46px; width: auto; }
+/* Height comes from --nav-logo-h in assets/silstone.css, because the blog's
+   heading offsets and sticky TOC are derived from the same value -- change it
+   there and the bar and everything that has to clear it move together. The
+   wordmark ships at 375x97, so it is still downscaling here and stays crisp. */
+.sil-logo-img { height: var(--nav-logo-h, 55px); width: auto; }
 
 .sil-nav-links { display: flex; align-items: center; gap: var(--space-6); margin-left: auto; }
 .sil-nav-links a {
