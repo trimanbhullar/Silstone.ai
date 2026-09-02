@@ -35,7 +35,7 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 
 <style>html,body{margin:0;padding:0;background:#08080B;}</style>
-<link rel="stylesheet" href="/assets/silstone.cb00efe0.css">
+<link rel="stylesheet" href="/assets/silstone.f22b8beb.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Silstone.AI","url":"https://www.silstone.ai/","logo":"https://www.silstone.ai/assets/logo-mark.950ffdaa.png","description":"Healthcare-native AI studio that designs, builds and deploys custom AI agents to automate back-office work for medical and dental practices.","contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"sales@silstonegroup.com","telephone":"+1-613-558-5913"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.silstone.ai/"},{"@type":"ListItem","position":2,"name":"Physical Therapy AI Automation","item":"https://www.silstone.ai/physical-therapy-automation"}]}</script>
 </head>
@@ -145,11 +145,11 @@
 }
 
 .sil-logo { display: inline-flex; align-items: center; flex: none; }
-/* The wordmark ships at 375x97, so it is still downscaling at this height and
-   stays crisp. Keep the nav bar under ~88px overall: the blog's headings use
-   scroll-margin-top:90px and its sticky TOC sits at top:96px, both of which
-   assume the nav clears out of the way above them. */
-.sil-logo-img { height: 46px; width: auto; }
+/* Height comes from --nav-logo-h in assets/silstone.css, because the blog's
+   heading offsets and sticky TOC are derived from the same value -- change it
+   there and the bar and everything that has to clear it move together. The
+   wordmark ships at 375x97, so it is still downscaling here and stays crisp. */
+.sil-logo-img { height: var(--nav-logo-h, 55px); width: auto; }
 
 .sil-nav-links { display: flex; align-items: center; gap: var(--space-6); margin-left: auto; }
 .sil-nav-links a {
@@ -1926,20 +1926,44 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
 .sil-ptstep-track {
   position: absolute; left: 10%; right: 10%; top: 21px; height: 2px;
   border-radius: 2px; background: rgba(255,255,255,0.07); overflow: hidden;
+  /* Cut away behind every node so the rail reads as connectors BETWEEN the
+     steps. The nodes are translucent until they light, so an unbroken line
+     showed straight through the middle of each one. Five stops at
+     0/25/50/75/100% because the track spans step one's centre to step five's.
+     `intersect` keeps only what is opaque in every layer, so any one circle
+     punches a hole. Same treatment as the hero rail in block 80. */
+  --hole: 30px;
+  -webkit-mask-image:
+    radial-gradient(circle var(--hole) at 0%   50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 25%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 50%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 75%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 100% 50%, transparent 0 100%, #000 100%);
+  mask-image:
+    radial-gradient(circle var(--hole) at 0%   50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 25%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 50%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 75%  50%, transparent 0 100%, #000 100%),
+    radial-gradient(circle var(--hole) at 100% 50%, transparent 0 100%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 .sil-ptstep-fill {
   display: block; height: 100%; width: 0%; border-radius: inherit;
   background: linear-gradient(90deg, var(--sec), var(--coral-400));
-  box-shadow: 0 0 12px rgba(var(--sec-rgb), .5);
   transition: width 520ms var(--ease-out);
 }
 .sil-ptstep-nodes {
   position: relative; z-index: 2;
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-3);
+  /* No column gap: with five equal columns and none, step k's centre sits at
+     exactly (k + 0.5)/5, which is where the track's 10% inset and the mask
+     holes assume it is. A gap pulls every centre inward and the line stops
+     landing on the nodes. Spacing comes from padding inside the cell. */
+  display: grid; grid-template-columns: repeat(5, 1fr); column-gap: 0; row-gap: 0;
 }
 .sil-root .sil-ptstep-nodes button {
   width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--space-3);
-  padding: 0; background: none; border: 0; text-align: center;
+  padding: 0 var(--space-2); background: none; border: 0; text-align: center;
 }
 .sil-ptstep-nodes .n {
   width: 44px; height: 44px; border-radius: 50%; flex: none;
@@ -2014,7 +2038,7 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
 
 @media (max-width: 900px) {
   .sil-ptstep-track { display: none; }
-  .sil-ptstep-nodes { grid-template-columns: repeat(3, 1fr); row-gap: var(--space-8); }
+  .sil-ptstep-nodes { grid-template-columns: repeat(3, 1fr); row-gap: var(--space-8); column-gap: var(--space-3); }
 }
 @media (max-width: 620px) {
   .sil-ptstep-nodes { grid-template-columns: repeat(2, 1fr); }

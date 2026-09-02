@@ -35,7 +35,7 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 
 <style>html,body{margin:0;padding:0;background:#08080B;}</style>
-<link rel="stylesheet" href="/assets/silstone.cb00efe0.css">
+<link rel="stylesheet" href="/assets/silstone.f22b8beb.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Silstone.AI","url":"https://www.silstone.ai/","logo":"https://www.silstone.ai/assets/logo-mark.950ffdaa.png","description":"Healthcare-native AI studio that designs, builds and deploys custom AI agents to automate back-office work for medical and dental practices.","contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"sales@silstonegroup.com","telephone":"+1-613-558-5913"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.silstone.ai/"},{"@type":"ListItem","position":2,"name":"Book a Scoping Call","item":"https://www.silstone.ai/contact"}]}</script>
 </head>
@@ -145,11 +145,11 @@
 }
 
 .sil-logo { display: inline-flex; align-items: center; flex: none; }
-/* The wordmark ships at 375x97, so it is still downscaling at this height and
-   stays crisp. Keep the nav bar under ~88px overall: the blog's headings use
-   scroll-margin-top:90px and its sticky TOC sits at top:96px, both of which
-   assume the nav clears out of the way above them. */
-.sil-logo-img { height: 46px; width: auto; }
+/* Height comes from --nav-logo-h in assets/silstone.css, because the blog's
+   heading offsets and sticky TOC are derived from the same value -- change it
+   there and the bar and everything that has to clear it move together. The
+   wordmark ships at 375x97, so it is still downscaling here and stays crisp. */
+.sil-logo-img { height: var(--nav-logo-h, 55px); width: auto; }
 
 .sil-nav-links { display: flex; align-items: center; gap: var(--space-6); margin-left: auto; }
 .sil-nav-links a {
