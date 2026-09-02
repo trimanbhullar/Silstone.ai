@@ -64,6 +64,12 @@ END = "<!-- SIL:GLOBAL END -->"
 # ---------------------------------------------------------------------------
 # Per-page SEO / GEO metadata.  slug "" == homepage.  Order == sitemap order.
 # title <=60 chars, description 140-155 chars (mirrors SEO-COPY.md).
+#
+# Optional "group" + "label" put the page into a generated link list. Any
+# <ul data-sil-links="GROUP"> in a section is filled from the entries carrying
+# that group, in table order -- so adding a solutions page here is all it takes
+# to get it into the footer, alongside the sitemap and llms.txt entries it
+# already produces. See fill_link_lists() below.
 # ---------------------------------------------------------------------------
 PAGES_META = [
     {
@@ -74,24 +80,28 @@ PAGES_META = [
     },
     {
         "slug": "what-we-build", "dir": "what-we-build",
+        "group": "solutions", "label": "What we build",
         "title": "What We Build | Silstone.AI",
         "desc": "A cited knowledge brain your staff can ask anything, plus custom agents that clear the fax pile, chase underpayments and run portals that have no API.",
         "priority": "0.9",
     },
     {
         "slug": "dental-automation", "dir": "dental-automation",
+        "group": "solutions", "label": "Dental automation",
         "title": "Dental Practice AI Automation | Silstone.AI",
         "desc": "AI agents for dental practices: clear the fax pile, chase insurance underpayments and run credentialing portals. Live in weeks, no PMS integration.",
         "priority": "0.9",
     },
     {
         "slug": "aesthetics-automation", "dir": "aesthetics-automation",
+        "group": "solutions", "label": "Aesthetics automation",
         "title": "Aesthetics & Med-Spa AI Automation | Silstone.AI",
         "desc": "AI agents for aesthetic and med-spa clinics that handle inbound enquiries, bookings and back-office admin, so your team sells time instead of chasing it.",
         "priority": "0.9",
     },
     {
         "slug": "physical-therapy-automation", "dir": "physical-therapy-automation",
+        "group": "solutions", "label": "Physical therapy automation",
         "title": "Physical Therapy AI Automation | Silstone.AI",
         "desc": "AI automation for physical therapy practices: eligibility, intake validation, prior authorization, therapy thresholds, KX documentation and payer follow ups.",
         "priority": "0.9",
@@ -149,7 +159,35 @@ def strip_global(text: str) -> str:
 
 
 def read_block(path: pathlib.Path) -> str:
-    return strip_global(path.read_text(encoding="utf-8"))
+    """Read a block, drop its baked global, and fill any generated link lists.
+
+    fill_link_lists belongs here rather than at the call sites: the homepage
+    assembles sections/ directly instead of going through the shared `footer`
+    variable, so hooking it in anywhere else silently leaves one page behind."""
+    return fill_link_lists(strip_global(path.read_text(encoding="utf-8")))
+
+
+LINK_LIST_RE = re.compile(r'(<ul[^>]*data-sil-links="([a-z-]+)"[^>]*>)(.*?)(</ul>)', re.DOTALL)
+
+
+def fill_link_lists(html: str) -> str:
+    """Fill every <ul data-sil-links="GROUP"> from PAGES_META.
+
+    The hand-written <li>s inside the marker stay in the source file on purpose:
+    they are the fallback for the Hostinger "Embed code" path, where a block is
+    pasted in raw and nothing runs this. On the real build they are replaced, so
+    the list can never drift from the page table."""
+    def repl(m):
+        open_tag, group, _fallback, close_tag = m.groups()
+        items = [p for p in PAGES_META if p.get("group") == group]
+        rows = "\n".join(
+            '            <li><a href="%s" target="_top">%s</a></li>'
+            % (canonical(p["slug"]), _html.escape(p["label"]))
+            for p in items
+        )
+        return "%s\n%s\n          %s" % (open_tag, rows, close_tag)
+
+    return LINK_LIST_RE.sub(repl, html)
 
 
 def clean_dist() -> None:
