@@ -91,6 +91,12 @@ PAGES_META = [
         "priority": "0.9",
     },
     {
+        "slug": "physical-therapy-automation", "dir": "physical-therapy-automation",
+        "title": "Physical Therapy AI Automation | Silstone.AI",
+        "desc": "AI automation for physical therapy practices: eligibility, intake validation, prior authorization, therapy thresholds, KX documentation and payer follow ups.",
+        "priority": "0.9",
+    },
+    {
         "slug": "live-demos", "dir": "live-demos",
         "title": "Live Demos | Try Healthcare AI Agents | Silstone.AI",
         "desc": "Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and turn a pile of inbound faxes into finished work — refills checked against protocol and cleared in one click, denials assembled into an appeal. Built on Claude.",
