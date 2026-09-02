@@ -1687,7 +1687,15 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
 
 /* ---- scene 5: the summary ---- */
 .sil-ptstage[data-scene="5"] .sil-ptboard { opacity: 0; pointer-events: none; }
-.sil-ptend {
+/* Scoped to .sil-ptstage on purpose. This is the one element in the page that
+   is a DIRECT child of a .sil-card, and the shared stylesheet's
+   `.sil-card > * { position: relative }` has exactly the same specificity as a
+   bare `.sil-ptend`. A tie is broken by source order, so the summary only
+   stayed absolute because the block's <style> happens to come after the linked
+   stylesheet -- and it dropped into the flow, pushed to the bottom of a
+   ballooning card, anywhere that order was not guaranteed. (0,2,0) beats
+   (0,1,0) outright, so ordering no longer matters. */
+.sil-ptstage .sil-ptend {
   position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: 4;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: var(--space-6); padding: clamp(24px, 2.6vw, 36px);
