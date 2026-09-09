@@ -35,7 +35,7 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 
 <style>html,body{margin:0;padding:0;background:#08080B;}</style>
-<link rel="stylesheet" href="/assets/silstone.0afc9b4c.css">
+<link rel="stylesheet" href="/assets/silstone.05d554b8.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Silstone.AI","url":"https://www.silstone.ai/","logo":"https://www.silstone.ai/assets/logo-mark.950ffdaa.png","description":"Healthcare-native AI studio that designs, builds and deploys custom AI agents to automate back-office work for medical and dental practices.","contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"sales@silstonegroup.com","telephone":"+1-613-558-5913"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.silstone.ai/"},{"@type":"ListItem","position":2,"name":"Live Demos","item":"https://www.silstone.ai/live-demos"}]}</script>
 </head>
@@ -398,13 +398,7 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
   Simplified demo: 5 states (A-E), no email feature.
   Hardcoded path = no lead gate. Own-data path = lead gate required.
 -->
-<div class="sil-root" data-sil-themed="denial-recovery">
-  <script>/* No-flash: resolve this block's stored Light/Dark choice before it paints. */
-  (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
-  if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
-  r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
-
-
+<div class="sil-root">
   <!-- ==================== HERO ==================== -->
   <section class="sil-section is-alt" style="padding:var(--space-12) 0 var(--space-8)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
@@ -420,16 +414,6 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
         <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
         <span class="sil-chip"><i class="dot"></i>Try with your own EOB</span>
       </div>
-
-      <!-- Light / Dark switch. Every demo block on the page follows it, and the
-           choice is remembered; see silstone.js > "the Light / Dark switch". -->
-      <div class="sil-themetoggle sil-mt-6" role="radiogroup" aria-labelledby="silTheme61">
-        <span class="sil-themetoggle-label" id="silTheme61">Appearance</span>
-        <div class="sil-themetoggle-set">
-          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
-          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -437,7 +421,23 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
   <section class="sil-section" style="padding:var(--space-8) 0 var(--space-12)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container sil-center">
-      <div class="sil-drdemo" id="drDemo">
+      <!-- Light / Dark switch. Governs ONLY the demo panel it names in
+           aria-controls -- never the heading above it -- and the choice is
+           remembered per demo. See silstone.js > "the Light / Dark switch". -->
+      <div class="sil-democtl">
+        <div class="sil-themetoggle" role="radiogroup" aria-labelledby="silTheme61" aria-controls="drDemo">
+          <span class="sil-themetoggle-label" id="silTheme61">Demo appearance</span>
+          <div class="sil-themetoggle-set">
+            <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
+            <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
+          </div>
+        </div>
+      </div>
+      <div class="sil-drdemo" id="drDemo" data-sil-themed="denial-recovery">
+        <script>/* No-flash: resolve this demo's stored Light/Dark choice before it paints. */
+        (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
+        if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+        r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
 
         <!-- State A: Document Input (read-only textarea) -->
         <div class="drd-state" id="drdStateA">
@@ -1192,13 +1192,7 @@ if(document.readyState==='loading'){
   Markup + trailing <style>/<script> live OUTSIDE the SIL:GLOBAL markers;
   run build-embeds.py to bake the system in.
 -->
-<div class="sil-root" data-sil-themed="fax-triage">
-  <script>/* No-flash: resolve this block's stored Light/Dark choice before it paints. */
-  (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
-  if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
-  r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
-
-
+<div class="sil-root">
   <!-- ==================== SUB-HERO ==================== -->
   <section class="sil-section is-alt has-tint acc-teal" style="padding:var(--space-12) 0 var(--space-8)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
@@ -1214,16 +1208,6 @@ if(document.readyState==='loading'){
         <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
         <span class="sil-chip"><i class="dot"></i>The same pipeline as production</span>
       </div>
-
-      <!-- Light / Dark switch. Every demo block on the page follows it, and the
-           choice is remembered; see silstone.js > "the Light / Dark switch". -->
-      <div class="sil-themetoggle sil-mt-6" role="radiogroup" aria-labelledby="silTheme62">
-        <span class="sil-themetoggle-label" id="silTheme62">Appearance</span>
-        <div class="sil-themetoggle-set">
-          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
-          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1231,7 +1215,23 @@ if(document.readyState==='loading'){
   <section class="sil-section" style="padding:var(--space-8) 0 var(--space-12)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container">
-      <div class="trg-demo" id="trgDemo">
+      <!-- Light / Dark switch. Governs ONLY the demo panel it names in
+           aria-controls -- never the heading above it -- and the choice is
+           remembered per demo. See silstone.js > "the Light / Dark switch". -->
+      <div class="sil-democtl">
+        <div class="sil-themetoggle" role="radiogroup" aria-labelledby="silTheme62" aria-controls="trgDemo">
+          <span class="sil-themetoggle-label" id="silTheme62">Demo appearance</span>
+          <div class="sil-themetoggle-set">
+            <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
+            <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
+          </div>
+        </div>
+      </div>
+      <div class="trg-demo" id="trgDemo" data-sil-themed="fax-triage">
+        <script>/* No-flash: resolve this demo's stored Light/Dark choice before it paints. */
+        (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
+        if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+        r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
 
         <!-- PHI / privacy disclaimer (top) -->
         <div class="trg-note">
@@ -1328,34 +1328,9 @@ if(document.readyState==='loading'){
     </div>
   </section>
 
-  <!-- ==================== NOTIFY ==================== -->
-  <section class="sil-section has-top">
-    <div class="sil-cursorglow" aria-hidden="true"></div>
-    <div class="sil-container">
-      <div class="sil-card is-hover is-spot sil-reveal">
-        <div class="sil-soon">
-          <div>
-            <span class="sil-tag">More on the way</span>
-            <h2 class="sil-display-s sil-mt-4">New demos land often.</h2>
-            <p class="sil-body-m sil-mt-3 sil-measure">
-              We're building a demo for every piece of admin practices dread.
-              Leave an email and we'll tell you the moment the next one goes live.
-            </p>
-          </div>
-          <form class="sil-notify" id="silNotify" action="https://api.web3forms.com/submit" method="POST" novalidate>
-            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
-            <input type="hidden" name="subject" value="New Live Demo notify signup">
-            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo page">
-            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-            <label class="sil-sr" for="silNotifyEmail">Email address</label>
-            <input id="silNotifyEmail" name="email" type="email" required placeholder="you@practice.com" autocomplete="email">
-            <button type="submit" class="sil-btn sil-btn-primary is-auto">Notify me</button>
-            <p class="sil-notify-msg" id="silNotifyMsg" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- The shared "notify / next demo" signup used to sit here. It always lives
+       in the LAST block on the page, so it moved to 63-benefits.html when the
+       benefit agent landed. -->
 </div>
 
 <style>
@@ -1617,14 +1592,7 @@ if(document.readyState==='loading'){
 }
 @media (prefers-reduced-motion:reduce){.trg-demo *{animation-duration:.01ms!important}}
 
-/* notify (shared signup — lives with the last demo on the page) */
-.sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
-.sil-notify{display:grid;grid-template-columns:1fr auto;gap:var(--space-3);align-items:start}
-.sil-notify .sil-btn{white-space:nowrap}
-.sil-notify-msg{grid-column:1/-1;margin:0;font-family:var(--font-mono);font-size:11px;color:var(--text-tertiary)}
-.sil-notify-msg.is-warn{color:var(--coral-500)}
-@media(max-width:900px){.sil-soon{grid-template-columns:1fr;gap:var(--space-6)}}
-@media(max-width:520px){.sil-notify{grid-template-columns:1fr}.sil-notify .sil-btn{width:100%}}
+/* The notify signup's styles moved to 63-benefits.html with the markup. */
 </style>
 
 <script>
@@ -2567,29 +2535,6 @@ if(document.readyState==='loading'){
 })();
 </script>
 
-<script>
-(function(){
-var f=document.getElementById('silNotify');
-if(!f||f.__init)return;f.__init=true;
-var msg=document.getElementById('silNotifyMsg');
-var btn=f.querySelector('button[type=submit]');
-f.addEventListener('submit',function(e){
-e.preventDefault();
-var email=f.querySelector('input[type=email]');
-if(!email.value||email.validity.typeMismatch){msg.textContent='Please enter a valid email address.';msg.className='sil-notify-msg is-warn';return;}
-msg.textContent='Sending…';msg.className='sil-notify-msg';
-if(btn)btn.disabled=true;
-fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
-.then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
-.then(function(res){
-if(res.ok&&res.data&&res.data.success){f.reset();msg.textContent="You're on the list. We'll email you the moment the next demo lands.";msg.className='sil-notify-msg';}
-else{msg.textContent=(res.data&&res.data.message)?res.data.message:'Something went wrong. Please try again.';msg.className='sil-notify-msg is-warn';}
-}).catch(function(){msg.textContent='Network error. Please try again.';msg.className='sil-notify-msg is-warn';})
-.then(function(){if(btn)btn.disabled=false;});
-});
-})();
-</script>
-
 <!--
   SILSTONE.AI - SECTION 12 - FINAL CTA
   Hostinger: Embed code block, FULL WIDTH. Suggested height 480px.
@@ -2966,6 +2911,6 @@ else{msg.textContent=(res.data&&res.data.message)?res.data.message:'Something we
   }
 })();
 </script>
-<script src="/assets/silstone.6cae9d75.js" defer></script>
+<script src="/assets/silstone.8cd8180e.js" defer></script>
 </body>
 </html>
