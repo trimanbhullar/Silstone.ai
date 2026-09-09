@@ -176,6 +176,48 @@ tags, meters, chart accents, card rim, cursor glow and ambient mesh all re-tint 
 A single card can override too: `style="--sec-rgb:255,158,122"`. That is how the four capability
 cards each carry a different hue.
 
+### Light mode on the live demos
+
+The site is dark everywhere except the **live demos**, which carry a Light/Dark switch. The
+reason is the audience: a lot of the people we send to `/live-demos` are older physicians, and a
+dense claim table or fax queue on a near-black canvas is genuinely harder for them to read than
+the same table on paper.
+
+**Each demo has its own switch and its own remembered setting.** The two demos are read one at a
+time, so someone can leave the claim table on white and keep the fax queue dark. A block opts in
+with `data-sil-themed="<id>"` on its `.sil-root`, and that id is the storage key:
+
+| Block | id |
+|---|---|
+| [61-content.html](pages/live-demos/61-content.html) — Denial Recovery | `denial-recovery` |
+| [62-triage.html](pages/live-demos/62-triage.html) — Fax Triage | `fax-triage` |
+
+The scoping is deliberate. Only opted-in blocks move; the **nav, page hero, final CTA and footer
+stay dark** in both modes, which is also why the white-ink wordmark still reads. To give a future
+demo a switch, add `data-sil-themed="<new-id>"` to its root, paste the `.sil-themetoggle` markup
+into its hero, and copy the inline no-flash bootstrap — nothing else needs to change.
+
+Mechanically it is a palette swap, not a second stylesheet. `.sil-root[data-sil-theme="light"]`
+(section 18 of [silstone.css](assets/silstone.css)) redefines the section 2 tokens, and the rest
+of the sheet follows on its own, because almost nothing in the system writes a colour literally.
+Every ramp step up to `-500` darkens — those steps exist to be legible type on near-black, and
+the demos use them as type — while `-600`/`-700` hold, so `--accent` and its white label are
+untouched. The dozen rules after the palette are the places that *did* bake in a colour assuming
+a dark ground: the mesh blobs, the gridlines, the chart axis, the `#f87171` billing-error card.
+
+Behaviour, in [silstone.js](assets/silstone.js):
+
+- with **no** stored choice a block follows the reader's OS setting, so someone who already runs
+  everything in light mode never has to find the switch
+- each block carries a tiny inline bootstrap that reads its own key and sets the attribute
+  *while the block is still parsing*, so a returning reader never sees the dark canvas paint first
+- in the Hostinger embed flow each block is its own iframe, so the same block open twice stays in
+  step through the `storage` event — keyed by id, so one demo changing never disturbs the other
+
+Light mode was measured the same way as dark: every visible text node, per demo, with both demos
+run to completion and every hidden state forced open, composited against its real background.
+**0 pairings below the WCAG AA bar** — 326 visible elements in Denial Recovery, 446 in Fax Triage.
+
 ### Trios
 
 **Any group of three cycles violet → coral → teal.** Add `sil-trio` to the container and its three

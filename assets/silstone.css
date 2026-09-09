@@ -826,3 +826,197 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     border-left: 2px solid transparent; transition: color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard); }
   .sil-toc a.is-active { color: var(--teal-300); border-left-color: var(--teal-500); }
 }
+
+/* ===========================================================================
+   18. LIGHT MODE  (opt-in, per block)
+   The site is dark by design. The live-demo page is the exception: a doctor
+   reading a dense claim table on a near-black canvas has a genuinely harder
+   time than on paper, so those blocks carry a Light/Dark switch.
+
+   How it works: a block opts in by putting data-sil-themed="<id>" on its
+   .sil-root, and the runtime writes data-sil-theme="light|dark" onto it (see
+   silstone.js). Each demo is its OWN switch and its own remembered setting --
+   read the claim table on white, keep the fax queue dark -- because the two
+   demos are read one at a time. Nothing else on the site is touched: the nav,
+   CTA and footer stay dark, which is also why the white-ink wordmark reads.
+
+   Almost everything below is a token swap; section 2's palette is the single
+   source of truth and the rest of the sheet follows it. The handful of rules
+   after the palette are the places where a colour was baked in literally,
+   assuming a dark ground.
+   =========================================================================== */
+.sil-root[data-sil-theme="light"] {
+  /* ---- Canvas & surfaces ---- */
+  --bg-canvas:         #FFFFFF;
+  --bg-canvas-alt:     #F5F6F9;
+  --bg-surface:        #FFFFFF;
+  --bg-surface-raised: #F2F3F7;
+  --bg-surface-3:      #E7E9EF;
+
+  /* ---- Lines: ink at low alpha, not white ---- */
+  --border-subtle:  rgba(16,17,26,0.10);
+  --border-default: rgba(16,17,26,0.16);
+  --border-strong:  rgba(16,17,26,0.26);
+
+  /* ---- Type: every step re-measured against #FFFFFF ---- */
+  --text-primary:    #14151C;   /* 16.6:1 */
+  --text-secondary:  #494C5A;   /*  8.3:1 */
+  --text-tertiary:   #565A69;   /*  7.0:1 */
+  --text-quaternary: #61657A;   /*  5.8:1 -- the quiet label colour */
+
+  /* ---- The accent ramps.
+     Everything up to the 500 step darkens. Those steps were picked to be
+     legible type on a near-black ground, and the demos use them as type --
+     a P1 band, a flagged lab value, a failed protocol check -- so on white
+     they have to swing the other way. Where a 500 is a FILL instead (the
+     scan line, a progress bar, the "done" step chip) the darker value is
+     equally correct, and the two chips that carried dark ink on a solid fill
+     are re-inked white further down.
+
+     The 600/700 steps do not move: --accent is violet-600 and its white
+     label depends on that exact value. ---- */
+  --violet-100: #3B2C7E;
+  --violet-200: #442F92;
+  --violet-300: #4E3AA6;   /* --text-accent / --sec-text -- 8.0:1 */
+  --violet-400: #5B44B8;
+  --violet-500: #5F49BE;
+
+  --coral-200: #8A3410;
+  --coral-300: #9A3B13;
+  --coral-400: #A94316;    /* 5.6:1 */
+  --coral-500: #993C13;
+
+  --amber-200: #6B4405;
+  --amber-300: #6E4705;
+  --amber-400: #875808;    /* 6.2:1 */
+  --amber-500: #794E06;
+
+  --mint-300: #0E6B45;
+  --mint-400: #10744B;     /* 5.6:1 */
+  --mint-500: #0E6741;
+
+  --teal-300: #0B5F5C;
+  --teal-400: #0D6E6A;     /* 6.0:1 */
+  --teal-500: #0F7C78;
+
+  /* ---- Semantic ---- */
+  --text-on-accent: #FFFFFF;
+
+  --accent-soft:        rgba(110,86,207,0.09);
+  --accent-soft-border: rgba(110,86,207,0.30);
+  --teal-soft:          rgba(23,140,136,0.09);
+  --teal-soft-border:   rgba(23,140,136,0.32);
+
+  /* Gradient text on white needs the darker stops or the middle of the sweep
+     washes out; --grad-primary is a solid fill behind white text, so it does
+     not move. */
+  --grad-text: linear-gradient(100deg, var(--violet-400) 0%, var(--violet-300) 26%, var(--teal-400) 52%, var(--coral-400) 78%, var(--violet-400) 100%);
+  --grad-line: linear-gradient(90deg, transparent, var(--violet-400), var(--coral-400), transparent);
+
+  /* ---- Shadow: ink at low alpha; the dark sheet's 40-50% black is a bruise
+     on white. ---- */
+  --shadow-sm: 0 1px 2px rgba(16,17,26,0.10);
+  --shadow-md: 0 4px 16px rgba(16,17,26,0.09);
+  --shadow-lg: 0 12px 40px rgba(16,17,26,0.12);
+
+  color-scheme: light;
+}
+
+/* --- The literals that assumed a dark ground --------------------------- */
+
+/* Ambient layers. The mesh blobs blend with `screen`, which is a no-op on
+   white, and the gridlines are white-on-white. Both get an ink treatment
+   instead of being switched off, so the page keeps its depth. */
+.sil-root[data-sil-theme="light"] .sil-mesh i { mix-blend-mode: multiply; filter: blur(110px); }
+.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(1) { opacity: .10; }
+.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(2) { opacity: .08; }
+.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(3) { opacity: .07; }
+.sil-root[data-sil-theme="light"] .sil-gridlines {
+  background-image:
+    linear-gradient(rgba(16,17,26,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,17,26,0.045) 1px, transparent 1px);
+}
+.sil-root[data-sil-theme="light"] .sil-cursorglow {
+  background: radial-gradient(520px circle at var(--gx,50%) var(--gy,40%), rgba(var(--sec-rgb),0.10), transparent 60%);
+}
+.sil-root[data-sil-theme="light"] .sil-hairline { opacity: .6; }
+.sil-root[data-sil-theme="light"] .sil-section.has-tint::before {
+  background: radial-gradient(ellipse 88% 54% at 50% 0%, rgba(var(--sec-rgb), 0.06), transparent 66%);
+}
+
+/* Charts and meters drew their rails in white. */
+.sil-root[data-sil-theme="light"] .sil-chart .axis { stroke: rgba(16,17,26,0.14); }
+.sil-root[data-sil-theme="light"] .sil-meter { background: rgba(16,17,26,0.09); }
+
+/* Two "dark ink on a solid mint/teal chip" pairings: the chip keeps its
+   colour, so the ink has to go the other way. */
+.sil-root[data-sil-theme="light"] .drd-step.done .n { color: #FFFFFF; }
+.sil-root[data-sil-theme="light"] .sil-tagfilter-btn.is-active { color: #FFFFFF; }
+
+/* The one animation that ends on white: a stat flashing to #fff to say "this
+   just changed" is invisible on a white card, so it flashes to the P1 colour
+   and holds instead. */
+.sil-root[data-sil-theme="light"] .trg-stat.trg-flash .v { animation: none; color: var(--coral-400); }
+
+/* The billing-discrepancy card is the one place a colour was written as a
+   literal (#f87171) instead of coming from the ramp, and its mono readout
+   sits on a 30%-black panel -- a grey slab once the card is white. */
+.sil-root[data-sil-theme="light"] .drd-be-icon,
+.sil-root[data-sil-theme="light"] .drd-be-title { color: #B3261E; }
+.sil-root[data-sil-theme="light"] .drd-be-msg { background: rgba(179,38,30,.07); }
+
+/* The flying "filed to the chart" chips carry a shadow tuned for a black
+   ground. */
+.sil-root[data-sil-theme="light"] .trg-fly { box-shadow: var(--shadow-md); }
+
+/* Glow rings around 7px dots turn into grey smudges on white. */
+.sil-root[data-sil-theme="light"] .drd-fdot { box-shadow: none; }
+
+/* ---------------------------------------------------------------------------
+   THE SWITCH
+   One per demo, in that demo's own hero, so it is in view when you start
+   reading the thing it governs. Sized for the audience: a real segmented
+   control with both words spelled out and permanently readable, not an
+   icon-only toggle whose current state you have to infer.
+   --------------------------------------------------------------------------- */
+.sil-themetoggle {
+  display: flex; align-items: center; gap: var(--space-3);
+  flex-wrap: wrap; justify-content: center;
+}
+.sil-themetoggle-label {
+  font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+}
+.sil-themetoggle-set {
+  display: inline-flex; padding: 4px; gap: 4px;
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+}
+.sil-root .sil-themetoggle-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 36px; padding: 7px 18px;
+  border: 1px solid transparent; border-radius: var(--radius-pill);
+  font-family: var(--font-body); font-size: var(--text-body-s-size);
+  font-weight: var(--font-weight-semibold); color: var(--text-secondary);
+  background: transparent; cursor: pointer;
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
+}
+.sil-themetoggle-btn svg { width: 17px; height: 17px; flex: none; }
+.sil-root .sil-themetoggle-btn:hover { color: var(--text-primary); }
+.sil-root .sil-themetoggle-btn[aria-checked="true"] {
+  background: var(--bg-canvas);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+.sil-themetoggle-btn:focus-visible {
+  outline: 2px solid var(--focus-ring); outline-offset: 2px;
+}
+
+/* Without the runtime there is nothing to switch, so the control hides itself
+   rather than sitting there inert. */
+.sil-themetoggle { display: none; }
+.sil-js .sil-themetoggle { display: flex; }
