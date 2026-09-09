@@ -830,24 +830,25 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 }
 
 /* ===========================================================================
-   18. LIGHT MODE  (opt-in, per block)
-   The site is dark by design. The live-demo page is the exception: a doctor
-   reading a dense claim table on a near-black canvas has a genuinely harder
-   time than on paper, so those blocks carry a Light/Dark switch.
+   18. LIGHT MODE  (opt-in, per demo)
+   The site is dark by design. The live demos are the exception: a doctor
+   reading a dense claim table or a fax queue on a near-black canvas has a
+   genuinely harder time than on paper, so each demo carries a Light/Dark
+   switch.
 
-   How it works: a block opts in by putting data-sil-themed="<id>" on its
-   .sil-root, and the runtime writes data-sil-theme="light|dark" onto it (see
-   silstone.js). Each demo is its OWN switch and its own remembered setting --
-   read the claim table on white, keep the fax queue dark -- because the two
-   demos are read one at a time. Nothing else on the site is touched: the nav,
-   CTA and footer stay dark, which is also why the white-ink wordmark reads.
+   The scope is the DEMO WIDGET, nothing else. A demo opts in with
+   data-sil-themed="<id>" on its own container (#drDemo, #trgDemo) and the
+   runtime writes data-sil-theme="light|dark" onto it -- so the panel flips
+   while the heading above it, the section around it, the nav and the footer
+   all stay dark. The id is also the storage key, so the two demos are
+   remembered separately: read the claim table on white, keep the queue dark.
 
    Almost everything below is a token swap; section 2's palette is the single
-   source of truth and the rest of the sheet follows it. The handful of rules
-   after the palette are the places where a colour was baked in literally,
-   assuming a dark ground.
+   source of truth and the rest of the sheet follows it, because nearly
+   nothing in the system writes a colour literally. The few rules after the
+   palette are the places inside a demo that did bake in a dark ground.
    =========================================================================== */
-.sil-root[data-sil-theme="light"] {
+[data-sil-theme="light"] {
   /* ---- Canvas & surfaces ---- */
   --bg-canvas:         #FFFFFF;
   --bg-canvas-alt:     #F5F6F9;
@@ -924,63 +925,65 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   color-scheme: light;
 }
 
-/* --- The literals that assumed a dark ground --------------------------- */
+/* The panel owns its own text colour. `color` is set on .sil-root, which is
+   now OUTSIDE the panel, so anything that inherits its ink rather than naming
+   --text-primary itself would keep the page's near-white on a light panel.
+   Unconditional: in dark mode this resolves to the same value it inherited. */
+[data-sil-themed] { color: var(--text-primary); }
 
-/* Ambient layers. The mesh blobs blend with `screen`, which is a no-op on
-   white, and the gridlines are white-on-white. Both get an ink treatment
-   instead of being switched off, so the page keeps its depth. */
-.sil-root[data-sil-theme="light"] .sil-mesh i { mix-blend-mode: multiply; filter: blur(110px); }
-.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(1) { opacity: .10; }
-.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(2) { opacity: .08; }
-.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(3) { opacity: .07; }
-.sil-root[data-sil-theme="light"] .sil-gridlines {
-  background-image:
-    linear-gradient(rgba(16,17,26,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16,17,26,0.045) 1px, transparent 1px);
-}
-.sil-root[data-sil-theme="light"] .sil-cursorglow {
-  background: radial-gradient(520px circle at var(--gx,50%) var(--gy,40%), rgba(var(--sec-rgb),0.10), transparent 60%);
-}
-.sil-root[data-sil-theme="light"] .sil-hairline { opacity: .6; }
-.sil-root[data-sil-theme="light"] .sil-section.has-tint::before {
-  background: radial-gradient(ellipse 88% 54% at 50% 0%, rgba(var(--sec-rgb), 0.06), transparent 66%);
+/* On a near-black page the panel has to carry its own ground, since the
+   section behind it no longer changes. --bg-canvas-alt rather than white, so
+   the white cards inside it still lift off the surface. Dark mode adds
+   nothing here -- the demo stays transparent, exactly as it was. */
+[data-sil-theme="light"][data-sil-themed] {
+  background: var(--bg-canvas-alt);
+  border-radius: var(--radius-xl);
+  padding: clamp(16px, 2.4vw, 28px);
 }
 
-/* Charts and meters drew their rails in white. */
-.sil-root[data-sil-theme="light"] .sil-chart .axis { stroke: rgba(16,17,26,0.14); }
-.sil-root[data-sil-theme="light"] .sil-meter { background: rgba(16,17,26,0.09); }
+/* --- The literals that assumed a dark ground, inside a demo -------------
+   Each block's own <style> is inlined AFTER this sheet, so an override that
+   merely ties on specificity loses. Hence the doubled [data-sil-theme][
+   data-sil-themed] prefix on every rule below -- it buys the extra weight to
+   beat the block rule it is correcting. */
 
-/* Two "dark ink on a solid mint/teal chip" pairings: the chip keeps its
+/* A "done" step chip is solid mint carrying dark ink; the chip keeps its
    colour, so the ink has to go the other way. */
-.sil-root[data-sil-theme="light"] .drd-step.done .n { color: #FFFFFF; }
-.sil-root[data-sil-theme="light"] .sil-tagfilter-btn.is-active { color: #FFFFFF; }
+[data-sil-theme="light"][data-sil-themed] .drd-step.done .n { color: #FFFFFF; }
 
-/* The one animation that ends on white: a stat flashing to #fff to say "this
-   just changed" is invisible on a white card, so it flashes to the P1 colour
-   and holds instead. */
-.sil-root[data-sil-theme="light"] .trg-stat.trg-flash .v { animation: none; color: var(--coral-400); }
+/* Glow rings around 7px dots turn into grey smudges on white. */
+[data-sil-theme="light"][data-sil-themed] .drd-finding .drd-fdot { box-shadow: none; }
 
 /* The billing-discrepancy card is the one place a colour was written as a
    literal (#f87171) instead of coming from the ramp, and its mono readout
    sits on a 30%-black panel -- a grey slab once the card is white. */
-.sil-root[data-sil-theme="light"] .drd-be-icon,
-.sil-root[data-sil-theme="light"] .drd-be-title { color: #B3261E; }
-.sil-root[data-sil-theme="light"] .drd-be-msg { background: rgba(179,38,30,.07); }
+[data-sil-theme="light"][data-sil-themed] .drd-be-icon,
+[data-sil-theme="light"][data-sil-themed] .drd-be-title { color: #B3261E; }
+[data-sil-theme="light"][data-sil-themed] .drd-be-msg { background: rgba(179,38,30,.07); }
 
-/* The flying "filed to the chart" chips carry a shadow tuned for a black
-   ground. */
-.sil-root[data-sil-theme="light"] .trg-fly { box-shadow: var(--shadow-md); }
-
-/* Glow rings around 7px dots turn into grey smudges on white. */
-.sil-root[data-sil-theme="light"] .drd-fdot { box-shadow: none; }
+/* A stat flashing to #fff to say "this just changed" is invisible on a white
+   card, so it flashes to the P1 colour and holds instead. */
+[data-sil-theme="light"][data-sil-themed] .trg-stat.trg-flash .v {
+  animation: none; color: var(--coral-400);
+}
 
 /* ---------------------------------------------------------------------------
    THE SWITCH
-   One per demo, in that demo's own hero, so it is in view when you start
-   reading the thing it governs. Sized for the audience: a real segmented
-   control with both words spelled out and permanently readable, not an
-   icon-only toggle whose current state you have to infer.
+   Sits on its own bar directly above the demo it governs -- outside the themed
+   container, so it keeps the page's dark chrome in both modes and reads as a
+   control ON the panel rather than part of it. Sized for the audience: a real
+   segmented control with both words spelled out and permanently readable, not
+   an icon-only toggle whose current state you have to infer.
    --------------------------------------------------------------------------- */
+.sil-democtl {
+  display: none;              /* nothing to switch without the runtime */
+  align-items: center; justify-content: center;
+  margin: clamp(24px, 4vw, 48px) 0 var(--space-4);
+}
+.sil-js .sil-democtl { display: flex; }
+/* the bar now owns the gap above the demo */
+.sil-democtl + [data-sil-themed] { margin-top: 0; }
+
 .sil-themetoggle {
   display: flex; align-items: center; gap: var(--space-3);
   flex-wrap: wrap; justify-content: center;
@@ -1017,11 +1020,6 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .sil-themetoggle-btn:focus-visible {
   outline: 2px solid var(--focus-ring); outline-offset: 2px;
 }
-
-/* Without the runtime there is nothing to switch, so the control hides itself
-   rather than sitting there inert. */
-.sil-themetoggle { display: none; }
-.sil-js .sil-themetoggle { display: flex; }
 </style>
 <script>
 /* ===========================================================================
@@ -1302,20 +1300,24 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
 /* ===========================================================================
    LIVE DEMOS: the Light / Dark switch
-   Each demo owns its own setting. A block opts in with data-sil-themed="<id>"
-   on its .sil-root; that id is the storage key, so the denial-recovery demo
-   and the fax-triage demo are read one at a time and remembered separately --
-   someone can leave the dense claim table on white and keep the queue dark.
-   Everything outside an opted-in block (nav, CTA, footer) stays dark.
+   The scope is the demo widget, not the page. A demo opts in with
+   data-sil-themed="<id>" on its own container; its switch sits outside that
+   container and names it in aria-controls, so flipping it repaints the panel
+   and leaves the heading, the section and the page chrome alone.
 
-   With no stored choice a block follows the reader's OS setting, which is the
+   The id is also the storage key, so the denial-recovery demo and the
+   fax-triage demo are remembered separately -- the two are read one at a time.
+   With no stored choice a demo follows the reader's OS setting, which is the
    whole point for someone who already runs everything in light mode.
-   The no-flash bootstrap is inline in each block; this module owns the buttons.
+   The no-flash bootstrap is inline in each demo; this module owns the buttons.
    =========================================================================== */
 (function () {
   var PREFIX = 'sil-theme:';
 
-  function idOf(root) { return root.getAttribute('data-sil-themed') || 'default'; }
+  function panels() { return document.querySelectorAll('[data-sil-themed]'); }
+  function groups() { return document.querySelectorAll('.sil-themetoggle[aria-controls]'); }
+  function idOf(panel) { return panel.getAttribute('data-sil-themed') || 'default'; }
+  function panelFor(group) { return document.getElementById(group.getAttribute('aria-controls')); }
 
   function preferred() {
     return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
@@ -1329,61 +1331,67 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   }
   function current(id) { return stored(id) || preferred(); }
 
-  function paint(root) {
-    var theme = current(idOf(root));
-    root.setAttribute('data-sil-theme', theme);
-    // Only this block's own switch -- a second demo further down the page has
-    // its own, pointing at its own setting.
-    [].forEach.call(root.querySelectorAll('.sil-themetoggle-btn'), function (btn) {
-      var on = btn.getAttribute('data-theme') === theme;
-      btn.setAttribute('aria-checked', on ? 'true' : 'false');
-      // Roving tabindex: one Tab stop for the pair, arrow keys to change it.
-      btn.setAttribute('tabindex', on ? '0' : '-1');
+  function paint(panel) {
+    if (!panel) return;
+    var theme = current(idOf(panel));
+    panel.setAttribute('data-sil-theme', theme);
+    // Only the switches that name THIS panel -- a second demo further down the
+    // page has its own, pointing at its own container.
+    [].forEach.call(groups(), function (group) {
+      if (panelFor(group) !== panel) return;
+      [].forEach.call(group.querySelectorAll('.sil-themetoggle-btn'), function (btn) {
+        var on = btn.getAttribute('data-theme') === theme;
+        btn.setAttribute('aria-checked', on ? 'true' : 'false');
+        // Roving tabindex: one Tab stop for the pair, arrow keys to change it.
+        btn.setAttribute('tabindex', on ? '0' : '-1');
+      });
     });
   }
-  function paintAll() { [].forEach.call(roots(), paint); }
-  function roots() { return document.querySelectorAll('.sil-root[data-sil-themed]'); }
-  function rootOf(el) { return el.closest ? el.closest('.sil-root[data-sil-themed]') : null; }
+  function paintAll() { [].forEach.call(panels(), paint); }
 
-  function choose(root, theme) {
-    try { localStorage.setItem(PREFIX + idOf(root), theme); } catch (e) {}
-    paint(root);
+  function groupOf(el) { return el.closest ? el.closest('.sil-themetoggle[aria-controls]') : null; }
+
+  function choose(panel, theme) {
+    try { localStorage.setItem(PREFIX + idOf(panel), theme); } catch (e) {}
+    paint(panel);
   }
 
   document.addEventListener('click', function (e) {
     var btn = e.target && e.target.closest && e.target.closest('.sil-themetoggle-btn');
     if (!btn) return;
-    var root = rootOf(btn), t = btn.getAttribute('data-theme');
-    if (root && (t === 'light' || t === 'dark')) { e.preventDefault(); choose(root, t); }
+    var group = groupOf(btn), t = btn.getAttribute('data-theme');
+    if (!group || (t !== 'light' && t !== 'dark')) return;
+    e.preventDefault();
+    choose(panelFor(group), t);
   });
 
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
     var btn = e.target && e.target.closest && e.target.closest('.sil-themetoggle-btn');
     if (!btn) return;
-    var root = rootOf(btn);
-    if (!root) return;
+    var group = groupOf(btn), panel = group && panelFor(group);
+    if (!panel) return;
     e.preventDefault();
-    choose(root, current(idOf(root)) === 'light' ? 'dark' : 'light');
-    var now = btn.parentNode && btn.parentNode.querySelector('.sil-themetoggle-btn[aria-checked="true"]');
+    choose(panel, current(idOf(panel)) === 'light' ? 'dark' : 'light');
+    var now = group.querySelector('.sil-themetoggle-btn[aria-checked="true"]');
     if (now) now.focus();
   });
 
-  // Hostinger renders each block in its own iframe, so the same block open in
+  // Hostinger renders each block in its own iframe, so the same demo open in
   // two frames has to stay in step through storage rather than the DOM. Keyed
-  // by id, so one demo changing does not disturb the other.
+  // by id, so one demo changing never disturbs the other.
   window.addEventListener('storage', function (e) {
     if (!e.key || e.key.indexOf(PREFIX) !== 0) return;
     var id = e.key.slice(PREFIX.length);
-    [].forEach.call(roots(), function (r) { if (idOf(r) === id) paint(r); });
+    [].forEach.call(panels(), function (panel) { if (idOf(panel) === id) paint(panel); });
   });
 
-  // Blocks with no explicit choice track the OS setting live rather than
+  // Demos with no explicit choice track the OS setting live rather than
   // freezing at whatever it was when the page loaded.
   if (window.matchMedia) {
     var mq = window.matchMedia('(prefers-color-scheme: light)');
     var follow = function () {
-      [].forEach.call(roots(), function (r) { if (!stored(idOf(r))) paint(r); });
+      [].forEach.call(panels(), function (p) { if (!stored(idOf(p))) paint(p); });
     };
     if (mq.addEventListener) mq.addEventListener('change', follow);
     else if (mq.addListener) mq.addListener(follow);
@@ -1392,7 +1400,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   window.silstoneTheme = {
     get: function (id) { return current(id); },
     set: function (id, theme) {
-      [].forEach.call(roots(), function (r) { if (idOf(r) === id) choose(r, theme); });
+      [].forEach.call(panels(), function (p) { if (idOf(p) === id) choose(p, theme); });
     },
     apply: paintAll
   };
@@ -1412,13 +1420,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   Simplified demo: 5 states (A-E), no email feature.
   Hardcoded path = no lead gate. Own-data path = lead gate required.
 -->
-<div class="sil-root" data-sil-themed="denial-recovery">
-  <script>/* No-flash: resolve this block's stored Light/Dark choice before it paints. */
-  (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
-  if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
-  r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
-
-
+<div class="sil-root">
   <!-- ==================== HERO ==================== -->
   <section class="sil-section is-alt" style="padding:var(--space-12) 0 var(--space-8)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
@@ -1434,16 +1436,6 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
         <span class="sil-chip"><i class="dot"></i>Try with your own EOB</span>
       </div>
-
-      <!-- Light / Dark switch. Every demo block on the page follows it, and the
-           choice is remembered; see silstone.js > "the Light / Dark switch". -->
-      <div class="sil-themetoggle sil-mt-6" role="radiogroup" aria-labelledby="silTheme61">
-        <span class="sil-themetoggle-label" id="silTheme61">Appearance</span>
-        <div class="sil-themetoggle-set">
-          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
-          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1451,7 +1443,23 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   <section class="sil-section" style="padding:var(--space-8) 0 var(--space-12)">
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container sil-center">
-      <div class="sil-drdemo" id="drDemo">
+      <!-- Light / Dark switch. Governs ONLY the demo panel it names in
+           aria-controls -- never the heading above it -- and the choice is
+           remembered per demo. See silstone.js > "the Light / Dark switch". -->
+      <div class="sil-democtl">
+        <div class="sil-themetoggle" role="radiogroup" aria-labelledby="silTheme61" aria-controls="drDemo">
+          <span class="sil-themetoggle-label" id="silTheme61">Demo appearance</span>
+          <div class="sil-themetoggle-set">
+            <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
+            <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
+          </div>
+        </div>
+      </div>
+      <div class="sil-drdemo" id="drDemo" data-sil-themed="denial-recovery">
+        <script>/* No-flash: resolve this demo's stored Light/Dark choice before it paints. */
+        (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
+        if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+        r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
 
         <!-- State A: Document Input (read-only textarea) -->
         <div class="drd-state" id="drdStateA">

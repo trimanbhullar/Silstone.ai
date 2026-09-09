@@ -828,24 +828,25 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 }
 
 /* ===========================================================================
-   18. LIGHT MODE  (opt-in, per block)
-   The site is dark by design. The live-demo page is the exception: a doctor
-   reading a dense claim table on a near-black canvas has a genuinely harder
-   time than on paper, so those blocks carry a Light/Dark switch.
+   18. LIGHT MODE  (opt-in, per demo)
+   The site is dark by design. The live demos are the exception: a doctor
+   reading a dense claim table or a fax queue on a near-black canvas has a
+   genuinely harder time than on paper, so each demo carries a Light/Dark
+   switch.
 
-   How it works: a block opts in by putting data-sil-themed="<id>" on its
-   .sil-root, and the runtime writes data-sil-theme="light|dark" onto it (see
-   silstone.js). Each demo is its OWN switch and its own remembered setting --
-   read the claim table on white, keep the fax queue dark -- because the two
-   demos are read one at a time. Nothing else on the site is touched: the nav,
-   CTA and footer stay dark, which is also why the white-ink wordmark reads.
+   The scope is the DEMO WIDGET, nothing else. A demo opts in with
+   data-sil-themed="<id>" on its own container (#drDemo, #trgDemo) and the
+   runtime writes data-sil-theme="light|dark" onto it -- so the panel flips
+   while the heading above it, the section around it, the nav and the footer
+   all stay dark. The id is also the storage key, so the two demos are
+   remembered separately: read the claim table on white, keep the queue dark.
 
    Almost everything below is a token swap; section 2's palette is the single
-   source of truth and the rest of the sheet follows it. The handful of rules
-   after the palette are the places where a colour was baked in literally,
-   assuming a dark ground.
+   source of truth and the rest of the sheet follows it, because nearly
+   nothing in the system writes a colour literally. The few rules after the
+   palette are the places inside a demo that did bake in a dark ground.
    =========================================================================== */
-.sil-root[data-sil-theme="light"] {
+[data-sil-theme="light"] {
   /* ---- Canvas & surfaces ---- */
   --bg-canvas:         #FFFFFF;
   --bg-canvas-alt:     #F5F6F9;
@@ -922,63 +923,65 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   color-scheme: light;
 }
 
-/* --- The literals that assumed a dark ground --------------------------- */
+/* The panel owns its own text colour. `color` is set on .sil-root, which is
+   now OUTSIDE the panel, so anything that inherits its ink rather than naming
+   --text-primary itself would keep the page's near-white on a light panel.
+   Unconditional: in dark mode this resolves to the same value it inherited. */
+[data-sil-themed] { color: var(--text-primary); }
 
-/* Ambient layers. The mesh blobs blend with `screen`, which is a no-op on
-   white, and the gridlines are white-on-white. Both get an ink treatment
-   instead of being switched off, so the page keeps its depth. */
-.sil-root[data-sil-theme="light"] .sil-mesh i { mix-blend-mode: multiply; filter: blur(110px); }
-.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(1) { opacity: .10; }
-.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(2) { opacity: .08; }
-.sil-root[data-sil-theme="light"] .sil-mesh i:nth-child(3) { opacity: .07; }
-.sil-root[data-sil-theme="light"] .sil-gridlines {
-  background-image:
-    linear-gradient(rgba(16,17,26,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16,17,26,0.045) 1px, transparent 1px);
-}
-.sil-root[data-sil-theme="light"] .sil-cursorglow {
-  background: radial-gradient(520px circle at var(--gx,50%) var(--gy,40%), rgba(var(--sec-rgb),0.10), transparent 60%);
-}
-.sil-root[data-sil-theme="light"] .sil-hairline { opacity: .6; }
-.sil-root[data-sil-theme="light"] .sil-section.has-tint::before {
-  background: radial-gradient(ellipse 88% 54% at 50% 0%, rgba(var(--sec-rgb), 0.06), transparent 66%);
+/* On a near-black page the panel has to carry its own ground, since the
+   section behind it no longer changes. --bg-canvas-alt rather than white, so
+   the white cards inside it still lift off the surface. Dark mode adds
+   nothing here -- the demo stays transparent, exactly as it was. */
+[data-sil-theme="light"][data-sil-themed] {
+  background: var(--bg-canvas-alt);
+  border-radius: var(--radius-xl);
+  padding: clamp(16px, 2.4vw, 28px);
 }
 
-/* Charts and meters drew their rails in white. */
-.sil-root[data-sil-theme="light"] .sil-chart .axis { stroke: rgba(16,17,26,0.14); }
-.sil-root[data-sil-theme="light"] .sil-meter { background: rgba(16,17,26,0.09); }
+/* --- The literals that assumed a dark ground, inside a demo -------------
+   Each block's own <style> is inlined AFTER this sheet, so an override that
+   merely ties on specificity loses. Hence the doubled [data-sil-theme][
+   data-sil-themed] prefix on every rule below -- it buys the extra weight to
+   beat the block rule it is correcting. */
 
-/* Two "dark ink on a solid mint/teal chip" pairings: the chip keeps its
+/* A "done" step chip is solid mint carrying dark ink; the chip keeps its
    colour, so the ink has to go the other way. */
-.sil-root[data-sil-theme="light"] .drd-step.done .n { color: #FFFFFF; }
-.sil-root[data-sil-theme="light"] .sil-tagfilter-btn.is-active { color: #FFFFFF; }
+[data-sil-theme="light"][data-sil-themed] .drd-step.done .n { color: #FFFFFF; }
 
-/* The one animation that ends on white: a stat flashing to #fff to say "this
-   just changed" is invisible on a white card, so it flashes to the P1 colour
-   and holds instead. */
-.sil-root[data-sil-theme="light"] .trg-stat.trg-flash .v { animation: none; color: var(--coral-400); }
+/* Glow rings around 7px dots turn into grey smudges on white. */
+[data-sil-theme="light"][data-sil-themed] .drd-finding .drd-fdot { box-shadow: none; }
 
 /* The billing-discrepancy card is the one place a colour was written as a
    literal (#f87171) instead of coming from the ramp, and its mono readout
    sits on a 30%-black panel -- a grey slab once the card is white. */
-.sil-root[data-sil-theme="light"] .drd-be-icon,
-.sil-root[data-sil-theme="light"] .drd-be-title { color: #B3261E; }
-.sil-root[data-sil-theme="light"] .drd-be-msg { background: rgba(179,38,30,.07); }
+[data-sil-theme="light"][data-sil-themed] .drd-be-icon,
+[data-sil-theme="light"][data-sil-themed] .drd-be-title { color: #B3261E; }
+[data-sil-theme="light"][data-sil-themed] .drd-be-msg { background: rgba(179,38,30,.07); }
 
-/* The flying "filed to the chart" chips carry a shadow tuned for a black
-   ground. */
-.sil-root[data-sil-theme="light"] .trg-fly { box-shadow: var(--shadow-md); }
-
-/* Glow rings around 7px dots turn into grey smudges on white. */
-.sil-root[data-sil-theme="light"] .drd-fdot { box-shadow: none; }
+/* A stat flashing to #fff to say "this just changed" is invisible on a white
+   card, so it flashes to the P1 colour and holds instead. */
+[data-sil-theme="light"][data-sil-themed] .trg-stat.trg-flash .v {
+  animation: none; color: var(--coral-400);
+}
 
 /* ---------------------------------------------------------------------------
    THE SWITCH
-   One per demo, in that demo's own hero, so it is in view when you start
-   reading the thing it governs. Sized for the audience: a real segmented
-   control with both words spelled out and permanently readable, not an
-   icon-only toggle whose current state you have to infer.
+   Sits on its own bar directly above the demo it governs -- outside the themed
+   container, so it keeps the page's dark chrome in both modes and reads as a
+   control ON the panel rather than part of it. Sized for the audience: a real
+   segmented control with both words spelled out and permanently readable, not
+   an icon-only toggle whose current state you have to infer.
    --------------------------------------------------------------------------- */
+.sil-democtl {
+  display: none;              /* nothing to switch without the runtime */
+  align-items: center; justify-content: center;
+  margin: clamp(24px, 4vw, 48px) 0 var(--space-4);
+}
+.sil-js .sil-democtl { display: flex; }
+/* the bar now owns the gap above the demo */
+.sil-democtl + [data-sil-themed] { margin-top: 0; }
+
 .sil-themetoggle {
   display: flex; align-items: center; gap: var(--space-3);
   flex-wrap: wrap; justify-content: center;
@@ -1015,8 +1018,3 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .sil-themetoggle-btn:focus-visible {
   outline: 2px solid var(--focus-ring); outline-offset: 2px;
 }
-
-/* Without the runtime there is nothing to switch, so the control hides itself
-   rather than sitting there inert. */
-.sil-themetoggle { display: none; }
-.sil-js .sil-themetoggle { display: flex; }

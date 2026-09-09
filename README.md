@@ -183,40 +183,53 @@ reason is the audience: a lot of the people we send to `/live-demos` are older p
 dense claim table or fax queue on a near-black canvas is genuinely harder for them to read than
 the same table on paper.
 
-**Each demo has its own switch and its own remembered setting.** The two demos are read one at a
-time, so someone can leave the claim table on white and keep the fax queue dark. A block opts in
-with `data-sil-themed="<id>"` on its `.sil-root`, and that id is the storage key:
+**The scope is the demo widget, and nothing else.** Flipping a switch repaints that one panel;
+the heading above it, the section around it, the nav and the footer all stay dark in both modes
+— which is also why the white-ink wordmark still reads. Each demo has its own switch and its own
+remembered setting, because the demos are read one at a time.
 
-| Block | id |
-|---|---|
-| [61-content.html](pages/live-demos/61-content.html) — Denial Recovery | `denial-recovery` |
-| [62-triage.html](pages/live-demos/62-triage.html) — Fax Triage | `fax-triage` |
+A demo opts in with `data-sil-themed="<id>"` on its own container. The id is the storage key:
 
-The scoping is deliberate. Only opted-in blocks move; the **nav, page hero, final CTA and footer
-stay dark** in both modes, which is also why the white-ink wordmark still reads. To give a future
-demo a switch, add `data-sil-themed="<new-id>"` to its root, paste the `.sil-themetoggle` markup
-into its hero, and copy the inline no-flash bootstrap — nothing else needs to change.
+| Demo | container | id |
+|---|---|---|
+| [61-content.html](pages/live-demos/61-content.html) — Denial Recovery | `#drDemo` | `denial-recovery` |
+| [62-triage.html](pages/live-demos/62-triage.html) — Fax Triage | `#trgDemo` | `fax-triage` |
+| [63-benefits.html](pages/live-demos/63-benefits.html) — Benefit Check | `#bvDemo` | `benefit-check` |
 
-Mechanically it is a palette swap, not a second stylesheet. `.sil-root[data-sil-theme="light"]`
-(section 18 of [silstone.css](assets/silstone.css)) redefines the section 2 tokens, and the rest
-of the sheet follows on its own, because almost nothing in the system writes a colour literally.
-Every ramp step up to `-500` darkens — those steps exist to be legible type on near-black, and
-the demos use them as type — while `-600`/`-700` hold, so `--accent` and its white label are
-untouched. The dozen rules after the palette are the places that *did* bake in a colour assuming
-a dark ground: the mesh blobs, the gridlines, the chart axis, the `#f87171` billing-error card.
+To give a new demo a switch: put `data-sil-themed="<new-id>"` on its container, copy the inline
+no-flash bootstrap in as the container's first child, and drop a `.sil-democtl` bar above it
+whose `.sil-themetoggle` names the container in `aria-controls`. Nothing else needs to change.
+
+Mechanically it is a palette swap, not a second stylesheet. `[data-sil-theme="light"]`
+(section 18 of [silstone.css](assets/silstone.css)) redefines the section 2 tokens on the panel
+and the rest of the sheet follows on its own, because almost nothing in the system writes a
+colour literally. Every ramp step up to `-500` darkens — those steps exist to be legible type on
+near-black, and the demos use them as type — while `-600`/`-700` hold, so `--accent` and its
+white label are untouched.
+
+Two things the scoping costs, both handled in section 18:
+
+- the panel has to carry its **own ground and its own ink**. The section behind it no longer
+  changes, so light mode gives it `--bg-canvas-alt` (not white — the white cards inside need to
+  lift off it), and `[data-sil-themed]` sets `color` unconditionally, because `color` is set on
+  `.sil-root`, which is now outside the panel.
+- each block's own `<style>` is inlined **after** this sheet, so an override that merely ties on
+  specificity loses. The handful of rules correcting baked-in dark-ground colours (the `#f87171`
+  billing-error card, the mint "done" chip's dark ink, the finding-dot glows, a stat that flashes
+  to white) therefore carry a doubled `[data-sil-theme][data-sil-themed]` prefix.
 
 Behaviour, in [silstone.js](assets/silstone.js):
 
-- with **no** stored choice a block follows the reader's OS setting, so someone who already runs
+- with **no** stored choice a demo follows the reader's OS setting, so someone who already runs
   everything in light mode never has to find the switch
-- each block carries a tiny inline bootstrap that reads its own key and sets the attribute
-  *while the block is still parsing*, so a returning reader never sees the dark canvas paint first
-- in the Hostinger embed flow each block is its own iframe, so the same block open twice stays in
-  step through the `storage` event — keyed by id, so one demo changing never disturbs the other
+- each demo carries a tiny inline bootstrap that reads its own key and sets the attribute *while
+  the demo is still parsing*, so a returning reader never sees the dark panel paint first
+- in the Hostinger embed flow each block is its own iframe, so the same demo open twice stays in
+  step through the `storage` event — keyed by id, so one demo never disturbs another
 
-Light mode was measured the same way as dark: every visible text node, per demo, with both demos
-run to completion and every hidden state forced open, composited against its real background.
-**0 pairings below the WCAG AA bar** — 326 visible elements in Denial Recovery, 446 in Fax Triage.
+Light mode was measured per demo, with each run to completion and every hidden state forced open,
+composited against real backgrounds: **0 pairings below the WCAG AA bar** across all three panels.
+Dark mode is untouched — the panels stay fully transparent, with no padding or radius added.
 
 ### Trios
 
