@@ -273,3 +273,106 @@
   window.addEventListener('scroll', spy, { passive: true });
   spy();
 })();
+
+/* ===========================================================================
+   LIVE DEMOS: the Light / Dark switch
+   Each demo owns its own setting. A block opts in with data-sil-themed="<id>"
+   on its .sil-root; that id is the storage key, so the denial-recovery demo
+   and the fax-triage demo are read one at a time and remembered separately --
+   someone can leave the dense claim table on white and keep the queue dark.
+   Everything outside an opted-in block (nav, CTA, footer) stays dark.
+
+   With no stored choice a block follows the reader's OS setting, which is the
+   whole point for someone who already runs everything in light mode.
+   The no-flash bootstrap is inline in each block; this module owns the buttons.
+   =========================================================================== */
+(function () {
+  var PREFIX = 'sil-theme:';
+
+  function idOf(root) { return root.getAttribute('data-sil-themed') || 'default'; }
+
+  function preferred() {
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+      ? 'light' : 'dark';
+  }
+  function stored(id) {
+    try {
+      var v = localStorage.getItem(PREFIX + id);
+      return (v === 'light' || v === 'dark') ? v : null;
+    } catch (e) { return null; }
+  }
+  function current(id) { return stored(id) || preferred(); }
+
+  function paint(root) {
+    var theme = current(idOf(root));
+    root.setAttribute('data-sil-theme', theme);
+    // Only this block's own switch -- a second demo further down the page has
+    // its own, pointing at its own setting.
+    [].forEach.call(root.querySelectorAll('.sil-themetoggle-btn'), function (btn) {
+      var on = btn.getAttribute('data-theme') === theme;
+      btn.setAttribute('aria-checked', on ? 'true' : 'false');
+      // Roving tabindex: one Tab stop for the pair, arrow keys to change it.
+      btn.setAttribute('tabindex', on ? '0' : '-1');
+    });
+  }
+  function paintAll() { [].forEach.call(roots(), paint); }
+  function roots() { return document.querySelectorAll('.sil-root[data-sil-themed]'); }
+  function rootOf(el) { return el.closest ? el.closest('.sil-root[data-sil-themed]') : null; }
+
+  function choose(root, theme) {
+    try { localStorage.setItem(PREFIX + idOf(root), theme); } catch (e) {}
+    paint(root);
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target && e.target.closest && e.target.closest('.sil-themetoggle-btn');
+    if (!btn) return;
+    var root = rootOf(btn), t = btn.getAttribute('data-theme');
+    if (root && (t === 'light' || t === 'dark')) { e.preventDefault(); choose(root, t); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+    var btn = e.target && e.target.closest && e.target.closest('.sil-themetoggle-btn');
+    if (!btn) return;
+    var root = rootOf(btn);
+    if (!root) return;
+    e.preventDefault();
+    choose(root, current(idOf(root)) === 'light' ? 'dark' : 'light');
+    var now = btn.parentNode && btn.parentNode.querySelector('.sil-themetoggle-btn[aria-checked="true"]');
+    if (now) now.focus();
+  });
+
+  // Hostinger renders each block in its own iframe, so the same block open in
+  // two frames has to stay in step through storage rather than the DOM. Keyed
+  // by id, so one demo changing does not disturb the other.
+  window.addEventListener('storage', function (e) {
+    if (!e.key || e.key.indexOf(PREFIX) !== 0) return;
+    var id = e.key.slice(PREFIX.length);
+    [].forEach.call(roots(), function (r) { if (idOf(r) === id) paint(r); });
+  });
+
+  // Blocks with no explicit choice track the OS setting live rather than
+  // freezing at whatever it was when the page loaded.
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: light)');
+    var follow = function () {
+      [].forEach.call(roots(), function (r) { if (!stored(idOf(r))) paint(r); });
+    };
+    if (mq.addEventListener) mq.addEventListener('change', follow);
+    else if (mq.addListener) mq.addListener(follow);
+  }
+
+  window.silstoneTheme = {
+    get: function (id) { return current(id); },
+    set: function (id, theme) {
+      [].forEach.call(roots(), function (r) { if (idOf(r) === id) choose(r, theme); });
+    },
+    apply: paintAll
+  };
+
+  paintAll();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', paintAll);
+  }
+})();

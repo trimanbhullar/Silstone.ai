@@ -35,7 +35,7 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
 
 <style>html,body{margin:0;padding:0;background:#08080B;}</style>
-<link rel="stylesheet" href="/assets/silstone.f22b8beb.css">
+<link rel="stylesheet" href="/assets/silstone.0afc9b4c.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Silstone.AI","url":"https://www.silstone.ai/","logo":"https://www.silstone.ai/assets/logo-mark.950ffdaa.png","description":"Healthcare-native AI studio that designs, builds and deploys custom AI agents to automate back-office work for medical and dental practices.","contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"sales@silstonegroup.com","telephone":"+1-613-558-5913"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.silstone.ai/"},{"@type":"ListItem","position":2,"name":"Live Demos","item":"https://www.silstone.ai/live-demos"}]}</script>
 </head>
@@ -398,7 +398,12 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
   Simplified demo: 5 states (A-E), no email feature.
   Hardcoded path = no lead gate. Own-data path = lead gate required.
 -->
-<div class="sil-root">
+<div class="sil-root" data-sil-themed="denial-recovery">
+  <script>/* No-flash: resolve this block's stored Light/Dark choice before it paints. */
+  (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
+  if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+  r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
+
 
   <!-- ==================== HERO ==================== -->
   <section class="sil-section is-alt" style="padding:var(--space-12) 0 var(--space-8)">
@@ -414,6 +419,16 @@ a.sil-nav-item.sil-nav-cta-m { display: none; }
         <span class="sil-chip"><i class="dot"></i>No signup for samples</span>
         <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
         <span class="sil-chip"><i class="dot"></i>Try with your own EOB</span>
+      </div>
+
+      <!-- Light / Dark switch. Every demo block on the page follows it, and the
+           choice is remembered; see silstone.js > "the Light / Dark switch". -->
+      <div class="sil-themetoggle sil-mt-6" role="radiogroup" aria-labelledby="silTheme61">
+        <span class="sil-themetoggle-label" id="silTheme61">Appearance</span>
+        <div class="sil-themetoggle-set">
+          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
+          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
+        </div>
       </div>
     </div>
   </section>
@@ -1177,7 +1192,12 @@ if(document.readyState==='loading'){
   Markup + trailing <style>/<script> live OUTSIDE the SIL:GLOBAL markers;
   run build-embeds.py to bake the system in.
 -->
-<div class="sil-root">
+<div class="sil-root" data-sil-themed="fax-triage">
+  <script>/* No-flash: resolve this block's stored Light/Dark choice before it paints. */
+  (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
+  if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+  r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
+
 
   <!-- ==================== SUB-HERO ==================== -->
   <section class="sil-section is-alt has-tint acc-teal" style="padding:var(--space-12) 0 var(--space-8)">
@@ -1193,6 +1213,16 @@ if(document.readyState==='loading'){
         <span class="sil-chip"><i class="dot"></i>Synthetic faxes &middot; no real PHI</span>
         <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
         <span class="sil-chip"><i class="dot"></i>The same pipeline as production</span>
+      </div>
+
+      <!-- Light / Dark switch. Every demo block on the page follows it, and the
+           choice is remembered; see silstone.js > "the Light / Dark switch". -->
+      <div class="sil-themetoggle sil-mt-6" role="radiogroup" aria-labelledby="silTheme62">
+        <span class="sil-themetoggle-label" id="silTheme62">Appearance</span>
+        <div class="sil-themetoggle-set">
+          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
+          <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
+        </div>
       </div>
     </div>
   </section>
@@ -2936,6 +2966,6 @@ else{msg.textContent=(res.data&&res.data.message)?res.data.message:'Something we
   }
 })();
 </script>
-<script src="/assets/silstone.802cd77b.js" defer></script>
+<script src="/assets/silstone.6cae9d75.js" defer></script>
 </body>
 </html>
