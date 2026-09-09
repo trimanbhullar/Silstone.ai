@@ -834,19 +834,43 @@ a.sil-byline-author:hover { color: var(--teal-300); }
    genuinely harder time than on paper, so each demo carries a Light/Dark
    switch.
 
-   The scope is the DEMO WIDGET, nothing else. A demo opts in with
-   data-sil-themed="<id>" on its own container (#drDemo, #trgDemo) and the
-   runtime writes data-sil-theme="light|dark" onto it -- so the panel flips
-   while the heading above it, the section around it, the nav and the footer
-   all stay dark. The id is also the storage key, so the two demos are
-   remembered separately: read the claim table on white, keep the queue dark.
+   The scope is the INTERACTIVE SURFACES, nothing else. A demo opts in with
+   data-sil-themed="<id>" on its container (#drDemo, #trgDemo, #bvDemo) and the
+   runtime writes data-sil-theme="light|dark" onto it -- but that attribute is
+   only a flag. The palette below is set on the CARDS inside the demo, never on
+   the container, so the document window, the claim table, the stat tiles and
+   the queue turn into light cards while everything around them keeps the
+   page's own ink: the heading, the intro copy, the captions, the "why not just
+   paste this into ChatGPT" explainer, the section, the nav and the footer.
+   That boundary is the whole point -- flipping the switch must change the
+   thing you are operating, not the page you are reading.
+
+   The id is also the storage key, so the demos are remembered separately:
+   read the claim table on white, keep the fax queue dark.
 
    Almost everything below is a token swap; section 2's palette is the single
    source of truth and the rest of the sheet follows it, because nearly
    nothing in the system writes a colour literally. The few rules after the
    palette are the places inside a demo that did bake in a dark ground.
    =========================================================================== */
-[data-sil-theme="light"] {
+/* The surfaces that go light. Adding a demo means adding its cards here --
+   and ONLY its cards: anything left off this list keeps the dark page's ink,
+   which is how the prose inside a demo stays put. Each entry is a card that
+   already paints its own background from a token, so it repaints itself.
+   Deliberately absent: .drd-why and .drd-book-cta (marketing copy that happens
+   to sit in a card), .drd-steps and the .*-controls rows (bare chrome, no
+   surface of their own). */
+[data-sil-theme="light"][data-sil-themed] :is(
+  .drd-doc-window, .drd-doc, .drd-findings, .drd-table, .drd-billing-error,
+  .drd-sc, .drd-email-box, .drd-phi-warning,
+  .trg-note, .trg-paste, .trg-stat, .trg-board, .trg-queuewrap, .trg-detail,
+  .bv-note, .bv-paste, .bv-stat, .bv-board, .bv-rosterwrap, .bv-detail
+) {
+  /* A card owns its ink as well as its ground: text that inherits `color`
+     rather than naming --text-primary would otherwise keep the page's
+     near-white on a white card. */
+  color: var(--text-primary);
+
   /* ---- Canvas & surfaces ---- */
   --bg-canvas:         #FFFFFF;
   --bg-canvas-alt:     #F5F6F9;
@@ -920,23 +944,37 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   --shadow-md: 0 4px 16px rgba(16,17,26,0.09);
   --shadow-lg: 0 12px 40px rgba(16,17,26,0.12);
 
+
+  /* Colour aliases a demo derives on its CONTAINER (--p1: var(--coral-500),
+     and friends) resolve up there, against the dark ramp, and then inherit
+     into the cards as finished colours -- so the swap above never reaches
+     them. They have to be re-derived here, on the surface, to pick the light
+     ramp up. This is the one thing to remember when adding a demo: every
+     `--alias: var(--ramp-step)` on its container needs repeating below. */
+  --p1: var(--coral-500); --p2: var(--amber-400);          /* Fax Triage    */
+  --p3: var(--teal-500);  --p4: var(--mint-400);
+  --ok: var(--mint-400);  --auth: var(--violet-300);        /* Benefit Check */
+  --cap: var(--amber-400); --plan: var(--teal-500);
+  --lapse: var(--coral-500);
+
   color-scheme: light;
 }
 
-/* The panel owns its own text colour. `color` is set on .sil-root, which is
-   now OUTSIDE the panel, so anything that inherits its ink rather than naming
-   --text-primary itself would keep the page's near-white on a light panel.
-   Unconditional: in dark mode this resolves to the same value it inherited. */
-[data-sil-themed] { color: var(--text-primary); }
+/* The one listed surface drawn as a border with no fill -- on the dark page it
+   needs a ground of its own before light ink lands on it. */
+[data-sil-theme="light"][data-sil-themed] .drd-table { background: var(--bg-surface); }
 
-/* On a near-black page the panel has to carry its own ground, since the
-   section behind it no longer changes. --bg-canvas-alt rather than white, so
-   the white cards inside it still lift off the surface. Dark mode adds
-   nothing here -- the demo stays transparent, exactly as it was. */
-[data-sil-theme="light"][data-sil-themed] {
-  background: var(--bg-canvas-alt);
-  border-radius: var(--radius-xl);
-  padding: clamp(16px, 2.4vw, 28px);
+/* Same problem, one step subtler: the caution cards are a translucent wash.
+   Over a dark section that reads as a warm panel; on the dark page, carrying
+   dark ink, it reads as nothing at all. These are the same washes composited
+   over white once, so the tint survives and the ink lands on a real ground.
+   (8% amber over white really is this close to white -- the border does the
+   work, exactly as it does in dark mode.) */
+[data-sil-theme="light"][data-sil-themed] :is(.trg-note, .bv-note, .drd-phi-warning) {
+  background: #FEFAF4;    /* rgba(239,193,120,.08) over #FFFFFF */
+}
+[data-sil-theme="light"][data-sil-themed] .drd-billing-error {
+  background: #FEF4F4;    /* rgba(248,113,113,.08) over #FFFFFF */
 }
 
 /* --- The literals that assumed a dark ground, inside a demo -------------
@@ -944,10 +982,6 @@ a.sil-byline-author:hover { color: var(--teal-300); }
    merely ties on specificity loses. Hence the doubled [data-sil-theme][
    data-sil-themed] prefix on every rule below -- it buys the extra weight to
    beat the block rule it is correcting. */
-
-/* A "done" step chip is solid mint carrying dark ink; the chip keeps its
-   colour, so the ink has to go the other way. */
-[data-sil-theme="light"][data-sil-themed] .drd-step.done .n { color: #FFFFFF; }
 
 /* Glow rings around 7px dots turn into grey smudges on white. */
 [data-sil-theme="light"][data-sil-themed] .drd-finding .drd-fdot { box-shadow: none; }
@@ -964,6 +998,14 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 [data-sil-theme="light"][data-sil-themed] .trg-stat.trg-flash .v {
   animation: none; color: var(--coral-400);
 }
+[data-sil-theme="light"][data-sil-themed] .bv-stat.bv-flash .v {
+  animation: none; color: var(--coral-400);
+}
+
+/* The 95165 dose-bank meter draws its rail in white at 9%, which is nothing at
+   all once the card underneath is white. Ink at the same alpha instead, the
+   way .sil-meter already does. */
+[data-sil-theme="light"][data-sil-themed] .bv-meter { background: rgba(16,17,26,0.10); }
 
 /* ---------------------------------------------------------------------------
    THE SWITCH

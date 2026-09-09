@@ -176,6 +176,33 @@ tags, meters, chart accents, card rim, cursor glow and ambient mesh all re-tint 
 A single card can override too: `style="--sec-rgb:255,158,122"`. That is how the four capability
 cards each carry a different hue.
 
+### The live demos
+
+`/live-demos` carries three demo blocks. Each is self-contained, each runs on synthetic data by
+default, and each has a second path that calls a real model.
+
+| Block | Demo | The simulated half | The live half |
+|---|---|---|---|
+| [61-content.html](pages/live-demos/61-content.html) | Denial Recovery | Five canned EOB scenarios | Paste your own EOB, lead-gated, `POST /` |
+| [62-triage.html](pages/live-demos/62-triage.html) | Fax Triage | A busy morning of synthetic faxes | Paste your own fax, lead-gated, `POST /api/triage` |
+| [63-benefits.html](pages/live-demos/63-benefits.html) | Benefit Check, CPT 95165 | Today's injection schedule, verified patient by patient | Map my practice, lead-gated, `POST /api/allergy` |
+
+All three routes live on **one Cloudflare Worker**
+([backend/underpayment-worker](backend/underpayment-worker)) so the API keys stay server-side.
+See that folder's README for the route table and the paste-in snippets.
+
+**Every live half degrades rather than breaks.** If its route is unreachable, demo 2 falls back
+to a client-side heuristic and demo 3 to a client-side estimator that labels itself "Offline
+estimate" instead of "Claude". A demo that half-works on a preview URL is worth more than one
+that shows an error.
+
+**The "notify me about the next demo" signup belongs to the LAST block on the page.** It moved
+61 → 62 → 63 as demos were added; move it again if a block 64 lands, or the page ends up with
+two of them.
+
+Block 63 is the only demo whose live half sends no document at all. It takes eight
+practice-level numbers, which is what lets it sit behind a lead gate without ever touching PHI.
+
 ### Light mode on the live demos
 
 The site is dark everywhere except the **live demos**, which carry a Light/Dark switch. The
@@ -183,53 +210,59 @@ reason is the audience: a lot of the people we send to `/live-demos` are older p
 dense claim table or fax queue on a near-black canvas is genuinely harder for them to read than
 the same table on paper.
 
-**The scope is the demo widget, and nothing else.** Flipping a switch repaints that one panel;
-the heading above it, the section around it, the nav and the footer all stay dark in both modes
-— which is also why the white-ink wordmark still reads. Each demo has its own switch and its own
-remembered setting, because the demos are read one at a time.
+**The scope is the interactive surfaces, and nothing else.** Flipping a switch turns the document
+window, the claim table, the stat tiles and the queue into light cards on the dark page. It does
+not touch a single sentence you are *reading*: the heading, the intro copy, the captions,
+"Analysis Complete", the "why not just paste this into ChatGPT" explainer, the section, the nav
+and the footer all keep the page's own ink in both modes. The switch changes the thing you
+operate, not the page you read.
 
-A demo opts in with `data-sil-themed="<id>"` on its own container. The id is the storage key:
+Each demo has its own switch and its own remembered setting, since the demos are read one at a
+time. A demo opts in with `data-sil-themed="<id>"` on its container — but **that attribute is
+only a flag.** The palette is set on the *cards inside* the demo, never on the container, and
+that is what keeps the prose out of it.
 
-| Demo | container | id |
+| Demo | container (the flag) | id / storage key |
 |---|---|---|
 | [61-content.html](pages/live-demos/61-content.html) — Denial Recovery | `#drDemo` | `denial-recovery` |
 | [62-triage.html](pages/live-demos/62-triage.html) — Fax Triage | `#trgDemo` | `fax-triage` |
 | [63-benefits.html](pages/live-demos/63-benefits.html) — Benefit Check | `#bvDemo` | `benefit-check` |
 
-To give a new demo a switch: put `data-sil-themed="<new-id>"` on its container, copy the inline
-no-flash bootstrap in as the container's first child, and drop a `.sil-democtl` bar above it
-whose `.sil-themetoggle` names the container in `aria-controls`. Nothing else needs to change.
+**Adding a demo** means adding its cards to the surface list at the top of section 18 in
+[silstone.css](assets/silstone.css) — and only its cards. Anything left off the list keeps the
+dark page's ink, which is exactly how the prose stays put. Deliberately absent today: `.drd-why`
+and `.drd-book-cta` (marketing copy that happens to sit in a card), `.drd-steps` and the
+`.*-controls` rows (bare chrome with no surface of their own).
 
-Mechanically it is a palette swap, not a second stylesheet. `[data-sil-theme="light"]`
-(section 18 of [silstone.css](assets/silstone.css)) redefines the section 2 tokens on the panel
-and the rest of the sheet follows on its own, because almost nothing in the system writes a
-colour literally. Every ramp step up to `-500` darkens — those steps exist to be legible type on
-near-black, and the demos use them as type — while `-600`/`-700` hold, so `--accent` and its
-white label are untouched.
+Below the palette, four things are worth knowing, because each one cost a real bug:
 
-Two things the scoping costs, both handled in section 18:
-
-- the panel has to carry its **own ground and its own ink**. The section behind it no longer
-  changes, so light mode gives it `--bg-canvas-alt` (not white — the white cards inside need to
-  lift off it), and `[data-sil-themed]` sets `color` unconditionally, because `color` is set on
-  `.sil-root`, which is now outside the panel.
-- each block's own `<style>` is inlined **after** this sheet, so an override that merely ties on
-  specificity loses. The handful of rules correcting baked-in dark-ground colours (the `#f87171`
-  billing-error card, the mint "done" chip's dark ink, the finding-dot glows, a stat that flashes
-  to white) therefore carry a doubled `[data-sil-theme][data-sil-themed]` prefix.
+- **a card owns its ink as well as its ground.** `color` is set on `.sil-root`, far outside the
+  card, so text that inherits it rather than naming `--text-primary` kept the page's near-white
+  on a white card.
+- **surfaces drawn as a border or a wash need a ground.** `.drd-table` is a border with no fill,
+  and the caution notes are a translucent tint — fine over a dark section, invisible once they
+  carry dark ink on the dark page. Both get a real background in light mode.
+- **aliases derived on the container have to be re-derived on the card.** `--p1: var(--coral-500)`
+  resolves up on `.trg-demo`, against the dark ramp, and inherits down as a finished colour, so
+  the swap never reaches it. Every `--alias: var(--ramp-step)` a demo declares on its container
+  needs repeating in the palette block. This is the easiest one to forget.
+- **each block's own `<style>` is inlined after this sheet**, so an override that merely ties on
+  specificity loses. The rules correcting baked-in dark-ground colours carry a doubled
+  `[data-sil-theme][data-sil-themed]` prefix to win.
 
 Behaviour, in [silstone.js](assets/silstone.js):
 
 - with **no** stored choice a demo follows the reader's OS setting, so someone who already runs
   everything in light mode never has to find the switch
-- each demo carries a tiny inline bootstrap that reads its own key and sets the attribute *while
-  the demo is still parsing*, so a returning reader never sees the dark panel paint first
+- each demo carries a tiny inline bootstrap that reads its own key and sets the flag *while the
+  demo is still parsing*, so a returning reader never sees the wrong theme paint first
 - in the Hostinger embed flow each block is its own iframe, so the same demo open twice stays in
   step through the `storage` event — keyed by id, so one demo never disturbs another
 
-Light mode was measured per demo, with each run to completion and every hidden state forced open,
-composited against real backgrounds: **0 pairings below the WCAG AA bar** across all three panels.
-Dark mode is untouched — the panels stay fully transparent, with no padding or radius added.
+Light mode is measured per demo, each run to completion with every hidden state forced open,
+compositing translucent tints against their real backgrounds: **0 pairings below the WCAG AA
+bar**. Dark mode is untouched — the containers stay fully transparent, with no padding or radius
+added, and every card keeps the exact background it always had.
 
 ### Trios
 

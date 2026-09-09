@@ -239,7 +239,12 @@ def deinline_logo(html: str) -> str:
 def minify_css(css: str) -> str:
     css = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)   # drop comments
     css = re.sub(r"\s+", " ", css)                            # collapse ws
-    css = re.sub(r"\s*([{}:;,>])\s*", r"\1", css)             # tighten around punctuation
+    # Tighten around punctuation. `:` is handled separately and only on its
+    # RIGHT: eating the space to its LEFT turns a descendant selector into a
+    # compound one -- `[data-sil-themed] :is(...)` silently became
+    # `[data-sil-themed]:is(...)`, which matches nothing at all.
+    css = re.sub(r"\s*([{};,>])\s*", r"\1", css)              # tighten around punctuation
+    css = re.sub(r":\s+", ":", css)                           # ...and after a colon only
     css = css.replace(";}", "}")
     return css.strip()
 
