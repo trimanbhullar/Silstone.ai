@@ -866,7 +866,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   .drd-doc-window, .drd-doc, .drd-findings, .drd-table, .drd-billing-error,
   .drd-sc, .drd-email-box, .drd-phi-warning,
   .trg-note, .trg-paste, .trg-stat, .trg-board, .trg-queuewrap, .trg-detail,
-  .bv-note, .bv-paste, .bv-stat, .bv-board, .bv-rosterwrap, .bv-detail
+  .bv-note, .bv-readout, .bv-board, .bv-rail, .bv-card, .bv-mapform, .bv-lead
 ) {
   /* A card owns its ink as well as its ground: text that inherits `color`
      rather than naming --text-primary would otherwise keep the page's
@@ -1000,14 +1000,26 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 [data-sil-theme="light"][data-sil-themed] .trg-stat.trg-flash .v {
   animation: none; color: var(--coral-400);
 }
-[data-sil-theme="light"][data-sil-themed] .bv-stat.bv-flash .v {
-  animation: none; color: var(--coral-400);
-}
 
 /* The 95165 dose-bank meter draws its rail in white at 9%, which is nothing at
    all once the card underneath is white. Ink at the same alpha instead, the
    way .sil-meter already does. */
 [data-sil-theme="light"][data-sil-themed] .bv-meter { background: rgba(16,17,26,0.10); }
+
+/* --- The quiet label colour, lifted inside demo panels only ---------------
+   --text-quaternary was tuned against --bg-canvas, where it measures 4.7:1.
+   The demos spend it on --bg-surface-raised and --bg-surface-3 instead, which
+   are lighter grounds, and every mono label on a card lands at 4.25-4.48:1 --
+   under the AA bar by a hair, across all three demos. These two lines put the
+   whole set back over it without touching the token on the rest of the site,
+   where it is still used against the canvas it was measured on. */
+[data-sil-themed] { --text-quaternary: #878793; }   /* 4.9:1 on the darkest ground a demo uses; light mode
+                                                       sets its own on the cards, and that one
+                                                       already measures 5.8:1 on white */
+
+/* A mint chip on a mint wash: the ramp step that reads as type on near-black
+   is not dark enough to be type on a pale tint. */
+[data-sil-theme="light"][data-sil-themed] .bv-act .again { color: #0B5C3B; }
 
 /* ---------------------------------------------------------------------------
    THE SWITCH

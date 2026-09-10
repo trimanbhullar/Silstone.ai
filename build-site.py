@@ -116,7 +116,7 @@ PAGES_META = [
     {
         "slug": "live-demos", "dir": "live-demos",
         "title": "Live Demos | Try Healthcare AI Agents | Silstone.AI",
-        "desc": "Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, and turn a pile of inbound faxes into finished work — refills checked against protocol and cleared in one click, denials assembled into an appeal. Built on Claude.",
+        "desc": "Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, turn a pile of inbound faxes into finished work, and verify CPT 95165 allergy immunotherapy benefits before the vial is mixed. Built on Claude, no EMR integration.",
         "priority": "0.8",
     },
     {

@@ -125,3 +125,50 @@ just adds a real analysis path beside it.
 - **PDF upload (optional).** The Worker already accepts `{ "pdf_base64": "..." }`
   (a base64 PDF, no `data:` prefix, no newlines) so you can let people drop an
   EOB PDF instead of pasting text.
+
+---
+
+## The other two routes on this Worker
+
+One Worker backs all three live demos. The default POST path is the EOB analyzer
+above; two extra routes hang off it.
+
+| Route | Demo | Model | Key |
+|---|---|---|---|
+| `POST /` | Denial Recovery ([61-content.html](../../pages/live-demos/61-content.html)) | `CLAUDE_MODEL` (Sonnet 5) | `ANTHROPIC_API_KEY` |
+| `POST /api/triage` | Fax Triage ([62-triage.html](../../pages/live-demos/62-triage.html)) | `OPENAI_MODEL` (GPT-4o-mini) | `OPENAI_API_KEY` |
+| `POST /api/allergy` | Benefit Check ([63-benefits.html](../../pages/live-demos/63-benefits.html)) | `ALLERGY_MODEL` (Opus 5) | `ANTHROPIC_API_KEY` |
+
+### `POST /api/allergy` — the CPT 95165 exposure map
+
+Takes a practice profile, returns a modelled map of where the manual benefit
+work goes. No PHI: eight practice-level numbers, nothing patient-level.
+
+```bash
+curl -X POST https://dental-denial-agent.denial-agent.workers.dev/api/allergy \
+  -H "Content-Type: application/json" \
+  -d '{"profile":{"patients":140,"visitsPerWeek":110,"vialsPerWeek":30,
+       "payers":9,"denialsPerMonth":14,"claimValue":95,"hourlyCost":28,
+       "whoVerifies":"the front desk"}}'
+```
+
+Returns `{ headline, hoursPerMonth, costPerMonth, atRiskPerMonth, sinks[],
+lapseRisk, quickWins[], noEmr[], profile }`. Every field is clamped and echoed
+back in `profile`, so the front end renders what was actually modelled rather
+than what was typed.
+
+It uses the Messages API over plain `fetch` with `output_config.format` set to
+the response schema, rather than the Anthropic SDK the EOB route imports. That
+is deliberate: it makes the block paste-able into the dashboard Worker with no
+bundler, exactly like the `/triage` route.
+
+**The demo works without this route.** If it 404s or times out, the front end
+falls back to a client-side estimator whose per-task minute assumptions are
+written into the source, and labels the result "Offline estimate" instead of
+"Claude". Shipping the route is what turns it into a real answer.
+
+**To add it to the deployed Worker:** paste
+[../allergy-benefits-route.snippet.js](../allergy-benefits-route.snippet.js) at
+module scope in the dashboard editor and add the one route branch it documents.
+`wrangler deploy` from this folder does it for you, since `src/index.js` already
+carries the same code.

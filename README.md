@@ -185,7 +185,7 @@ default, and each has a second path that calls a real model.
 |---|---|---|---|
 | [61-content.html](pages/live-demos/61-content.html) | Denial Recovery | Five canned EOB scenarios | Paste your own EOB, lead-gated, `POST /` |
 | [62-triage.html](pages/live-demos/62-triage.html) | Fax Triage | A busy morning of synthetic faxes | Paste your own fax, lead-gated, `POST /api/triage` |
-| [63-benefits.html](pages/live-demos/63-benefits.html) | Benefit Check, CPT 95165 | Today's injection schedule, verified patient by patient | Map my practice, lead-gated, `POST /api/allergy` |
+| [63-benefits.html](pages/live-demos/63-benefits.html) | Benefit Check, CPT 95165 | The panel plotted on a calendar you can scrub | Map my practice, lead-gated, `POST /api/allergy` |
 
 All three routes live on **one Cloudflare Worker**
 ([backend/underpayment-worker](backend/underpayment-worker)) so the API keys stay server-side.
@@ -202,6 +202,34 @@ two of them.
 
 Block 63 is the only demo whose live half sends no document at all. It takes eight
 practice-level numbers, which is what lets it sit behind a lead gate without ever touching PHI.
+
+#### Why block 63 is not another queue
+
+Demos 1 and 2 are both document-shaped: something arrives, the agent reads it, you work a list.
+Block 63 started out the same way and it was the wrong shape, because the subject is not a pile.
+A series runs three to five years; the plan year, the dose cap and the authorization paying for
+it do not. **That is a calendar problem, so the demo is a calendar.**
+
+Every patient is a lane running left to right across a 42-month board. Teal is funded, coral
+hatch is series with nothing paying for it, a diagonal stripe is coverage that pays but not for
+the whole vial, and the pips are the admin events in between. Three things follow from that
+shape and none of them would work in a list:
+
+- **The scrubber.** Drag the handle and the whole book walks into the future. Two of the four
+  counters are read at the cursor, so you watch patients cross into their own gaps: two exposed
+  today, four by next spring, then fewer as series finish. That sentence is the entire pitch and
+  the chart makes it without anyone writing it down.
+- **Approving an action heals the lane.** Sign the authorization renewal and the coral collapses
+  to teal in place, with the months it recovered floating up off the button. The counter is
+  measured as the gap it actually closed (`projectGain`), so the number and the bar can never
+  disagree.
+- **Some gaps do not close.** The COBRA termination and the exhausted benefit maximum have no
+  action that recovers a month, so "Close every gap you can" leaves them coral and says so:
+  *"91 patient-months recovered · 2 gaps a click cannot close."* A demo that healed everything
+  would be a better advertisement and a worse description of the job.
+
+The panel is weighted so most lanes are funded, with four guaranteed problems dealt on top. A
+board showing half the practice in coral would not be believable.
 
 ### Light mode on the live demos
 
@@ -259,10 +287,24 @@ Behaviour, in [silstone.js](assets/silstone.js):
 - in the Hostinger embed flow each block is its own iframe, so the same demo open twice stays in
   step through the `storage` event — keyed by id, so one demo never disturbs another
 
-Light mode is measured per demo, each run to completion with every hidden state forced open,
-compositing translucent tints against their real backgrounds: **0 pairings below the WCAG AA
-bar**. Dark mode is untouched — the containers stay fully transparent, with no padding or radius
-added, and every card keeps the exact background it always had.
+Both modes are measured per demo, each run to completion with every hidden state forced open,
+compositing translucent tints against their real backgrounds. At rest: **0 pairings below the
+WCAG AA bar** in either mode, worst case 4.6:1 light and 4.7:1 dark across demos 2 and 3, and
+4.9:1 on the benefit board. Dark mode is otherwise untouched — the containers stay fully
+transparent, with no padding or radius added, and every card keeps the exact background it
+always had.
+
+Getting there needed one token moved. `--text-quaternary` was tuned against `--bg-canvas`, where
+it measures 4.7:1, but the demos spend it on `--bg-surface-raised` and `--bg-surface-3` — lighter
+grounds — so every mono label on a card sat at 4.25 to 4.48:1, under the bar by a hair, in all
+three demos. Section 18 now lifts it to `#878793` **inside demo panels only**, which clears the
+whole set without touching the token anywhere else on the site, where it is still used against
+the canvas it was measured on. Light mode sets its own on the cards and already measured 5.8:1.
+
+One known exception, pre-existing and outside the panels' resting state: while demo 1's scan
+animation is running, a flagged document line puts `--text-tertiary` on a warm tint at
+**3.84:1** for a few seconds. It is a transient view of demo 1's animation, not a resting
+pairing, and fixing it means retuning that demo's scan styling.
 
 ### Trios
 

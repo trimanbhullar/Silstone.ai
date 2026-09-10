@@ -73,7 +73,7 @@ No EMR integration by design. PHI runs on AWS Bedrock under a full HIPAA BAA, wi
 - **Page title:** `Live Demos | Try a Healthcare AI Agent | Silstone.AI`
 - **Description:**
 ```
-Run a free, interactive healthcare AI agent right in your browser, no signup. See how a Silstone agent answers questions and handles admin, built on Claude.
+Run free, interactive healthcare AI agents right in your browser, no signup: denial recovery, inbound fax triage, and CPT 95165 allergy immunotherapy benefit verification. Built on Claude.
 ```
 
 ### Contact

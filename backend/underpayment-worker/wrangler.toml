@@ -28,6 +28,12 @@ CLAUDE_MODEL = "claude-sonnet-5"
 #   npx wrangler secret put OPENAI_API_KEY
 OPENAI_MODEL = "gpt-4o-mini"
 
+# Allergy benefit-exposure route (POST /api/allergy) runs on Claude off the same
+# ANTHROPIC_API_KEY secret as the EOB route. It is one short structured call per
+# submission, so it is worth the better model; drop it to claude-sonnet-5 if the
+# demo ever gets heavy public traffic.
+ALLERGY_MODEL = "claude-opus-5"
+
 # --- Optional bill-protection for /api/triage (both OFF until configured) ---
 # Per-IP rate limit: create a KV namespace and bind it here as RATE_LIMIT.
 #   npx wrangler kv namespace create TRIAGE_RATELIMIT
