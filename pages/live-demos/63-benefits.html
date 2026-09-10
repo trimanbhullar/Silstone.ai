@@ -1483,10 +1483,14 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   Two halves, one story:
     1. "Run today's verification sweep" - a client-side simulation on SYNTHETIC
        immunotherapy patients, plotted onto the board.
-    2. "Map my practice" - the lead-gated half. Sends a short practice profile
-       to the SAME Cloudflare Worker as demos 1 and 2 (Claude via /api/allergy)
-       and renders the exposure map it returns. Falls back to a documented
-       client-side estimator when the route is unreachable, and says so.
+    2. "Read a payer policy" - the lead-gated half, and the one you can run on
+       a real document. Posts a pasted payer policy to the SAME Cloudflare
+       Worker as demos 1 and 2 (/api/policy), which extracts the rules that
+       decide whether 95165 gets paid and quotes the sentence each came from,
+       every quote checked back against the pasted text before it is shown.
+       The extracted rules then re-run the board above as if that policy
+       governed the whole panel, which is the point: the board's rules are not
+       invented, they come out of documents like the one you just pasted.
 
   This is the LAST block on the page, so it carries the shared "notify / next
   demo" signup (move it again if a block 64 lands).
@@ -1550,7 +1554,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         <!-- controls -->
         <div class="bv-controls">
           <button type="button" class="bv-btn-primary" id="bvRun">Run today's verification sweep <span class="arw">&rarr;</span></button>
-          <button type="button" class="bv-btn-ghost" id="bvMapToggle">Map my practice</button>
+          <button type="button" class="bv-btn-ghost" id="bvPolToggle">Read a payer policy</button>
           <button type="button" class="bv-btn-ghost" id="bvReset">Reset</button>
         </div>
 
@@ -1566,6 +1570,13 @@ a.sil-byline-author:hover { color: var(--teal-300); }
             <div class="bv-num is-stop"><b id="bvNMoney">$0</b><span>95165 unfunded across the book</span></div>
             <div class="bv-num is-good"><b id="bvNSaved">0</b><span>patient-months recovered by you</span></div>
           </div>
+        </div>
+
+        <!-- set by the policy reader below, when a pasted policy is driving the board -->
+        <div class="bv-polbanner" id="bvPolBanner" hidden>
+          <span class="pb-lbl">Policy applied</span>
+          <span class="pb-txt" id="bvPolBannerTxt"></span>
+          <button type="button" class="bv-btn-restore" id="bvPolRestore">Restore the panel</button>
         </div>
 
         <!-- the board -->
@@ -1619,26 +1630,27 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     </div>
   </section>
 
-  <!-- ==================== MAP MY PRACTICE ==================== -->
-  <section class="sil-section is-alt has-tint acc-amber" id="bvMapSection" style="padding:var(--space-10) 0 var(--space-12);display:none">
+  <!-- ==================== READ A PAYER POLICY ==================== -->
+  <section class="sil-section is-alt has-tint acc-amber" id="bvPolSection" style="padding:var(--space-10) 0 var(--space-12);display:none">
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container">
       <div class="bv-demo">
         <div class="bv-maphead sil-center">
-          <span class="sil-eyebrow"><i class="dot"></i>The other half</span>
-          <h2 class="sil-display-s sil-mt-4">Where is <span class="sil-gt">your</span> practice losing the time?</h2>
+          <span class="sil-eyebrow"><i class="dot"></i>Try it on a real document</span>
+          <h2 class="sil-display-s sil-mt-4">Every rule on that board came out of <span class="sil-gt">a document like this.</span></h2>
           <p class="sil-body-m sil-mt-3">
-            Eight numbers, no chart access, no EMR integration. Claude reads them the way an operations
-            analyst would and returns a modelled map of the 95165 benefit workload: the hours a month,
-            who is carrying them, what is exposed to a mid-series lapse, and the three things worth
-            fixing first.
+            Each payer publishes a medical policy for allergen immunotherapy, and buried in it are the
+            handful of sentences that decide whether 95165 gets paid: how that payer defines a dose,
+            what it caps per vial and per year, whether it wants a precert. Paste one in. The agent
+            pulls the rules out and shows you the sentence each one came from, then re-runs the board
+            above as if that policy governed your whole panel.
           </p>
         </div>
 
-        <!-- lead gate -> the form -->
+        <!-- lead gate -> the reader -->
         <div class="bv-lead" id="bvLead">
-          <h3 class="bv-lead-title">Map the workload for <span class="sil-gt">your practice</span></h3>
-          <p class="bv-lead-sub">Enter your details to unlock the mapper. You will get the full breakdown on screen, here, right away.</p>
+          <h3 class="bv-lead-title">Read <span class="sil-gt">your payer's policy</span></h3>
+          <p class="bv-lead-sub">Enter your details to unlock the reader. You will get the extracted rules on screen, here, right away.</p>
           <form id="bvLeadForm" novalidate>
             <label class="sil-sr" for="bvLName">Full name</label>
             <input type="text" name="name" id="bvLName" placeholder="Dr. Smith" required>
@@ -1647,41 +1659,28 @@ a.sil-byline-author:hover { color: var(--teal-300); }
             <label class="sil-sr" for="bvLPhone">Phone number</label>
             <input type="tel" name="phone" id="bvLPhone" placeholder="(555) 123-4567" required>
             <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
-            <input type="hidden" name="subject" value="Demo request: Immunotherapy Benefit Agent (CPT 95165)">
+            <input type="hidden" name="subject" value="Demo request: Payer policy reader (CPT 95165)">
             <input type="hidden" name="from_name" value="Silstone.AI - Live Demo">
             <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-            <button type="submit" class="bv-btn-primary" id="bvLeadBtn" style="width:100%">Unlock the mapper <span class="arw">&rarr;</span></button>
+            <button type="submit" class="bv-btn-primary" id="bvLeadBtn" style="width:100%">Unlock the reader <span class="arw">&rarr;</span></button>
           </form>
-          <p class="bv-lead-micro">Practice-level numbers only. Nothing you enter here is patient data.</p>
+          <p class="bv-lead-micro">A payer policy is a public document. Nothing you paste here is patient data.</p>
         </div>
 
-        <div class="bv-mapform" id="bvMapForm" style="display:none">
-          <div class="bv-fgrid">
-            <label class="bv-f"><span>Patients on immunotherapy</span><input type="number" id="bvPatients" min="0" step="1" value="140"></label>
-            <label class="bv-f"><span>Injection visits per week</span><input type="number" id="bvVisits" min="0" step="1" value="110"></label>
-            <label class="bv-f"><span>Vials mixed per week</span><input type="number" id="bvVials" min="0" step="1" value="30"></label>
-            <label class="bv-f"><span>Commercial payers billed</span><input type="number" id="bvPayers" min="0" step="1" value="9"></label>
-            <label class="bv-f"><span>95165 denials worked per month</span><input type="number" id="bvDenials" min="0" step="1" value="14"></label>
-            <label class="bv-f"><span>Average paid 95165 claim ($)</span><input type="number" id="bvClaim" min="0" step="1" value="95"></label>
-            <label class="bv-f"><span>Loaded staff cost per hour ($)</span><input type="number" id="bvHourly" min="0" step="1" value="28"></label>
-            <label class="bv-f"><span>Who does the verifying</span>
-              <select id="bvWho">
-                <option value="the front desk">Front desk</option>
-                <option value="a dedicated billing specialist">Billing specialist</option>
-                <option value="the nursing / injection staff">Nursing or injection staff</option>
-                <option value="the physician">The physician</option>
-                <option value="an outside billing company">An outside billing company</option>
-              </select>
-            </label>
+        <div class="bv-polform" id="bvPolForm" style="display:none">
+          <label class="bv-pol-lbl" for="bvPolText">
+            Paste a payer's allergen-immunotherapy policy. Yours, or one of the samples.
+          </label>
+          <textarea id="bvPolText" spellcheck="false" placeholder="Paste the policy text here, or press &ldquo;Load a sample policy&rdquo; below."></textarea>
+          <div class="bv-polrow">
+            <button type="button" class="bv-btn-primary" id="bvPolRun">Read the policy <span class="arw">&rarr;</span></button>
+            <button type="button" class="bv-link" id="bvPolSample">Load a sample policy</button>
+            <span class="bv-mapnote">Sent for extraction &middot; not stored</span>
           </div>
-          <div class="bv-maprow">
-            <button type="button" class="bv-btn-primary" id="bvMapRun">Map the workload <span class="arw">&rarr;</span></button>
-            <span class="bv-mapnote">Modelled estimate &middot; nothing stored</span>
-          </div>
-          <p class="bv-mapmsg" id="bvMapMsg" role="status" aria-live="polite"></p>
+          <p class="bv-mapmsg" id="bvPolMsg" role="status" aria-live="polite"></p>
         </div>
 
-        <div class="bv-mapout" id="bvMapOut" hidden></div>
+        <div class="bv-polout" id="bvPolOut" hidden></div>
       </div>
     </div>
   </section>
@@ -1994,8 +1993,8 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .bv-empty h3{margin:0 0 6px;color:var(--text-secondary);font-size:15px;font-weight:600}
 .bv-empty p{margin:0;font-size:13.5px;max-width:38ch}
 
-/* ---- map my practice (unchanged in shape; it was never queue-like) ---- */
-.bv-maphead{max-width:62ch;margin:0 auto var(--space-8)}
+/* ---- read a payer policy ---- */
+.bv-maphead{max-width:64ch;margin:0 auto var(--space-8)}
 .bv-demo .bv-lead{max-width:440px;margin:0 auto;text-align:center;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:clamp(24px,3vw,40px)}
 .bv-demo .bv-lead-title{font-family:var(--font-display);font-size:1.25rem;font-weight:600;color:var(--text-primary)}
 .bv-demo .bv-lead-sub{font-size:var(--text-body-s-size);line-height:1.6;color:var(--text-secondary);margin-top:var(--space-3);margin-bottom:var(--space-5)}
@@ -2004,73 +2003,72 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .bv-demo .bv-lead input::placeholder{color:var(--text-quaternary)}
 .bv-demo .bv-lead .bv-btn-primary{margin-top:var(--space-2)}
 .bv-demo .bv-lead-micro{font-size:12px;color:var(--text-quaternary);text-align:center;margin-top:var(--space-4)}
-.bv-mapform{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;padding:18px 20px}
-.bv-fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.bv-f{display:flex;flex-direction:column;gap:6px;min-width:0}
-.bv-f>span{font-size:11.5px;line-height:1.35;color:var(--text-tertiary)}
-.bv-demo .bv-f input,.bv-demo .bv-f select{width:100%;padding:10px 12px;border-radius:var(--radius-md);background:var(--bg-surface-3);border:1px solid var(--border-default);color:var(--text-primary);font-size:14px;font-family:var(--font-body);font-variant-numeric:tabular-nums;outline:none;transition:border-color .2s}
-.bv-demo .bv-f input:focus,.bv-demo .bv-f select:focus{border-color:var(--violet-500)}
-.bv-maprow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+
+.bv-polform{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;padding:18px 20px}
+.bv-pol-lbl{display:block;font-size:13px;color:var(--text-secondary);margin-bottom:10px}
+.bv-demo .bv-polform textarea{width:100%;min-height:220px;resize:vertical;background:var(--bg-surface-3);border:1px solid var(--border-default);border-radius:10px;color:var(--text-primary);font-family:var(--font-mono);font-size:12.5px;padding:14px 15px;line-height:1.65;outline:none}
+.bv-demo .bv-polform textarea:focus{border-color:var(--violet-500)}
+.bv-polrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.bv-demo .bv-link{background:none;border:0;color:var(--violet-300);font-family:var(--font-body);font-size:13px;font-weight:500;padding:6px 4px;cursor:pointer}
+.bv-demo .bv-link:hover{color:var(--violet-200)}
 .bv-mapnote{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary);margin-left:auto}
 .bv-mapmsg{margin:10px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-tertiary)}
 .bv-mapmsg.is-warn{color:var(--coral-500)}
-.bv-mapout{margin-top:16px;display:flex;flex-direction:column;gap:14px}
-.bv-mapout[hidden]{display:none}
-.bv-card{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;padding:18px 20px}
-.bv-headline{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.12rem;line-height:1.45;color:var(--text-primary);margin:0}
-.bv-bignums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.bv-big{background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:12px;padding:13px 15px}
-.bv-big .bvv{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.6rem;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--text-primary)}
-.bv-big .bvl{font-size:11.5px;color:var(--text-tertiary);margin-top:6px;line-height:1.35}
-.bv-big.risk .bvv{color:var(--coral-500)}
-.bv-sinks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
-.bv-sinkrow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
-.bv-sinkrow .sn{font-size:13.5px;font-weight:600;color:var(--text-primary)}
-.bv-sinkrow .sh{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary);font-variant-numeric:tabular-nums}
-.bv-auto{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;padding:3px 7px;border-radius:5px}
-.bv-auto.full{background:rgba(94,224,168,.14);color:var(--mint-400)}
-.bv-auto.partial{background:var(--warnw);color:var(--amber-400)}
-.bv-auto.human{background:var(--bg-surface-3);color:var(--text-tertiary)}
-.bv-meter{position:relative;height:10px;border-radius:5px;background:rgba(255,255,255,.09);overflow:hidden}
-.bv-meter>i{display:block;height:100%;border-radius:5px;transition:width .7s cubic-bezier(.2,.75,.2,1)}
-.bv-sinkwhy{font-size:12px;line-height:1.5;color:var(--text-secondary);margin:6px 0 0}
-.bv-wins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.bv-win{background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:12px;padding:13px 15px}
-.bv-win .wt{font-size:13.5px;font-weight:600;color:var(--text-primary);line-height:1.35}
-.bv-win .wd{font-size:12px;line-height:1.5;color:var(--text-secondary);margin-top:6px}
-.bv-win .wh{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mint-400);margin-top:8px}
-.bv-noemr{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;padding:0;list-style:none}
-.bv-noemr li{font-size:12px;line-height:1.4;color:var(--text-secondary);background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:9px;padding:7px 11px}
-.bv-foot{font-size:11.5px;line-height:1.55;color:var(--text-tertiary);margin:0}
-.bv-src{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--authw);color:var(--violet-300)}
-.bv-src.local{background:var(--warnw);color:var(--amber-400)}
 
-@media (max-width:1040px){
-  .bv-demo{--labw:220px}
-  .bv-nums{grid-template-columns:repeat(2,1fr)}
-  .bv-fgrid{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width:820px){
-  /* the label stops competing with the calendar for width and sits above it */
-  .bv-demo{--labw:1fr}
-  .bv-scrub,.bv-ruler,.bv-demo .bv-lanerow{grid-template-columns:1fr;gap:8px}
-  .bv-scrublbl{display:none}
-  .bv-rlab.alt{display:none}   /* six-month ticks collide at this width */
-  .bv-runlbl{min-width:0}
-  .bv-bodygrid{grid-template-columns:1fr}
-  .bv-wins,.bv-bignums{grid-template-columns:1fr}
-  .bv-demo .bv-btn-heal{width:100%;justify-content:center}
-  .bv-lanes{max-height:none}
-}
-@media (max-width:560px){
-  .bv-nums{grid-template-columns:1fr}
-  .bv-fgrid{grid-template-columns:1fr}
-  .bv-fields li{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:reduce){
-  .bv-demo *{animation-duration:.01ms!important;transition-duration:.01ms!important}
-  .bv-lanes{scroll-behavior:auto}
-}
+.bv-polout{margin-top:16px;display:flex;flex-direction:column;gap:14px}
+.bv-polout[hidden]{display:none}
+.bv-card{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;padding:18px 20px}
+.bv-polhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.bv-polpayer{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.12rem;line-height:1.35;color:var(--text-primary)}
+.bv-polref{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary)}
+.bv-polstats{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.bv-stat-pill{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:6px;background:var(--bg-surface-3);color:var(--text-tertiary)}
+.bv-stat-pill.good{background:rgba(94,224,168,.14);color:var(--mint-400)}
+.bv-stat-pill.warn{background:rgba(239,193,120,.14);color:var(--amber-400)}
+.bv-polsum{font-size:13.5px;line-height:1.6;color:var(--text-secondary);margin:0}
+
+.bv-rules{display:flex;flex-direction:column;gap:10px}
+.bv-rule{background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:12px;padding:13px 15px}
+.bv-rule.unver{border-color:rgba(239,193,120,.4)}
+.bv-rulehead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.bv-rulelab{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quaternary)}
+.bv-badge{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px}
+.bv-badge svg{width:10px;height:10px}
+.bv-badge.ok{background:rgba(94,224,168,.14);color:var(--mint-400)}
+.bv-badge.no{background:rgba(239,193,120,.16);color:var(--amber-400)}
+.bv-ruleval{display:block;font-size:14px;font-weight:600;color:var(--text-primary);line-height:1.4;margin-top:6px}
+.bv-quote{margin:10px 0 0;padding:9px 12px;border-left:3px solid var(--teal-500);border-radius:0 9px 9px 0;background:var(--bg-surface-3);
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.6;color:var(--text-secondary)}
+.bv-rule.unver .bv-quote{border-left-color:var(--amber-400)}
+.bv-conseq{margin:9px 0 0;font-size:12px;line-height:1.5;color:var(--text-tertiary)}
+.bv-conseq b{color:var(--coral-500);font-weight:600}
+
+.bv-silent{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0;padding:0;list-style:none}
+.bv-silent li{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-tertiary);background:var(--bg-surface-raised);
+  border:1px dashed var(--border-default);border-radius:8px;padding:6px 10px}
+.bv-foot{font-size:11.5px;line-height:1.55;color:var(--text-tertiary);margin:0}
+
+.bv-applybar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--bg-surface);
+  border:1px solid var(--violet-500);border-radius:14px;padding:14px 16px}
+.bv-applytxt{flex:1;min-width:200px;font-size:13px;line-height:1.5;color:var(--text-secondary)}
+.bv-applytxt b{color:var(--text-primary);font-weight:600}
+.bv-demo .bv-btn-apply{flex:none;display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:var(--radius-pill);
+  border:0;background:var(--grad-primary);background-size:200% 200%;color:var(--text-on-accent);font-family:var(--font-body);
+  font-weight:600;font-size:13px;cursor:pointer;animation:silGradShift 10s ease-in-out infinite}
+.bv-demo .bv-btn-apply:disabled{opacity:.45;cursor:default;animation:none}
+
+/* the banner that sits over the board once a policy is driving it */
+.bv-polbanner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;padding:11px 14px;
+  border-radius:12px;background:rgba(110,86,207,.14);border:1px solid var(--violet-500)}
+.bv-polbanner[hidden]{display:none}
+.bv-polbanner .pb-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--violet-300);flex:none}
+.bv-polbanner .pb-txt{flex:1;min-width:180px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}
+.bv-polbanner .pb-txt b{color:var(--text-primary);font-weight:600}
+.bv-demo .bv-btn-restore{flex:none;padding:7px 14px;border-radius:var(--radius-pill);border:1px solid var(--border-default);
+  background:var(--bg-surface);color:var(--text-secondary);font-family:var(--font-body);font-weight:600;font-size:12px;cursor:pointer}
+.bv-demo .bv-btn-restore:hover{color:var(--text-primary);border-color:var(--border-strong)}
+.bv-lane.polhit .bv-track{box-shadow:inset 0 0 0 1.5px var(--violet-500)}
 
 /* notify (shared signup — lives with the last demo on the page) */
 .sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
@@ -2086,14 +2084,6 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 (function(){
   "use strict";
   if(window.__bvInit) return; window.__bvInit=true;
-
-  /* Same Worker as demos 1 and 2 (dental-denial-agent), new /api/allergy route.
-     Claude reads the practice profile server-side off the ANTHROPIC_API_KEY
-     secret, so the key never reaches the browser. See
-     backend/allergy-benefits-route.snippet.js. If the route is unreachable
-     (local preview, or before it ships) we fall back to the documented
-     client-side estimator below and label the result as such. */
-  var MAP_API="https://dental-denial-agent.denial-agent.workers.dev/api/allergy";
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
   var $=function(id){return document.getElementById(id);};
@@ -2344,6 +2334,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     for(var k in t) if(t.hasOwnProperty(k)) o[k]=t[k];
     o.id="bv"+(seq++);
     o.name=newName();
+    /* cloned, not shared: applying a payer policy rewrites the dose bank, and a
+       template mutated in place would leak that into every later sweep */
+    o.dose={used:t.dose.used, allowed:t.dose.allowed, cap:t.dose.cap, note:t.dose.note};
     o.pips=t.pips.map(function(p){return {m:p.m,k:p.k};});
     o.done={};
     o.gone={};             // overlays cleared by an approval
@@ -2781,6 +2774,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       '<h3>Board cleared</h3><p>Run the sweep again to plot a fresh panel.</p>';
     lanesEl.appendChild(e); emptyEl=e;
     lanesEl.style.setProperty("--cur","0%");
+    polSnap=null; var pb=$("bvPolBanner"); if(pb) pb.setAttribute("hidden","");
     $("bvRail").setAttribute("hidden",""); $("bvRailChips").innerHTML="";
     $("bvBTitle").textContent="Coverage runway"; $("bvBSub").textContent="idle";
     $("bvHeal").disabled=true; $("bvRun").disabled=false;
@@ -2802,129 +2796,199 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     paintScrub(); refresh();
   }
 
-  /* ==================== MAP MY PRACTICE ==================== */
+  /* ==================== READ A PAYER POLICY ====================
+     The other half of the demo, and the one you can run on a real document.
+     Every rule the board enforces came out of a payer policy; this is where a
+     reader watches that happen to a policy they chose, with the sentence each
+     rule was taken from quoted back and checked against their own text. */
 
-  function profileFromForm(){
-    function n(id,d){ var v=parseFloat($(id).value); return (isFinite(v)&&v>=0)?v:d; }
-    return {patients:n("bvPatients",140), visitsPerWeek:n("bvVisits",110), vialsPerWeek:n("bvVials",30),
-      payers:n("bvPayers",9), denialsPerMonth:n("bvDenials",14), claimValue:n("bvClaim",95),
-      hourlyCost:n("bvHourly",28), whoVerifies:$("bvWho").value};
-  }
+  var POL_API="https://dental-denial-agent.denial-agent.workers.dev/api/policy";
 
-  /* The fallback, used only when the Worker route is unreachable. Deterministic
-     and deliberately conservative; every minute figure below is stated so the
-     number can be argued with rather than believed.
-       full re-verification .... 18 min per patient per year
-       pre-visit spot check ....  4 min on ~30% of injection visits
-       dose-cap reconciliation .  6 min per vial mixed
-       prior authorization ..... 25 min per patient per year, ~55% of payers
-       worked denial ........... 32 min each                                  */
-  function estimateLocal(p){
-    var m=4.333;
-    var verif   = p.patients/12*18;
-    var previsit= p.visitsPerWeek*m*0.30*4;
-    var dosecap = p.vialsPerWeek*m*6;
-    var auth    = p.patients*0.55/12*25;
-    var denials = p.denialsPerMonth*32;
-    var mins=[["Pre-visit coverage checks",previsit,"full","Every injection visit needs a live coverage answer, and roughly a third of them are stale enough to need a portal login."],
-              ["Working 95165 denials",denials,"partial","CO-197, CO-151 and N362 all trace back to something knowable before the vial was mixed."],
-              ["Dose-cap reconciliation",dosecap,"full","Each payer counts doses its own way, so the mixing log has to be reconciled against a different rule per vial."],
-              ["Annual benefit re-verification",verif,"full","Plan years roll over and deductibles reset, so every patient on the series gets re-verified at least once a year."],
-              ["Prior authorizations and renewals",auth,"partial","Not every payer requires one, and the ones that do expire in the middle of a three-year series."]];
-    var total=0; mins.forEach(function(x){ total+=x[1]; });
-    var hours=total/60;
-    var atRisk=p.denialsPerMonth*p.claimValue;
-    var patientsAtRisk=Math.round(p.patients*0.22);
-    var lapse=patientsAtRisk*p.claimValue*0.5;
-    var biggest=mins.slice().sort(function(a,b){return b[1]-a[1];})[0];
-    return {
-      headline:"On these numbers the biggest single cost is "+biggest[0].toLowerCase()+", at about "+(biggest[1]/60).toFixed(1)+" hours a month, carried by "+p.whoVerifies+".",
-      hoursPerMonth:hours, costPerMonth:hours*p.hourlyCost, atRiskPerMonth:atRisk+lapse,
-      sinks:mins.map(function(x){ return {task:x[0],hoursPerMonth:x[1]/60,whoDoesIt:p.whoVerifies,
-        automatable:x[2],why:x[3]}; }).sort(function(a,b){return b.hoursPerMonth-a.hoursPerMonth;}),
-      lapseRisk:{headline:"About "+patientsAtRisk+" of your "+Math.round(p.patients)+" immunotherapy patients will hit a plan change, a dose cap or an auth expiry in the next twelve months.",
-        detail:"A series runs three to five years; a plan year runs one. Every rollover, employer change and benefit maximum is a chance for the coverage to end before the treatment does. The practice usually finds out through a denial, weeks after the antigen was mixed and the visit was given.",
-        patientsAtRisk:patientsAtRisk},
-      quickWins:[
-        {title:"Verify before the vial, not after the denial",hoursBack:previsit/60*0.8,
-         detail:"The agent checks coverage against the schedule the night before and posts the answer to the visit. A person only sees the ones that failed."},
-        {title:"Keep a dose bank per patient, per payer",hoursBack:dosecap/60*0.85,
-         detail:"Doses are counted against each payer's own definition as vials are mixed, so a cap is hit on screen instead of on a remittance."},
-        {title:"Watch the runway, not the calendar",hoursBack:denials/60*0.5,
-         detail:"Plan-year ends, authorization expiries and benefit maximums are projected against how long each series still has to run, so a lapse is visible months out."}],
-      noEmr:["The appointment schedule","The payer portals you already log into","The antigen mixing log","The remittance file"],
-      profile:p, source:"local"
-    };
-  }
+  /* Two synthetic policies, written for the demo. They are invented documents,
+     not extracts of any real payer's published policy, and they are built to
+     disagree with each other: one caps the vial and demands a precert, the
+     other follows Medicare's aliquot but caps the year and the dollars. */
+  var POL_SAMPLES=[
+{name:"Meridian Health Plan · caps the vial",text:
+"MERIDIAN HEALTH PLAN\nMedical Policy MP-ALL-014: Allergen Immunotherapy\nEffective: January 1, 2026 | Revision 7\n\n"+
+"1. SCOPE\nThis policy addresses coverage of allergen immunotherapy, including the preparation\nand provision of antigens (CPT 95165) and the administration of injections (CPT 95115,\n95117), for commercial members enrolled in Meridian Health Plan products.\n\n"+
+"2. COVERAGE CRITERIA\nAllergen immunotherapy is considered medically necessary when the member has\ndocumented IgE-mediated allergic rhinitis, allergic conjunctivitis, or allergic asthma\nthat has not responded adequately to a trial of avoidance measures and pharmacotherapy\nof at least three months' duration.\n\n"+
+"3. UNIT DEFINITION AND LIMITS\nFor purposes of CPT 95165, the Plan reimburses a maximum of 10 doses per multi-dose\nvial, regardless of the volume of antigen prepared or the number of aliquots drawn.\nProviders billing units in excess of this limit will have the excess units denied.\nThe Plan does not adopt the 1 mL aliquot convention used by Medicare.\n\n"+
+"4. PRIOR AUTHORIZATION\nPrior authorization is required for all allergen immunotherapy services, including\nthe initial preparation of antigen vials. Authorizations are valid for twelve months\nfrom the date of approval and must be renewed before the anniversary date.\n\n"+
+"5. DOCUMENTATION\nThe medical record must contain the results of specific IgE testing or percutaneous\nskin testing identifying the allergens included in the prescription set, a written\ntreatment plan signed by the prescribing physician, and the antigen preparation log\nidentifying the date each vial was compounded.\n\n"+
+"6. APPEALS\nA provider may appeal an adverse determination within 60 calendar days of the date\nof the remittance advice. Appeals submitted after this period will not be considered.\n\n"+
+"7. EXCLUSIONS\nSublingual immunotherapy and any preparation dispensed for home administration are\nnot covered under this policy."},
+{name:"Northstar Mutual · caps the year",text:
+"NORTHSTAR MUTUAL BENEFIT\nCoverage Guideline CG-2026-31: Allergy Immunotherapy Services\nApplies to: Northstar Choice PPO, Northstar Select HMO\n\n"+
+"PURPOSE\nTo describe reimbursement parameters for allergen extract preparation and\nadministration for Northstar commercial members.\n\n"+
+"REIMBURSEMENT PARAMETERS\nNorthstar follows the Medicare convention for antigen preparation. One unit of\nCPT 95165 equals one 1 mL aliquot removed from a properly prepared multi-dose vial.\nReimbursement is limited to 120 units per member per benefit year across all\nprescribing providers.\n\n"+
+"Immunotherapy services are subject to a combined annual maximum benefit of $1,800\nper member per benefit year. Amounts in excess of the annual maximum are the\nfinancial responsibility of the member.\n\n"+
+"AUTHORIZATION\nPrecertification is not required for allergen immunotherapy services rendered by a\nparticipating provider. Non-participating providers must obtain authorization prior\nto the initiation of treatment.\n\n"+
+"RECORD REQUIREMENTS\nProviders shall retain documentation of antigen selection and the compounding record\nfor a period of not less than seven years.\n\n"+
+"RECONSIDERATION\nRequests for reconsideration of a claim determination must be received within\nninety (90) days of the original remittance date."}
+  ];
+  var polSampleIdx=0, polData=null, polSnap=null;
 
-  function autoLabel(a){ return a==="full"?"Agent runs it":(a==="partial"?"Agent drafts, you approve":"Stays with a person"); }
-  function renderMap(d){
-    var out=$("bvMapOut");
-    var maxH=0; (d.sinks||[]).forEach(function(s){ if(s.hoursPerMonth>maxH) maxH=s.hoursPerMonth; });
-    var sinks=(d.sinks||[]).map(function(s){
-      var pct=Math.max(3,Math.round((s.hoursPerMonth/(maxH||1))*100));
-      var a=(s.automatable==="full"||s.automatable==="partial")?s.automatable:"human";
-      return '<li><div class="bv-sinkrow"><span class="sn">'+esc(s.task)+'</span>'+
-        '<span class="bv-auto '+a+'">'+esc(autoLabel(a))+'</span>'+
-        '<span class="sh">'+(Number(s.hoursPerMonth)||0).toFixed(1)+' h/mo</span></div>'+
-        '<div class="bv-meter"><i style="width:'+pct+'%;background:var(--violet-400)"></i></div>'+
-        '<p class="bv-sinkwhy">'+esc(s.why)+' <span style="color:var(--text-quaternary)">Carried by '+esc(s.whoDoesIt)+'.</span></p></li>';
+  var TICK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg>';
+  var WARN='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M7 1.8 1 12.2h12z" fill="none"/><path d="M7 5.6v3"/><path d="M7 10.2v.1"/></svg>';
+
+  function polMsg(t,warn){ var m=$("bvPolMsg"); m.textContent=t||""; m.className="bv-mapmsg"+(warn?" is-warn":""); }
+
+  function renderPolicy(d){
+    var out=$("bvPolOut");
+    var st=d.stats||{extracted:0,verified:0,silent:0};
+    var rules=(d.rules||[]).map(function(r){
+      var badge = r.verified
+        ? '<span class="bv-badge ok">'+TICK+'Found in your document</span>'
+        : '<span class="bv-badge no">'+WARN+'Not found in your text</span>';
+      return '<div class="bv-rule'+(r.verified?"":" unver")+'">'+
+        '<div class="bv-rulehead"><span class="bv-rulelab">'+esc(r.label)+'</span>'+badge+'</div>'+
+        '<span class="bv-ruleval">'+esc(r.value)+'</span>'+
+        (r.quote?'<blockquote class="bv-quote">&ldquo;'+esc(r.quote)+'&rdquo;</blockquote>':'')+
+        '<p class="bv-conseq">'+esc(r.consequence)+'</p></div>';
     }).join("");
-    var wins=(d.quickWins||[]).map(function(w){
-      return '<div class="bv-win"><div class="wt">'+esc(w.title)+'</div>'+
-        '<div class="wd">'+esc(w.detail)+'</div>'+
-        '<div class="wh">about '+(Number(w.hoursBack)||0).toFixed(1)+' h/mo back</div></div>';
-    }).join("");
-    var noemr=(d.noEmr||[]).map(function(x){ return '<li>'+esc(x)+'</li>'; }).join("");
-    var src = d.source==="local"
-      ? '<span class="bv-src local">Offline estimate</span>'
-      : '<span class="bv-src">Claude</span>';
-    var srcNote = d.source==="local"
-      ? "The live model could not be reached, so this is the demo's own estimator running in your browser on the minute assumptions printed in the source of this page."
-      : "Modelled by Claude from the eight numbers you entered, using per-task minute assumptions stated in the prompt.";
+    var silent=(d.notFound||[]).map(function(n){ return '<li>'+esc(n.label)+'</li>'; }).join("");
+    var ap=d.apply||{}, drivers=[];
+    if(ap.dosesPerVial!=null) drivers.push(ap.dosesPerVial+" doses a vial");
+    if(ap.dosesPerYear!=null) drivers.push(ap.dosesPerYear+" doses a year");
+    if(ap.precert===true) drivers.push("a precert on file");
+    var canApply = drivers.length>0 && data.length>0;
+    var applyTxt = !data.length
+      ? "Run the sweep above first, then you can re-run that panel under this policy."
+      : (drivers.length
+        ? "This policy is enforceable against a panel: <b>"+esc(drivers.join(", "))+"</b>. Re-run the board above as if every patient on it were covered by this plan."
+        : "Nothing in this policy is numeric enough to re-run the board against. That is itself a finding: a policy that never states a cap is a policy you cannot bill against with confidence.");
+
     out.innerHTML=
       '<div class="bv-card">'+
-        '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">'+
-          '<span class="bv-dsec" style="margin:0">Your 95165 exposure map</span>'+src+'</div>'+
-        '<p class="bv-headline">'+esc(d.headline)+'</p>'+
-        '<div class="bv-bignums">'+
-          '<div class="bv-big"><div class="bvv">'+(Number(d.hoursPerMonth)||0).toFixed(0)+' h</div><div class="bvl">Staff hours a month on 95165 benefit work</div></div>'+
-          '<div class="bv-big"><div class="bvv">'+money(d.costPerMonth)+'</div><div class="bvl">What those hours cost you a month</div></div>'+
-          '<div class="bv-big risk"><div class="bvv">'+money(d.atRiskPerMonth)+'</div><div class="bvl">95165 revenue a month exposed to denial or a mid-series lapse</div></div>'+
+        '<div class="bv-polhead">'+
+          '<span class="bv-polpayer">'+esc(d.payer)+'</span>'+
+          (d.policyRef?'<span class="bv-polref">'+esc(d.policyRef)+'</span>':'')+
+          '<span class="bv-polstats">'+
+            '<span class="bv-stat-pill">'+st.extracted+' rules found</span>'+
+            '<span class="bv-stat-pill'+(st.verified===st.extracted?" good":" warn")+'">'+st.verified+' quoted from your text</span>'+
+            '<span class="bv-stat-pill">'+st.silent+' never stated</span>'+
+          '</span>'+
         '</div>'+
+        (d.summary?'<p class="bv-polsum">'+esc(d.summary)+'</p>':'')+
       '</div>'+
-      '<div class="bv-card"><div class="bv-dsec">Where the hours go</div>'+
-        '<ul class="bv-sinks">'+sinks+'</ul></div>'+
-      '<div class="bv-card"><div class="bv-dsec">The mid-series lapse</div>'+
-        '<p class="bv-headline" style="font-size:1rem">'+esc(d.lapseRisk&&d.lapseRisk.headline)+'</p>'+
-        '<p class="bv-sinkwhy" style="margin-top:8px;font-size:12.5px">'+esc(d.lapseRisk&&d.lapseRisk.detail)+'</p></div>'+
-      '<div class="bv-card"><div class="bv-dsec">Worth fixing first</div>'+
-        '<div class="bv-wins">'+wins+'</div></div>'+
-      '<div class="bv-card"><div class="bv-dsec">What this runs on instead of an EMR integration</div>'+
-        '<ul class="bv-noemr">'+noemr+'</ul>'+
-        '<p class="bv-foot" style="margin-top:14px">'+esc(srcNote)+' It is a modelled estimate, not an audit, and it is only as good as the eight numbers above. Nothing you entered is stored.</p></div>';
+      '<div class="bv-card"><div class="bv-dsec">The rules that decide whether 95165 gets paid</div>'+
+        '<div class="bv-rules">'+rules+'</div></div>'+
+      (silent?'<div class="bv-card"><div class="bv-dsec">What this policy never says</div>'+
+        '<ul class="bv-silent">'+silent+'</ul>'+
+        '<p class="bv-foot" style="margin-top:12px">A policy that is silent on a limit is not the same as a policy with no limit. '+
+        'These are the rules you would be guessing at, and the ones worth a written question to the payer before the next vial is mixed.</p></div>':'')+
+      '<div class="bv-applybar">'+
+        '<span class="bv-applytxt">'+applyTxt+'</span>'+
+        '<button type="button" class="bv-btn-apply" id="bvApply"'+(canApply?'':' disabled')+'>Re-run the board under this policy <span class="arw">&rarr;</span></button>'+
+      '</div>'+
+      '<div class="bv-card"><p class="bv-foot">Each quote above was checked back against the text you pasted before it was shown, '+
+        'so a rule marked <b>Found in your document</b> is one the agent can point at rather than one it inferred. '+
+        'Anything it could not find is flagged instead of hidden. Nothing you paste is stored.</p></div>';
     out.removeAttribute("hidden");
+    var ab=$("bvApply"); if(ab) ab.addEventListener("click",function(){ applyPolicy(d); });
     try{ out.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"}); }catch(e){}
   }
 
-  function runMap(){
-    var p=profileFromForm(), btn=$("bvMapRun"), msg=$("bvMapMsg");
-    btn.disabled=true; msg.className="bv-mapmsg"; msg.textContent="Mapping the workload…";
-    var done=false;
-    function finish(d){ if(done)return; done=true; btn.disabled=false; msg.textContent=""; renderMap(d); }
-    var t=setTimeout(function(){ finish(estimateLocal(p)); }, 30000);
-    fetch(MAP_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({profile:p})})
-      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(d){ if(!d||d.error||!d.sinks||!d.sinks.length) throw 0;
-        clearTimeout(t); d.source="claude"; d.profile=d.profile||p; finish(d); })
-      .catch(function(){ clearTimeout(t); finish(estimateLocal(p)); });
+  /* ---- re-run the board under the pasted policy ----
+     A dose bank is spent at roughly one dose a week on maintenance, which is
+     what turns an annual cap into a number of months of runway. The assumption
+     is stated on screen rather than buried here, because it is the step where
+     the simulation stops being the policy's own words. */
+  var DOSES_PER_MONTH=4;
+  function applyPolicy(d){
+    var ap=d.apply||{};
+    if(!data.length) return;
+    if(!polSnap){
+      polSnap=data.map(function(f){
+        return {id:f.id, cover:f.cover, kind:f.kind, resumes:f.resumes, leak:f.leak,
+                allowed:f.dose.allowed, cap:f.dose.cap, pips:f.pips.slice()};
+      });
+    }
+    var lostFunding=0, nowLeak=0, needAuth=0;
+    data.forEach(function(f){
+      var hadGap=gapMonths(f)>0, hadLeak=!!f.leak;
+      // an annual cap replaces the lane's own allowance, and what is left of
+      // the bank becomes months of runway before the plan year refills it
+      if(ap.dosesPerYear!=null){
+        f.dose.allowed=ap.dosesPerYear;
+        f.dose.cap=ap.dosesPerYear+" doses per plan year, per this policy";
+        var left=Math.max(0, ap.dosesPerYear - f.dose.used);
+        var runway=left/DOSES_PER_MONTH;
+        if(runway < f.series){
+          var rollover=null;
+          f.pips.forEach(function(p){ if(p.k==="year" && p.m>runway && (rollover===null||p.m<rollover)) rollover=p.m; });
+          f.kind="ends"; f.cover=Math.round(runway*10)/10;
+          f.resumes = (rollover!==null && rollover<f.series) ? rollover : null;
+        }
+      }
+      // a per-vial cap does not end coverage, it shaves every vial you mix
+      if(ap.dosesPerVial!=null && ap.dosesPerVial<20){ f.leak=true; f.gone.leak=false; }
+      // a precert requirement stops the vials that are due to be re-mixed
+      if(ap.precert===true){
+        var hasAuth=f.pips.some(function(p){ return p.k==="auth"; });
+        if(!hasAuth){
+          f.pips=f.pips.concat([{m:0,k:"auth"}]);
+          needAuth++;
+          if(/re-mix/i.test(f.visit||"")){ f.kind="ends"; f.cover=0; f.resumes=null; }
+        }
+      }
+      if(!hadGap && gapMonths(f)>0) lostFunding++;
+      if(!hadLeak && f.leak) nowLeak++;
+      repaintLane(f);
+      var el=nodes[f.id];
+      if(el){ el.classList.add("polhit"); setTimeout(function(){ el.classList.remove("polhit"); }, 2400); }
+    });
+    var bits=[];
+    if(lostFunding) bits.push("<b>"+lostFunding+"</b> lane"+(lostFunding===1?"":"s")+" lost funding");
+    if(nowLeak) bits.push("<b>"+nowLeak+"</b> now lose part of every vial");
+    if(needAuth) bits.push("<b>"+needAuth+"</b> need a precert on file");
+    if(ap.benefitMax!=null) bits.push("a $"+ap.benefitMax+" annual maximum applies on top, which the board does not model");
+    var b=$("bvPolBanner");
+    $("bvPolBannerTxt").innerHTML="Running as if every patient were on <b>"+esc(d.payer)+
+      (d.policyRef?" "+esc(d.policyRef):"")+"</b>. "+
+      (bits.length?bits.join(", ")+"."
+        :"Nothing on the panel changed: your patients were already inside this policy's limits.")+
+      " Dose banks are spent at about "+DOSES_PER_MONTH+" doses a month.";
+    b.removeAttribute("hidden");
+    refresh();
+    try{ $("bvBoard").scrollIntoView({block:"start",behavior:reduce?"auto":"smooth"}); }catch(e){}
+  }
+  function restorePolicy(){
+    if(!polSnap) return;
+    polSnap.forEach(function(s){
+      var f=findById(s.id); if(!f) return;
+      f.cover=s.cover; f.kind=s.kind; f.resumes=s.resumes; f.leak=s.leak;
+      f.dose.allowed=s.allowed; f.dose.cap=s.cap; f.pips=s.pips.slice();
+      f.gone.leak=false;
+      repaintLane(f);
+    });
+    polSnap=null;
+    $("bvPolBanner").setAttribute("hidden","");
+    refresh();
   }
 
-  var mapUnlocked=false;
-  function showMapStage(){
-    $("bvLead").style.display = mapUnlocked ? "none" : "block";
-    $("bvMapForm").style.display = mapUnlocked ? "block" : "none";
-    setTimeout(function(){ var el = mapUnlocked ? $("bvPatients") : $("bvLName"); if(el) el.focus(); }, 70);
+  function runPolicy(){
+    var txt=$("bvPolText").value.trim();
+    if(txt.length<120){ polMsg("Paste a policy first, or load one of the samples.",true); $("bvPolText").focus(); return; }
+    var btn=$("bvPolRun");
+    btn.disabled=true; polMsg("Reading the policy…");
+    fetch(POL_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({policy:txt})})
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,d:d}; }); })
+      .then(function(res){
+        btn.disabled=false;
+        if(!res.ok||res.d.error){ polMsg(res.d.error||"Could not read that policy. Try a sample.",true); return; }
+        if(!res.d.rules||!res.d.rules.length){ polMsg("No 95165 rules found in that text. Is it an immunotherapy policy?",true); return; }
+        polMsg(""); polData=res.d; renderPolicy(res.d);
+      })
+      .catch(function(){ btn.disabled=false; polMsg("Could not reach the reader. Please try again in a moment.",true); });
+  }
+
+  var polUnlocked=false;
+  function showPolStage(){
+    $("bvLead").style.display = polUnlocked ? "none" : "block";
+    $("bvPolForm").style.display = polUnlocked ? "block" : "none";
+    setTimeout(function(){ var el = polUnlocked ? $("bvPolText") : $("bvLName"); if(el) el.focus(); }, 70);
   }
   function submitLead(e){
     e.preventDefault();
@@ -2937,11 +3001,13 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:new FormData(f)})
       .then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
       .then(function(res){
-        if(res.ok && res.data && res.data.success){ mapUnlocked=true; showMapStage(); }
-        else { alert((res.data&&res.data.message)||"Something went wrong."); btn.disabled=false;
-               btn.innerHTML='Unlock the mapper <span class="arw">&rarr;</span>'; }
+        if(res.ok && res.data && res.data.success){
+          polUnlocked=true; showPolStage();
+          var te=$("bvPolText"); if(te && !te.value){ te.value=POL_SAMPLES[0].text; polSampleIdx=1; }
+        } else { alert((res.data&&res.data.message)||"Something went wrong."); btn.disabled=false;
+                 btn.innerHTML='Unlock the reader <span class="arw">&rarr;</span>'; }
       }).catch(function(){ alert("Network error. Please try again."); btn.disabled=false;
-        btn.innerHTML='Unlock the mapper <span class="arw">&rarr;</span>'; });
+        btn.innerHTML='Unlock the reader <span class="arw">&rarr;</span>'; });
     return false;
   }
 
@@ -2954,15 +3020,20 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     $("bvScrub").addEventListener("input",onScrub);
     lanesEl.addEventListener("click",onBoardClick);
 
-    var sec=$("bvMapSection"), toggle=$("bvMapToggle");
+    var sec=$("bvPolSection"), toggle=$("bvPolToggle");
     toggle.addEventListener("click",function(){
       var open = sec.style.display==="none";
       sec.style.display = open ? "" : "none";
       toggle.classList.toggle("active",open);
-      if(open){ showMapStage(); try{ sec.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }catch(e){} }
+      if(open){ showPolStage(); try{ sec.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }catch(e){} }
     });
     var lf=$("bvLeadForm"); if(lf) lf.addEventListener("submit",submitLead);
-    $("bvMapRun").addEventListener("click",runMap);
+    $("bvPolRun").addEventListener("click",runPolicy);
+    $("bvPolSample").addEventListener("click",function(){
+      var s=POL_SAMPLES[polSampleIdx % POL_SAMPLES.length]; polSampleIdx++;
+      $("bvPolText").value=s.text; polMsg("Loaded: "+s.name); $("bvPolText").focus();
+    });
+    $("bvPolRestore").addEventListener("click",restorePolicy);
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
   else bind();

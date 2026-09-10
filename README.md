@@ -185,23 +185,30 @@ default, and each has a second path that calls a real model.
 |---|---|---|---|
 | [61-content.html](pages/live-demos/61-content.html) | Denial Recovery | Five canned EOB scenarios | Paste your own EOB, lead-gated, `POST /` |
 | [62-triage.html](pages/live-demos/62-triage.html) | Fax Triage | A busy morning of synthetic faxes | Paste your own fax, lead-gated, `POST /api/triage` |
-| [63-benefits.html](pages/live-demos/63-benefits.html) | Benefit Check, CPT 95165 | The panel plotted on a calendar you can scrub | Map my practice, lead-gated, `POST /api/allergy` |
+| [63-benefits.html](pages/live-demos/63-benefits.html) | Benefit Check, CPT 95165 | The panel plotted on a calendar you can scrub | Read a payer policy, lead-gated, `POST /api/policy` |
 
-All three routes live on **one Cloudflare Worker**
-([backend/underpayment-worker](backend/underpayment-worker)) so the API keys stay server-side.
-See that folder's README for the route table and the paste-in snippets.
+All four routes live on **one Cloudflare Worker**, whose real source is
+[backend/live-worker](backend/live-worker). It runs Cloudflare Workers AI (Llama) through the
+`AI` binding, not Claude: the demos are badged "Built on Claude" because that is what Silstone
+builds for clients, not a claim about the demo plumbing. See that folder's README before
+touching it, and note the warning there about `backend/underpayment-worker`, which is an
+undeployed scaffold that must never be deployed over the live Worker.
 
 **Every live half degrades rather than breaks.** If its route is unreachable, demo 2 falls back
-to a client-side heuristic and demo 3 to a client-side estimator that labels itself "Offline
-estimate" instead of "Claude". A demo that half-works on a preview URL is worth more than one
-that shows an error.
+to a client-side heuristic, and demo 3 says so in the status line rather than showing a broken
+panel. A demo that half-works on a preview URL is worth more than one that shows an error.
 
 **The "notify me about the next demo" signup belongs to the LAST block on the page.** It moved
 61 → 62 → 63 as demos were added; move it again if a block 64 lands, or the page ends up with
 two of them.
 
-Block 63 is the only demo whose live half sends no document at all. It takes eight
-practice-level numbers, which is what lets it sit behind a lead gate without ever touching PHI.
+Block 63's live half is the only one that reads a document nobody has to redact: a payer's
+published medical policy is public, so it sits behind a lead gate without ever going near PHI.
+
+Its earlier version asked for eight practice numbers and returned a modelled report. That was
+dropped on 2026-09-10: entering numbers and getting prose back is a calculator, not a
+demonstration, and it showed the agent doing nothing only an agent could do. Reading a policy
+does.
 
 #### Why block 63 is not another queue
 
@@ -230,6 +237,26 @@ shape and none of them would work in a list:
 
 The panel is weighted so most lanes are funded, with four guaranteed problems dealt on top. A
 board showing half the practice in coral would not be believable.
+
+#### The half you can run on a real document
+
+Under the board sits the policy reader, and the two are the same story told twice. Every rule the
+board enforces (Ambetter pays ten doses a vial, this plan wants a precert) came out of a payer's
+medical policy. So: paste one in, and the agent pulls out the handful of sentences that decide
+whether 95165 gets paid, **quoting the sentence each rule came from**.
+
+Every quote is matched back against the pasted text server-side before it is shown. A rule the
+agent can point at is badged "Found in your document"; one it could not find is flagged rather
+than hidden, and is not allowed to move the board. A rule with no quote at all is reported as
+something the policy never states, which is a finding in its own right rather than a failure.
+
+Then "Re-run the board under this policy" applies the extracted rules to the whole panel: a
+ten-dose vial cap gives every lane the leak stripe, an annual cap turns funded lanes into ones
+that run dry before the plan year rolls over, a precert requirement stops the vials due to be
+re-mixed. A banner says what changed and what it declined to model, and Restore puts the panel
+back exactly. The dose-bank spend rate the runway maths needs (about four doses a month) is
+stated on screen, because that is the one step where the simulation stops being the policy's own
+words.
 
 ### Light mode on the live demos
 

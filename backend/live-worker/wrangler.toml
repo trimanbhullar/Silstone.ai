@@ -1,0 +1,16 @@
+# Faithful redeploy of the LIVE dental-denial-agent Worker (pulled from the
+# dashboard on 2026-09-10), plus the new /api/allergy route. Mirrors the
+# settings the live script already had: AI binding, workers.dev subdomain,
+# previews on, observability off, compat date 2024-01-01.
+# The RESEND_API_KEY secret is preserved by wrangler and is not declared here.
+name = "dental-denial-agent"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+workers_dev = true
+preview_urls = true
+
+[ai]
+binding = "AI"
+
+[observability]
+enabled = false
