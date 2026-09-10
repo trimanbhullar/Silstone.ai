@@ -2685,14 +2685,14 @@ if(document.readyState==='loading'){
 
           <div class="bv-legend">
             <div class="bv-legrow">
-              <span class="bv-leglbl">The bar</span>
-              <span><i class="k-ok"></i>Funded</span>
-              <span><i class="k-gap"></i>Nothing paying for it</span>
-              <span><i class="k-leak"></i>Part of every vial unpaid</span>
-              <span><i class="k-pat"></i>Covered, patient owes it</span>
+              <span class="bv-leglbl">Who pays</span>
+              <span><i class="k-ok"></i>The payer</span>
+              <span><i class="k-leak"></i>The payer, but only part of each vial</span>
+              <span><i class="k-pat"></i>The patient</span>
+              <span><i class="k-gap"></i>Nobody</span>
             </div>
             <div class="bv-legrow">
-              <span class="bv-leglbl">The markers</span>
+              <span class="bv-leglbl">What changes</span>
               <span><i class="k-year"></i>Plan year rolls over</span>
               <span><i class="k-auth"></i>Authorization expires</span>
               <span><i class="k-dose"></i>Dose bank runs out</span>
@@ -2924,12 +2924,17 @@ if(document.readyState==='loading'){
 /* the track: one row of the calendar */
 .bv-track{position:relative;height:30px;border-radius:8px;background:var(--bg-surface-3);overflow:hidden}
 .bv-track .seg{position:absolute;top:0;bottom:0;transition:left .75s cubic-bezier(.2,.75,.2,1),width .75s cubic-bezier(.2,.75,.2,1),opacity .4s}
-.bv-track .seg.ok{background:linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
-.bv-track .seg.gap{background:repeating-linear-gradient(135deg,rgba(240,133,94,.34) 0 6px,rgba(240,133,94,.11) 6px 12px)}
-.bv-track .ovl{position:absolute;top:0;bottom:0;transition:opacity .5s,width .6s}
-.bv-track .ovl.leak{background:repeating-linear-gradient(45deg,rgba(139,124,246,.92) 0 3.5px,transparent 3.5px 10px)}
-.bv-track .ovl.pat{background:repeating-linear-gradient(45deg,rgba(239,193,120,.92) 0 3.5px,transparent 3.5px 10px)}
-.bv-track .ovl.gone{opacity:0}
+/* hue says who pays, height says how much of it. Data ink is strong on purpose:
+   the ambient layers of this site sit at 15% because they are decoration, and
+   this is the only thing on the page anyone actually has to read. */
+.bv-track .seg.ok{background:linear-gradient(180deg,#3FCFCA,#2AA7A3)}
+.bv-track .seg.gap{background:linear-gradient(180deg,#E8734B,#C45734)}
+.bv-track.pat .seg.ok{background:linear-gradient(180deg,#E8B860,#C29338)}
+/* the payer pays for part of each vial, so the bar is drawn part-height. The
+   empty part is the part nobody is paying for, which is the whole point. */
+.bv-track.half .seg.ok{top:auto;bottom:0;height:48%}
+.bv-track.half .seg.ok::after{content:"";position:absolute;left:0;right:0;bottom:100%;height:1px;
+  background:rgba(255,255,255,.34)}
 .bv-track .end{position:absolute;top:3px;bottom:3px;width:2px;border-radius:1px;background:var(--text-quaternary);opacity:.65}
 /* the cursor: drawn per track off one shared --cur, so it stays aligned at
    every breakpoint without a single absolutely-positioned overlay to maintain */
@@ -2946,8 +2951,10 @@ if(document.readyState==='loading'){
 .bv-track .seg{transform-origin:left center}
 
 /* pips: the admin events between now and the end of the series */
-.bv-pip{position:absolute;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;
-  border:1.5px solid var(--bg-surface);z-index:2;transition:transform .2s}
+/* the ring is the card colour, so a marker separates from any fill it lands on
+   in either theme: a coral dot on a coral bar was the failure case */
+.bv-pip{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;
+  border:2px solid var(--bg-surface);z-index:2;transition:transform .2s}
 .bv-pip.year{background:var(--text-secondary)} .bv-pip.auth{background:var(--violet-300)}
 .bv-pip.dose{background:var(--amber-400)} .bv-pip.term,.bv-pip.max{background:var(--coral-500)}
 .bv-pip.passed{transform:scale(1.32)}
@@ -2982,8 +2989,11 @@ if(document.readyState==='loading'){
   transition:height .9s cubic-bezier(.2,.8,.25,1) .1s,bottom .9s cubic-bezier(.2,.8,.25,1)}
 .bv-capline{position:absolute;left:-3px;right:-3px;height:0;border-top:2px dashed var(--amber-400);
   transition:bottom .9s cubic-bezier(.2,.8,.25,1)}
-.bv-capline span{position:absolute;right:0;bottom:3px;font-family:'IBM Plex Mono',monospace;font-size:8.5px;
-  letter-spacing:.05em;text-transform:uppercase;color:var(--amber-400)}
+/* the caption for the cap line lives beside the vial, not inside it: the glass
+   clips its own overflow, so an 8.5px label in there was cut in half */
+.bv-vialnums .bcap{display:flex;align-items:flex-start;gap:7px;margin-top:9px;
+  font-size:11px;line-height:1.45;color:var(--amber-400)}
+.bv-vialnums .bcap i{flex:none;width:14px;margin-top:6px;border-top:2px dashed var(--amber-400)}
 .bv-vialnums .bn{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.15rem;line-height:1;
   color:var(--text-primary);font-variant-numeric:tabular-nums}
 .bv-vialnums .bl{font-size:11px;color:var(--text-quaternary);margin-top:4px}
@@ -2996,9 +3006,10 @@ if(document.readyState==='loading'){
 .bv-why.good{border-left-color:var(--mint-400)}
 .bv-why .wk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;
   text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
-.bv-why .wv{font-size:13px;color:var(--text-primary);line-height:1.5}
+.bv-why .wf{font-size:13.5px;font-weight:600;color:var(--text-primary);line-height:1.45;margin-bottom:6px}
+.bv-why .wv{font-size:13px;color:var(--text-secondary);line-height:1.55}
 
-.bv-checks{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.bv-checks{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
 .bv-checks li{display:grid;grid-template-columns:17px 1fr;gap:10px;align-items:start}
 .bv-checks .ci{width:17px;height:17px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;flex:none}
 .bv-checks .ci svg{width:10px;height:10px}
@@ -3007,7 +3018,7 @@ if(document.readyState==='loading'){
 .bv-checks li.warn .ci{background:var(--warnw);color:var(--amber-400)}
 .bv-checks .cl{display:block;font-size:12.5px;font-weight:500;color:var(--text-primary);line-height:1.4}
 .bv-checks li.bad .cl{color:var(--coral-500)} .bv-checks li.warn .cl{color:var(--amber-400)}
-.bv-checks .cd{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.4;color:var(--text-quaternary);margin-top:2px}
+.bv-checks .cd{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.45;color:var(--text-quaternary);margin-top:3px}
 
 .bv-acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:8px;margin-top:8px}
 .bv-demo .bv-act{position:relative;display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;
@@ -3058,12 +3069,12 @@ if(document.readyState==='loading'){
 /* the bar swatches are layered exactly as a lane draws them: the stripe
    patterns sit OVER the funded teal, never over the panel, or the legend shows
    a colour the chart never produces */
-.bv-legend .k-ok{background-image:linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
-.bv-legend .k-gap{background-image:repeating-linear-gradient(135deg,rgba(240,133,94,.34) 0 5px,rgba(240,133,94,.11) 5px 10px)}
-.bv-legend .k-leak{background-image:repeating-linear-gradient(45deg,rgba(139,124,246,.92) 0 3.5px,transparent 3.5px 10px),
-  linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
-.bv-legend .k-pat{background-image:repeating-linear-gradient(45deg,rgba(239,193,120,.92) 0 3.5px,transparent 3.5px 10px),
-  linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
+.bv-legend .k-ok{background-image:linear-gradient(180deg,#3FCFCA,#2AA7A3)}
+.bv-legend .k-gap{background-image:linear-gradient(180deg,#E8734B,#C45734)}
+.bv-legend .k-pat{background-image:linear-gradient(180deg,#E8B860,#C29338)}
+/* drawn part-height, exactly as a part-paid lane is */
+.bv-legend .k-leak{background-image:linear-gradient(180deg,#3FCFCA,#2AA7A3);
+  background-size:100% 48%;background-position:0 100%;background-repeat:no-repeat}
 /* markers are dots, and each one carries the colour it has on the track */
 .bv-legend .k-year,.bv-legend .k-auth,.bv-legend .k-dose,.bv-legend .k-term{
   width:11px;height:11px;border-radius:50%;border:0;background-color:transparent}
@@ -3501,12 +3512,14 @@ if(document.readyState==='loading'){
   }
 
   /* ---------- rendering ---------- */
+  /* leak and patient are states of the bar, not things drawn on top of it */
+  function trackMods(f){
+    return ((f.leak&&!f.gone.leak)?" half":"")+((f.patient&&!f.gone.patient)?" pat":"");
+  }
   function trackHtml(f){
     var segs=segsOf(f).map(function(s){
       return '<i class="seg '+s.k+'" style="left:'+pct(s.a)+'%;width:'+(pct(s.b)-pct(s.a))+'%"></i>'; }).join("");
     var ovl="";
-    if(f.leak) ovl+='<i class="ovl leak'+(f.gone.leak?" gone":"")+'" style="left:0;width:'+pct(f.series)+'%"></i>';
-    if(f.patient) ovl+='<i class="ovl pat'+(f.gone.patient?" gone":"")+'" style="left:0;width:'+pct(f.series)+'%"></i>';
     var pips=f.pips.map(function(p){
       /* clamped in px, not %, so a marker at month 0 or at the very end is
          still a whole dot instead of a half one the track clips off */
@@ -3523,14 +3536,14 @@ if(document.readyState==='loading'){
           '<span class="bv-runlbl">'+esc(runLabel(f))+'</span>'+
           '<span class="bv-caret">'+CHEV+'</span>'+
         '</span>'+
-        '<span class="bv-track">'+trackHtml(f)+'</span>'+
+        '<span class="bv-track'+trackMods(f)+'">'+trackHtml(f)+'</span>'+
       '</button>'+
       '<div class="bv-lanebody"><div><div class="bv-bodyinner" data-body="'+f.id+'"></div></div></div>';
   }
   function repaintLane(f){
     var el=nodes[f.id]; if(!el) return;
     var tr=el.querySelector(".bv-track");
-    if(tr) tr.innerHTML=trackHtml(f);
+    if(tr){ tr.className="bv-track"+trackMods(f); tr.innerHTML=trackHtml(f); }
     var chip=el.querySelector(".bv-chip");
     if(chip){ chip.className="bv-chip "+bandOf(f); chip.textContent=BANDNAME[bandOf(f)]; }
     var rl=el.querySelector(".bv-runlbl"); if(rl) rl.textContent=runLabel(f);
@@ -3553,10 +3566,11 @@ if(document.readyState==='loading'){
       '<div class="bv-vial"><div class="bv-vialneck"></div><div class="bv-glass">'+
         '<i class="bv-fill" data-h="'+fillPct+'"></i>'+
         (overPct?'<i class="bv-over" data-h="'+overPct+'" data-b="'+capPct+'"></i>':'')+
-        (overPct?'<i class="bv-capline" data-b="'+capPct+'"><span>pays to here</span></i>':'')+
+        (overPct?'<i class="bv-capline" data-b="'+capPct+'"></i>':'')+
       '</div></div>'+
       '<div class="bv-vialnums"><div class="bn">'+d.used+' / '+d.allowed+'</div>'+
         '<div class="bl">doses drawn against the cap</div>'+
+        (overPct?'<div class="bcap"><i></i>the dashed line is where this payer stops paying</div>':'')+
         '<div class="bc">'+esc(d.cap)+'</div>'+
         '<div class="bnote">'+esc(note)+'</div></div></div>';
   }
@@ -3585,11 +3599,12 @@ if(document.readyState==='loading'){
   function bodyHtml(f){
     var fields=Object.keys(f.cov).map(function(k){
       return '<li><span class="k">'+esc(k)+'</span><span class="val">'+esc(f.cov[k])+'</span></li>'; }).join("");
-    var head=f.code?f.code+" · "+f.finding:f.finding;
+    var head=f.code||"Finding";
     return '<div class="bv-bodygrid">'+
         '<div><div class="bv-dsec">The dose bank</div>'+vialHtml(f)+'</div>'+
         '<div><div class="bv-dsec">What the agent found</div>'+
           '<div class="bv-why '+f.tone+'"><div class="wk">'+esc(head)+'</div>'+
+            '<div class="wf">'+esc(f.finding)+'</div>'+
             '<div class="wv">'+esc(f.verdict)+'</div></div>'+
           checksHtml(f)+'</div>'+
       '</div>'+
