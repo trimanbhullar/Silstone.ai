@@ -273,10 +273,19 @@ across an `[illegible]` gap. That last one is the check earning its keep.
 
 #### Add a patient
 
-The try-it-yourself half is **"Add a patient"**, in two steps and one press: who they are, then
-their payer's policy, then they appear on the calendar with everyone else. That order is the
-point. A patient is their own numbers *plus* their own payer's document, and reading a policy
-was never the goal in itself, so the demo no longer makes anyone ask for the answer twice.
+The try-it-yourself half **replaces the calendar rather than appearing underneath it**, which is
+how demos 1 and 2 behave and what a reader expects. One panel, four stages, one at a time:
+
+    calendar  ->  lead gate  ->  the patient + their policy  ->  the answer  ->  calendar
+
+The last step is a deliberate commit. The answer is computed and shown while the patient is still
+**not** on the board; pressing *Add to my list* is what puts them there, ranked against everybody
+else by how much of their series has nothing paying for it. Seeing where they land among the
+other sixteen is the payoff, and it only means something if the reader chose it.
+
+The order within the form is the other half of the point. A patient is their own numbers *plus*
+their own payer's document, and reading a policy was never the goal in itself, so the demo no
+longer makes anyone ask for the answer twice.
 
 What comes back is the pre-visit question, the one a coordinator actually has the day before a
 visit: can I mix this, how much of it gets paid, and do I need anything first.

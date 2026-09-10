@@ -866,7 +866,8 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   .drd-doc-window, .drd-doc, .drd-findings, .drd-table, .drd-billing-error,
   .drd-sc, .drd-email-box, .drd-phi-warning,
   .trg-note, .trg-paste, .trg-stat, .trg-board, .trg-queuewrap, .trg-detail,
-  .bv-note, .bv-readout, .bv-board, .bv-rail, .bv-card, .bv-mapform, .bv-lead
+  .bv-note, .bv-readout, .bv-board, .bv-rail, .bv-card, .bv-lead,
+  .bv-polform, .bv-commit
 ) {
   /* A card owns its ink as well as its ground: text that inherits `color`
      rather than naming --text-primary would otherwise keep the page's
@@ -1555,133 +1556,131 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         </div>
 
         <!-- controls -->
-        <div class="bv-controls">
-          <button type="button" class="bv-btn-primary" id="bvRun">Run today's verification sweep <span class="arw">&rarr;</span></button>
-          <button type="button" class="bv-btn-ghost" id="bvPolToggle">Add a patient</button>
-          <button type="button" class="bv-btn-ghost" id="bvReset">Reset</button>
-        </div>
-
-        <!-- the readout: two numbers move with the scrubber, two with your decisions -->
-        <div class="bv-readout">
-          <p class="bv-lede" id="bvLede">
-            The agent checks every immunotherapy patient booked in today, then plots how long each one's
-            coverage lasts against how long their series still has to run. Press the button.
-          </p>
-          <div class="bv-nums">
-            <div class="bv-num is-stop"><b id="bvNUncov">0</b><span>uncovered <i id="bvWhenA">today</i></span></div>
-            <div class="bv-num is-warn"><b id="bvNStale">0</b><span>stale benefits <i id="bvWhenB">today</i></span></div>
-            <div class="bv-num is-stop"><b id="bvNMoney">$0</b><span>95165 unfunded across the book</span></div>
-            <div class="bv-num is-good"><b id="bvNSaved">0</b><span>patient-months recovered by you</span></div>
-          </div>
-        </div>
-
-        <!-- set by the policy reader below, when a pasted policy is driving the board -->
-        <div class="bv-polbanner" id="bvPolBanner" hidden>
-          <span class="pb-lbl">Policy applied</span>
-          <span class="pb-txt" id="bvPolBannerTxt"></span>
-          <label class="bv-rate"><span>Doses a month</span>
-            <input type="number" id="bvRateBanner" min="0.5" max="30" step="0.5" value="4">
-          </label>
-          <button type="button" class="bv-btn-restore" id="bvPolRestore">Restore the panel</button>
-        </div>
-
-        <!-- the board -->
-        <div class="bv-board" id="bvBoard">
-          <div class="bv-bhead">
-            <div class="bv-bmeta">
-              <span class="bv-btitle" id="bvBTitle">Coverage runway</span>
-              <span class="bv-bsub" id="bvBSub">idle</span>
-            </div>
-            <button type="button" class="bv-btn-heal" id="bvHeal" disabled>Close every gap you can <span class="arw">&rarr;</span></button>
+        <!-- STAGE: the calendar. Everything else replaces it in place rather
+             than stacking a second section underneath, which is how demos 1
+             and 2 behave and what a reader expects here. -->
+        <div class="bv-stage on" id="bvStageBoard">
+          <div class="bv-controls">
+            <button type="button" class="bv-btn-primary" id="bvRun">Run today's verification sweep <span class="arw">&rarr;</span></button>
+            <button type="button" class="bv-btn-invite" id="bvPolToggle">Add your own patient with a custom policy and watch the agent work <span class="arw">&rarr;</span></button>
+            <button type="button" class="bv-btn-ghost" id="bvReset">Reset</button>
           </div>
 
-          <!-- scrubber + month ruler, sharing the lanes' grid so the handle,
-               the ticks and the cursor line all land on the same month -->
-          <div class="bv-scrub">
-            <label class="bv-scrublbl" for="bvScrub">Walk the book forward</label>
-            <div class="bv-scrubtrack">
-              <i class="bv-scrubfill" id="bvScrubFill"></i>
-              <span class="bv-scrubknob" id="bvScrubKnob"><b id="bvScrubDate">today</b></span>
-              <input type="range" id="bvScrub" min="0" max="42" step="1" value="0"
-                     aria-label="Months from today" aria-describedby="bvLede">
+          <!-- the readout: two numbers move with the scrubber, two with your decisions -->
+          <div class="bv-readout">
+            <p class="bv-lede" id="bvLede">
+              The agent checks every immunotherapy patient booked in today, then plots how long each one's
+              coverage lasts against how long their series still has to run. Press the button.
+            </p>
+            <div class="bv-nums">
+              <div class="bv-num is-stop"><b id="bvNUncov">0</b><span>uncovered <i id="bvWhenA">today</i></span></div>
+              <div class="bv-num is-warn"><b id="bvNStale">0</b><span>stale benefits <i id="bvWhenB">today</i></span></div>
+              <div class="bv-num is-stop"><b id="bvNMoney">$0</b><span>95165 unfunded across the book</span></div>
+              <div class="bv-num is-good"><b id="bvNSaved">0</b><span>patient-months recovered by you</span></div>
             </div>
           </div>
-          <div class="bv-ruler" id="bvRuler" aria-hidden="true"></div>
 
-          <div class="bv-lanes" id="bvLanes" style="--cur:0%">
-            <div class="bv-empty" id="bvEmpty">
-              <div class="bv-empty-ico">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18.5h18"/><path d="M4.5 14.5h5"/><path d="M9.5 14.5h9"/><path d="M4.5 9.5h11"/><path d="M15.5 9.5h4"/><path d="M4.5 5h7"/></svg>
+          <!-- set by the policy reader below, when a pasted policy is driving the board -->
+          <div class="bv-polbanner" id="bvPolBanner" hidden>
+            <span class="pb-lbl">Policy applied</span>
+            <span class="pb-txt" id="bvPolBannerTxt"></span>
+            <label class="bv-rate"><span>Doses a month</span>
+              <input type="number" id="bvRateBanner" min="0.5" max="30" step="0.5" value="4">
+            </label>
+            <button type="button" class="bv-btn-restore" id="bvPolRestore">Restore the panel</button>
+          </div>
+
+          <!-- the board -->
+          <div class="bv-board" id="bvBoard">
+            <div class="bv-bhead">
+              <div class="bv-bmeta">
+                <span class="bv-btitle" id="bvBTitle">Coverage runway</span>
+                <span class="bv-bsub" id="bvBSub">idle</span>
               </div>
-              <h3>Nothing plotted yet</h3>
-              <p>Run the sweep to put today's immunotherapy panel on the calendar.</p>
+              <button type="button" class="bv-btn-heal" id="bvHeal" disabled>Close every gap you can <span class="arw">&rarr;</span></button>
+            </div>
+
+            <!-- scrubber + month ruler, sharing the lanes' grid so the handle,
+                 the ticks and the cursor line all land on the same month -->
+            <div class="bv-scrub">
+              <label class="bv-scrublbl" for="bvScrub">Walk the book forward</label>
+              <div class="bv-scrubtrack">
+                <i class="bv-scrubfill" id="bvScrubFill"></i>
+                <span class="bv-scrubknob" id="bvScrubKnob"><b id="bvScrubDate">today</b></span>
+                <input type="range" id="bvScrub" min="0" max="42" step="1" value="0"
+                       aria-label="Months from today" aria-describedby="bvLede">
+              </div>
+            </div>
+            <div class="bv-ruler" id="bvRuler" aria-hidden="true"></div>
+
+            <div class="bv-lanes" id="bvLanes" style="--cur:0%">
+              <div class="bv-empty" id="bvEmpty">
+                <div class="bv-empty-ico">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18.5h18"/><path d="M4.5 14.5h5"/><path d="M9.5 14.5h9"/><path d="M4.5 9.5h11"/><path d="M15.5 9.5h4"/><path d="M4.5 5h7"/></svg>
+                </div>
+                <h3>Nothing plotted yet</h3>
+                <p>Run the sweep to put today's immunotherapy panel on the calendar.</p>
+              </div>
+            </div>
+
+            <div class="bv-legend">
+              <div class="bv-legrow">
+                <span class="bv-leglbl">Who pays</span>
+                <span><i class="k-ok"></i>The payer</span>
+                <span><i class="k-leak"></i>The payer, but only part of each vial</span>
+                <span><i class="k-pat"></i>The patient</span>
+                <span><i class="k-gap"></i>Nobody</span>
+              </div>
+              <div class="bv-legrow">
+                <span class="bv-leglbl">What changes</span>
+                <span><i class="k-year"></i>Plan year rolls over</span>
+                <span><i class="k-auth"></i>Authorization expires</span>
+                <span><i class="k-dose"></i>Dose bank runs out</span>
+                <span><i class="k-term"></i>Coverage ends</span>
+              </div>
             </div>
           </div>
 
-          <div class="bv-legend">
-            <div class="bv-legrow">
-              <span class="bv-leglbl">Who pays</span>
-              <span><i class="k-ok"></i>The payer</span>
-              <span><i class="k-leak"></i>The payer, but only part of each vial</span>
-              <span><i class="k-pat"></i>The patient</span>
-              <span><i class="k-gap"></i>Nobody</span>
-            </div>
-            <div class="bv-legrow">
-              <span class="bv-leglbl">What changes</span>
-              <span><i class="k-year"></i>Plan year rolls over</span>
-              <span><i class="k-auth"></i>Authorization expires</span>
-              <span><i class="k-dose"></i>Dose bank runs out</span>
-              <span><i class="k-term"></i>Coverage ends</span>
-            </div>
+          <!-- what you approved, newest first -->
+          <div class="bv-rail" id="bvRail" hidden>
+            <span class="bv-raillbl">Approved by you</span>
+            <div class="bv-railchips" id="bvRailChips"></div>
           </div>
         </div>
 
-        <!-- what you approved, newest first -->
-        <div class="bv-rail" id="bvRail" hidden>
-          <span class="bv-raillbl">Approved by you</span>
-          <div class="bv-railchips" id="bvRailChips"></div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- STAGE: the lead gate -->
+        <div class="bv-stage" id="bvStageGate">
+          <button type="button" class="bv-back2" data-stage="board">&larr; Back to the calendar</button>
+          <div class="bv-lead" id="bvLead">
+            <h3 class="bv-lead-title">Give it a policy it has <span class="sil-gt">never seen.</span></h3>
+            <p class="bv-lead-sub">Paste any payer's immunotherapy policy, yours included, alongside one of
+              your own patients' numbers. The agent reads the document, quotes the sentence behind every
+              rule it finds, tells you whether you can mix tomorrow and how many units will actually be
+              paid, and puts that patient on the calendar against the rest. On screen, here, in about ten
+              seconds.</p>
+            <form id="bvLeadForm" novalidate>
+              <label class="sil-sr" for="bvLName">Full name</label>
+              <input type="text" name="name" id="bvLName" placeholder="Dr. Smith" required>
+              <label class="sil-sr" for="bvLEmail">Work email</label>
+              <input type="email" name="email" id="bvLEmail" placeholder="you@practice.com" required>
+              <label class="sil-sr" for="bvLPhone">Phone number</label>
+              <input type="tel" name="phone" id="bvLPhone" placeholder="(555) 123-4567" required>
+              <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
+              <input type="hidden" name="subject" value="Demo request: Add a patient (CPT 95165)">
+              <input type="hidden" name="from_name" value="Silstone.AI - Live Demo">
+              <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+              <button type="submit" class="bv-btn-primary" id="bvLeadBtn" style="width:100%">Unlock it <span class="arw">&rarr;</span></button>
+            </form>
+            <p class="bv-lead-micro">A payer policy is a public document and the fields are administrative,
+              so nothing here is patient data. Nothing you paste is stored.</p>
+          </div>
 
-  <!-- ==================== ADD A PATIENT ==================== -->
-  <section class="sil-section is-alt has-tint acc-amber" id="bvPolSection" style="padding:var(--space-10) 0 var(--space-12);display:none">
-    <div class="sil-cursorglow" aria-hidden="true"></div>
-    <div class="sil-container">
-      <div class="bv-demo">
-        <div class="bv-maphead sil-center">
-          <span class="sil-eyebrow"><i class="dot"></i>Try it on a real document</span>
-          <h2 class="sil-display-s sil-mt-4">Add a patient, and <span class="sil-gt">the policy that governs them.</span></h2>
-          <p class="sil-body-m sil-mt-3">
-            Nobody's panel is on one plan. A patient is their own numbers plus their own payer's
-            policy, so that is what you give it: who they are, then the document that decides what
-            gets paid for them. The agent reads the policy, answers the question you actually have
-            the day before their visit, and puts them on the calendar above beside everybody else.
-          </p>
-        </div>
-
-        <!-- lead gate -> the form -->
-        <div class="bv-lead" id="bvLead">
-          <h3 class="bv-lead-title">Add <span class="sil-gt">your own patient</span></h3>
-          <p class="bv-lead-sub">Enter your details to unlock it. You will get the answer on screen, here, right away.</p>
-          <form id="bvLeadForm" novalidate>
-            <label class="sil-sr" for="bvLName">Full name</label>
-            <input type="text" name="name" id="bvLName" placeholder="Dr. Smith" required>
-            <label class="sil-sr" for="bvLEmail">Work email</label>
-            <input type="email" name="email" id="bvLEmail" placeholder="you@practice.com" required>
-            <label class="sil-sr" for="bvLPhone">Phone number</label>
-            <input type="tel" name="phone" id="bvLPhone" placeholder="(555) 123-4567" required>
-            <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
-            <input type="hidden" name="subject" value="Demo request: Add a patient (CPT 95165)">
-            <input type="hidden" name="from_name" value="Silstone.AI - Live Demo">
-            <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-            <button type="submit" class="bv-btn-primary" id="bvLeadBtn" style="width:100%">Unlock it <span class="arw">&rarr;</span></button>
-          </form>
-          <p class="bv-lead-micro">A payer policy is a public document, and the fields below are administrative. Nothing here is patient data.</p>
         </div>
 
-        <div class="bv-polform" id="bvPolForm" style="display:none">
+        <!-- STAGE: who they are, then their payer's policy -->
+        <div class="bv-stage" id="bvStageForm">
+          <button type="button" class="bv-back2" data-stage="board">&larr; Back to the calendar</button>
+          <div class="bv-polform" id="bvPolForm">
 
           <!-- step 1 -->
           <div class="bv-step">
@@ -1730,11 +1729,21 @@ a.sil-byline-author:hover { color: var(--teal-300); }
             <p class="bv-mapmsg" id="bvPolMsg" role="status" aria-live="polite"></p>
           </div>
         </div>
+        </div>
 
-        <div class="bv-polout" id="bvPolOut" hidden></div>
+        <!-- STAGE: the answer, and the button that commits them to the list -->
+        <div class="bv-stage" id="bvStageResult">
+          <button type="button" class="bv-back2" data-stage="form">&larr; Change the details</button>
+          <div class="bv-polout" id="bvPolOut"></div>
+          <div class="bv-commit">
+            <span class="bv-committxt" id="bvCommitTxt"></span>
+            <button type="button" class="bv-btn-primary" id="bvCommit">Add to my list <span class="arw">&rarr;</span></button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
 
   <!-- ==================== NOTIFY ==================== -->
   <section class="sil-section has-top">
@@ -2084,6 +2093,23 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .bv-demo .bv-lead-micro{font-size:12px;color:var(--text-quaternary);text-align:center;margin-top:var(--space-4)}
 
 .bv-polform{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;padding:18px 20px}
+.bv-stage{display:none} .bv-stage.on{display:block}
+.bv-demo .bv-btn-invite{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;
+  border-radius:var(--radius-pill);border:1px solid var(--violet-500);background:rgba(110,86,207,.16);
+  color:var(--violet-300);font-family:var(--font-body);font-weight:600;font-size:13.5px;
+  transition:background .2s,color .2s}
+.bv-demo .bv-btn-invite:hover{background:rgba(110,86,207,.3);color:var(--violet-200)}
+.bv-demo .bv-btn-invite .arw{transition:transform .2s}
+.bv-demo .bv-btn-invite:hover .arw{transform:translateX(3px)}
+.bv-demo .bv-back2{display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;padding:6px 13px 6px 10px;
+  border-radius:var(--radius-pill);background:var(--bg-surface-3);border:1px solid var(--border-subtle);
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--violet-300);cursor:pointer;transition:background .2s,border-color .2s}
+.bv-demo .bv-back2:hover{background:rgba(110,86,207,.16);border-color:var(--violet-500)}
+.bv-commit{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;padding:14px 16px;
+  border-radius:14px;background:var(--bg-surface);border:1px solid var(--violet-500)}
+.bv-committxt{flex:1;min-width:210px;font-size:13px;line-height:1.5;color:var(--text-secondary)}
+.bv-committxt b{color:var(--text-primary);font-weight:600}
 .bv-step{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;padding:16px 0;
   border-top:1px solid var(--border-subtle)}
 .bv-step:first-child{border-top:0;padding-top:4px}
@@ -2193,6 +2219,34 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   background:var(--bg-surface);color:var(--text-secondary);font-family:var(--font-body);font-weight:600;font-size:12px;cursor:pointer}
 .bv-demo .bv-btn-restore:hover{color:var(--text-primary);border-color:var(--border-strong)}
 .bv-lane.polhit .bv-track{box-shadow:inset 0 0 0 1.5px var(--violet-500)}
+
+@media (max-width:1040px){
+  .bv-demo{--labw:220px}
+  .bv-nums{grid-template-columns:repeat(2,1fr)}
+  .bv-fgrid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:820px){
+  /* the label stops competing with the calendar for width and sits above it */
+  .bv-demo{--labw:1fr}
+  .bv-scrub,.bv-ruler,.bv-demo .bv-lanerow{grid-template-columns:1fr;gap:8px}
+  .bv-scrublbl{display:none}
+  .bv-rlab.alt{display:none}   /* six-month ticks collide at this width */
+  .bv-runlbl{min-width:0}
+  .bv-bodygrid{grid-template-columns:1fr}
+  .bv-wins,.bv-bignums{grid-template-columns:1fr}
+  .bv-demo .bv-btn-heal{width:100%;justify-content:center}
+  .bv-lanes{max-height:none}
+}
+@media (max-width:640px){ .bv-fgrid{grid-template-columns:1fr} }
+@media (max-width:560px){
+  .bv-nums{grid-template-columns:1fr}
+  .bv-fields li{grid-template-columns:1fr}
+  .bv-vialwrap{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  .bv-demo *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .bv-lanes{scroll-behavior:auto}
+}
 
 /* notify (shared signup — lives with the last demo on the page) */
 .sil-soon{display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-10);align-items:center}
@@ -3057,7 +3111,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   "\n"+
   "*** END 0F TRANSM1SS10N ***   P.05/05"}
   ];
-  var polSampleIdx=0, polData=null, polSnap=null;
+  var polSampleIdx=0, polData=null, polSnap=null, pending=null;
 
   var TICK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg>';
   var WARN='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M7 1.8 1 12.2h12z" fill="none"/><path d="M7 5.6v3"/><path d="M7 10.2v.1"/></svg>';
@@ -3375,9 +3429,6 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   }
 
   function runPolicy(){
-    if(!data.length){ polMsg("Run the sweep above first, so there is a calendar to add them to.",true);
-      try{ $("bvBoard").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }catch(e){}
-      return; }
     var txt=$("bvPolText").value.trim();
     if(txt.length<120){ polMsg("Paste a policy first, or load one of the samples.",true); $("bvPolText").focus(); return; }
     var btn=$("bvPolRun");
@@ -3393,6 +3444,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
            in one press rather than making someone ask twice */
         window.__ptCard=runPatient(res.d);
         renderPolicy(res.d);
+        stage("result");
       })
       .catch(function(){ btn.disabled=false; polMsg("Could not reach the reader. Please try again in a moment.",true); });
   }
@@ -3412,8 +3464,26 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     };
     readRate($("bvRate"));
     var v=patientVerdict(pol,inp);
-    /* the button invites a second press, so a repeat of the same reference
-       updates that patient instead of putting a twin on the calendar */
+    pending={pol:pol, inp:inp, v:v};
+    var card='<div class="bv-card"><div class="bv-dsec">'+esc(inp.ref)+', '+
+      (inp.remix?"booked for a vial re-mix":"booked for an injection")+'</div>'+
+      '<div class="bv-ptv '+v.tone+'">'+
+      '<div class="pth">'+esc(v.head)+'</div>'+
+      '<ul class="ptl">'+v.say.map(function(s){
+        return '<li><b>'+esc(s.t)+'</b><span>'+esc(s.d)+'</span></li>'; }).join("")+'</ul>'+
+      '</div></div>';
+    /* put them on the board next to everyone else, ranked the same way */
+    $("bvCommitTxt").innerHTML="Adding <b>"+esc(inp.ref)+"</b> puts them on the calendar against"+
+      " the rest of the panel, ranked by how much of their series has nothing paying for it.";
+    return card;
+  }
+
+  /* Only now do they join the list, ranked against everybody else. */
+  function commitPatient(){
+    if(!pending) return;
+    var inp=pending.inp;
+    /* a repeat of the same reference updates that patient rather than putting a
+       twin on the calendar */
     for(var i=data.length-1;i>=0;i--){
       if(data[i].mine && data[i].name===inp.ref){
         var old=nodes[data[i].id];
@@ -3421,17 +3491,8 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         delete nodes[data[i].id]; data.splice(i,1);
       }
     }
-    var f=addPatient(pol,inp,v);
-    var card='<div class="bv-card"><div class="bv-dsec">'+esc(inp.ref)+', '+
-      (inp.remix?"booked for a vial re-mix":"booked for an injection")+'</div>'+
-      '<div class="bv-ptv '+v.tone+'">'+
-      '<div class="pth">'+esc(v.head)+'</div>'+
-      '<ul class="ptl">'+v.say.map(function(s){
-        return '<li><b>'+esc(s.t)+'</b><span>'+esc(s.d)+'</span></li>'; }).join("")+'</ul>'+
-      '<p class="ptf">'+esc(inp.ref)+' is on the calendar above now, carrying '+esc(pol.payer)+
-        '. Change anything and press the button again, or give the next patient a different'+
-        ' reference and a different policy.</p></div></div>';
-    /* put them on the board next to everyone else, ranked the same way */
+    var f=addPatient(pending.pol,inp,pending.v);
+    pending=null;
     sortLanes();
     lanesEl.innerHTML="";
     data.forEach(function(x){
@@ -3444,16 +3505,29 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     });
     data.forEach(function(x){ repaintLane(x); });
     refresh();
+    stage("board");
     var el=nodes[f.id];
-    if(el) setTimeout(function(){ if(!el.classList.contains("open")) el.querySelector(".bv-lanerow").click(); }, reduce?0:400);
-    return card;
+    if(el){
+      lanesEl.scrollTop=Math.max(0, el.offsetTop-40);
+      el.classList.add("polhit"); setTimeout(function(){ el.classList.remove("polhit"); },2600);
+      setTimeout(function(){ if(!el.classList.contains("open")) el.querySelector(".bv-lanerow").click(); }, reduce?0:450);
+    }
   }
 
-  var polUnlocked=false;
-  function showPolStage(){
-    $("bvLead").style.display = polUnlocked ? "none" : "block";
-    $("bvPolForm").style.display = polUnlocked ? "block" : "none";
-    setTimeout(function(){ var el = polUnlocked ? $("bvPolText") : $("bvLName"); if(el) el.focus(); }, 70);
+  var polUnlocked=false, STAGES=["board","gate","form","result"];
+  /* one stage at a time, in the same panel: the calendar is replaced, not
+     pushed down the page by a second section */
+  function stage(name){
+    STAGES.forEach(function(s){
+      var el=$("bvStage"+s.charAt(0).toUpperCase()+s.slice(1));
+      if(el) el.classList.toggle("on", s===name);
+    });
+    if(name!=="board") polMsg("");
+    try{ $("bvDemo").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }catch(e){}
+    setTimeout(function(){
+      var el = name==="gate" ? $("bvLName") : (name==="form" ? $("ptRef") : null);
+      if(el) el.focus();
+    }, reduce?0:80);
   }
   function submitLead(e){
     e.preventDefault();
@@ -3467,7 +3541,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       .then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
       .then(function(res){
         if(res.ok && res.data && res.data.success){
-          polUnlocked=true; showPolStage();
+          polUnlocked=true; stage("form");
           var te=$("bvPolText"); if(te && !te.value){ te.value=POL_SAMPLES[0].text; polSampleIdx=1; }
         } else { alert((res.data&&res.data.message)||"Something went wrong."); btn.disabled=false;
                  btn.innerHTML='Unlock the reader <span class="arw">&rarr;</span>'; }
@@ -3485,13 +3559,15 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     $("bvScrub").addEventListener("input",onScrub);
     lanesEl.addEventListener("click",onBoardClick);
 
-    var sec=$("bvPolSection"), toggle=$("bvPolToggle");
-    toggle.addEventListener("click",function(){
-      var open = sec.style.display==="none";
-      sec.style.display = open ? "" : "none";
-      toggle.classList.toggle("active",open);
-      if(open){ showPolStage(); try{ sec.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }catch(e){} }
+    $("bvPolToggle").addEventListener("click",function(){
+      if(!data.length){ stage("board");
+        polMsg("Run the sweep first, so there is a calendar to add them to.",true); return; }
+      stage(polUnlocked?"form":"gate");
     });
+    [].forEach.call(document.querySelectorAll(".bv-back2"),function(b){
+      b.addEventListener("click",function(){ stage(b.getAttribute("data-stage")); });
+    });
+    $("bvCommit").addEventListener("click",commitPatient);
     var lf=$("bvLeadForm"); if(lf) lf.addEventListener("submit",submitLead);
     $("bvPolRun").addEventListener("click",runPolicy);
     $("bvPolSample").addEventListener("click",function(){
