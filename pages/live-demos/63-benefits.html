@@ -3189,6 +3189,13 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     if(ap.dosesPerYear!=null) drivers.push(ap.dosesPerYear+" doses a year");
     if(ap.precert===true) drivers.push("a precert on file");
     var canApply = drivers.length>0 && data.length>0;
+    /* A prefilled patient only helps if the answer is interesting, and what is
+       interesting depends on the policy: seed just past a per-vial cap, and most
+       of the way through an annual one, so the first click lands on the finding
+       rather than on "all clear". Realistic numbers, and every one of them
+       editable. */
+    var sVial = ap.dosesPerVial!=null ? ap.dosesPerVial+10 : 20;
+    var sDrawn = ap.dosesPerYear!=null ? Math.round(ap.dosesPerYear*0.9) : 84;
     var applyTxt = !data.length
       ? "Run the sweep above first, then you can re-run that panel under this policy."
       : (drivers.length
@@ -3217,15 +3224,16 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         'These are the rules you would be guessing at, and the ones worth a written question to the payer before the next vial is mixed.</p></div>':'')+
       '<div class="bv-card bv-pt">'+
         '<div class="bv-dsec">Check a patient against this policy</div>'+
-        '<p class="bv-ptlede">The question you actually have the day before a visit. Everything below is'+
-          ' something you already have to hand, and none of it is patient data: use initials or a'+
+        '<p class="bv-ptlede">The question you actually have the day before a visit. It is filled in with'+
+          ' an example patient, so you can just press the button, and every field is yours to change.'+
+          ' All of it is something you have to hand, and none of it is patient data: use initials or a'+
           ' reference you make up.</p>'+
         '<div class="bv-fgrid">'+
-          '<label class="bv-f"><span>Your reference for them</span><input type="text" id="ptRef" maxlength="24" placeholder="e.g. MR-204 or J.D."></label>'+
+          '<label class="bv-f"><span>Your reference for them</span><input type="text" id="ptRef" maxlength="24" value="MR-204" placeholder="e.g. MR-204 or J.D."></label>'+
           '<label class="bv-f"><span>Tomorrow they are booked for</span><select id="ptVisit">'+
             '<option value="remix">A vial re-mix</option><option value="inject">An injection</option></select></label>'+
-          '<label class="bv-f"><span>Doses drawn this plan year</span><input type="number" id="ptDrawn" min="0" step="1" value="84"></label>'+
-          '<label class="bv-f"><span>Doses you draw per vial</span><input type="number" id="ptVial" min="1" step="1" value="20"></label>'+
+          '<label class="bv-f"><span>Doses drawn this plan year</span><input type="number" id="ptDrawn" min="0" step="1" value="'+sDrawn+'"></label>'+
+          '<label class="bv-f"><span>Doses you draw per vial</span><input type="number" id="ptVial" min="1" step="1" value="'+sVial+'"></label>'+
           '<label class="bv-f"><span>Plan year renews in (months)</span><input type="number" id="ptRenew" min="0" max="12" step="1" value="5"></label>'+
           '<label class="bv-f"><span>Prior authorization</span><select id="ptAuth">'+
             '<option value="onfile">On file</option><option value="expiring">Expires soon</option>'+
@@ -3383,6 +3391,15 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     };
     readRate($("bvRate"));
     var v=patientVerdict(pol,inp);
+    /* the button invites a second press, so a repeat of the same reference
+       updates that patient instead of putting a twin on the calendar */
+    for(var i=data.length-1;i>=0;i--){
+      if(data[i].mine && data[i].name===inp.ref){
+        var old=nodes[data[i].id];
+        if(old&&old.parentNode) old.parentNode.removeChild(old);
+        delete nodes[data[i].id]; data.splice(i,1);
+      }
+    }
     var f=addPatient(pol,inp,v);
     $("ptOut").innerHTML='<div class="bv-ptv '+v.tone+'">'+
       '<div class="pth">'+esc(v.head)+'</div>'+
