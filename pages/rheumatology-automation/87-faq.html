@@ -1013,7 +1013,10 @@ a.sil-byline-author:hover { color: var(--teal-300); }
    under the AA bar by a hair, across all three demos. These two lines put the
    whole set back over it without touching the token on the rest of the site,
    where it is still used against the canvas it was measured on. */
-[data-sil-themed] { --text-quaternary: #878793; }   /* 4.9:1 on the darkest ground a demo uses; light mode
+/* .bv-demo as well as the themed panel: demo 3's policy reader lives in a normal
+   dark section, outside the switch, and it carries the same mono labels on the
+   same raised cards. */
+[data-sil-themed], .bv-demo { --text-quaternary: #878793; }   /* 4.9:1 on the darkest ground a demo uses; light mode
                                                        sets its own on the cards, and that one
                                                        already measures 5.8:1 on white */
 

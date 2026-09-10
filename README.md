@@ -271,11 +271,34 @@ by fax, half-scanned, with two pages missing and OCR damage throughout. It yield
 three of them salvaged through the noise, and one flagged because the model stitched its quote
 across an `[illegible]` gap. That last one is the check earning its keep.
 
-Then "Re-run the board under this policy" applies the extracted rules to the whole panel: a
-ten-dose vial cap gives every lane the leak stripe, an annual cap turns funded lanes into ones
-that run dry before the plan year rolls over, a precert requirement stops the vials due to be
-re-mixed. A banner says what changed and what it declined to model, and Restore puts the panel
-back exactly.
+Then **check a patient against it.** This is the pre-visit question, the one a coordinator
+actually has the day before a visit: can I mix this, how much of it gets paid, and do I need
+anything first. Seven fields, all things they have to hand and none of them patient data, and
+the answer comes back as something to act on:
+
+> **Do not mix yet.** Bill 10 units, not 20: you draw 20 doses from a vial this payer pays 10
+> of, and the other 10 come back CO-151 every time. This payer requires precertification and
+> there is none on file.
+
+with the sentence from their policy under each clause. That patient then joins the calendar
+carrying **their own policy**, which is the point: one policy governs one plan, so every lane's
+detail says which document its rules came from. A lane built from a pasted policy says it was
+read by the agent and how much of it was evidenced; a lane on the synthetic panel says its rules
+are on file for that plan, and that a patient on a different payer is reading a different policy.
+
+**The arithmetic is deterministic, not a second model call.** The agent's work was reading the
+policy once; after that, checking a patient against it is arithmetic, and arithmetic should be
+instant, free and right. That is also how you would build it for real, and there is a scar to
+prove it: the version of this demo that let the model do the sums returned 176 staff hours a
+month for a 140-patient panel, about five times reality.
+
+It also says what it cannot say. Where a policy never states an annual cap, the answer is "there
+is no honest way to tell you when this patient runs out, that is a written question for the
+payer", not an inferred number.
+
+Modelling the whole panel on one policy is still there as a secondary what-if, clearly labelled,
+because it is a good exposure story. It is no longer the headline, because no practice has a
+panel on one plan.
 
 The runway maths needs one number no policy contains: how fast a dose bank is actually drawn
 down. That is **an input, not an assumption baked into the code** - a doses-a-month control sits

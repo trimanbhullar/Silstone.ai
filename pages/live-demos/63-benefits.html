@@ -1013,7 +1013,10 @@ a.sil-byline-author:hover { color: var(--teal-300); }
    under the AA bar by a hair, across all three demos. These two lines put the
    whole set back over it without touching the token on the rest of the site,
    where it is still used against the canvas it was measured on. */
-[data-sil-themed] { --text-quaternary: #878793; }   /* 4.9:1 on the darkest ground a demo uses; light mode
+/* .bv-demo as well as the themed panel: demo 3's policy reader lives in a normal
+   dark section, outside the switch, and it carries the same mono labels on the
+   same raised cards. */
+[data-sil-themed], .bv-demo { --text-quaternary: #878793; }   /* 4.9:1 on the darkest ground a demo uses; light mode
                                                        sets its own on the cards, and that one
                                                        already measures 5.8:1 on white */
 
@@ -2099,6 +2102,30 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   border:1px dashed var(--border-default);border-radius:8px;padding:6px 10px}
 .bv-foot{font-size:11.5px;line-height:1.55;color:var(--text-tertiary);margin:0}
 
+/* ---- check a patient against this policy ---- */
+.bv-pt .bv-ptlede{font-size:12.5px;line-height:1.55;color:var(--text-secondary);margin:0 0 14px;max-width:72ch}
+.bv-ptv{margin-top:16px;border:1px solid var(--border-default);border-left:3px solid var(--teal-500);
+  border-radius:0 12px 12px 0;background:var(--bg-surface-raised);padding:14px 16px}
+.bv-ptv.warn{border-left-color:var(--amber-400)} .bv-ptv.stop{border-left-color:var(--coral-500)}
+.bv-ptv.good{border-left-color:var(--mint-400)}
+.bv-ptv .pth{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.12rem;line-height:1.4;color:var(--text-primary)}
+.bv-ptv.stop .pth{color:var(--coral-500)} .bv-ptv.warn .pth{color:var(--amber-400)}
+.bv-ptv .ptl{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.bv-ptv .ptl li{display:block}
+.bv-ptv .ptl b{display:block;font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.4}
+.bv-ptv .ptl span{display:block;font-size:12px;line-height:1.55;color:var(--text-secondary);margin-top:3px}
+.bv-ptv .ptf{margin:14px 0 0;font-size:12px;line-height:1.5;color:var(--violet-300)}
+/* which document governs THIS patient, at the top of every lane */
+.bv-gov{display:grid;gap:3px;padding:10px 13px;margin-bottom:14px;border-radius:11px;
+  background:var(--bg-surface-3);border:1px solid var(--border-subtle)}
+.bv-gov.is-read{border-color:rgba(45,217,211,.34)}
+.bv-gov .gk{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--text-quaternary)}
+.bv-gov .gv{font-size:13.5px;font-weight:600;color:var(--text-primary);line-height:1.35}
+.bv-gov .gd{font-size:11.5px;line-height:1.5;color:var(--text-tertiary)}
+.bv-gov.is-read .gd{color:var(--teal-500)}
+.bv-lane.mine .bv-lanerow{box-shadow:inset 0 0 0 1.5px var(--violet-500);border-radius:10px}
+
 .bv-applybar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--bg-surface);
   border:1px solid var(--violet-500);border-radius:14px;padding:14px 16px}
 .bv-applytxt{flex:1;min-width:200px;font-size:13px;line-height:1.5;color:var(--text-secondary)}
@@ -2484,6 +2511,17 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
   function vialHtml(f){
     var d=f.dose, capPct, fillPct, overPct=0;
+    /* nothing to measure against: draw the vial at rest rather than implying a
+       bank that is full, which would read as one that is spent */
+    if(d.noCap){
+      return '<div class="bv-vialwrap">'+
+        '<div class="bv-vial"><div class="bv-vialneck"></div><div class="bv-glass">'+
+          '<i class="bv-fill" data-h="42"></i></div></div>'+
+        '<div class="bv-vialnums"><div class="bn">'+d.used+'</div>'+
+          '<div class="bl">doses drawn this plan year</div>'+
+          '<div class="bc">'+esc(d.cap)+'</div>'+
+          '<div class="bnote">'+esc(d.note||"")+'</div></div></div>';
+    }
     if(d.used>d.allowed){                 // a payer cap the practice has already blown past
       capPct=Math.round(d.allowed/d.used*100);
       fillPct=capPct; overPct=100-capPct;
@@ -2528,11 +2566,38 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         '<span class="ak">'+(done?"Approved by you · just now":esc(a.h))+'</span>'+badge+'</span></button>';
     }).join("");
   }
+  /* One policy does not govern a panel. Every patient is on their own plan, so
+     every lane says which document its rules came from and how much of that
+     document was actually evidenced. */
+  function governedBy(f){
+    if(f.policy){
+      var s=f.policy.stats||{}, ref=f.policy.ref?(" "+f.policy.ref):"";
+      var q=(s.verified||0)+" of "+(s.extracted||0)+" rules quoted from the document you pasted"+
+            (s.silent?", "+s.silent+" it never states":"");
+      return '<div class="bv-gov is-read"><span class="gk">Governed by</span>'+
+        '<span class="gv">'+esc(f.policy.payer+ref)+'</span>'+
+        '<span class="gd">Read by the agent from your pasted policy &middot; '+esc(q)+'</span></div>';
+    }
+    return '<div class="bv-gov"><span class="gk">Governed by</span>'+
+      '<span class="gv">'+esc(f.payer)+' &middot; '+esc(f.plan)+'</span>'+
+      '<span class="gd">Rules on file for this plan. A different patient on a different payer is'+
+      ' reading a different policy, which is why this sits on the patient and not on the board.</span></div>';
+  }
+  function citedHtml(f){
+    if(!f.policy||!f.policy.cited||!f.policy.cited.length) return "";
+    return '<div class="bv-dsec" style="margin-top:16px">The lines this answer rests on</div>'+
+      f.policy.cited.map(function(r){
+        return '<div class="bv-rule'+(r.exact?"":(r.verified?" noise":" unver"))+'" style="margin-bottom:8px">'+
+          '<div class="bv-rulehead"><span class="bv-rulelab">'+esc(r.label)+'</span></div>'+
+          '<span class="bv-ruleval">'+esc(r.value)+'</span>'+
+          '<blockquote class="bv-quote">&ldquo;'+esc(r.quote)+'&rdquo;</blockquote></div>';
+      }).join("");
+  }
   function bodyHtml(f){
     var fields=Object.keys(f.cov).map(function(k){
       return '<li><span class="k">'+esc(k)+'</span><span class="val">'+esc(f.cov[k])+'</span></li>'; }).join("");
     var head=f.code||"Finding";
-    return '<div class="bv-bodygrid">'+
+    return governedBy(f)+'<div class="bv-bodygrid">'+
         '<div><div class="bv-dsec">The dose bank</div>'+vialHtml(f)+'</div>'+
         '<div><div class="bv-dsec">What the agent found</div>'+
           '<div class="bv-why '+f.tone+'"><div class="wk">'+esc(head)+'</div>'+
@@ -2543,6 +2608,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       '<div class="bv-dsec" style="margin-top:16px">What happens next</div>'+
       '<div class="bv-acts">'+actsHtml(f)+'</div>'+
       '<p class="bv-actnote">Every action here waits for the click. The agent drafts, checks and queues; it never sends on its own.</p>'+
+      citedHtml(f)+
       '<details class="bv-cov"><summary>Coverage on file</summary>'+
         '<ul class="bv-fields">'+fields+'</ul></details>';
   }
@@ -2793,6 +2859,18 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       }, reduce?k*4:260+k*130);
     });
   }
+  function bleeds(f){ return ((f.leak&&!f.gone.leak)||(f.patient&&!f.gone.patient))?1:0; }
+  /* unfunded months first, then the lanes quietly losing money on every vial,
+     then the merely funded. Used by the sweep and by an added patient alike. */
+  function sortLanes(){
+    data.sort(function(a,b){
+      var ga=gapMonths(a), gb=gapMonths(b);
+      if(ga!==gb) return gb-ga;
+      if(bleeds(a)!==bleeds(b)) return bleeds(b)-bleeds(a);
+      if(a.cover!==b.cover) return a.cover-b.cover;
+      return b.series-a.series;
+    });
+  }
   function finishSweep(){
     /* rank by runway: shortest first, so the board reads as a priority order
        without anyone having to sort it */
@@ -2801,14 +2879,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     /* unfunded months first, then the lanes that are quietly losing money on
        every vial, then the merely funded. A lane that pays in full and never
        stops is the only thing that belongs at the bottom. */
-    function bleeds(f){ return ((f.leak&&!f.gone.leak)||(f.patient&&!f.gone.patient))?1:0; }
-    data.sort(function(a,b){
-      var ga=gapMonths(a), gb=gapMonths(b);
-      if(ga!==gb) return gb-ga;
-      if(bleeds(a)!==bleeds(b)) return bleeds(b)-bleeds(a);
-      if(a.cover!==b.cover) return a.cover-b.cover;
-      return b.series-a.series;
-    });
+    sortLanes();
     data.forEach(function(f){ lanesEl.appendChild(nodes[f.id]); });
     if(!reduce) data.forEach(function(f){
       var n=nodes[f.id], t=tops[f.id]; if(t==null||!n.animate) return;
@@ -2947,6 +3018,154 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 
   function polMsg(t,warn){ var m=$("bvPolMsg"); m.textContent=t||""; m.className="bv-mapmsg"+(warn?" is-warn":""); }
 
+  /* ================= CHECK A PATIENT AGAINST THIS POLICY =================
+     The pre-visit question, which is the one a coordinator actually has the day
+     before a visit: can I mix this, how much of it gets paid, and do I need
+     anything first.
+
+     The arithmetic is done here, not by the model. The agent's work was reading
+     the policy once; after that, checking a patient against it is arithmetic,
+     and arithmetic should be instant, free and right. That is also how you would
+     build it for real: extract the rules once per policy, then apply them to
+     every patient on that plan without another inference call. */
+
+  function patientVerdict(pol, inp){
+    var ap=pol.apply||{}, cited=[], say=[], stop=false, warn=false;
+    function cite(key){
+      var r=(pol.rules||[]).find(function(x){ return x.key===key && x.verified; });
+      if(r && cited.indexOf(r)<0) cited.push(r);
+      return !!r;
+    }
+    /* ---- how much of this vial the payer will actually pay for ---- */
+    var billable=inp.perVial, denied=0;
+    if(ap.dosesPerVial!=null && inp.perVial>ap.dosesPerVial){
+      billable=ap.dosesPerVial; denied=inp.perVial-ap.dosesPerVial; cite("dosesPerVial"); warn=true;
+      say.push({s:"bad",t:"Bill "+billable+" units, not "+inp.perVial+".",
+        d:"You draw "+inp.perVial+" doses from a vial this payer pays "+ap.dosesPerVial+" of. The other "+
+          denied+" come back CO-151 every time, on this vial and the next."});
+    } else if(ap.dosesPerVial!=null){
+      cite("dosesPerVial");
+      say.push({s:"ok",t:"All "+inp.perVial+" doses on this vial are billable.",
+        d:"The payer's cap is "+ap.dosesPerVial+" per vial and you draw "+inp.perVial+"."});
+    }
+
+    /* ---- the annual bank, and when it runs dry ---- */
+    var runway=null, bankLeft=null;
+    if(ap.dosesPerYear!=null){
+      cite("dosesPerYear");
+      bankLeft=Math.max(0, ap.dosesPerYear-inp.drawn);
+      runway=bankLeft/doseRate;
+      if(bankLeft<=0){
+        stop=true;
+        say.push({s:"bad",t:"The annual bank is already empty.",
+          d:inp.drawn+" of "+ap.dosesPerYear+" doses are used. Nothing further pays until the plan year renews in "+
+            inp.renews+" month"+(inp.renews===1?"":"s")+", and units billed meanwhile return N362."});
+      } else {
+        var when=runway>=inp.renews
+          ? "That is past the "+inp.renews+"-month renewal, so the bank refills before it empties."
+          : "The plan year does not renew for "+inp.renews+" months, which leaves about "+
+            Math.max(0,Math.round(inp.renews-runway))+" months where a mixed vial is not payable.";
+        if(runway<inp.renews) warn=true;
+        say.push({s:runway<inp.renews?"warn":"ok",t:bankLeft+" doses left, about "+runway.toFixed(runway<10?1:0)+" months at "+doseRate+" a month.",
+          d:when});
+      }
+    } else {
+      say.push({s:"warn",t:"This policy never states an annual cap.",
+        d:"So there is no honest way to tell you when this patient runs out. That is a written question for the payer, not something to infer."});
+    }
+
+    /* ---- authorization ---- */
+    if(ap.precert===true){
+      cite("precert");
+      if(inp.auth==="none"){
+        if(inp.remix){ stop=true;
+          say.push({s:"bad",t:"Do not mix this vial yet.",
+            d:"This payer requires precertification and there is none on file. A vial mixed now is denied CO-197 after the antigen is already made."});
+        } else { warn=true;
+          say.push({s:"warn",t:"There is no precertification on file.",
+            d:"Today's injection is not the problem; the next vial is. Get it before the re-mix, not after."});
+        }
+      } else if(inp.auth==="expiring"){
+        warn=true;
+        say.push({s:"warn",t:"The authorization expires in "+inp.authMonths+" month"+(inp.authMonths===1?"":"s")+".",
+          d:"Renew it before then or everything after that date is denied CO-197, whatever the chart says."});
+      } else {
+        say.push({s:"ok",t:"Authorization is on file and this payer requires one.",
+          d:"Worth confirming it runs past the next re-mix."});
+      }
+    } else if(ap.precert===false){
+      cite("precert");
+      say.push({s:"ok",t:"No precertification needed.",
+        d:"This payer does not require one for a participating provider. Worth having that in writing before relying on it."});
+    }
+    if(ap.benefitMax!=null){
+      cite("benefitMax");
+      say.push({s:"warn",t:"There is a $"+ap.benefitMax+" annual maximum on top of the dose cap.",
+        d:"The board does not model dollars, so treat this as a separate ceiling to watch."});
+    }
+
+    /* ---- the headline a coordinator can act on ---- */
+    var verb=inp.remix?"mix":"inject";
+    var head;
+    if(stop) head="Do not "+verb+" yet.";
+    else if(denied>0) head="Go ahead, but bill "+billable+" of the "+inp.perVial+" doses.";
+    else if(warn) head="Clear to "+verb+" today, with something to fix.";
+    else head="Clear to "+verb+".";
+
+    /* ---- and the lane this patient draws on the calendar ---- */
+    var cover;
+    if(stop) cover=0;
+    else if(runway!=null) cover=Math.min(runway, inp.series);
+    else cover=inp.series;                      // no stated cap: nothing to project against
+    var resumes=null;
+    if(runway!=null && cover<inp.series && inp.renews>cover && inp.renews<inp.series) resumes=inp.renews;
+    if(stop && ap.precert===true && inp.auth==="none") resumes=null;
+    var pips=[];
+    if(inp.renews<inp.series) pips.push({m:inp.renews,k:"year"});
+    if(ap.precert===true && inp.auth==="none") pips.push({m:0,k:"auth"});
+    if(inp.auth==="expiring" && inp.authMonths<inp.series) pips.push({m:inp.authMonths,k:"auth"});
+    if(runway!=null && runway<inp.series) pips.push({m:runway,k:"dose"});
+
+    return {
+      head:head, tone:stop?"stop":(warn?"warn":"good"), say:say, cited:cited,
+      billable:billable, denied:denied, bankLeft:bankLeft, runway:runway,
+      lane:{ cover:cover, series:inp.series, kind:(cover>=inp.series?"renews":"ends"),
+             resumes:resumes, leak:denied>0, pips:pips }
+    };
+  }
+
+  /* Build a real lane from the verdict and drop it on the calendar beside the
+     synthetic panel, carrying its own policy so the detail view can say which
+     document governs THIS patient rather than implying one covers everyone. */
+  function addPatient(pol, inp, v){
+    var f={
+      id:"bv"+(seq++), mine:true, name:inp.ref, visit:inp.remix?"Vial re-mix due":"Injection visit",
+      payer:pol.payer, plan:pol.policyRef||"policy you pasted",
+      band:v.tone==="stop"?"LAPSE":(v.tone==="warn"?"CAP":"READY"),
+      series:v.lane.series, cover:v.lane.cover, kind:v.lane.kind, resumes:v.lane.resumes,
+      leak:v.lane.leak, patient:false, pips:v.lane.pips, perMonth:0,
+      finding:v.head, tone:v.tone, code:v.denied>0?"CO-151":"",
+      verdict:v.say.length?v.say[0].d:"",
+      dose:{ used:inp.drawn, noCap:!(pol.apply&&pol.apply.dosesPerYear!=null),
+             allowed:(pol.apply&&pol.apply.dosesPerYear!=null)?pol.apply.dosesPerYear:inp.drawn,
+             cap:(pol.apply&&pol.apply.dosesPerYear!=null)?(pol.apply.dosesPerYear+" doses per plan year, per this policy")
+                                                          :"this policy states no annual cap",
+             note:(pol.apply&&pol.apply.dosesPerYear!=null)?null
+                  :"The policy never states an annual cap, so this bar shows what you have drawn, not what is left." },
+      cov:{ "Payer":pol.payer, "Policy":pol.policyRef||"pasted policy",
+            "Doses per vial":(pol.apply&&pol.apply.dosesPerVial!=null)?(pol.apply.dosesPerVial+" paid, you draw "+inp.perVial):("you draw "+inp.perVial),
+            "Prior auth":pol.apply&&pol.apply.precert===true?(inp.auth==="none"?"required, none on file":"required, on file"):"not required by this policy",
+            "Plan year renews":"in "+inp.renews+" month"+(inp.renews===1?"":"s") },
+      checks:v.say.map(function(s){ return [s.s||"ok", s.t, s.d]; }),
+      acts:[{p:1,l:"Post this answer to tomorrow's visit",h:"the desk sees it before the patient arrives",d:"Answer posted to the visit"},
+            {l:"Flag the account with the billing rule",h:"so the next vial bills correctly",d:"Billing rule flagged on the account"}],
+      done:{}, gone:{},
+      policy:{ payer:pol.payer, ref:pol.policyRef, stats:pol.stats, cited:v.cited, verdict:v }
+    };
+    data.push(f);
+    return f;
+  }
+
   function renderPolicy(d){
     var out=$("bvPolOut");
     var st=d.stats||{extracted:0,verified:0,silent:0};
@@ -2996,12 +3215,34 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         '<ul class="bv-silent">'+silent+'</ul>'+
         '<p class="bv-foot" style="margin-top:12px">A policy that is silent on a limit is not the same as a policy with no limit. '+
         'These are the rules you would be guessing at, and the ones worth a written question to the payer before the next vial is mixed.</p></div>':'')+
+      '<div class="bv-card bv-pt">'+
+        '<div class="bv-dsec">Check a patient against this policy</div>'+
+        '<p class="bv-ptlede">The question you actually have the day before a visit. Everything below is'+
+          ' something you already have to hand, and none of it is patient data: use initials or a'+
+          ' reference you make up.</p>'+
+        '<div class="bv-fgrid">'+
+          '<label class="bv-f"><span>Your reference for them</span><input type="text" id="ptRef" maxlength="24" placeholder="e.g. MR-204 or J.D."></label>'+
+          '<label class="bv-f"><span>Tomorrow they are booked for</span><select id="ptVisit">'+
+            '<option value="remix">A vial re-mix</option><option value="inject">An injection</option></select></label>'+
+          '<label class="bv-f"><span>Doses drawn this plan year</span><input type="number" id="ptDrawn" min="0" step="1" value="84"></label>'+
+          '<label class="bv-f"><span>Doses you draw per vial</span><input type="number" id="ptVial" min="1" step="1" value="20"></label>'+
+          '<label class="bv-f"><span>Plan year renews in (months)</span><input type="number" id="ptRenew" min="0" max="12" step="1" value="5"></label>'+
+          '<label class="bv-f"><span>Prior authorization</span><select id="ptAuth">'+
+            '<option value="onfile">On file</option><option value="expiring">Expires soon</option>'+
+            '<option value="none">None on file</option></select></label>'+
+          '<label class="bv-f" id="ptAuthMWrap" style="display:none"><span>Auth expires in (months)</span><input type="number" id="ptAuthM" min="0" max="36" step="1" value="3"></label>'+
+          '<label class="bv-f"><span>Months of treatment left</span><input type="number" id="ptSeries" min="1" max="60" step="1" value="26"></label>'+
+          '<label class="bv-f"><span>Doses drawn a month</span><input type="number" id="bvRate" min="0.5" max="30" step="0.5" value="'+doseRate+'"></label>'+
+        '</div>'+
+        '<div class="bv-maprow">'+
+          '<button type="button" class="bv-btn-primary" id="ptRun">Check this patient <span class="arw">&rarr;</span></button>'+
+          '<span class="bv-mapnote">Answered from the rules above &middot; no second model call</span>'+
+        '</div>'+
+        '<div id="ptOut"></div>'+
+      '</div>'+
       '<div class="bv-applybar">'+
-        '<span class="bv-applytxt">'+applyTxt+'</span>'+
-        '<label class="bv-rate"><span>Doses drawn a month</span>'+
-          '<input type="number" id="bvRate" min="0.5" max="30" step="0.5" value="'+doseRate+'">'+
-        '</label>'+
-        '<button type="button" class="bv-btn-apply" id="bvApply"'+(canApply?'':' disabled')+'>Re-run the board under this policy <span class="arw">&rarr;</span></button>'+
+        '<span class="bv-applytxt"><b>Or model the whole panel on it.</b> '+applyTxt+'</span>'+
+        '<button type="button" class="bv-btn-apply" id="bvApply"'+(canApply?'':' disabled')+'>Model the panel <span class="arw">&rarr;</span></button>'+
       '</div>'+
       '<div class="bv-card"><p class="bv-foot">Each quote above was checked back against the text you pasted before it was shown, '+
         'so a rule marked <b>Found in your document</b> is one the agent can point at rather than one it inferred. '+
@@ -3010,6 +3251,11 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     var ab=$("bvApply"); if(ab) ab.addEventListener("click",function(){ applyPolicy(d); });
     var ri=$("bvRate");
     if(ri) ri.addEventListener("change",function(){ readRate(ri); if(polSnap&&polData) applyPolicy(polData); });
+    var av=$("ptAuth");
+    if(av) av.addEventListener("change",function(){
+      $("ptAuthMWrap").style.display = av.value==="expiring" ? "" : "none"; });
+    var pr=$("ptRun");
+    if(pr) pr.addEventListener("click",function(){ runPatient(d); });
     try{ out.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"}); }catch(e){}
   }
 
@@ -3119,6 +3365,47 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         polMsg(""); polData=res.d; renderPolicy(res.d);
       })
       .catch(function(){ btn.disabled=false; polMsg("Could not reach the reader. Please try again in a moment.",true); });
+  }
+
+  function runPatient(pol){
+    if(!data.length){ polMsg("Run the sweep above first, so there is a calendar to add them to.",true); return; }
+    function n(id,d,min,max){ var v=parseFloat($(id).value); if(!isFinite(v))v=d;
+      return Math.max(min,Math.min(max,v)); }
+    var inp={
+      ref: ($("ptRef").value||"").trim().slice(0,24) || "Your patient",
+      remix: $("ptVisit").value==="remix",
+      drawn: n("ptDrawn",84,0,2000),
+      perVial: n("ptVial",20,1,200),
+      renews: Math.round(n("ptRenew",5,0,12)),
+      auth: $("ptAuth").value,
+      authMonths: Math.round(n("ptAuthM",3,0,36)),
+      series: Math.round(n("ptSeries",26,1,60))
+    };
+    readRate($("bvRate"));
+    var v=patientVerdict(pol,inp);
+    var f=addPatient(pol,inp,v);
+    $("ptOut").innerHTML='<div class="bv-ptv '+v.tone+'">'+
+      '<div class="pth">'+esc(v.head)+'</div>'+
+      '<ul class="ptl">'+v.say.map(function(s){
+        return '<li><b>'+esc(s.t)+'</b><span>'+esc(s.d)+'</span></li>'; }).join("")+'</ul>'+
+      '<p class="ptf">'+esc(inp.ref)+' is now on the calendar above, carrying this policy. '+
+        'Open their lane to see it beside the rest of the panel.</p></div>';
+    /* put them on the board next to everyone else, ranked the same way */
+    sortLanes();
+    lanesEl.innerHTML="";
+    data.forEach(function(x){
+      if(!nodes[x.id]){
+        var el=document.createElement("div");
+        el.className="bv-lane"+(x.mine?" mine":""); el.setAttribute("data-id",x.id);
+        el.innerHTML=laneHtml(x); nodes[x.id]=el;
+      }
+      lanesEl.appendChild(nodes[x.id]);
+    });
+    data.forEach(function(x){ repaintLane(x); });
+    refresh();
+    var el=nodes[f.id];
+    if(el){ try{ $("bvBoard").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }catch(e){}
+      setTimeout(function(){ if(!el.classList.contains("open")) el.querySelector(".bv-lanerow").click(); }, reduce?0:500); }
   }
 
   var polUnlocked=false;
