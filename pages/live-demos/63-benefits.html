@@ -1576,6 +1576,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         <div class="bv-polbanner" id="bvPolBanner" hidden>
           <span class="pb-lbl">Policy applied</span>
           <span class="pb-txt" id="bvPolBannerTxt"></span>
+          <label class="bv-rate"><span>Doses a month</span>
+            <input type="number" id="bvRateBanner" min="0.5" max="30" step="0.5" value="4">
+          </label>
           <button type="button" class="bv-btn-restore" id="bvPolRestore">Restore the panel</button>
         </div>
 
@@ -2036,6 +2039,17 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .bv-badge svg{width:10px;height:10px}
 .bv-badge.ok{background:rgba(94,224,168,.14);color:var(--mint-400)}
 .bv-badge.no{background:rgba(239,193,120,.16);color:var(--amber-400)}
+.bv-badge.noise{background:rgba(45,217,211,.14);color:var(--teal-500)}
+.bv-rule.noise{border-color:rgba(45,217,211,.34)}
+.bv-rule.noise .bv-quote{border-left-color:var(--teal-500);opacity:.92}
+.bv-stat-pill.noise{background:rgba(45,217,211,.14);color:var(--teal-500)}
+.bv-rate{display:inline-flex;align-items:center;gap:8px;flex:none}
+.bv-rate>span{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--text-quaternary)}
+.bv-demo .bv-rate input{width:66px;padding:7px 9px;border-radius:8px;background:var(--bg-surface-3);
+  border:1px solid var(--border-default);color:var(--text-primary);font-family:var(--font-body);
+  font-size:13px;font-variant-numeric:tabular-nums;outline:none}
+.bv-demo .bv-rate input:focus{border-color:var(--violet-500)}
 .bv-ruleval{display:block;font-size:14px;font-weight:600;color:var(--text-primary);line-height:1.4;margin-top:6px}
 .bv-quote{margin:10px 0 0;padding:9px 12px;border-left:3px solid var(--teal-500);border-radius:0 9px 9px 0;background:var(--bg-surface-3);
   font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.6;color:var(--text-secondary)}
@@ -2825,7 +2839,55 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 "Immunotherapy services are subject to a combined annual maximum benefit of $1,800\nper member per benefit year. Amounts in excess of the annual maximum are the\nfinancial responsibility of the member.\n\n"+
 "AUTHORIZATION\nPrecertification is not required for allergen immunotherapy services rendered by a\nparticipating provider. Non-participating providers must obtain authorization prior\nto the initiation of treatment.\n\n"+
 "RECORD REQUIREMENTS\nProviders shall retain documentation of antigen selection and the compounding record\nfor a period of not less than seven years.\n\n"+
-"RECONSIDERATION\nRequests for reconsideration of a claim determination must be received within\nninety (90) days of the original remittance date."}
+"RECONSIDERATION\nRequests for reconsideration of a claim determination must be received within\nninety (90) days of the original remittance date."},
+{name:"Piedmont Valley · faxed and half-scanned",text:
+  "*** INCOMING FAX ***  09/03/2026 14:22   FROM: PIEDMONT VALLEY HEALTH   P.01/05\n"+
+  "\n"+
+  "PIEDM0NT VALLEY HEALTH PLAN\n"+
+  "UT1LIZATION MANAGEMENT POL1CY  UM-441\n"+
+  "ALLERGEN 1MMUNOTHERAPY  (CPT 95115, 95117, 95165)\n"+
+  "Rev1sed O3/2026          Supersedes UM-441 rev. 11/2O24\n"+
+  "\n"+
+  "SECT10N 1 - PURPOSE\n"+
+  "Th1s pol1cy descr1bes the Plan's coverage cr1ter1a for allergen immuno-\n"+
+  "therapy serv1ces prov1ded to commerc1al members of P1edmont Valley\n"+
+  "Health Plan and 1ts aff1l1ates.\n"+
+  "\n"+
+  "[SCAN QUAL1TY POOR -- SECT10N 2 PART1ALLY 1LLEG1BLE]\n"+
+  "\n"+
+  "SECT10N 2 - CL1N1CAL CR1TER1A\n"+
+  "...documented lgE-med1ated allerg1c rh1n1t1s ... [illegible] ... follow1ng\n"+
+  "a tr1al of av01dance and pharmacotherapy of not less than three (3)\n"+
+  "months ... [illegible] ...\n"+
+  "\n"+
+  "------------------------------ Page 3 of 5 ------------------------------\n"+
+  "\n"+
+  "SECT10N 3 - UN1TS AND L1M1TAT10NS\n"+
+  "For CPT 95165, one un1t 1s def1ned as a s1ngle 1 mL al1quot removed from\n"+
+  "a mult1-dose v1al prepared for the 1nd1v1dual member.\n"+
+  "\n"+
+  "The Plan w1ll re1mburse no more than 150 units per member per calendar\n"+
+  "year across all render1ng prov1ders. Un1ts b1lled 1n excess of th1s\n"+
+  "l1m1t w1ll be den1ed as exceed1ng the benef1t max1mum.\n"+
+  "\n"+
+  "SECT10N 4 - AUTHOR1ZAT10N\n"+
+  "Pr10r author1zat1on 1s requ1red for the 1n1t1al preparat1on of antigen\n"+
+  "and for each subsequent v1al ser1es. Author1zat1ons 1ssued under th1s\n"+
+  "pol1cy rema1n val1d for twelve (12) months.\n"+
+  "\n"+
+  "SECT10N 5 - DOCUMENTAT10N REQU1REMENTS\n"+
+  "[ TH1S PAGE WAS NOT RECE1VED -- P.04/05 M1SS1NG FROM TRANSM1SS10N ]\n"+
+  "\n"+
+  "------------------------------ Page 5 of 5 ------------------------------\n"+
+  "\n"+
+  "SECT10N 6 - RECONS1DERAT10N AND APPEALS\n"+
+  "A prov1der may request recons1derat1on ... [illegible] ... w1th1n th1rty\n"+
+  "(3O) days of the date of the rem1ttance adv1ce.\n"+
+  "\n"+
+  "SECT10N 7 - RELATED POL1C1ES\n"+
+  "UM-2O3 Skin Test1ng    UM-118 Sublingual Immunotherapy (NOT COVERED)\n"+
+  "\n"+
+  "*** END 0F TRANSM1SS10N ***   P.05/05"}
   ];
   var polSampleIdx=0, polData=null, polSnap=null;
 
@@ -2838,10 +2900,14 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     var out=$("bvPolOut");
     var st=d.stats||{extracted:0,verified:0,silent:0};
     var rules=(d.rules||[]).map(function(r){
-      var badge = r.verified
+      /* three states, because "matched through scan damage" is neither a clean
+         hit nor a failure and must not be dressed up as either */
+      var badge = r.exact
         ? '<span class="bv-badge ok">'+TICK+'Found in your document</span>'
-        : '<span class="bv-badge no">'+WARN+'Not found in your text</span>';
-      return '<div class="bv-rule'+(r.verified?"":" unver")+'">'+
+        : (r.verified
+          ? '<span class="bv-badge noise">'+TICK+'Matched through scan noise</span>'
+          : '<span class="bv-badge no">'+WARN+'Not found in your text</span>');
+      return '<div class="bv-rule'+(r.exact?"":(r.verified?" noise":" unver"))+'">'+
         '<div class="bv-rulehead"><span class="bv-rulelab">'+esc(r.label)+'</span>'+badge+'</div>'+
         '<span class="bv-ruleval">'+esc(r.value)+'</span>'+
         (r.quote?'<blockquote class="bv-quote">&ldquo;'+esc(r.quote)+'&rdquo;</blockquote>':'')+
@@ -2867,6 +2933,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
           '<span class="bv-polstats">'+
             '<span class="bv-stat-pill">'+st.extracted+' rules found</span>'+
             '<span class="bv-stat-pill'+(st.verified===st.extracted?" good":" warn")+'">'+st.verified+' quoted from your text</span>'+
+            (st.throughNoise?'<span class="bv-stat-pill noise">'+st.throughNoise+' through scan noise</span>':'')+
             '<span class="bv-stat-pill">'+st.silent+' never stated</span>'+
           '</span>'+
         '</div>'+
@@ -2880,6 +2947,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         'These are the rules you would be guessing at, and the ones worth a written question to the payer before the next vial is mixed.</p></div>':'')+
       '<div class="bv-applybar">'+
         '<span class="bv-applytxt">'+applyTxt+'</span>'+
+        '<label class="bv-rate"><span>Doses drawn a month</span>'+
+          '<input type="number" id="bvRate" min="0.5" max="30" step="0.5" value="'+doseRate+'">'+
+        '</label>'+
         '<button type="button" class="bv-btn-apply" id="bvApply"'+(canApply?'':' disabled')+'>Re-run the board under this policy <span class="arw">&rarr;</span></button>'+
       '</div>'+
       '<div class="bv-card"><p class="bv-foot">Each quote above was checked back against the text you pasted before it was shown, '+
@@ -2887,6 +2957,8 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         'Anything it could not find is flagged instead of hidden. Nothing you paste is stored.</p></div>';
     out.removeAttribute("hidden");
     var ab=$("bvApply"); if(ab) ab.addEventListener("click",function(){ applyPolicy(d); });
+    var ri=$("bvRate");
+    if(ri) ri.addEventListener("change",function(){ readRate(ri); if(polSnap&&polData) applyPolicy(polData); });
     try{ out.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"}); }catch(e){}
   }
 
@@ -2895,10 +2967,21 @@ a.sil-byline-author:hover { color: var(--teal-300); }
      what turns an annual cap into a number of months of runway. The assumption
      is stated on screen rather than buried here, because it is the step where
      the simulation stops being the policy's own words. */
-  var DOSES_PER_MONTH=4;
+  var doseRate=4;
+  function readRate(el){
+    var v=parseFloat(el && el.value);
+    if(!isFinite(v)||v<0.5) v=0.5; if(v>30) v=30;
+    doseRate=v;
+    ["bvRate","bvRateBanner"].forEach(function(id){ var i=$(id); if(i && i!==el) i.value=v; });
+    return v;
+  }
   function applyPolicy(d){
     var ap=d.apply||{};
     if(!data.length) return;
+    /* re-applying has to start from the untouched panel, so changing the spend
+       rate re-runs the policy instead of stacking a second pass on top of the
+       first */
+    if(polSnap) restoreLanes();
     if(!polSnap){
       polSnap=data.map(function(f){
         return {id:f.id, cover:f.cover, kind:f.kind, resumes:f.resumes, leak:f.leak,
@@ -2914,7 +2997,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         f.dose.allowed=ap.dosesPerYear;
         f.dose.cap=ap.dosesPerYear+" doses per plan year, per this policy";
         var left=Math.max(0, ap.dosesPerYear - f.dose.used);
-        var runway=left/DOSES_PER_MONTH;
+        var runway=left/doseRate;
         if(runway < f.series){
           var rollover=null;
           f.pips.forEach(function(p){ if(p.k==="year" && p.m>runway && (rollover===null||p.m<rollover)) rollover=p.m; });
@@ -2949,12 +3032,12 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       (d.policyRef?" "+esc(d.policyRef):"")+"</b>. "+
       (bits.length?bits.join(", ")+"."
         :"Nothing on the panel changed: your patients were already inside this policy's limits.")+
-      " Dose banks are spent at about "+DOSES_PER_MONTH+" doses a month.";
+      " Dose banks are spent at "+doseRate+" dose"+(doseRate===1?"":"s")+" a month.";
     b.removeAttribute("hidden");
     refresh();
     try{ $("bvBoard").scrollIntoView({block:"start",behavior:reduce?"auto":"smooth"}); }catch(e){}
   }
-  function restorePolicy(){
+  function restoreLanes(){
     if(!polSnap) return;
     polSnap.forEach(function(s){
       var f=findById(s.id); if(!f) return;
@@ -2963,6 +3046,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       f.gone.leak=false;
       repaintLane(f);
     });
+  }
+  function restorePolicy(){
+    restoreLanes();
     polSnap=null;
     $("bvPolBanner").setAttribute("hidden","");
     refresh();
@@ -3034,6 +3120,12 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       $("bvPolText").value=s.text; polMsg("Loaded: "+s.name); $("bvPolText").focus();
     });
     $("bvPolRestore").addEventListener("click",restorePolicy);
+    /* the banner control re-runs the policy live, so the spend-rate assumption
+       is something you can argue with while looking at what it produced */
+    $("bvRateBanner").addEventListener("change",function(){
+      readRate($("bvRateBanner"));
+      if(polSnap&&polData) applyPolicy(polData);
+    });
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
   else bind();

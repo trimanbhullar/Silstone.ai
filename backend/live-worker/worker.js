@@ -481,8 +481,18 @@ __name(callPolicyAI, "callPolicyAI");
  * it: the reader should see when the model reached past its evidence.
  */
 function verifyPolicy(d, policyText) {
-  const norm = /* @__PURE__ */ __name((s2) => String(s2 || "").toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[\s ]+/g, " ").trim(), "norm");
-  const haystack = norm(policyText);
+  // Two passes. `norm` is the strict one: case, whitespace and smart quotes only,
+  // so a match means the model copied the span as written. `fold` additionally
+  // collapses the character families an OCR engine confuses (1/l/i, 0/o, 5/s)
+  // and drops spacing entirely, because a policy that
+  // arrived by fax says "al1quot" where the model will quote "aliquot" and that
+  // is the same sentence, not an invented one. Folding is deliberately narrow:
+  // it forgives scan damage, not paraphrase, and a quote that needed it is
+  // reported as such rather than passed off as verbatim.
+  const norm = /* @__PURE__ */ __name((s2) => String(s2 || "").toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim(), "norm");
+  const fold = /* @__PURE__ */ __name((s2) => String(s2 || "").toLowerCase().replace(/[1li]/g, "i").replace(/[0o]/g, "o").replace(/[5s]/g, "s").replace(/[^a-z0-9]/g, ""), "fold");
+  const hayNorm = norm(policyText);
+  const hayFold = fold(policyText);
   const known = POLICY_RULES.map((r) => r.key);
   const meta = /* @__PURE__ */ __name((k) => POLICY_RULES.find((r) => r.key === k), "meta");
   const seen = {};
@@ -491,8 +501,9 @@ function verifyPolicy(d, policyText) {
     const n = norm(quote);
     // a quote has to be a real span, not a stray word or the whole document
     const usable = n.length >= 12 && n.length <= 600;
-    const verified = usable && haystack.includes(n);
     if (!usable) return null;   // no quote means the policy is silent, not that the citation failed
+    const exact = hayNorm.includes(n);
+    const verified = exact || hayFold.includes(fold(quote));
     const m = meta(r.key);
     const conf = Number(r.confidence);
     // "precertification is NOT required" is a different finding from
@@ -508,20 +519,25 @@ function verifyPolicy(d, policyText) {
       value: String(r.value || "").trim().slice(0, 140) || m.label,
       quote,
       verified,
+      exact,
       consequence,
       confidence: Number.isFinite(conf) ? Math.max(0.5, Math.min(0.97, conf)) : 0.7
     };
   }).filter(Boolean);
   const found = rules.map((r) => r.key);
   const notFound = known.filter((k) => !found.includes(k)).map((k) => ({ key: k, label: meta(k).label }));
-  const verifiedCount = rules.filter((r) => r.verified).length;
   return {
     payer: String(d.payer || "").trim().slice(0, 90) || "Unknown payer",
     policyRef: String(d.policyRef || "").trim().slice(0, 90),
     summary: String(d.summary || "").trim().slice(0, 600),
     rules,
     notFound,
-    stats: { extracted: rules.length, verified: verifiedCount, silent: notFound.length },
+    stats: {
+      extracted: rules.length,
+      verified: rules.filter((r) => r.verified).length,
+      throughNoise: rules.filter((r) => r.verified && !r.exact).length,
+      silent: notFound.length
+    },
     // what the front end needs to re-run the coverage board under this policy
     apply: buildApply(rules)
   };
@@ -534,19 +550,28 @@ __name(verifyPolicy, "verifyPolicy");
  */
 function buildApply(rules) {
   const out = { dosesPerVial: null, dosesPerYear: null, precert: null, benefitMax: null };
-  const firstInt = /* @__PURE__ */ __name((s2) => {
-    const m = String(s2).replace(/,/g, "").match(/\d+(\.\d+)?/);
-    return m ? Math.round(parseFloat(m[0])) : null;
-  }, "firstInt");
+  // A quote reading "For CPT 95165, no more than 150 units per year" carries two
+  // numbers and only one of them is a limit. Prefer a count actually attached to
+  // doses or units; fall back to the first plausible small number, never a
+  // procedure code and never a year.
+  const pickCount = /* @__PURE__ */ __name((s2) => {
+    const t2 = String(s2).replace(/,/g, "");
+    const tagged = t2.match(/(\d{1,4})\s*(?:doses?|units?|aliquots?|vials?)\b/i);
+    if (tagged) return parseInt(tagged[1], 10);
+    const all = (t2.match(/\b\d{1,4}\b/g) || []).map(Number).filter((n) => n > 0 && n <= 600 && !(n >= 1900 && n <= 2100));
+    return all.length ? all[0] : null;
+  }, "pickCount");
+  const pickMoney = /* @__PURE__ */ __name((s2) => {
+    const m = String(s2).replace(/,/g, "").match(/\$\s?(\d{2,7})/);
+    return m ? parseInt(m[1], 10) : null;
+  }, "pickMoney");
   for (const r of rules) {
     if (!r.verified) continue;
     const hay = `${r.value} ${r.quote}`;
-    if (r.key === "dosesPerVial") out.dosesPerVial = firstInt(hay);
-    if (r.key === "dosesPerYear") out.dosesPerYear = firstInt(hay);
-    if (r.key === "benefitMax") out.benefitMax = firstInt(hay);
-    if (r.key === "precert") {
-      out.precert = !NO_PRECERT.test(hay);
-    }
+    if (r.key === "dosesPerVial") out.dosesPerVial = pickCount(hay);
+    if (r.key === "dosesPerYear") out.dosesPerYear = pickCount(hay);
+    if (r.key === "benefitMax") out.benefitMax = pickMoney(hay);
+    if (r.key === "precert") out.precert = !NO_PRECERT.test(hay);
   }
   if (out.dosesPerVial !== null && (out.dosesPerVial < 1 || out.dosesPerVial > 60)) out.dosesPerVial = null;
   if (out.dosesPerYear !== null && (out.dosesPerYear < 1 || out.dosesPerYear > 600)) out.dosesPerYear = null;

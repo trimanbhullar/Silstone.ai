@@ -245,18 +245,31 @@ board enforces (Ambetter pays ten doses a vial, this plan wants a precert) came 
 medical policy. So: paste one in, and the agent pulls out the handful of sentences that decide
 whether 95165 gets paid, **quoting the sentence each rule came from**.
 
-Every quote is matched back against the pasted text server-side before it is shown. A rule the
-agent can point at is badged "Found in your document"; one it could not find is flagged rather
-than hidden, and is not allowed to move the board. A rule with no quote at all is reported as
-something the policy never states, which is a finding in its own right rather than a failure.
+Every quote is matched back against the pasted text server-side before it is shown, and there
+are **three** answers, not two. A span copied as written is badged "Found in your document". One
+that only matches after folding the characters an OCR engine confuses (`1`/`l`/`i`, `0`/`o`,
+`5`/`s`) is badged "Matched through scan noise", because a faxed policy reads `al1quot` where the
+model quotes `aliquot` and that is the same sentence, not an invented one. Anything that matches
+neither is flagged rather than hidden, and is not allowed to move the board. A rule with no quote
+at all is reported as something the policy never states, which is a finding in its own right.
+
+The third sample is there to prove that distinction rather than assert it: a policy that arrived
+by fax, half-scanned, with two pages missing and OCR damage throughout. It yields four rules,
+three of them salvaged through the noise, and one flagged because the model stitched its quote
+across an `[illegible]` gap. That last one is the check earning its keep.
 
 Then "Re-run the board under this policy" applies the extracted rules to the whole panel: a
 ten-dose vial cap gives every lane the leak stripe, an annual cap turns funded lanes into ones
 that run dry before the plan year rolls over, a precert requirement stops the vials due to be
 re-mixed. A banner says what changed and what it declined to model, and Restore puts the panel
-back exactly. The dose-bank spend rate the runway maths needs (about four doses a month) is
-stated on screen, because that is the one step where the simulation stops being the policy's own
-words.
+back exactly.
+
+The runway maths needs one number no policy contains: how fast a dose bank is actually drawn
+down. That is **an input, not an assumption baked into the code** - a doses-a-month control sits
+in the apply bar and again in the banner, so you can argue with it while looking at what it
+produced. Changing it re-runs the policy from the untouched panel rather than stacking a second
+pass on the first. On the sample panel, one dose a month leaves seven lanes unfunded and twelve
+leaves all sixteen.
 
 ### Light mode on the live demos
 

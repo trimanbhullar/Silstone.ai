@@ -57,28 +57,44 @@ Takes `{ "policy": "<text>" }` and returns the rules that decide whether CPT
   "summary": "...",
   "rules": [{ "key": "dosesPerVial", "label": "Doses paid per vial",
               "value": "max 10 doses per vial", "quote": "<verbatim span>",
-              "verified": true, "confidence": 0.95, "consequence": "..." }],
+              "verified": true, "exact": true, "confidence": 0.95, "consequence": "..." }],
   "notFound": [{ "key": "benefitMax", "label": "Annual benefit maximum" }],
-  "stats": { "extracted": 5, "verified": 5, "silent": 2 },
+  "stats": { "extracted": 5, "verified": 5, "throughNoise": 0, "silent": 2 },
   "apply": { "dosesPerVial": 10, "dosesPerYear": null, "precert": true, "benefitMax": null }
 }
 ```
 
-Three things in there are worth not breaking:
+Five things in there are worth not breaking:
 
 - **`verified` is checked, not claimed.** Every quote is matched back against
-  the text the reader pasted, on whitespace-and-case-normalised strings so
-  ordinary reflow does not cause a false negative. A quote that is not in the
-  document comes back `verified: false` and the demo shows it flagged rather
-  than hiding it. A citation nobody checked is just a confident-looking
-  sentence.
+  the text the reader pasted. A quote that is not in the document comes back
+  `verified: false` and the demo shows it flagged rather than hiding it. A
+  citation nobody checked is just a confident-looking sentence.
+- **`exact` separates a clean hit from a salvaged one.** Matching runs twice.
+  The strict pass normalises case, whitespace and smart quotes only, so a hit
+  means the span was copied as written (`exact: true`). The second pass also
+  folds the character families an OCR engine confuses (`1`/`l`/`i`, `0`/`o`,
+  `5`/`s`) and drops spacing entirely, because a policy that arrived by fax
+  reads `al1quot` where the model will quote `aliquot` and that is the same
+  sentence, not an invented one. A rule that needed the second pass comes back
+  `verified: true, exact: false` and the demo badges it "Matched through scan
+  noise" rather than passing it off as verbatim. Folding forgives scan damage,
+  not paraphrase: it is narrow enough that an invented quote still fails, and a
+  quote stitched across an `[illegible]` gap still fails, which is correct
+  because it is not a contiguous span.
 - **No quote means silent, not unverified.** A rule the model returns with no
   usable quote is moved to `notFound`. "This policy never states a per-vial cap"
   is a finding; "the citation failed" is a different one, and they must not look
   alike.
 - **Only verified rules reach `apply`.** `apply` is what the front end re-runs
   its coverage board against, so an unverified read may be shown to a reader but
-  may never move a chart.
+  may never move a chart. Rules salvaged through scan noise do count: they are
+  evidenced, just not pristine.
+- **Numbers are picked, not grabbed.** A quote reading "For CPT 95165, no more
+  than 150 units per year" holds two numbers and only one is a limit, so
+  `buildApply` prefers a count actually attached to doses/units/vials and
+  otherwise takes the first plausible small number, never a procedure code and
+  never a year. Getting this wrong once meant a 95,165-dose cap.
 
 ## Testing a route
 
