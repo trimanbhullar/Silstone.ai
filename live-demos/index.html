@@ -2684,11 +2684,20 @@ if(document.readyState==='loading'){
           </div>
 
           <div class="bv-legend">
-            <span><i class="k-ok"></i>Funded</span>
-            <span><i class="k-gap"></i>Series with nothing paying for it</span>
-            <span><i class="k-leak"></i>Paying, but not for the whole vial</span>
-            <span><i class="k-pat"></i>Covered, patient owes it</span>
-            <span><i class="k-pip"></i>Plan year, auth or dose event</span>
+            <div class="bv-legrow">
+              <span class="bv-leglbl">The bar</span>
+              <span><i class="k-ok"></i>Funded</span>
+              <span><i class="k-gap"></i>Nothing paying for it</span>
+              <span><i class="k-leak"></i>Part of every vial unpaid</span>
+              <span><i class="k-pat"></i>Covered, patient owes it</span>
+            </div>
+            <div class="bv-legrow">
+              <span class="bv-leglbl">The markers</span>
+              <span><i class="k-year"></i>Plan year rolls over</span>
+              <span><i class="k-auth"></i>Authorization expires</span>
+              <span><i class="k-dose"></i>Dose bank runs out</span>
+              <span><i class="k-term"></i>Coverage ends</span>
+            </div>
           </div>
         </div>
 
@@ -2856,7 +2865,9 @@ if(document.readyState==='loading'){
 .bv-demo .bv-btn-heal:disabled{opacity:.4;cursor:default}
 
 /* ---- scrubber ---- */
-.bv-scrub{display:grid;grid-template-columns:var(--labw) 1fr;gap:14px;align-items:center;margin-bottom:20px}
+/* the knob's date label sits above the track, so the row has to reserve room
+   for it or it lands on top of the board header */
+.bv-scrub{display:grid;grid-template-columns:var(--labw) 1fr;gap:14px;align-items:center;margin:28px 0 20px}
 .bv-scrublbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.09em;
   text-transform:uppercase;color:var(--text-quaternary)}
 .bv-scrubtrack{position:relative;height:22px;display:flex;align-items:center}
@@ -2916,8 +2927,8 @@ if(document.readyState==='loading'){
 .bv-track .seg.ok{background:linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
 .bv-track .seg.gap{background:repeating-linear-gradient(135deg,rgba(240,133,94,.34) 0 6px,rgba(240,133,94,.11) 6px 12px)}
 .bv-track .ovl{position:absolute;top:0;bottom:0;transition:opacity .5s,width .6s}
-.bv-track .ovl.leak{background:repeating-linear-gradient(45deg,rgba(240,133,94,.32) 0 3px,transparent 3px 9px)}
-.bv-track .ovl.pat{background:repeating-linear-gradient(45deg,rgba(239,193,120,.34) 0 3px,transparent 3px 9px)}
+.bv-track .ovl.leak{background:repeating-linear-gradient(45deg,rgba(139,124,246,.92) 0 3.5px,transparent 3.5px 10px)}
+.bv-track .ovl.pat{background:repeating-linear-gradient(45deg,rgba(239,193,120,.92) 0 3.5px,transparent 3.5px 10px)}
 .bv-track .ovl.gone{opacity:0}
 .bv-track .end{position:absolute;top:3px;bottom:3px;width:2px;border-radius:1px;background:var(--text-quaternary);opacity:.65}
 /* the cursor: drawn per track off one shared --cur, so it stays aligned at
@@ -2937,7 +2948,7 @@ if(document.readyState==='loading'){
 /* pips: the admin events between now and the end of the series */
 .bv-pip{position:absolute;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;
   border:1.5px solid var(--bg-surface);z-index:2;transition:transform .2s}
-.bv-pip.year{background:var(--teal-500)} .bv-pip.auth{background:var(--violet-300)}
+.bv-pip.year{background:var(--text-secondary)} .bv-pip.auth{background:var(--violet-300)}
 .bv-pip.dose{background:var(--amber-400)} .bv-pip.term,.bv-pip.max{background:var(--coral-500)}
 .bv-pip.passed{transform:scale(1.32)}
 .bv-lanerow:hover .bv-pip{transform:scale(1.2)}
@@ -3036,15 +3047,30 @@ if(document.readyState==='loading'){
   border:1px solid var(--mint-400);color:var(--mint-400);white-space:nowrap}
 
 /* ---- legend + rail ---- */
-.bv-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;padding-top:12px;
-  border-top:1px solid var(--border-subtle)}
-.bv-legend span{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:var(--text-tertiary)}
-.bv-legend i{width:20px;height:9px;border-radius:3px;flex:none}
-.bv-legend .k-ok{background:linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
-.bv-legend .k-gap{background:repeating-linear-gradient(135deg,rgba(240,133,94,.34) 0 5px,rgba(240,133,94,.11) 5px 10px)}
-.bv-legend .k-leak{background:repeating-linear-gradient(45deg,rgba(240,133,94,.32) 0 3px,var(--bg-surface-3) 3px 8px)}
-.bv-legend .k-pat{background:repeating-linear-gradient(45deg,rgba(239,193,120,.34) 0 3px,var(--bg-surface-3) 3px 8px)}
-.bv-legend .k-pip{width:10px;height:10px;border-radius:50%;background:var(--teal-500)}
+.bv-legend{margin-top:14px;padding-top:12px;border-top:1px solid var(--border-subtle);
+  display:flex;flex-direction:column;gap:9px}
+.bv-legrow{display:flex;flex-wrap:wrap;align-items:center;gap:7px 16px}
+.bv-leglbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-quaternary);flex:none;min-width:84px}
+.bv-legend span{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--text-secondary)}
+.bv-legend i{width:24px;height:11px;border-radius:3px;flex:none;
+  border:1px solid var(--border-subtle);background-color:var(--bg-surface-3)}
+/* the bar swatches are layered exactly as a lane draws them: the stripe
+   patterns sit OVER the funded teal, never over the panel, or the legend shows
+   a colour the chart never produces */
+.bv-legend .k-ok{background-image:linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
+.bv-legend .k-gap{background-image:repeating-linear-gradient(135deg,rgba(240,133,94,.34) 0 5px,rgba(240,133,94,.11) 5px 10px)}
+.bv-legend .k-leak{background-image:repeating-linear-gradient(45deg,rgba(139,124,246,.92) 0 3.5px,transparent 3.5px 10px),
+  linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
+.bv-legend .k-pat{background-image:repeating-linear-gradient(45deg,rgba(239,193,120,.92) 0 3.5px,transparent 3.5px 10px),
+  linear-gradient(180deg,rgba(45,217,211,.34),rgba(45,217,211,.15))}
+/* markers are dots, and each one carries the colour it has on the track */
+.bv-legend .k-year,.bv-legend .k-auth,.bv-legend .k-dose,.bv-legend .k-term{
+  width:11px;height:11px;border-radius:50%;border:0;background-color:transparent}
+.bv-legend .k-year{background-color:var(--text-secondary)}
+.bv-legend .k-auth{background-color:var(--violet-300)}
+.bv-legend .k-dose{background-color:var(--amber-400)}
+.bv-legend .k-term{background-color:var(--coral-500)}
 
 .bv-rail{display:flex;align-items:center;gap:12px;margin-top:12px;background:var(--bg-surface);
   border:1px solid var(--border-subtle);border-radius:12px;padding:10px 13px;overflow:hidden}
@@ -3469,7 +3495,7 @@ if(document.readyState==='loading'){
   function runLabel(f){
     var g=gapMonths(f);
     if(g>0) return Math.round(g)+" mo unfunded";
-    if(f.leak&&!f.gone.leak) return "half a vial";
+    if(f.leak&&!f.gone.leak) return "vial part-paid";
     if(f.patient&&!f.gone.patient) return "patient pays";
     return "funded";
   }
@@ -3482,7 +3508,10 @@ if(document.readyState==='loading'){
     if(f.leak) ovl+='<i class="ovl leak'+(f.gone.leak?" gone":"")+'" style="left:0;width:'+pct(f.series)+'%"></i>';
     if(f.patient) ovl+='<i class="ovl pat'+(f.gone.patient?" gone":"")+'" style="left:0;width:'+pct(f.series)+'%"></i>';
     var pips=f.pips.map(function(p){
-      return '<span class="bv-pip '+p.k+(cursor>=p.m?" passed":"")+'" style="left:'+pct(p.m)+'%" '+
+      /* clamped in px, not %, so a marker at month 0 or at the very end is
+         still a whole dot instead of a half one the track clips off */
+      return '<span class="bv-pip '+p.k+(cursor>=p.m?" passed":"")+
+        '" style="left:clamp(8px,'+pct(p.m)+'%,calc(100% - 8px))" '+
         'title="'+esc(PIPNAME[p.k]+" · "+fmt(p.m))+'"></span>'; }).join("");
     return segs+ovl+'<i class="end" style="left:'+pct(f.series)+'%"></i>'+pips;
   }
@@ -3870,7 +3899,14 @@ if(document.readyState==='loading'){
     var p=pct(cursor);
     $("bvScrubFill").style.width=p+"%";
     $("bvScrubKnob").style.left=p+"%";
-    $("bvScrubDate").textContent = cursor<0.6 ? "today" : fmt(cursor);
+    var lab=$("bvScrubDate");
+    lab.textContent = cursor<0.6 ? "today" : fmt(cursor);
+    /* keep the label inside the track: centred on the knob everywhere except
+       the two ends, where it would hang off the board and be clipped */
+    var tw=$("bvScrubKnob").parentNode.clientWidth, half=lab.offsetWidth/2, x=p/100*tw, dx=0;
+    if(x-half<0) dx=half-x;
+    else if(x+half>tw) dx=tw-x-half;
+    lab.style.transform="translateX(calc(-50% + "+Math.round(dx)+"px))";
     lanesEl.style.setProperty("--cur", p+"%");
   }
   function onScrub(){
