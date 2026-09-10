@@ -1557,7 +1557,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         <!-- controls -->
         <div class="bv-controls">
           <button type="button" class="bv-btn-primary" id="bvRun">Run today's verification sweep <span class="arw">&rarr;</span></button>
-          <button type="button" class="bv-btn-ghost" id="bvPolToggle">Read a payer policy</button>
+          <button type="button" class="bv-btn-ghost" id="bvPolToggle">Add a patient</button>
           <button type="button" class="bv-btn-ghost" id="bvReset">Reset</button>
         </div>
 
@@ -1645,27 +1645,26 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     </div>
   </section>
 
-  <!-- ==================== READ A PAYER POLICY ==================== -->
+  <!-- ==================== ADD A PATIENT ==================== -->
   <section class="sil-section is-alt has-tint acc-amber" id="bvPolSection" style="padding:var(--space-10) 0 var(--space-12);display:none">
     <div class="sil-cursorglow" aria-hidden="true"></div>
     <div class="sil-container">
       <div class="bv-demo">
         <div class="bv-maphead sil-center">
           <span class="sil-eyebrow"><i class="dot"></i>Try it on a real document</span>
-          <h2 class="sil-display-s sil-mt-4">Every rule on that board came out of <span class="sil-gt">a document like this.</span></h2>
+          <h2 class="sil-display-s sil-mt-4">Add a patient, and <span class="sil-gt">the policy that governs them.</span></h2>
           <p class="sil-body-m sil-mt-3">
-            Each payer publishes a medical policy for allergen immunotherapy, and buried in it are the
-            handful of sentences that decide whether 95165 gets paid: how that payer defines a dose,
-            what it caps per vial and per year, whether it wants a precert. Paste one in. The agent
-            pulls the rules out and shows you the sentence each one came from, then re-runs the board
-            above as if that policy governed your whole panel.
+            Nobody's panel is on one plan. A patient is their own numbers plus their own payer's
+            policy, so that is what you give it: who they are, then the document that decides what
+            gets paid for them. The agent reads the policy, answers the question you actually have
+            the day before their visit, and puts them on the calendar above beside everybody else.
           </p>
         </div>
 
-        <!-- lead gate -> the reader -->
+        <!-- lead gate -> the form -->
         <div class="bv-lead" id="bvLead">
-          <h3 class="bv-lead-title">Read <span class="sil-gt">your payer's policy</span></h3>
-          <p class="bv-lead-sub">Enter your details to unlock the reader. You will get the extracted rules on screen, here, right away.</p>
+          <h3 class="bv-lead-title">Add <span class="sil-gt">your own patient</span></h3>
+          <p class="bv-lead-sub">Enter your details to unlock it. You will get the answer on screen, here, right away.</p>
           <form id="bvLeadForm" novalidate>
             <label class="sil-sr" for="bvLName">Full name</label>
             <input type="text" name="name" id="bvLName" placeholder="Dr. Smith" required>
@@ -1674,25 +1673,62 @@ a.sil-byline-author:hover { color: var(--teal-300); }
             <label class="sil-sr" for="bvLPhone">Phone number</label>
             <input type="tel" name="phone" id="bvLPhone" placeholder="(555) 123-4567" required>
             <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
-            <input type="hidden" name="subject" value="Demo request: Payer policy reader (CPT 95165)">
+            <input type="hidden" name="subject" value="Demo request: Add a patient (CPT 95165)">
             <input type="hidden" name="from_name" value="Silstone.AI - Live Demo">
             <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-            <button type="submit" class="bv-btn-primary" id="bvLeadBtn" style="width:100%">Unlock the reader <span class="arw">&rarr;</span></button>
+            <button type="submit" class="bv-btn-primary" id="bvLeadBtn" style="width:100%">Unlock it <span class="arw">&rarr;</span></button>
           </form>
-          <p class="bv-lead-micro">A payer policy is a public document. Nothing you paste here is patient data.</p>
+          <p class="bv-lead-micro">A payer policy is a public document, and the fields below are administrative. Nothing here is patient data.</p>
         </div>
 
         <div class="bv-polform" id="bvPolForm" style="display:none">
-          <label class="bv-pol-lbl" for="bvPolText">
-            Paste a payer's allergen-immunotherapy policy. Yours, or one of the samples.
-          </label>
-          <textarea id="bvPolText" spellcheck="false" placeholder="Paste the policy text here, or press &ldquo;Load a sample policy&rdquo; below."></textarea>
-          <div class="bv-polrow">
-            <button type="button" class="bv-btn-primary" id="bvPolRun">Read the policy <span class="arw">&rarr;</span></button>
-            <button type="button" class="bv-link" id="bvPolSample">Load a sample policy</button>
-            <span class="bv-mapnote">Sent for extraction &middot; not stored</span>
+
+          <!-- step 1 -->
+          <div class="bv-step">
+            <span class="bv-stepn">1</span>
+            <div class="bv-stepbody">
+              <h3 class="bv-steph">The patient</h3>
+              <p class="bv-ptlede">Filled in with an example so you can just press the button at the
+                bottom, and every field is yours to change. All of it is something you have to hand,
+                and none of it identifies anybody: use initials or a reference you make up.</p>
+              <div class="bv-fgrid">
+                <label class="bv-f"><span>Your reference for them</span><input type="text" id="ptRef" maxlength="24" value="MR-204" placeholder="e.g. MR-204 or J.D."></label>
+                <label class="bv-f"><span>Tomorrow they are booked for</span><select id="ptVisit">
+                  <option value="remix">A vial re-mix</option><option value="inject">An injection</option></select></label>
+                <label class="bv-f"><span>Doses drawn this plan year</span><input type="number" id="ptDrawn" min="0" step="1" value="28"></label>
+                <label class="bv-f"><span>Doses you draw per vial</span><input type="number" id="ptVial" min="1" step="1" value="20"></label>
+                <label class="bv-f"><span>Plan year renews in (months)</span><input type="number" id="ptRenew" min="0" max="12" step="1" value="5"></label>
+                <label class="bv-f"><span>Prior authorization</span><select id="ptAuth">
+                  <option value="onfile">On file</option><option value="expiring">Expires soon</option>
+                  <option value="none">None on file</option></select></label>
+                <label class="bv-f" id="ptAuthMWrap" style="display:none"><span>Auth expires in (months)</span><input type="number" id="ptAuthM" min="0" max="36" step="1" value="3"></label>
+                <label class="bv-f"><span>Months of treatment left</span><input type="number" id="ptSeries" min="1" max="60" step="1" value="26"></label>
+                <label class="bv-f"><span>Doses drawn a month</span><input type="number" id="bvRate" min="0.5" max="30" step="0.5" value="4"></label>
+              </div>
+            </div>
           </div>
-          <p class="bv-mapmsg" id="bvPolMsg" role="status" aria-live="polite"></p>
+
+          <!-- step 2 -->
+          <div class="bv-step">
+            <span class="bv-stepn">2</span>
+            <div class="bv-stepbody">
+              <h3 class="bv-steph">Their payer's policy</h3>
+              <p class="bv-ptlede">The medical policy that payer publishes for allergen immunotherapy.
+                Paste yours, or load one of the samples. A different patient on a different payer
+                means a different document, which is the whole reason this sits on the patient.</p>
+              <label class="sil-sr" for="bvPolText">Paste the payer policy</label>
+              <textarea id="bvPolText" spellcheck="false" placeholder="Paste the policy text here, or press &ldquo;Load a sample policy&rdquo; below."></textarea>
+              <div class="bv-polrow">
+                <button type="button" class="bv-link" id="bvPolSample">Load a sample policy</button>
+                <span class="bv-mapnote">Sent for extraction &middot; not stored</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bv-polrow bv-submit">
+            <button type="button" class="bv-btn-primary" id="bvPolRun">Read the policy and add them <span class="arw">&rarr;</span></button>
+            <p class="bv-mapmsg" id="bvPolMsg" role="status" aria-live="polite"></p>
+          </div>
         </div>
 
         <div class="bv-polout" id="bvPolOut" hidden></div>
@@ -2048,6 +2084,16 @@ a.sil-byline-author:hover { color: var(--teal-300); }
 .bv-demo .bv-lead-micro{font-size:12px;color:var(--text-quaternary);text-align:center;margin-top:var(--space-4)}
 
 .bv-polform{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;padding:18px 20px}
+.bv-step{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;padding:16px 0;
+  border-top:1px solid var(--border-subtle)}
+.bv-step:first-child{border-top:0;padding-top:4px}
+.bv-stepn{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;
+  background:rgba(110,86,207,.16);border:1px solid var(--violet-500);color:var(--violet-300);
+  font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600}
+.bv-steph{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--text-primary);margin:2px 0 6px}
+.bv-stepbody{min-width:0}
+.bv-submit{border-top:1px solid var(--border-subtle);padding-top:16px;margin-top:4px}
+@media (max-width:560px){ .bv-step{grid-template-columns:1fr;gap:8px} .bv-stepn{display:none} }
 .bv-pol-lbl{display:block;font-size:13px;color:var(--text-secondary);margin-bottom:10px}
 .bv-demo .bv-polform textarea{width:100%;min-height:220px;resize:vertical;background:var(--bg-surface-3);border:1px solid var(--border-default);border-radius:10px;color:var(--text-primary);font-family:var(--font-mono);font-size:12.5px;padding:14px 15px;line-height:1.65;outline:none}
 .bv-demo .bv-polform textarea:focus{border-color:var(--violet-500)}
@@ -3189,13 +3235,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     if(ap.dosesPerYear!=null) drivers.push(ap.dosesPerYear+" doses a year");
     if(ap.precert===true) drivers.push("a precert on file");
     var canApply = drivers.length>0 && data.length>0;
-    /* A prefilled patient only helps if the answer is interesting, and what is
-       interesting depends on the policy: seed just past a per-vial cap, and most
-       of the way through an annual one, so the first click lands on the finding
-       rather than on "all clear". Realistic numbers, and every one of them
-       editable. */
-    var sVial = ap.dosesPerVial!=null ? ap.dosesPerVial+10 : 20;
-    var sDrawn = ap.dosesPerYear!=null ? Math.round(ap.dosesPerYear*0.9) : 84;
+
     var applyTxt = !data.length
       ? "Run the sweep above first, then you can re-run that panel under this policy."
       : (drivers.length
@@ -3203,6 +3243,7 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         : "Nothing in this policy is numeric enough to re-run the board against. That is itself a finding: a policy that never states a cap is a policy you cannot bill against with confidence.");
 
     out.innerHTML=
+      (window.__ptCard||'')+
       '<div class="bv-card">'+
         '<div class="bv-polhead">'+
           '<span class="bv-polpayer">'+esc(d.payer)+'</span>'+
@@ -3216,38 +3257,12 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         '</div>'+
         (d.summary?'<p class="bv-polsum">'+esc(d.summary)+'</p>':'')+
       '</div>'+
-      '<div class="bv-card"><div class="bv-dsec">The rules that decide whether 95165 gets paid</div>'+
+      '<div class="bv-card"><div class="bv-dsec">The lines it read that from</div>'+
         '<div class="bv-rules">'+rules+'</div></div>'+
       (silent?'<div class="bv-card"><div class="bv-dsec">What this policy never says</div>'+
         '<ul class="bv-silent">'+silent+'</ul>'+
         '<p class="bv-foot" style="margin-top:12px">A policy that is silent on a limit is not the same as a policy with no limit. '+
         'These are the rules you would be guessing at, and the ones worth a written question to the payer before the next vial is mixed.</p></div>':'')+
-      '<div class="bv-card bv-pt">'+
-        '<div class="bv-dsec">Check a patient against this policy</div>'+
-        '<p class="bv-ptlede">The question you actually have the day before a visit. It is filled in with'+
-          ' an example patient, so you can just press the button, and every field is yours to change.'+
-          ' All of it is something you have to hand, and none of it is patient data: use initials or a'+
-          ' reference you make up.</p>'+
-        '<div class="bv-fgrid">'+
-          '<label class="bv-f"><span>Your reference for them</span><input type="text" id="ptRef" maxlength="24" value="MR-204" placeholder="e.g. MR-204 or J.D."></label>'+
-          '<label class="bv-f"><span>Tomorrow they are booked for</span><select id="ptVisit">'+
-            '<option value="remix">A vial re-mix</option><option value="inject">An injection</option></select></label>'+
-          '<label class="bv-f"><span>Doses drawn this plan year</span><input type="number" id="ptDrawn" min="0" step="1" value="'+sDrawn+'"></label>'+
-          '<label class="bv-f"><span>Doses you draw per vial</span><input type="number" id="ptVial" min="1" step="1" value="'+sVial+'"></label>'+
-          '<label class="bv-f"><span>Plan year renews in (months)</span><input type="number" id="ptRenew" min="0" max="12" step="1" value="5"></label>'+
-          '<label class="bv-f"><span>Prior authorization</span><select id="ptAuth">'+
-            '<option value="onfile">On file</option><option value="expiring">Expires soon</option>'+
-            '<option value="none">None on file</option></select></label>'+
-          '<label class="bv-f" id="ptAuthMWrap" style="display:none"><span>Auth expires in (months)</span><input type="number" id="ptAuthM" min="0" max="36" step="1" value="3"></label>'+
-          '<label class="bv-f"><span>Months of treatment left</span><input type="number" id="ptSeries" min="1" max="60" step="1" value="26"></label>'+
-          '<label class="bv-f"><span>Doses drawn a month</span><input type="number" id="bvRate" min="0.5" max="30" step="0.5" value="'+doseRate+'"></label>'+
-        '</div>'+
-        '<div class="bv-maprow">'+
-          '<button type="button" class="bv-btn-primary" id="ptRun">Check this patient <span class="arw">&rarr;</span></button>'+
-          '<span class="bv-mapnote">Answered from the rules above &middot; no second model call</span>'+
-        '</div>'+
-        '<div id="ptOut"></div>'+
-      '</div>'+
       '<div class="bv-applybar">'+
         '<span class="bv-applytxt"><b>Or model the whole panel on it.</b> '+applyTxt+'</span>'+
         '<button type="button" class="bv-btn-apply" id="bvApply"'+(canApply?'':' disabled')+'>Model the panel <span class="arw">&rarr;</span></button>'+
@@ -3360,6 +3375,9 @@ a.sil-byline-author:hover { color: var(--teal-300); }
   }
 
   function runPolicy(){
+    if(!data.length){ polMsg("Run the sweep above first, so there is a calendar to add them to.",true);
+      try{ $("bvBoard").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }catch(e){}
+      return; }
     var txt=$("bvPolText").value.trim();
     if(txt.length<120){ polMsg("Paste a policy first, or load one of the samples.",true); $("bvPolText").focus(); return; }
     var btn=$("bvPolRun");
@@ -3370,13 +3388,16 @@ a.sil-byline-author:hover { color: var(--teal-300); }
         btn.disabled=false;
         if(!res.ok||res.d.error){ polMsg(res.d.error||"Could not read that policy. Try a sample.",true); return; }
         if(!res.d.rules||!res.d.rules.length){ polMsg("No 95165 rules found in that text. Is it an immunotherapy policy?",true); return; }
-        polMsg(""); polData=res.d; renderPolicy(res.d);
+        polMsg(""); polData=res.d;
+        /* the policy was only ever a means to an answer, so read it and answer
+           in one press rather than making someone ask twice */
+        window.__ptCard=runPatient(res.d);
+        renderPolicy(res.d);
       })
       .catch(function(){ btn.disabled=false; polMsg("Could not reach the reader. Please try again in a moment.",true); });
   }
 
   function runPatient(pol){
-    if(!data.length){ polMsg("Run the sweep above first, so there is a calendar to add them to.",true); return; }
     function n(id,d,min,max){ var v=parseFloat($(id).value); if(!isFinite(v))v=d;
       return Math.max(min,Math.min(max,v)); }
     var inp={
@@ -3401,12 +3422,15 @@ a.sil-byline-author:hover { color: var(--teal-300); }
       }
     }
     var f=addPatient(pol,inp,v);
-    $("ptOut").innerHTML='<div class="bv-ptv '+v.tone+'">'+
+    var card='<div class="bv-card"><div class="bv-dsec">'+esc(inp.ref)+', '+
+      (inp.remix?"booked for a vial re-mix":"booked for an injection")+'</div>'+
+      '<div class="bv-ptv '+v.tone+'">'+
       '<div class="pth">'+esc(v.head)+'</div>'+
       '<ul class="ptl">'+v.say.map(function(s){
         return '<li><b>'+esc(s.t)+'</b><span>'+esc(s.d)+'</span></li>'; }).join("")+'</ul>'+
-      '<p class="ptf">'+esc(inp.ref)+' is now on the calendar above, carrying this policy. '+
-        'Open their lane to see it beside the rest of the panel.</p></div>';
+      '<p class="ptf">'+esc(inp.ref)+' is on the calendar above now, carrying '+esc(pol.payer)+
+        '. Change anything and press the button again, or give the next patient a different'+
+        ' reference and a different policy.</p></div></div>';
     /* put them on the board next to everyone else, ranked the same way */
     sortLanes();
     lanesEl.innerHTML="";
@@ -3421,8 +3445,8 @@ a.sil-byline-author:hover { color: var(--teal-300); }
     data.forEach(function(x){ repaintLane(x); });
     refresh();
     var el=nodes[f.id];
-    if(el){ try{ $("bvBoard").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"}); }catch(e){}
-      setTimeout(function(){ if(!el.classList.contains("open")) el.querySelector(".bv-lanerow").click(); }, reduce?0:500); }
+    if(el) setTimeout(function(){ if(!el.classList.contains("open")) el.querySelector(".bv-lanerow").click(); }, reduce?0:400);
+    return card;
   }
 
   var polUnlocked=false;

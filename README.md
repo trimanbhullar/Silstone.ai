@@ -185,7 +185,7 @@ default, and each has a second path that calls a real model.
 |---|---|---|---|
 | [61-content.html](pages/live-demos/61-content.html) | Denial Recovery | Five canned EOB scenarios | Paste your own EOB, lead-gated, `POST /` |
 | [62-triage.html](pages/live-demos/62-triage.html) | Fax Triage | A busy morning of synthetic faxes | Paste your own fax, lead-gated, `POST /api/triage` |
-| [63-benefits.html](pages/live-demos/63-benefits.html) | Benefit Check, CPT 95165 | The panel plotted on a calendar you can scrub | Read a payer policy, lead-gated, `POST /api/policy` |
+| [63-benefits.html](pages/live-demos/63-benefits.html) | Benefit Check, CPT 95165 | The panel plotted on a calendar you can scrub | Add a patient and their payer's policy, lead-gated, `POST /api/policy` |
 
 All four routes live on **one Cloudflare Worker**, whose real source is
 [backend/live-worker](backend/live-worker). It runs Cloudflare Workers AI (Llama) through the
@@ -271,20 +271,35 @@ by fax, half-scanned, with two pages missing and OCR damage throughout. It yield
 three of them salvaged through the noise, and one flagged because the model stitched its quote
 across an `[illegible]` gap. That last one is the check earning its keep.
 
-Then **check a patient against it.** This is the pre-visit question, the one a coordinator
-actually has the day before a visit: can I mix this, how much of it gets paid, and do I need
-anything first. Seven fields, all things they have to hand and none of them patient data, and
-the answer comes back as something to act on:
+#### Add a patient
+
+The try-it-yourself half is **"Add a patient"**, in two steps and one press: who they are, then
+their payer's policy, then they appear on the calendar with everyone else. That order is the
+point. A patient is their own numbers *plus* their own payer's document, and reading a policy
+was never the goal in itself, so the demo no longer makes anyone ask for the answer twice.
+
+What comes back is the pre-visit question, the one a coordinator actually has the day before a
+visit: can I mix this, how much of it gets paid, and do I need anything first.
 
 > **Do not mix yet.** Bill 10 units, not 20: you draw 20 doses from a vial this payer pays 10
 > of, and the other 10 come back CO-151 every time. This payer requires precertification and
 > there is none on file.
 
-with the sentence from their policy under each clause. That patient then joins the calendar
-carrying **their own policy**, which is the point: one policy governs one plan, so every lane's
-detail says which document its rules came from. A lane built from a pasted policy says it was
-read by the agent and how much of it was evidenced; a lane on the synthetic panel says its rules
-are on file for that plan, and that a patient on a different payer is reading a different policy.
+with the sentence from their policy under each clause, and the answer sits **above** the
+evidence rather than under it, because the answer is what was wanted.
+
+That patient joins the calendar carrying **their own policy**. Add a second one on a different
+payer and you get a second lane governed by a different document, which is exactly the situation
+every practice is in. Every lane's detail says which policy its rules came from: one built from
+a pasted policy says it was read by the agent and how much of it was evidenced, one on the
+synthetic panel says its rules are on file for that plan, and that a patient on a different
+payer is reading a different policy. Re-using a reference updates that patient rather than
+putting a twin on the board.
+
+The form arrives filled in with a coherent example, so the first press produces an answer with
+no typing. Coherent matters: doses drawn this plan year, the monthly draw rate and the months
+left until renewal have to agree with each other, or the example teaches the reader that the
+tool does not check its own arithmetic.
 
 **The arithmetic is deterministic, not a second model call.** The agent's work was reading the
 policy once; after that, checking a patient against it is arithmetic, and arithmetic should be
