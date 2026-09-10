@@ -217,18 +217,22 @@ Block 63 started out the same way and it was the wrong shape, because the subjec
 A series runs three to five years; the plan year, the dose cap and the authorization paying for
 it do not. **That is a calendar problem, so the demo is a calendar.**
 
-Every patient is a lane running left to right across a 42-month board, and the legend is split
-into what the **bar** means and what the **markers** mean, because they answer different
-questions. The bar is the state: teal funded, coral hatch for series with nothing paying for
-them, violet stripes over teal where the payer pays for only part of every vial, amber stripes
-over teal where it is covered but the patient carries it. The markers are the causes: a neutral
-grey dot for a plan-year rollover (the one event that is not a problem), violet for an
-authorization expiring, amber for a dose bank running out, coral for coverage ending.
+Every patient is a lane running left to right across a 42-month board, and the bar answers
+exactly one question: **who pays, and how much of it.** Hue carries who — teal the payer, amber
+the patient, coral nobody — and height carries how much, so a payer that only covers part of
+each vial draws a part-height bar. The empty part is the part nobody is paying for, which is the
+whole point. Separately, the markers carry what changes and when: a neutral grey dot for a
+plan-year rollover (the one event that is not a problem), violet for an authorization expiring,
+amber for a dose bank running out, coral for coverage ending.
 
-Two rules hold that together. **Each hue means one thing** — coral is only ever "nothing is
-paying", which is why a part-paid vial had to move off it. And **the legend swatches are layered
-exactly as a lane draws them**, stripes over the funded teal rather than over the panel, so the
-legend cannot show a colour the chart never produces. Three things follow from that
+That encoding is the second attempt. The first gave each of four states its own treatment, which
+put three of them on teal and separated them with stripe patterns laid over a coloured field.
+The legend could name them and the board still could not be read at a glance: two channels were
+fighting in the same pixels. One scale, two channels, no patterns, and it reads instantly.
+
+The fills are also deliberately strong. The rest of this site runs its ambient layers at 15%
+opacity because they are decoration; the board is the only thing on the page anyone has to
+actually read, so it gets real data ink. Three things follow from that
 shape and none of them would work in a list:
 
 - **The scrubber.** Drag the handle and the whole book walks into the future. Two of the four
