@@ -1,0 +1,2129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fax Triage Demo | Silstone.AI</title>
+<meta name="description" content="Try the fax triage AI agent: watch an inbound fax get read, classified and routed into finished work automatically.">
+<link rel="canonical" href="https://www.silstone.ai/demo/fax-triage">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#08080B">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Silstone.AI">
+<meta property="og:title" content="Fax Triage Demo | Silstone.AI">
+<meta property="og:description" content="Try the fax triage AI agent: watch an inbound fax get read, classified and routed into finished work automatically.">
+<meta property="og:url" content="https://www.silstone.ai/demo/fax-triage">
+<meta property="og:image" content="https://www.silstone.ai/assets/og.9e039572.png">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fax Triage Demo | Silstone.AI">
+<meta name="twitter:description" content="Try the fax triage AI agent: watch an inbound fax get read, classified and routed into finished work automatically.">
+<meta name="twitter:image" content="https://www.silstone.ai/assets/og.9e039572.png">
+
+<link rel="icon" href="/assets/favicon.018c3355.png">
+<link rel="apple-touch-icon" href="/assets/favicon.018c3355.png">
+
+<!-- fonts loaded directly (was a serial @import inside the CSS) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+
+<style>html,body{margin:0;padding:0;background:#08080B;}</style>
+<link rel="stylesheet" href="/assets/silstone.7cb3e81a.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Silstone.AI","url":"https://www.silstone.ai/","logo":"https://www.silstone.ai/assets/logo-mark.950ffdaa.png","description":"Healthcare-native AI studio that designs, builds and deploys custom AI agents to automate back-office work for medical and dental practices.","contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"sales@silstonegroup.com","telephone":"+1-613-558-5913"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.silstone.ai/"},{"@type":"ListItem","position":2,"name":"Fax Triage Demo","item":"https://www.silstone.ai/demo/fax-triage"}]}</script>
+</head>
+<body>
+<!--
+  SILSTONE.AI - SECTION 01 - NAVIGATION
+  Hostinger: Embed code block, FULL WIDTH, at the very top of the page.
+  Suggested height 76px. Set the block background to transparent.
+
+  LOGO: the <img> below uses the real wordmark from the design system, inlined
+  as a data URI so it works with zero setup. Once you upload logo-mark.png to
+  Hostinger's media library, replace the src with that URL to trim page weight.
+
+  Update the href values to match your real Hostinger page slugs.
+-->
+<div class="sil-root">
+<header class="sil-nav" id="silNav">
+  <div class="sil-nav-inner">
+
+    <a href="/" target="_top" class="sil-logo" aria-label="Silstone.AI home">
+      <img class="sil-logo-img" src="/assets/logo-mark.950ffdaa.png" alt="Silstone.AI" width="375" height="97">
+    </a>
+
+    <nav class="sil-nav-links" id="silNavLinks" aria-label="Main">
+
+      <div class="sil-nav-item sil-has-menu">
+        <button type="button" class="sil-nav-trigger" aria-expanded="false" aria-haspopup="true">
+          Solutions
+          <svg class="sil-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="sil-menu" role="menu">
+          <a href="https://www.silstone.ai/what-we-build" target="_top" role="menuitem">
+            <span class="sil-menu-t">What we build</span>
+            <span class="sil-menu-d">The knowledge brain &amp; custom agents</span>
+          </a>
+          <a href="https://www.silstone.ai/dental-automation" target="_top" role="menuitem">
+            <span class="sil-menu-t">Dental automation</span>
+            <span class="sil-menu-d">Fax triage, underpayments, credentialing</span>
+          </a>
+          <a href="https://www.silstone.ai/physical-therapy-automation" target="_top" role="menuitem">
+            <span class="sil-menu-t">Physical therapy automation</span>
+            <span class="sil-menu-d">Prior auth, thresholds, KX, payer follow ups</span>
+          </a>
+          <a href="https://www.silstone.ai/rheumatology-automation" target="_top" role="menuitem">
+            <span class="sil-menu-t">Rheumatology automation</span>
+            <span class="sil-menu-d">Biologic prior auth, appeals, denials</span>
+          </a>
+          <a href="https://www.silstone.ai/aesthetics-automation" target="_top" role="menuitem">
+            <span class="sil-menu-t">Aesthetics automation</span>
+            <span class="sil-menu-d">Enquiries, bookings, back-office admin</span>
+          </a>
+        </div>
+      </div>
+
+      <a class="sil-nav-item sil-nav-demo" href="https://www.silstone.ai/live-demos" target="_top">
+        <span class="sil-demo-dot" aria-hidden="true"></span>Live demos
+      </a>
+
+      <a class="sil-nav-item" href="https://www.silstone.ai/pricing" target="_top">Pricing</a>
+
+      <a class="sil-nav-item" href="https://www.silstone.ai/trust-and-security" target="_top">Trust &amp; security</a>
+
+      <div class="sil-nav-item sil-has-menu">
+        <button type="button" class="sil-nav-trigger" aria-expanded="false" aria-haspopup="true">
+          Company
+          <svg class="sil-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="sil-menu" role="menu">
+          <a href="https://www.silstone.ai/why-silstone" target="_top" role="menuitem">
+            <span class="sil-menu-t">Why Silstone</span>
+            <span class="sil-menu-d">Built inside healthcare, not adjacent</span>
+          </a>
+          <a href="https://www.silstone.ai/blog" target="_top" role="menuitem">
+            <span class="sil-menu-t">Blog</span>
+            <span class="sil-menu-d">Field notes on healthcare AI</span>
+          </a>
+        </div>
+      </div>
+
+      <a class="sil-nav-item sil-nav-cta-m" href="https://www.silstone.ai/contact" target="_top">Book a scoping call</a>
+
+    </nav>
+
+    <div class="sil-nav-right">
+      <a href="https://www.silstone.ai/contact" target="_top" class="sil-btn sil-btn-primary sil-btn-sm is-auto">Book a scoping call</a>
+      <button class="sil-burger" id="silBurger" aria-label="Open menu" aria-expanded="false" aria-controls="silNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+</div>
+
+<style>
+.sil-nav {
+  position: sticky; top: 0; z-index: 900; width: 100%;
+  background: var(--bg-canvas);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--duration-base) var(--ease-standard);
+}
+.sil-nav.is-stuck { border-bottom-color: var(--border-subtle); }
+.sil-nav.is-stuck::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal-500), transparent); opacity: .45;
+}
+.sil-nav-inner {
+  max-width: var(--container-max); margin: 0 auto;
+  padding: var(--space-4) var(--container-pad);
+  display: flex; align-items: center; gap: var(--space-6);
+}
+
+.sil-logo { display: inline-flex; align-items: center; flex: none; }
+/* Height comes from --nav-logo-h in assets/silstone.css, because the blog's
+   heading offsets and sticky TOC are derived from the same value -- change it
+   there and the bar and everything that has to clear it move together. The
+   wordmark ships at 375x97, so it is still downscaling here and stays crisp. */
+.sil-logo-img { height: var(--nav-logo-h, 55px); width: auto; }
+
+.sil-nav-links { display: flex; align-items: center; gap: var(--space-6); margin-left: auto; }
+.sil-nav-links a {
+  position: relative; padding: 6px 0;
+  font-size: var(--text-body-s-size); font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+.sil-nav-links a:hover { color: var(--teal-300); }
+.sil-nav-links a.is-active { color: var(--text-primary); }
+.sil-nav-links a.is-active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+  border-radius: 2px; background: var(--teal-500);
+}
+
+.sil-nav-right { display: flex; align-items: center; gap: var(--space-3); flex: none; }
+
+.sil-burger {
+  display: none; width: 40px; height: 40px; border-radius: var(--radius-md);
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  border: 1px solid var(--border-default); background: transparent;
+  transition: border-color var(--duration-base) var(--ease-standard);
+}
+.sil-burger:hover { border-color: var(--teal-500); }
+.sil-burger span {
+  display: block; width: 17px; height: 1.5px; border-radius: 2px; background: var(--text-primary);
+  transition: transform var(--duration-base) var(--ease-standard), opacity var(--duration-fast);
+}
+.sil-burger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.sil-burger.is-open span:nth-child(2) { opacity: 0; }
+.sil-burger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 980px) {
+  .sil-burger { display: flex; }
+  .sil-nav-links {
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    margin-left: 0; padding: var(--space-2) var(--container-pad) var(--space-5);
+    background: var(--bg-canvas);
+    border-bottom: 1px solid var(--border-subtle);
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: opacity var(--duration-base) var(--ease-standard),
+                transform var(--duration-base) var(--ease-standard),
+                visibility var(--duration-base);
+  }
+  .sil-nav-links.is-open { opacity: 1; visibility: visible; transform: none; }
+  .sil-nav-links a { padding: var(--space-4) 0; font-size: var(--text-body-m-size); border-bottom: 1px solid var(--border-subtle); }
+  .sil-nav-links a:last-child { border-bottom: 0; }
+  .sil-nav-links a.is-active::after { display: none; }
+  .sil-nav-right .sil-btn { display: none; }
+}
+
+/* ============ grouped nav: triggers, dropdowns, demo highlight ============ */
+.sil-nav-item { position: relative; }
+
+.sil-root .sil-nav-trigger,
+.sil-root a.sil-nav-item {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 0; margin: 0; background: none; border: 0; cursor: pointer;
+  font-family: inherit; font-size: var(--text-body-s-size);
+  font-weight: var(--font-weight-medium); color: var(--text-secondary);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+.sil-nav-trigger:hover, a.sil-nav-item:hover,
+.sil-has-menu:hover .sil-nav-trigger,
+.sil-nav-trigger.is-active { color: var(--teal-300); }
+
+.sil-caret { width: 9px; height: 6px; opacity: .8;
+  transition: transform var(--duration-base) var(--ease-standard); }
+.sil-has-menu:hover .sil-caret,
+.sil-has-menu.is-open .sil-caret { transform: rotate(180deg); }
+
+.sil-menu {
+  position: absolute; top: calc(100% + 12px); left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 264px; padding: var(--space-2);
+  display: flex; flex-direction: column; gap: 2px;
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard),
+              visibility var(--duration-base);
+  z-index: 950;
+}
+/* invisible hover bridge so the 12px gap doesn't drop the menu */
+.sil-menu::before { content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
+.sil-has-menu:hover .sil-menu,
+.sil-has-menu:focus-within .sil-menu,
+.sil-has-menu.is-open .sil-menu {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.sil-menu a {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 9px 12px; border-radius: var(--radius-md); border-bottom: 0 !important;
+}
+.sil-menu a::after { display: none !important; }
+.sil-menu a:hover { background: var(--bg-surface-3); }
+.sil-menu-t { font-size: var(--text-body-s-size); font-weight: var(--font-weight-semibold); color: var(--text-primary); }
+.sil-menu a:hover .sil-menu-t { color: var(--teal-300); }
+.sil-menu-d { font-size: 12px; line-height: 1.35; color: var(--text-tertiary); }
+.sil-menu a.is-active { background: var(--bg-surface-3); }
+.sil-menu a.is-active .sil-menu-t { color: var(--teal-300); }
+
+/* Live demos: the conversion highlight */
+a.sil-nav-demo { color: var(--text-primary); }
+.sil-demo-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--teal-500);
+  animation: silDemoPulse 2.4s ease-out infinite;
+}
+@keyframes silDemoPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(45,217,211,.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(45,217,211,0); }
+  100% { box-shadow: 0 0 0 0 rgba(45,217,211,0); }
+}
+@media (prefers-reduced-motion: reduce) { .sil-demo-dot { animation: none; } }
+
+/* Book-a-call sits in the header on desktop; this in-sheet copy is mobile-only */
+a.sil-nav-item.sil-nav-cta-m { display: none; }
+
+/* ---- mobile: dropdowns become tap-accordions inside the burger sheet ---- */
+@media (max-width: 980px) {
+  .sil-nav-right { margin-left: auto; }   /* burger to the far right of the bar */
+  .sil-nav-links { padding-bottom: var(--space-4); }
+  .sil-nav-item { width: 100%; }
+
+  .sil-root .sil-nav-trigger,
+  .sil-root a.sil-nav-item {
+    width: 100%;
+    padding: var(--space-4) 0; font-size: var(--text-body-m-size);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .sil-nav-trigger { justify-content: space-between; }          /* label | caret */
+  a.sil-nav-item { justify-content: flex-start; gap: 10px; }    /* dot hugs its text */
+
+  /* an open group reads as one unit: drop the row line, indent under a teal spine */
+  .sil-has-menu.is-open > .sil-nav-trigger { border-bottom-color: transparent; }
+  .sil-menu {
+    position: static; transform: none; min-width: 0; width: 100%;
+    margin: 0 0 2px; padding: 2px 0 var(--space-3) var(--space-4);
+    background: none; border: 0; border-left: 2px solid var(--teal-700);
+    border-radius: 0; box-shadow: none;
+    display: none; opacity: 1; visibility: visible; pointer-events: auto;
+  }
+  .sil-has-menu.is-open .sil-menu { display: flex; transform: none; }
+  .sil-menu::before { display: none; }
+  .sil-menu a { padding: var(--space-3) 0; }
+  .sil-menu a:hover { background: none; }
+  .sil-menu-t { font-weight: var(--font-weight-medium); color: var(--text-secondary); }
+  .sil-menu a:hover .sil-menu-t,
+  .sil-menu a.is-active .sil-menu-t { color: var(--teal-300); }
+  .sil-menu-d { display: none; }
+
+  /* full-width Book-a-call at the bottom of the sheet */
+  a.sil-nav-item.sil-nav-cta-m {
+    display: flex; justify-content: center; gap: 0;
+    margin-top: var(--space-5); padding: var(--space-4);
+    border: 0; border-radius: var(--radius-md);
+    background: var(--accent); color: var(--text-on-accent);
+    font-weight: var(--font-weight-semibold); box-shadow: var(--shadow-sm);
+  }
+  a.sil-nav-item.sil-nav-cta-m:hover { background: var(--accent-hover); color: var(--text-on-accent); }
+}
+</style>
+
+<script>
+(function () {
+  var nav = document.getElementById('silNav');
+  var burger = document.getElementById('silBurger');
+  var links = document.getElementById('silNavLinks');
+  if (!nav || nav.__init) return;
+  nav.__init = true;
+
+  var onScroll = function () { nav.classList.toggle('is-stuck', window.scrollY > 12); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  burger.addEventListener('click', function () {
+    var open = links.classList.toggle('is-open');
+    burger.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+
+  var groups = links.querySelectorAll('.sil-has-menu');
+  function closeGroups(except) {
+    groups.forEach(function (g) {
+      if (g === except) return;
+      g.classList.remove('is-open');
+      var t = g.querySelector('.sil-nav-trigger');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  // Click / tap / keyboard toggle for each dropdown (drives mobile accordion
+  // and desktop keyboard use; hover is handled in CSS).
+  groups.forEach(function (g) {
+    var trigger = g.querySelector('.sil-nav-trigger');
+    trigger.addEventListener('click', function () {
+      var open = g.classList.toggle('is-open');
+      closeGroups(g);
+      trigger.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  links.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      links.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      closeGroups(null);
+    }
+  });
+
+  // Close open dropdowns on outside click or Escape.
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.sil-has-menu')) closeGroups(null);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeGroups(null);
+  });
+
+  // Active state: highlight the current page's link, and its parent group.
+  var here = location.pathname.replace(/\/+$/, '') || '/';
+  links.querySelectorAll('a').forEach(function (a) {
+    var href = a.getAttribute('href').replace(/\/+$/, '') || '/';
+    if (href !== '/' && here.indexOf(href) === 0) {
+      a.classList.add('is-active');
+      var g = a.closest('.sil-has-menu');
+      if (g) { var t = g.querySelector('.sil-nav-trigger'); if (t) t.classList.add('is-active'); }
+    }
+  });
+})();
+</script>
+
+<!--
+  SILSTONE.AI - PAGE: LIVE-DEMOS - BLOCK 62 - FAX TRIAGE DEMO
+  Hostinger: Embed code block, FULL WIDTH. Second demo in the list.
+  Fax is the channel every one of these documents arrives on, so the refill
+  protocol check and the prior-auth appeal packet live HERE as work surfaces
+  on the fax, not as separate demos (block 63 was retired into this one).
+  "Simulate a busy morning" runs a client-side simulation on SYNTHETIC faxes.
+  "Paste your own fax" calls the SAME Cloudflare Worker backend as demo 1
+  (Claude via /api/triage), with a client-side heuristic fallback if the API
+  is unreachable. Carries the shared "notify / next demo" signup, which must
+  always sit in the LAST block on the page - move it if a block 63 returns.
+  Markup + trailing <style>/<script> live OUTSIDE the SIL:GLOBAL markers;
+  run build-embeds.py to bake the system in.
+-->
+<div class="sil-root">
+  <!-- ==================== SUB-HERO ==================== -->
+  <section class="sil-section is-alt has-tint acc-teal" style="padding:var(--space-12) 0 var(--space-8)">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container sil-center">
+      <span class="sil-eyebrow sil-reveal"><i class="dot"></i>Live demo&nbsp;&middot;&nbsp;Fax Triage</span>
+      <h1 class="sil-display-l sil-mt-4 sil-reveal" style="--d:70ms">Turn the fax pile into <span class="sil-gt">finished work.</span></h1>
+      <p class="sil-body-l sil-mt-4 sil-hero-sub sil-reveal" style="--d:140ms">
+        A clinic takes in 50&ndash;200 faxes a day &mdash; referrals, results, prior-auth replies, refills &mdash; all mixed together, oldest first. Press the button and watch the agent read each one, re-stack the pile by clinical urgency, and carry each document to the point where one human click finishes it: refills checked against your protocol and cleared as a batch, denials assembled into an appeal against the deadline.
+      </p>
+      <div class="sil-hero-chips sil-mt-4 sil-reveal" style="--d:210ms">
+        <span class="sil-chip"><i class="dot"></i>Built on Claude</span>
+        <span class="sil-chip"><i class="dot"></i>Synthetic faxes &middot; no real PHI</span>
+        <span class="sil-chip"><i class="dot"></i>Runs in your browser</span>
+        <span class="sil-chip"><i class="dot"></i>The same pipeline as production</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE DEMO ==================== -->
+  <section class="sil-section" style="padding:var(--space-8) 0 var(--space-12)">
+    <div class="sil-cursorglow" aria-hidden="true"></div>
+    <div class="sil-container">
+      <!-- Light / Dark switch. Governs ONLY the demo panel it names in
+           aria-controls -- never the heading above it -- and the choice is
+           remembered per demo. See silstone.js > "the Light / Dark switch". -->
+      <div class="sil-democtl">
+        <div class="sil-themetoggle" role="radiogroup" aria-labelledby="silTheme62" aria-controls="trgDemo">
+          <span class="sil-themetoggle-label" id="silTheme62">Demo appearance</span>
+          <div class="sil-themetoggle-set">
+            <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="light" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>Light</button>
+            <button type="button" class="sil-themetoggle-btn" role="radio" data-theme="dark" aria-checked="true" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></svg>Dark</button>
+          </div>
+        </div>
+      </div>
+      <div class="trg-demo" id="trgDemo" data-sil-themed="fax-triage">
+        <script>/* No-flash: resolve this demo's stored Light/Dark choice before it paints. */
+        (function(){try{var r=document.currentScript.parentNode,t=localStorage.getItem('sil-theme:'+r.getAttribute('data-sil-themed'));
+        if(t!=='light'&&t!=='dark')t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+        r.setAttribute('data-sil-theme',t);}catch(e){}})();</script>
+
+        <!-- PHI / privacy disclaimer (top) -->
+        <div class="trg-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.2 2.8 20h18.4L12 4.2Z"/><line x1="12" y1="10" x2="12" y2="14.2"/><line x1="12" y1="17" x2="12" y2="17.1"/></svg>
+          <span class="trg-note-tag">Synthetic data only</span>
+          <span>Anything you paste is analysed for triage and never stored &mdash; even so, <b>do not paste real patient information (PHI)</b>.</span>
+        </div>
+
+        <!-- controls -->
+        <div class="trg-controls">
+          <button type="button" class="trg-btn-primary" id="trgSim">Simulate a busy morning <span class="arw">&rarr;</span></button>
+          <button type="button" class="trg-btn-ghost" id="trgPasteToggle">Paste your own fax</button>
+          <button type="button" class="trg-btn-ghost" id="trgReset">Reset</button>
+        </div>
+
+        <!-- paste-your-own panel (lead gate -> editor) -->
+        <div class="trg-paste" id="trgPaste">
+          <div class="trg-lead" id="trgLead">
+            <h3 class="trg-lead-title">Run it on <span class="sil-gt">your own fax</span></h3>
+            <p class="trg-lead-sub">Enter your details to unlock the tool and triage your own document in real time — live, against the rest of the queue.</p>
+            <form id="trgLeadForm" novalidate>
+              <label class="sil-sr" for="trgLName">Full name</label>
+              <input type="text" name="name" id="trgLName" placeholder="Dr. Smith" required>
+              <label class="sil-sr" for="trgLEmail">Work email</label>
+              <input type="email" name="email" id="trgLEmail" placeholder="you@practice.com" required>
+              <label class="sil-sr" for="trgLPhone">Phone number</label>
+              <input type="tel" name="phone" id="trgLPhone" placeholder="(555) 123-4567" required>
+              <input type="hidden" name="access_key" value="94814fe7-9502-4b6a-b862-44da6cbe1576">
+              <input type="hidden" name="subject" value="Demo request: Fax Triage Agent">
+              <input type="hidden" name="from_name" value="Silstone.AI - Live Demo">
+              <input type="checkbox" name="botcheck" class="sil-sr" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+              <button type="submit" class="trg-btn-primary" id="trgLeadBtn" style="width:100%">Unlock the tool <span class="arw">&rarr;</span></button>
+            </form>
+            <p class="trg-lead-micro">Use sample or de-identified data only. We respect your privacy.</p>
+          </div>
+          <div class="trg-paste-editor" id="trgPasteEditor" style="display:none">
+            <label class="trg-paste-lbl" for="trgPasteText">Paste a fax (or any clinical document) below, then watch the agent read it and slot it into the queue against everything else.</label>
+            <textarea id="trgPasteText" spellcheck="false" placeholder="Paste a fax here — for example:&#10;&#10;PRIOR AUTHORIZATION DETERMINATION&#10;Member: Jane Doe   DOB: 04/12/1968&#10;Requested: MRI lumbar spine&#10;DETERMINATION: DENIED — not medically necessary. You may appeal within 5 business days."></textarea>
+            <div class="trg-paste-row">
+              <button type="button" class="trg-btn-primary" id="trgPasteRun">Prioritize my fax <span class="arw">&rarr;</span></button>
+              <button type="button" class="trg-link" id="trgPasteSample">Fill a sample</button>
+              <span class="trg-paste-note">Sent for analysis &middot; not stored</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- stats -->
+        <div class="trg-stats">
+          <div class="trg-stat"><div class="v" id="trgVRead">0</div><div class="l">Faxes read</div></div>
+          <div class="trg-stat"><div class="v trg-c-p1" id="trgVP1">0</div><div class="l">P1 &middot; critical</div></div>
+          <div class="trg-stat"><div class="v trg-c-p2" id="trgVP2">0</div><div class="l">P2 &middot; urgent</div></div>
+          <div class="trg-stat"><div class="v trg-c-mut" id="trgVFilt">0</div><div class="l">Auto-filtered junk</div></div>
+          <div class="trg-stat"><div class="v trg-c-teal" id="trgVTime">0h</div><div class="l">Staff time saved</div></div>
+        </div>
+
+        <!-- actions ledger -->
+        <div class="trg-board" id="trgLedger" hidden>
+          <div class="trg-bhead">
+            <span class="trg-ldlbl">Where each action goes</span>
+            <span class="trg-btotal" id="trgBTotal">nothing actioned yet</span>
+            <button type="button" class="trg-btn-clear" id="trgClear">Approve all &amp; clear the pile <span class="arw">&rarr;</span></button>
+          </div>
+          <div class="trg-dests" id="trgDests"></div>
+        </div>
+
+        <!-- panel: queue + detail -->
+        <div class="trg-panel">
+          <div class="trg-queuewrap">
+            <div class="trg-qhead">
+              <button type="button" class="trg-back" id="trgBack" hidden><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 3.2L4.8 7l3.8 3.8"/></svg>Back</button>
+              <span class="trg-qtitle" id="trgQTitle">Priority queue</span>
+              <span class="trg-prog" id="trgProg">idle</span>
+            </div>
+            <ul class="trg-queue" id="trgQueue">
+              <div class="trg-empty" id="trgEmpty">
+                <div class="trg-empty-ico">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/></svg>
+                </div>
+                <h3>The queue is empty</h3>
+                <p>Hit &ldquo;Simulate a busy morning&rdquo; &mdash; or paste your own fax &mdash; to watch the pipeline work.</p>
+              </div>
+            </ul>
+            <div class="trg-boxview" id="trgBoxView" hidden></div>
+          </div>
+
+          <aside class="trg-detail" id="trgDetail">
+            <div class="trg-dempty" id="trgDempty">
+              <h3>Nothing selected</h3>
+              <p>Select a fax to see the original page beside the fields the agent pulled out.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The shared "notify / next demo" signup used to sit here. It always lives
+       in the LAST block on the page, so it moved to 63-benefits.html when the
+       benefit agent landed. -->
+</div>
+
+<style>
+/* ============ Silstone Triage demo (block-scoped) ============ */
+.trg-demo{ --p1:var(--coral-500); --p2:var(--amber-400); --p3:var(--teal-500); --p4:var(--mint-400);
+  --p1w:rgba(240,133,94,.14); --p2w:rgba(239,193,120,.14); --p3w:rgba(45,217,211,.13); --p4w:rgba(94,224,168,.14);
+  --vw:rgba(110,86,207,.16);
+  max-width:1120px; margin:0 auto; }
+.trg-demo *{box-sizing:border-box}
+
+.trg-note{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;font-size:12px;line-height:1.45;
+  color:var(--amber-300);background:rgba(239,193,120,.08);border:1px solid rgba(239,193,120,.28);
+  border-radius:11px;padding:10px 13px;margin-bottom:12px}
+.trg-note svg{flex:none;color:var(--amber-400)}
+.trg-note b{color:var(--amber-200);font-weight:600}
+.trg-demo .trg-note-tag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 8px;border-radius:5px;flex:none;
+  background:rgba(239,193,120,.16);color:var(--amber-300)}
+
+.trg-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.trg-demo button{font-family:inherit;cursor:pointer;border:none;font-weight:600}
+.trg-demo button:active{transform:translateY(1px)}
+.trg-demo button:disabled{opacity:.5;cursor:default}
+.trg-demo .trg-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 24px;border-radius:var(--radius-pill);font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--text-on-accent);background:var(--grad-primary);background-size:200% 200%;box-shadow:var(--shadow-sm);cursor:pointer;transition:box-shadow .2s,transform .2s;animation:silGradShift 10s ease-in-out infinite}
+.trg-demo .trg-btn-primary:hover{box-shadow:0 8px 28px rgba(124,107,240,.34);transform:translateY(-1px);color:var(--text-on-accent)}
+.trg-demo .trg-btn-primary:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none;animation:none}
+.trg-demo .trg-btn-primary .arw{transition:transform .2s}
+.trg-demo .trg-btn-primary:hover .arw{transform:translateX(3px)}
+.trg-demo .trg-btn-ghost{background:none;border:0;color:var(--text-tertiary);font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:color .2s;padding:8px 4px}
+.trg-demo .trg-btn-ghost:hover{color:var(--text-primary)}
+.trg-demo .trg-btn-ghost.active{color:var(--violet-300)}
+.trg-link{background:none;color:var(--violet-300);font-size:13px;font-weight:500;padding:6px 4px}
+.trg-link:hover{color:var(--violet-200)}
+
+.trg-paste{display:none;margin-bottom:18px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:14px;padding:16px 18px}
+.trg-paste.open{display:block;animation:trgEnter .25s ease}
+.trg-paste-lbl{display:block;font-size:13px;color:var(--text-secondary);margin-bottom:10px}
+.trg-paste textarea{width:100%;min-height:210px;resize:vertical;background:var(--bg-surface-3);border:1px solid var(--border-default);border-radius:10px;color:var(--text-primary);font-family:var(--font-mono);font-size:13.5px;padding:14px 15px;line-height:1.6}
+.trg-paste textarea:focus{outline:none;border-color:var(--violet-500)}
+.trg-paste-row{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.trg-paste-note{font-family:var(--font-mono);font-size:11px;color:var(--text-quaternary);margin-left:auto}
+/* lead gate — exact match to demo 1's .drd-email-box */
+.trg-demo .trg-lead{max-width:440px;margin:0 auto;text-align:center;background:var(--bg-surface);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:clamp(24px,3vw,40px)}
+.trg-demo .trg-lead-title{font-family:var(--font-display);font-size:1.25rem;font-weight:600;color:var(--text-primary)}
+.trg-demo .trg-lead-sub{font-size:var(--text-body-s-size);line-height:1.6;color:var(--text-secondary);margin-top:var(--space-3);margin-bottom:var(--space-5)}
+.trg-demo .trg-lead input{width:100%;padding:14px 16px;margin-bottom:var(--space-4);border-radius:var(--radius-md);background:var(--bg-surface-raised);border:1px solid var(--border-subtle);color:var(--text-primary);font-size:14px;font-family:var(--font-body);outline:none;transition:border-color .2s}
+.trg-demo .trg-lead input:focus{border-color:var(--violet-500)}
+.trg-demo .trg-lead input::placeholder{color:var(--text-quaternary)}
+.trg-demo .trg-lead .trg-btn-primary{margin-top:var(--space-2)}
+.trg-demo .trg-lead-micro{font-size:12px;color:var(--text-quaternary);text-align:center;margin-top:var(--space-4)}
+
+.trg-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px}
+.trg-stat{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:11px 13px}
+.trg-stat .v{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.3rem;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--text-primary)}
+.trg-stat .l{font-size:11px;color:var(--text-quaternary);margin-top:5px;letter-spacing:.02em}
+.trg-c-p1{color:var(--coral-500)!important} .trg-c-p2{color:var(--amber-400)!important}
+.trg-c-teal{color:var(--teal-500)!important} .trg-c-mut{color:var(--text-quaternary)!important}
+.trg-stat.trg-flash .v{animation:trgFlash 1s ease}
+@keyframes trgFlash{0%,100%{color:var(--coral-500)}50%{color:#fff}}
+
+.trg-panel{display:grid;grid-template-columns:1fr 440px;gap:16px}
+.trg-queuewrap,.trg-detail{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:16px;height:clamp(460px,calc(100vh - 365px),650px);display:flex;flex-direction:column;overflow:hidden}
+.trg-qhead{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:9px 16px;border-bottom:1px solid var(--border-subtle);flex:none;min-height:46px}
+.trg-qtitle{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary)}
+.trg-prog{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}
+.trg-queue{list-style:none;margin:0;padding:6px;overflow-y:auto;flex:1}
+
+.trg-empty,.trg-dempty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:40px 24px;color:var(--text-quaternary)}
+.trg-empty-ico{width:52px;height:52px;border-radius:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--text-quaternary)}
+.trg-empty h3,.trg-dempty h3{margin:0 0 6px;color:var(--text-secondary);font-size:15px;font-weight:600}
+.trg-empty p,.trg-dempty p{margin:0;font-size:13.5px;max-width:36ch}
+
+.trg-row{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;padding:9px 12px;border-radius:11px;cursor:pointer;border:1px solid transparent;position:relative;overflow:hidden}
+.trg-row:hover{background:var(--bg-surface-raised)}
+.trg-row.sel{background:var(--bg-surface-raised);border-color:var(--border-default)}
+.trg-row.mine{box-shadow:inset 0 0 0 1.5px var(--violet-500)}
+.trg-row.enter{animation:trgEnter .34s ease}
+.trg-row.settle{animation:trgSettle .5s ease}
+@keyframes trgEnter{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes trgSettle{0%{background:var(--vw)}100%{background:transparent}}
+.trg-band{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:5px 0;border-radius:7px;text-align:center;letter-spacing:.03em;position:relative;z-index:1}
+.trg-band.P1{background:var(--p1w);color:var(--p1)} .trg-band.P2{background:var(--p2w);color:var(--p2)}
+.trg-band.P3{background:var(--p3w);color:var(--p3)} .trg-band.P4{background:var(--p4w);color:var(--p4)}
+.trg-band.FILTER{background:var(--bg-surface-3);color:var(--text-quaternary)}
+.trg-band.reading{background:var(--vw);color:var(--violet-300)}
+.trg-rmain{min-width:0;position:relative;z-index:1}
+.trg-rtitle{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary);display:flex;align-items:center}
+.trg-rtitle .who{color:var(--text-quaternary);font-weight:400;margin-left:5px;overflow:hidden;text-overflow:ellipsis}
+.trg-ico{display:inline-flex;width:16px;height:16px;flex:none;margin-right:8px}
+.trg-ico svg{width:16px;height:16px}
+.trg-you{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;background:var(--vw);color:var(--violet-300);padding:2px 6px;border-radius:5px;margin-left:8px;flex:none}
+.trg-rreason{font-size:12px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+.trg-rreason.reading{color:var(--violet-300);font-family:'IBM Plex Mono',monospace;font-size:12px}
+.trg-pbar{height:3px;border-radius:2px;background:var(--bg-surface-3);margin-top:9px;overflow:hidden}
+.trg-pbar>i{display:block;height:100%;width:4%;border-radius:2px;background:linear-gradient(90deg,var(--violet-500),var(--teal-500))}
+.trg-rmeta{text-align:right;white-space:nowrap;position:relative;z-index:1}
+.trg-rmeta .pt{font-size:13px;font-weight:500;color:var(--text-primary)}
+.trg-rmeta .sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:3px}
+.trg-dot{display:inline-block;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:5px}
+.trg-scan{position:absolute;inset:0;pointer-events:none;z-index:0}
+.trg-scan::after{content:"";position:absolute;top:0;bottom:0;width:36%;left:-40%;background:linear-gradient(90deg,transparent,rgba(165,148,255,.14),transparent);animation:trgSweep 1.15s linear infinite}
+@keyframes trgSweep{to{left:120%}}
+
+.trg-dhead{padding:12px 15px;border-bottom:1px solid var(--border-subtle);flex:none}
+.trg-dhead .row1{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.trg-dtype{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary)}
+.trg-conf{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary)}
+.trg-dfrom{font-size:12.5px;color:var(--text-secondary)}
+.trg-dbody{overflow-y:auto;padding:13px 15px}
+.trg-dsec{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-quaternary);margin:0 0 8px}
+.trg-page{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:12px 14px;font-size:11.5px;line-height:1.6;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word}
+.trg-page .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--text-primary);margin-bottom:2px}
+.trg-page .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
+.trg-page.clip{max-height:148px;overflow:hidden;position:relative}
+.trg-page.clip::after{content:"";position:absolute;left:0;right:0;bottom:0;height:66px;background:linear-gradient(to bottom,transparent,var(--bg-surface-3))}
+.trg-demo .trg-pagemore{display:block;margin:8px 0 0;padding:6px 0;background:none;border:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;color:var(--violet-300);cursor:pointer}
+.trg-mk{background:var(--p1w);color:var(--coral-500);padding:1px 5px;border-radius:4px;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px}
+.trg-fields{list-style:none;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--border-subtle);display:grid;gap:8px}
+.trg-fields li{display:grid;grid-template-columns:108px 1fr;gap:12px;align-items:baseline}
+.trg-fields .k{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-quaternary);text-transform:uppercase;letter-spacing:.04em}
+.trg-fields .val{font-size:12.5px;color:var(--text-primary);font-weight:500}
+.trg-why{margin-top:14px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--teal-500);border-radius:0 11px 11px 0;padding:10px 12px}
+.trg-why .wk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
+.trg-why .wv{font-size:13px;color:var(--text-primary)}
+.trg-why .sla{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary)}
+
+
+/* ---- action layer: what happens next + ledger ---- */
+.trg-board{background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:12px;padding:10px 13px 12px;margin-bottom:12px;display:flex;flex-direction:column;gap:9px}
+.trg-board[hidden]{display:none}
+.trg-bhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.trg-demo .trg-ldlbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-quaternary);flex:none}
+.trg-demo .trg-btotal{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary);flex:1;min-width:120px}
+.trg-dests{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.trg-demo .trg-dest{background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:11px;padding:9px 11px;display:flex;flex-direction:column;gap:4px;min-width:0;transition:border-color .3s,transform .3s}
+.trg-demo .trg-dest .dtop{display:flex;align-items:center;gap:7px;min-width:0}
+.trg-demo .trg-dest .di{width:15px;height:15px;flex:none;display:flex}
+.trg-demo .trg-dest .di svg{width:15px;height:15px}
+.trg-demo .trg-dest .dl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-quaternary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trg-demo .trg-dest .dv{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.15rem;line-height:1;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.trg-demo .trg-dest .dlast{font-size:10.5px;line-height:1.35;color:var(--text-quaternary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:14px}
+.trg-dest.aim{border-color:currentColor;transform:translateY(-2px)}
+.trg-dest.hit{animation:trgHit .8s cubic-bezier(.3,.8,.3,1)}
+@keyframes trgHit{0%{border-color:var(--border-subtle)}14%{border-color:currentColor;transform:translateY(-3px)}100%{border-color:var(--border-subtle);transform:none}}
+.trg-fly{position:fixed;z-index:9999;pointer-events:none;font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:5px 9px;border-radius:7px;background:var(--bg-surface-3);border:1px solid var(--border-default);color:var(--text-primary);white-space:nowrap;max-width:190px;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.trg-fly.filed{border-color:var(--teal-500)} .trg-fly.sign{border-color:var(--violet-500)}
+.trg-fly.out{border-color:var(--mint-400)} .trg-fly.task{border-color:var(--coral-500)}
+
+/* boxes are openable */
+.trg-demo .trg-dest{cursor:pointer;text-align:left;font-family:var(--font-body);width:100%}
+.trg-demo .trg-dest:hover{border-color:currentColor}
+.trg-demo .trg-dest.open{border-color:currentColor;background:var(--bg-surface-3)}
+.trg-demo .trg-dest .dgo{margin-left:auto;flex:none;display:flex;opacity:0;transition:opacity .2s;color:currentColor}
+.trg-demo .trg-dest .dgo svg{width:13px;height:13px}
+.trg-demo .trg-dest:hover .dgo,.trg-demo .trg-dest.open .dgo{opacity:1}
+.trg-demo .trg-dest.pending .dlast{color:currentColor}
+.trg-demo .trg-dest .dv{display:inline-block;transform-origin:left center}
+.trg-demo .trg-dest .dv.pop{animation:trgPop .45s cubic-bezier(.3,1.4,.4,1)}
+@keyframes trgPop{0%{transform:scale(1)}35%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+/* inside a box */
+.trg-boxview{padding:6px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:5px}
+.trg-boxview[hidden]{display:none}
+.trg-demo .trg-qtitle{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trg-demo .trg-back{display:inline-flex;align-items:center;gap:6px;flex:none;padding:5px 11px 5px 8px;
+  border-radius:var(--radius-pill);background:var(--bg-surface-3);border:1px solid var(--border-subtle);
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--violet-300);cursor:pointer;transition:background .2s,border-color .2s}
+.trg-demo .trg-back:hover{background:var(--vw);border-color:var(--violet-500)}
+.trg-demo .trg-back:focus-visible{outline:2px solid var(--violet-500);outline-offset:2px}
+.trg-demo .trg-back svg{width:11px;height:11px;flex:none}
+.trg-demo .trg-back[hidden]{display:none}
+.trg-demo .trg-task{display:grid;grid-template-columns:9px 1fr 14px;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:11px;padding:9px 11px;cursor:pointer;font-family:var(--font-body);color:var(--text-primary)}
+.trg-demo .trg-task:hover{background:var(--bg-surface-raised);border-color:var(--border-subtle)}
+.trg-demo .trg-task.sel{background:var(--bg-surface-raised);border-color:var(--border-default)}
+.trg-demo .trg-task .tdot{width:9px;height:9px;border-radius:50%;flex:none}
+.trg-demo .trg-task .tt{display:block;font-size:12.5px;font-weight:600;line-height:1.38}
+.trg-demo .trg-task .ts{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-quaternary);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trg-demo .trg-task .tgo{display:flex;color:var(--text-quaternary)}
+.trg-demo .trg-task .tgo svg{width:14px;height:14px}
+.trg-demo .trg-task.is-done .tt{font-weight:500;color:var(--text-secondary)}
+.trg-demo .trg-task.is-done .tgo{color:var(--mint-400)}
+.trg-demo .trg-boxempty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:36px 24px;color:var(--text-quaternary)}
+.trg-demo .trg-boxempty h3{margin:0 0 6px;color:var(--text-secondary);font-size:15px;font-weight:600}
+.trg-demo .trg-boxempty p{margin:0;font-size:13.5px;max-width:34ch}
+.trg-demo .trg-dbadge{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:4px 8px;border-radius:6px;border:1px solid currentColor}
+.trg-demo .trg-btn-clear{flex:none;display:inline-flex;align-items:center;gap:7px;padding:9px 17px;border-radius:var(--radius-pill);border:1px solid var(--violet-500);background:var(--vw);color:var(--violet-300);font-family:var(--font-body);font-weight:600;font-size:13px;cursor:pointer;transition:background .2s}
+.trg-demo .trg-btn-clear:hover:not(:disabled){background:rgba(110,86,207,.3)}
+.trg-demo .trg-btn-clear:disabled{opacity:.45;cursor:default}
+
+.trg-acts{display:flex;flex-direction:column;gap:6px}
+.trg-demo .trg-act{display:grid;grid-template-columns:20px 1fr;gap:11px;align-items:start;width:100%;text-align:left;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-radius:11px;padding:9px 11px;cursor:pointer;font-family:var(--font-body);color:var(--text-primary);transition:border-color .18s,background .18s}
+.trg-demo .trg-act:hover:not(:disabled){border-color:var(--violet-500);background:var(--vw)}
+.trg-demo .trg-act.is-primary{border-color:rgba(110,86,207,.5);background:var(--vw)}
+.trg-demo .trg-act .aic{width:18px;height:18px;border-radius:6px;border:1.5px solid var(--border-default);display:flex;align-items:center;justify-content:center;margin-top:1px;color:var(--text-quaternary)}
+.trg-demo .trg-act .aic svg{width:11px;height:11px}
+.trg-demo .trg-act .al{display:block;font-size:12.5px;font-weight:600;line-height:1.38}
+.trg-demo .trg-act .ak{display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-top:3px}
+.trg-demo .trg-act.is-done{cursor:default;border-color:rgba(94,224,168,.35);background:rgba(94,224,168,.07)}
+.trg-demo .trg-act.is-done .aic{border-color:var(--mint-400);color:var(--mint-400);background:rgba(94,224,168,.14)}
+.trg-demo .trg-act.is-done .al{font-weight:500;color:var(--text-secondary)}
+.trg-demo .trg-act.is-done .ak{color:var(--mint-400)}
+.trg-demo .trg-actnote{margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--text-quaternary)}
+.trg-demo .trg-why .sla.done{color:var(--mint-400)}
+.trg-demo .trg-clearnote{margin:10px 0 0;font-size:12.5px;color:var(--violet-300)}
+.trg-row.is-done{opacity:.6}
+.trg-row.is-done .trg-band{background:var(--p4w);color:var(--p4)}
+.trg-row.is-clearing{animation:trgOut .3s ease forwards;pointer-events:none}
+@keyframes trgOut{to{opacity:0;transform:translateX(30px)}}
+
+/* ---- work surfaces: the refill protocol check + the appeal packet ---- */
+.trg-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.trg-checks li{display:grid;grid-template-columns:17px 1fr;gap:10px;align-items:start}
+.trg-checks .ci{width:17px;height:17px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;flex:none}
+.trg-checks .ci svg{width:10px;height:10px}
+.trg-checks li.ok .ci{background:rgba(94,224,168,.15);color:var(--mint-400)}
+.trg-checks li.bad .ci,.trg-checks li.blocked .ci{background:var(--p1w);color:var(--coral-500)}
+.trg-checks .cl{display:block;font-size:12.5px;font-weight:500;color:var(--text-primary);line-height:1.38}
+.trg-checks li.bad .cl,.trg-checks li.blocked .cl{color:var(--coral-500)}
+.trg-checks .cd{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.35;color:var(--text-quaternary);margin-top:2px}
+.trg-verdict{margin-top:11px;background:var(--bg-surface-raised);border:1px solid var(--border-subtle);border-left:3px solid var(--mint-400);border-radius:0 11px 11px 0;padding:10px 12px}
+.trg-verdict.warn{border-left-color:var(--amber-400)}
+.trg-verdict.stop{border-left-color:var(--coral-500)}
+.trg-verdict .vk{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-quaternary);margin-bottom:4px}
+.trg-verdict .vv{font-size:12.5px;color:var(--text-primary);line-height:1.48}
+.trg-verdict .sla{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary)}
+.trg-dsechead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.trg-dsechead .trg-dsec{margin:0}
+.trg-clock{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:4px 9px;border-radius:6px;background:var(--p2w);color:var(--amber-400)}
+.trg-letter{background:var(--bg-surface-3);border:1px solid var(--border-subtle);border-radius:11px;padding:12px 14px;font-size:11.5px;line-height:1.65;color:var(--text-secondary);white-space:pre-wrap}
+.trg-letter .lh{font-family:'Poppins',sans-serif;font-weight:600;font-size:12.5px;color:var(--text-primary);margin-bottom:2px}
+.trg-letter .lh-sub{font-size:10.5px;color:var(--text-quaternary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:11px}
+
+/* the one-click batch, inside the Signature queue */
+.trg-batchbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--bg-surface-raised);border:1px solid rgba(94,224,168,.3);border-radius:12px;padding:11px 13px;margin-bottom:8px}
+.trg-demo .trg-bstxt{flex:1;min-width:150px;font-size:12.5px;color:var(--text-secondary);line-height:1.45}
+.trg-demo .trg-bstxt b{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.trg-demo .trg-btn-batch{flex:none;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--radius-pill);border:1px solid var(--mint-400);background:rgba(94,224,168,.14);color:var(--mint-400);font-family:var(--font-body);font-weight:600;font-size:12.5px;cursor:pointer;transition:background .2s}
+.trg-demo .trg-btn-batch:hover:not(:disabled){background:rgba(94,224,168,.28)}
+.trg-demo .trg-btn-batch:disabled{opacity:.45;cursor:default}
+
+@media (max-width:1040px){
+  .trg-panel{grid-template-columns:1fr 372px}
+  .trg-queuewrap,.trg-detail{height:clamp(460px,calc(100vh - 300px),600px)}
+}
+@media (max-width:560px){
+  /* the box title matters more than the counter - drop the counter to its own
+     line rather than letting it squeeze the title down to nothing */
+  .trg-qhead{flex-wrap:wrap;row-gap:6px}
+  .trg-demo .trg-qtitle{flex:1 1 auto}
+  .trg-demo .trg-prog{flex:1 1 100%}
+}
+@media (max-width:820px){
+  .trg-stats{grid-template-columns:repeat(2,1fr)}
+  .trg-dests{grid-template-columns:repeat(2,1fr)}
+  .trg-demo .trg-btn-clear{width:100%;justify-content:center}
+  .trg-panel{grid-template-columns:1fr}
+  .trg-queuewrap{height:auto;max-height:66vh} .trg-detail{height:auto}
+}
+@media (prefers-reduced-motion:reduce){.trg-demo *{animation-duration:.01ms!important}}
+
+/* The notify signup's styles moved to 63-benefits.html with the markup. */
+</style>
+
+<script>
+(function(){
+  "use strict";
+  if(window.__trgInit) return; window.__trgInit=true;
+
+  /* Same Worker as demo 1 (dental-denial-agent), new /api/triage route.
+     Cloudflare Workers AI (Llama, env.AI binding) reads the pasted fax server-
+     side — no external key. CORS is open, so it works from the live site.
+     If the endpoint is unreachable (local preview, or before the route ships),
+     we fall back to a client-side heuristic so the demo still works. */
+  var TRIAGE_API="https://dental-denial-agent.denial-agent.workers.dev/api/triage";
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var RANK={P1:4,P2:3,P3:2,P4:1,FILTER:0};
+  var BASE={P1:96,P2:74,P3:45,P4:20,FILTER:2};
+  var STAGES=["Running OCR…","Classifying document…","Extracting fields…","Scoring urgency…"];
+  var MAXR=3, simN=22;
+
+  var FIRST=["Maria","James","Linda","Robert","Aisha","David","Elena","Michael","Priya","John","Sofia","Wei","Grace","Omar","Nina","Carlos","Ruth","Samuel","Ivy","Hassan"];
+  var LAST=["Alvarez","Thompson","Nguyen","Patel","Johnson","Garcia","Kim","O'Brien","Rossi","Cohen","Okafor","Martinez","Singh","Walsh","Fischer","Haddad","Brooks","Delgado","Sato","Reyes"];
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function pad(n){return n<10?"0"+n:""+n;}
+  function dob(){var y=1938+Math.floor(Math.random()*70);return pad(1+Math.floor(Math.random()*12))+"/"+pad(1+Math.floor(Math.random()*28))+"/"+y;}
+  function mrn(){return "MRN-"+(100000+Math.floor(Math.random()*899999));}
+  function recvTime(){var h=8+Math.floor(Math.random()*3);return pad(h)+":"+pad(Math.floor(Math.random()*60))+" AM";}
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+  var ICONS={
+    result:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h2.4l1.6-4.2 2.5 8.4 1.5-4.2H13"/></svg>',
+    doc:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M3.4 1.4h4.2l3 3v8.2H3.4z"/><path d="M7.6 1.4v3h3"/></svg>',
+    rx:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.8" y="4.5" width="10.4" height="5" rx="2.5"/><line x1="7" y1="4.7" x2="7" y2="9.3"/></svg>',
+    auth:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M7 1.3l4.6 1.8v3.4c0 2.8-2 4.7-4.6 5.5-2.6-.8-4.6-2.7-4.6-5.5V3.1z"/></svg>',
+    junk:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7" cy="7" r="5.3"/><line x1="3.2" y1="3.2" x2="10.8" y2="10.8"/></svg>'
+  };
+  function kindFor(type){var t=(type||"").toLowerCase();
+    if(/refill|prescription/.test(t))return"rx";
+    if(/prior-?auth|authorization/.test(t))return"auth";
+    if(/marketing|advert|cover|junk|spam/.test(t))return"junk";
+    if(/lab|result|imaging|path|discharge|abnormal|normal|stat|critical|x-ray|ct|mri/.test(t))return"result";
+    return"doc";}
+
+  var T=[
+    {cat:"P1",type:"STAT lab result",sender:"Quest Diagnostics",conf:.99,reason:"Critical potassium 6.8 mmol/L — panic value",mk:"6.8 mmol/L (H, CRITICAL)",
+     fields:[["Result","Potassium 6.8 mmol/L"],["Flag","Panic / critical high"],["Ordering MD","Dr. Nguyen"],["Collected","Today 07:12"]],
+     body:"STAT CHEMISTRY PANEL — CRITICAL RESULT\nPatient: {{PT}}   DOB: {{DOB}}   {{MRN}}\nOrdering provider: Dr. Nguyen\n\nPotassium ......... {{MK}}\nSodium ............ 139 mmol/L\nCreatinine ........ 1.9 mg/dL (H)\n\n** Critical value phoned to lab. Please acknowledge. **"},
+    {cat:"P1",type:"Critical imaging read",sender:"Regional Radiology",conf:.97,reason:"CT head: acute intracranial finding, wet-read",mk:"Recommend urgent clinical correlation.",
+     fields:[["Study","CT head w/o contrast"],["Impression","Acute finding, see report"],["Radiologist","Dr. Adeyemi"],["Priority","Wet read / STAT"]],
+     body:"RADIOLOGY REPORT — STAT\nPatient: {{PT}}   DOB: {{DOB}}\nExam: CT HEAD WITHOUT CONTRAST\n\nIMPRESSION:\nAcute intracranial abnormality identified.\n{{MK}}\n\nRead by: Dr. Adeyemi, MD"},
+    {cat:"P1",type:"Pathology result",sender:"CBL Path Labs",conf:.96,reason:"Biopsy positive for malignancy",mk:"POSITIVE for malignancy",
+     fields:[["Specimen","Skin, left forearm"],["Diagnosis","Positive — malignant"],["Pathologist","Dr. Ruiz"],["Received","Yesterday"]],
+     body:"SURGICAL PATHOLOGY REPORT\nPatient: {{PT}}   DOB: {{DOB}}   {{MRN}}\nSpecimen: Skin punch biopsy, L forearm\n\nDIAGNOSIS:\n{{MK}}. Recommend prompt clinical follow-up and referral.\n\nPathologist: Dr. Ruiz"},
+    {cat:"P1",type:"Hospital discharge",sender:"St. Mary's Medical Ctr",conf:.94,reason:"Discharged today — 48h follow-up needed",mk:"within 48 hours",
+     fields:[["Discharged","Today"],["Dx","CHF exacerbation"],["Follow-up","within 48 hours"],["Meds","3 changes — reconcile"]],
+     body:"DISCHARGE SUMMARY\nPatient: {{PT}}   DOB: {{DOB}}\nAdmit dx: Acute CHF exacerbation\nDisposition: Home today\n\nFOLLOW-UP: PCP visit {{MK}}.\nMedication changes x3 — please reconcile."},
+    {cat:"P2",type:"Prior-auth DENIAL",sender:"BlueCross Payer Svcs",conf:.95,reason:"MRI denied — appeal window 5 days",mk:"5 business days",
+     fields:[["Service","MRI lumbar spine"],["Decision","Denied"],["Reason","Medical necessity"],["Appeal by","5 business days"]],
+     work:{kind:"appeal",deadline:"5 business days left to file",policy:"BlueCross policy MSK-14",
+       checks:[["ok","Six weeks of conservative therapy documented","PT notes 04 Jan – 18 Feb 2026"],
+               ["ok","Neurological deficit documented","progressive L5 radiculopathy, 21 Feb 2026"],
+               ["ok","Plain films obtained first","lumbar X-ray 11 Jan 2026"]],
+       verdict:"The payer's own criteria are all met and evidenced in the chart. The packet is drafted, waiting on a signature.",
+       letter:"RE: Appeal of adverse determination — MRI lumbar spine (72148)\nMember: {{PT}}   ID: {{MRN}}\n\nThis request meets all three criteria in BlueCross policy MSK-14:\n\n1. Conservative therapy — physical therapy 04 Jan to 18 Feb 2026, twelve sessions, documented in the chart with no sustained improvement.\n2. Neurological deficit — progressive L5 radiculopathy on examination 21 Feb 2026.\n3. Prior imaging — lumbar plain films obtained 11 Jan 2026.\n\nThe determination cites medical necessity not established. The evidence above was in the record at the time of the original request. We ask that the determination be overturned.\n\nEnclosures: PT notes, examination note 21 Feb 2026, radiology report 11 Jan 2026."},
+     body:"PRIOR AUTHORIZATION DETERMINATION\nMember: {{PT}}   ID: {{MRN}}\nRequested: MRI lumbar spine\n\nDETERMINATION: DENIED — medical necessity not established.\nYou may appeal within {{MK}}."},
+    {cat:"P2",type:"Prior-auth — info request",sender:"Aetna Auth Unit",conf:.9,reason:"RFI: needs recent notes to proceed",mk:"Recent progress notes required.",
+     fields:[["Service","Specialty infusion"],["Status","Pended — RFI"],["Needs","Recent progress notes"],["Due","3 days"]],
+     work:{kind:"appeal",deadline:"3 days before the request closes",policy:"Aetna pended review",
+       checks:[["ok","Progress notes located in the chart","office visits 12 Jan and 09 Feb 2026"],
+               ["ok","Diagnosis code matches the authorisation request",""],
+               ["bad","The payer has not received them","pended 3 days — nothing sent back yet"]],
+       verdict:"One missing item is holding the authorisation. The notes are assembled and ready to send back.",
+       letter:"RE: Response to request for information — specialty infusion\nMember: {{PT}}\n\nEnclosed are the progress notes requested to continue review:\n\n· Office visit 12 Jan 2026 — assessment and plan\n· Office visit 09 Feb 2026 — response to therapy\n\nThe diagnosis on both notes matches the code on the original authorisation request. Please resume review."},
+     body:"AUTHORIZATION — REQUEST FOR INFORMATION\nMember: {{PT}}\nRequest pended. To continue review, submit recent progress notes.\n{{MK}}"},
+    {cat:"P2",type:"Urgent referral",sender:"Northside Family Med",conf:.92,reason:"Cardiology — new exertional chest pain",mk:"new exertional chest pain",
+     fields:[["Refer to","Cardiology"],["Reason","Exertional chest pain"],["Urgency","Urgent"],["From","Dr. Walsh"]],
+     body:"REFERRAL / CONSULT REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nRefer to: CARDIOLOGY (urgent)\nReason: {{MK}}. Requesting expedited appointment.\nReferring: Dr. Walsh"},
+    {cat:"P2",type:"Abnormal lab result",sender:"LabCorp",conf:.93,reason:"HbA1c 11.2% — markedly elevated",mk:"11.2% (H)",
+     fields:[["Result","HbA1c 11.2%"],["Flag","High"],["Ordering MD","Dr. Kim"],["Collected","Today"]],
+     body:"HEMATOLOGY / CHEMISTRY\nPatient: {{PT}}   DOB: {{DOB}}\nHbA1c ............. {{MK}}\nReference: <5.7%\nOrdering: Dr. Kim"},
+    {cat:"P3",type:"Routine referral",sender:"Eastside Clinic",conf:.9,reason:"Dermatology — chronic rash, routine",mk:"",
+     fields:[["Refer to","Dermatology"],["Reason","Chronic rash"],["Urgency","Routine"],["From","Dr. Brooks"]],
+     body:"REFERRAL REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nRefer to: Dermatology (routine)\nReason: chronic rash, stable. Standard scheduling."},
+    {cat:"P3",type:"Normal lab result",sender:"Quest Diagnostics",conf:.95,reason:"Lipid panel — within normal limits",mk:"",
+     fields:[["Result","Lipid panel — normal"],["Flag","None"],["Ordering MD","Dr. Kim"],["Collected","Yesterday"]],
+     body:"LIPID PANEL\nPatient: {{PT}}   DOB: {{DOB}}\nAll values within normal limits.\nOrdering: Dr. Kim. File to chart, notify patient routine."},
+    {cat:"P3",type:"Records / ROI request",sender:"Harbor Law LLP",conf:.88,reason:"Records request — signed authorization attached",mk:"",
+     fields:[["Requestor","Harbor Law LLP"],["Scope","Visit notes 2024–25"],["Auth","Signed, attached"],["Due","Standard"]],
+     body:"RELEASE OF INFORMATION REQUEST\nRe: {{PT}}   DOB: {{DOB}}\nRequesting: office visit notes 2024–2025.\nSigned patient authorization enclosed."},
+    {cat:"P3",type:"Normal imaging",sender:"Regional Radiology",conf:.94,reason:"Chest X-ray — no acute findings",mk:"",
+     fields:[["Study","Chest X-ray"],["Impression","No acute findings"],["Radiologist","Dr. Adeyemi"],["Priority","Routine"]],
+     body:"RADIOLOGY REPORT\nPatient: {{PT}}   Exam: Chest X-ray, PA/LAT\nIMPRESSION: No acute cardiopulmonary findings.\nRead: Dr. Adeyemi"},
+    {cat:"P4",type:"Prescription refill",sender:"Walgreens #4821",conf:.96,reason:"Refill authorization — metformin 500mg",mk:"",
+     fields:[["Drug","Metformin 500mg"],["Qty","90 / refills 3"],["Pharmacy","Walgreens #4821"],["Type","Refill auth"]],
+     work:{kind:"refill",clean:true,drug:"Metformin 500 mg",pharmacy:"Walgreens #4821",
+       checks:[["ok","Office visit 4 months ago","protocol: within 12 months"],
+               ["ok","A1c 6.9% on 12 Mar 2026","protocol: within 6 months, at goal"],
+               ["ok","2 refills left on the original Rx",""],
+               ["ok","Not a controlled substance",""]],
+       verdict:"Protocol clean. Every rule the practice set for metformin is satisfied, with the evidence attached."},
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Metformin 500mg, #90, refills x3\nPharmacy: Walgreens #4821. Please approve/deny."},
+    {cat:"P4",type:"Prescription refill",sender:"CVS Pharmacy #337",conf:.96,reason:"Refill authorization — lisinopril 10mg",mk:"",
+     fields:[["Drug","Lisinopril 10mg"],["Qty","30 / refills 5"],["Pharmacy","CVS #337"],["Type","Refill auth"]],
+     work:{kind:"refill",clean:true,drug:"Lisinopril 10 mg",pharmacy:"CVS #337",
+       checks:[["ok","Office visit 3 months ago","protocol: within 12 months"],
+               ["ok","Potassium 4.1 · creatinine 0.9 on 02 Feb 2026","protocol: within 12 months"],
+               ["ok","5 refills left on the original Rx",""],
+               ["ok","Not a controlled substance",""]],
+       verdict:"Protocol clean. Renal function checked inside the window the protocol requires for an ACE inhibitor."},
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Lisinopril 10mg, #30, refills x5\nPharmacy: CVS #337."},
+    {cat:"P4",type:"Prescription refill",sender:"Rite Aid #1102",conf:.95,reason:"Refill authorization — atorvastatin 20mg",mk:"",
+     fields:[["Drug","Atorvastatin 20mg"],["Qty","90 / refills 3"],["Pharmacy","Rite Aid #1102"],["Type","Refill auth"]],
+     work:{kind:"refill",clean:true,drug:"Atorvastatin 20 mg",pharmacy:"Rite Aid #1102",
+       checks:[["ok","Office visit 6 months ago","protocol: within 12 months"],
+               ["ok","Lipid panel 08 Jan 2026","protocol: within 12 months"],
+               ["ok","3 refills left on the original Rx",""],
+               ["ok","Not a controlled substance",""]],
+       verdict:"Protocol clean. Statin continuation with a current lipid panel on file."},
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Atorvastatin 20mg, #90, refills x3\nPharmacy: Rite Aid #1102."},
+    {cat:"P4",type:"Prescription refill",sender:"Kroger Pharmacy",conf:.92,reason:"Refill — metformin 1000mg, A1c overdue",mk:"",
+     fields:[["Drug","Metformin 1000mg"],["Qty","90 / refills 0"],["Pharmacy","Kroger Pharmacy"],["Held","Lab overdue"]],
+     work:{kind:"refill",clean:false,hold:"Lab overdue",drug:"Metformin 1000 mg",pharmacy:"Kroger Pharmacy",
+       checks:[["ok","Office visit 8 months ago","protocol: within 12 months"],
+               ["bad","No A1c since 04 Aug 2024","protocol: within 6 months — 19 months overdue"],
+               ["ok","Refills remain on the original Rx",""],
+               ["ok","Not a controlled substance",""]],
+       verdict:"Held for a prescriber. The agent will not authorise a diabetes medication on a 19-month-old A1c — that is a clinical call, not a rule."},
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Metformin 1000mg, #90\nPharmacy: Kroger Pharmacy. Please approve/deny."},
+    {cat:"P4",type:"Prescription refill",sender:"Costco Pharmacy #118",conf:.99,reason:"Refill — alprazolam, controlled substance",mk:"",
+     fields:[["Drug","Alprazolam 0.5mg"],["Qty","30 / refills 0"],["Pharmacy","Costco #118"],["Held","Schedule IV"]],
+     work:{kind:"refill",clean:false,controlled:true,hold:"Schedule IV",drug:"Alprazolam 0.5 mg",pharmacy:"Costco #118",
+       checks:[["blocked","Schedule IV controlled substance","protocol: never auto-authorised"],
+               ["ok","Office visit 2 months ago",""],
+               ["ok","Requesting pharmacy verified",""]],
+       verdict:"Controlled substance. The agent stops here every time, whatever the rest of the chart says — this needs a prescriber and the usual EPCS path."},
+     body:"REFILL AUTHORIZATION REQUEST\nPatient: {{PT}}   DOB: {{DOB}}\nDrug: Alprazolam 0.5mg, #30\nPharmacy: Costco #118. Please approve/deny."},
+    {cat:"P4",type:"Insurance / EOB",sender:"UnitedHealthcare",conf:.9,reason:"Explanation of benefits — for filing",mk:"",
+     fields:[["Doc","EOB statement"],["Action","File to billing"],["Amount","see statement"],["Type","Not a bill"]],
+     body:"EXPLANATION OF BENEFITS\nMember: {{PT}}   ID: {{MRN}}\nThis is not a bill. For your records / billing reconciliation."},
+    {cat:"FILTER",type:"Marketing fax",sender:"MedSupply Direct",conf:.99,reason:"Unsolicited advertisement — auto-quarantined",mk:"",
+     fields:[["Type","Advertisement"],["Sender","MedSupply Direct"],["Action","Quarantined"],["Patient","None detected"]],
+     body:"*** SPECIAL OFFER ***\nSave on exam gloves & supplies! Reply STOP to opt out.\nThis is a promotional fax. No patient information."},
+    {cat:"FILTER",type:"Cover page only",sender:"Unknown sender",conf:.85,reason:"Blank cover sheet — no content",mk:"",
+     fields:[["Type","Cover sheet"],["Pages","1 (blank)"],["Action","Quarantined"],["Patient","None detected"]],
+     body:"FAX COVER SHEET\nTo: Front desk\nFrom: —\nPages: 1\n(no additional content transmitted)"}
+  ];
+  var WEIGHT={P1:1,P2:2,P3:3,P4:4,FILTER:2};
+  var BAG=[]; T.forEach(function(t,i){var w=WEIGHT[t.cat];for(var k=0;k<w;k++)BAG.push(i);});
+
+  var $=function(id){return document.getElementById(id);};
+  var queueEl=$("trgQueue"), emptyEl=$("trgEmpty"), detailEl=$("trgDetail"), progEl=$("trgProg");
+  var nodes={}, data={}, seq=0, selected=null;
+  var pending=[], active=0, produced=0, doneCount=0, running=false;
+  var count={read:0,P1:0,P2:0,P3:0,P4:0,FILTER:0};
+  var DOT={P1:"var(--coral-500)",P2:"var(--amber-400)",P3:"var(--teal-500)",P4:"var(--mint-400)",FILTER:"var(--text-quaternary)"};
+  var SLA={P1:"Act within 30–60 min",P2:"Act same day",P3:"Act within 24–48 h",P4:"Batch / low priority",FILTER:"No action — quarantined"};
+
+  /* ---------- ACTION LAYER ----------
+     Triage sorts the pile; this is what makes it go away. One chain per
+     document lane: match -> draft -> ONE human click -> deliver -> close.
+     Every action below is held until a person clicks it. Nothing self-sends. */
+  var CHECK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg>';
+  var ledger={filed:0,sign:0,out:0,task:0,junk:0};
+  // every action that lands is kept as a task inside its box
+  var inbox={filed:[],sign:[],out:[],task:[],junk:[]}, openBox=null, selTask=null, seqT=0;
+  var CHEV='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.4 2.8L9.6 7l-4.2 4.2"/></svg>';
+  function nowStamp(){
+    var d=new Date(), h=d.getHours(), m=d.getMinutes(), ap=h<12?"AM":"PM";
+    h=h%12; if(!h)h=12; return h+":"+(m<10?"0"+m:m)+" "+ap;
+  }
+  // filed / sent / quarantined are finished when they land; signatures and
+  // escalations are work a person still has to do.
+  function mkItem(f,a){
+    return {tid:"t"+(seqT++), b:a.b, label:f.type, title:fill(a.d,f), hint:fill(a.h,f),
+            fax:f, at:nowStamp(), done:(a.b!=="sign"&&a.b!=="task")};
+  }
+  function findTask(tid){
+    for(var i=0;i<ORDER.length;i++){ var l=inbox[ORDER[i]];
+      for(var j=0;j<l.length;j++){ if(l[j].tid===tid) return l[j]; } }
+    return null;
+  }
+
+  function fval(f,k){ var v=""; (f.fields||[]).some(function(x){
+      if(String(x[0]).toLowerCase().indexOf(k)>-1){ v=String(x[1]); return true; } return false; }); return v; }
+  function fill(str,f){
+    var due=fval(f,"appeal by")||fval(f,"due")||fval(f,"deadline");
+    due = due ? (due+" left") : "before the deadline";   // no field -> still reads
+    return String(str)
+      .replace(/\{sender\}/g, f.sender||"the sender")
+      .replace(/\{md\}/g, fval(f,"ordering")||fval(f,"referring")||fval(f,"from")||"the ordering provider")
+      .replace(/\{drug\}/g, fval(f,"drug")||"the medication")
+      .replace(/\{pharmacy\}/g, fval(f,"pharmacy")||f.sender||"the pharmacy")
+      .replace(/\{refto\}/g, fval(f,"refer to")||"the specialist")
+      .replace(/\{due\}/g, due);
+  }
+
+  /* Each action names the destination it lands in: -> board target - detail. */
+  var DEST={
+    filed:{n:"Patient chart",c:"var(--teal-500)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M3.4 1.4h4.2l3 3v8.2H3.4z"/><path d="M7.6 1.4v3h3"/></svg>'},
+    sign:{n:"Signature queue",c:"var(--violet-300)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M9.5 1.8l2.7 2.7-7.1 7.1-3.4.7.7-3.4z"/><path d="M8.2 3.1l2.7 2.7"/></svg>'},
+    out:{n:"Outbound",c:"var(--mint-400)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M2.2 11.8L11.8 2.2"/><path d="M5 2.2h6.8V9"/></svg>'},
+    task:{n:"Escalations",c:"var(--coral-500)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M3.3 10.1h7.4l-1-1.7V6.1a2.7 2.7 0 0 0-5.4 0v2.3z"/><path d="M5.7 11.5a1.35 1.35 0 0 0 2.6 0"/></svg>'},
+    junk:{n:"Quarantine",c:"var(--text-quaternary)",
+      ic:'<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="7" cy="7" r="5.3"/><line x1="3.2" y1="3.2" x2="10.8" y2="10.8"/></svg>'}
+  };
+  var ORDER=["filed","sign","out","task","junk"];
+
+  var ACTIONS={
+    crit:{note:"The agent never interprets a result and never contacts the patient \u2014 it makes sure a clinician sees it, with the clock running.",acts:[
+      {p:1,l:"Page {md} with the value",h:"\u2192 Escalations \u00b7 acknowledgement clock",d:"Paged {md} \u2014 acknowledgement clock running",b:"task"},
+      {l:"Draft the result note + callback stub",h:"\u2192 Signature queue \u00b7 needs one clinician",d:"Result note drafted \u2014 waiting on sign-off",b:"sign"},
+      {l:"File to chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Filed to chart",b:"filed"}]},
+    discharge:{note:"Transitional care is billable work most practices are already half-doing and never capturing.",acts:[
+      {p:1,l:"Open the TCM task \u00b7 2-business-day clock",h:"\u2192 Escalations \u00b7 contact window",d:"TCM task opened \u2014 contact due in 2 business days",b:"task"},
+      {l:"Build the medication reconciliation diff",h:"\u2192 Signature queue \u00b7 needs the provider",d:"Med-rec diff built \u2014 waiting on sign-off",b:"sign"},
+      {l:"Offer the follow-up appointment",h:"\u2192 Outbound \u00b7 to the patient",d:"Follow-up slots offered to the patient",b:"out"}]},
+    referral:{note:"A same-hour response is what stops a referral leaking to whichever specialist calls the patient first.",acts:[
+      {p:1,l:"Fax the missing-items request to {sender}",h:"\u2192 Outbound \u00b7 fax to {sender}",d:"Missing-items request faxed to {sender}",b:"out"},
+      {l:"Check eligibility and offer appointment slots",h:"\u2192 Outbound \u00b7 to the patient",d:"Eligibility checked \u2014 slots offered",b:"out"},
+      {l:"Create the chart and file the packet",h:"\u2192 Patient chart \u00b7 new record",d:"Chart created \u2014 referral packet filed",b:"filed"}]},
+    denial:{note:"The appeal deadline is the whole game \u2014 a denial that sits four days in the pile is revenue written off.",acts:[
+      {p:1,l:"Start the appeal \u2014 {due}",h:"\u2192 Signature queue \u00b7 medical necessity",d:"Appeal packet drafted \u2014 waiting on signature",b:"sign"},
+      {l:"File the determination to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Determination filed to chart",b:"filed"}]},
+    rfi:{note:"A pended authorization is usually held up by one missing item. The agent names it instead of re-reading the letter.",acts:[
+      {p:1,l:"Send the payer the notes it asked for",h:"\u2192 Outbound \u00b7 to the payer",d:"Requested progress notes sent to the payer",b:"out"},
+      {l:"Re-open the auth with a due-date clock",h:"\u2192 Escalations \u00b7 due-date clock",d:"Authorization re-opened \u2014 due-date clock running",b:"task"}]},
+    refill:{note:"Protocol-clean refills batch onto one screen. Controlled substances always route to manual \u2014 no exceptions.",acts:[
+      {p:1,l:"Approve \u2014 protocol clean \u00b7 fax to {pharmacy}",h:"\u2192 Outbound \u00b7 fax to {pharmacy}",d:"{drug} authorized \u2014 sent to {pharmacy}",b:"out"},
+      {l:"Hold for the prescriber with the evidence",h:"\u2192 Signature queue \u00b7 needs the prescriber",d:"Held for the prescriber \u2014 evidence attached",b:"sign"}]},
+    roi:{note:"This gate never automates. The agent validates and assembles; a human decides what is released.",acts:[
+      {p:1,l:"Validate the authorization and scope",h:"\u2192 Escalations \u00b7 scope check",d:"Authorization validated \u2014 scope matches the request",b:"task"},
+      {l:"Assemble the records and draft the cover letter",h:"\u2192 Signature queue \u00b7 needs a release approval",d:"Record set assembled \u2014 waiting on release approval",b:"sign"},
+      {l:"Log the disclosure",h:"\u2192 Patient chart \u00b7 disclosure log",d:"Disclosure logged for accounting",b:"filed"}]},
+    eob:{note:"Underpayments hide in this lane \u2014 it feeds straight into the recovery agent instead of a filing cabinet.",acts:[
+      {p:1,l:"Check paid against the contracted rate",h:"\u2192 Escalations \u00b7 recovery queue",d:"Variance checked \u2014 sent to the recovery queue",b:"task"},
+      {l:"File to the billing record",h:"\u2192 Patient chart \u00b7 billing record",d:"Filed to the billing record",b:"filed"}]},
+    result:{note:"Routine results still need to reach the chart and the patient \u2014 they just never need to interrupt anyone.",acts:[
+      {p:1,l:"File to chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Filed to chart",b:"filed"},
+      {l:"Release the routine result to the patient",h:"\u2192 Outbound \u00b7 to the patient",d:"Routine result released to the patient",b:"out"}]},
+    junk:{note:"Quarantined automatically \u2014 recoverable for 30 days. This is the one lane where nobody in the practice has to look.",acts:[
+      {l:"Fax a removal request to {sender}",h:"\u2192 Outbound \u00b7 fax to {sender}",d:"Removal request faxed to {sender}",b:"out"}]},
+    doc:{note:"Anything the agent is unsure about is routed, never guessed \u2014 low-confidence reads go to a person off the hot path.",acts:[
+      {p:1,l:"File to chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Filed to chart",b:"filed"},
+      {l:"Route to the queue that owns it",h:"\u2192 Escalations \u00b7 owner assigned",d:"Routed to the owning queue",b:"task"}]}
+  };
+
+  function laneFor(f){
+    var t=(f.type||"").toLowerCase();
+    if(f.cat==="FILTER") return "junk";
+    if(/refill|prescription/.test(t)) return "refill";
+    if(/deni/.test(t)) return "denial";
+    if(/info request|rfi|pend/.test(t)) return "rfi";
+    if(/prior-?auth|authorization|appeal/.test(t)) return "denial";
+    if(/discharge/.test(t)) return "discharge";
+    if(/referral|consult/.test(t)) return "referral";
+    if(/records|roi|release/.test(t)) return "roi";
+    if(/eob|benefit|remittance|insurance|billing/.test(t)) return "eob";
+    if(f.cat==="P1"||/critical|stat|panic|abnormal|patholog|malignan/.test(t)) return "crit";
+    if(/result|imaging|lab|x-ray|report/.test(t)) return "result";
+    return "doc";
+  }
+  function laneOf(f){ return ACTIONS[laneFor(f)]||ACTIONS.doc; }
+
+  // the fax page is the longest thing in the pane - clip it so the actions stay
+  // above the fold, but keep the whole document one click away
+  function pageHtml(sender,recv,bodyHtml,raw){
+    var long=(raw||"").length>360;
+    return '<div class="trg-page'+(long?" clip":"")+'">'+
+      '<div class="lh">'+esc(sender||"")+'</div>'+
+      '<div class="lh-sub">inbound fax \u00b7 '+esc(recv||"")+'</div>'+bodyHtml+'</div>'+
+      (long?'<button type="button" class="trg-pagemore">Show the full page</button>':'');
+  }
+  function onPageMore(ev){
+    var n=ev.target;
+    while(n&&n!==detailEl&&!(n.classList&&n.classList.contains("trg-pagemore"))) n=n.parentNode;
+    if(!n||n===detailEl) return;
+    var pg=n.previousSibling;
+    while(pg&&!(pg.classList&&pg.classList.contains("trg-page"))) pg=pg.previousSibling;
+    if(!pg) return;
+    n.textContent = pg.classList.toggle("clip") ? "Show the full page" : "Hide the full page";
+  }
+  var XMARK='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4l6 6M10 4l-6 6"/></svg>';
+  var LOCKI='<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6.3" width="8" height="5.4" rx="1.4"/><path d="M5.1 6.3V4.7a1.9 1.9 0 0 1 3.8 0v1.6"/></svg>';
+
+  /* The work behind the fax. A refill carries the practice protocol checked
+     rule by rule; a prior-auth reply carries the payer's own criteria matched
+     against the chart, plus the drafted letter. Same fax pipeline either way. */
+  function workHtml(f,withLetter,lead){
+    var w=f&&f.work; if(!w) return "";
+    var isRefill=(w.kind==="refill");
+    var checks=w.checks.map(function(c){
+      var ico = c[0]==="ok"?CHECK:(c[0]==="blocked"?LOCKI:XMARK);
+      return '<li class="'+c[0]+'"><span class="ci">'+ico+'</span>'+
+        '<span><span class="cl">'+esc(c[1])+'</span>'+
+        (c[2]?'<span class="cd">'+esc(c[2])+'</span>':'')+'</span></li>';
+    }).join("");
+    var anyBad=false; w.checks.forEach(function(c){ if(c[0]!=="ok") anyBad=true; });
+    var vc = isRefill ? (w.controlled?" stop":(w.clean?"":" warn")) : (anyBad?" warn":"");
+    var vk = isRefill ? (w.controlled?"Verdict \u00b7 controlled substance"
+                                     :(w.clean?"Verdict \u00b7 safe to authorise":"Verdict \u00b7 held for a prescriber"))
+                      : ("Verdict \u00b7 "+w.policy);
+    var clock = (!isRefill && w.deadline)
+      ? '<div class="trg-clock"><svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.3"/><path d="M7 4v3.2l2 1.2"/></svg>'+esc(w.deadline)+'</div>'
+      : "";
+    var letter = (withLetter && w.letter)
+      ? '<div class="trg-dsec" style="margin-top:14px">The drafted letter</div>'+
+        '<div class="trg-letter"><div class="lh">Letter of medical necessity \u2014 draft</div>'+
+        '<div class="lh-sub">assembled by the agent \u00b7 unsigned</div>'+
+        esc(w.letter).replace(/\n/g,"<br>")+'</div>'
+      : "";
+    var sla = lead && f.sla
+      ? '<div class="sla"><span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla)+'</div>'
+      : "";
+    return '<div class="trg-dsechead" style="margin-top:'+(lead?"0":"20px")+'">'+
+        '<span class="trg-dsec">'+(isRefill?"Protocol check":"Appeal readiness")+'</span>'+
+        clock+'</div>'+
+      '<ul class="trg-checks">'+checks+'</ul>'+
+      '<div class="trg-verdict'+vc+'"><div class="vk">'+vk+'</div>'+
+        '<div class="vv">'+esc(w.verdict)+'</div>'+sla+'</div>'+
+      letter;
+  }
+
+  /* A refill's options depend on what the protocol check found - that is the
+     whole point of checking it. Everything else uses its lane's defaults. */
+  function actsFor(f){
+    var w=f&&f.work;
+    if(w && w.kind==="refill"){
+      if(w.controlled) return {note:"Controlled substances are the one lane with no automatic path, by design. The agent files the paperwork and gets out of the way.",acts:[
+        {p:1,l:"Route to the prescriber \u00b7 EPCS",h:"\u2192 Escalations \u00b7 never automated",d:"Routed to the prescriber for EPCS",b:"task"},
+        {l:"File the request to the chart",h:"\u2192 Patient chart \u00b7 labelled and indexed",d:"Refill request filed to chart",b:"filed"}]};
+      if(!w.clean) return {note:"The agent did the checking and named what is missing. The judgement stays with the prescriber.",acts:[
+        {p:1,l:"Queue for the prescriber \u2014 "+w.hold,h:"\u2192 Signature queue \u00b7 held, evidence attached",d:"Held for the prescriber \u2014 "+w.hold,b:"sign"},
+        {l:"Ask {pharmacy} for the missing item",h:"\u2192 Outbound \u00b7 fax to {pharmacy}",d:"Query faxed to {pharmacy}",b:"out"}]};
+      return {note:"Protocol-clean refills pile up in the signature queue and clear together \u2014 one click for the batch, not one click each.",acts:[
+        {p:1,l:"Queue for the prescriber \u2014 protocol clean",h:"\u2192 Signature queue \u00b7 clears in the batch",d:"Queued for signature \u2014 protocol clean",b:"sign"},
+        {l:"Hold \u2014 book a visit instead",h:"\u2192 Outbound \u00b7 to the patient",d:"Held \u2014 visit offered to the patient",b:"out"}]};
+    }
+    return laneOf(f);
+  }
+  function actsHtml(f){
+    var lane=actsFor(f), done=f.acts||{};
+    var rows=lane.acts.map(function(a,i){
+      var isDone=!!done[i];
+      return '<button type="button" class="trg-act'+((a.p&&!isDone)?" is-primary":"")+(isDone?" is-done":"")+
+        '" data-ai="'+i+'" data-b="'+a.b+'"'+(isDone?' disabled':'')+'>'+
+        '<span class="aic">'+(isDone?CHECK:"")+'</span>'+
+        '<span><span class="al">'+esc(fill(isDone?a.d:a.l,f))+'</span>'+
+        '<span class="ak">'+(isDone?"Approved by you \u00b7 just now":esc(fill(a.h,f)))+'</span></span></button>';
+    }).join("");
+    return '<div class="trg-dsec" style="margin-top:14px">What happens next</div>'+
+      '<div class="trg-acts">'+rows+'</div>'+
+      (f.work?'':'<p class="trg-actnote">'+esc(lane.note)+'</p>');   // the verdict already says it
+  }
+
+  function allDone(f){ var a=actsFor(f).acts, d=f.acts||{};
+    for(var i=0;i<a.length;i++){ if(!d[i]) return false; } return true; }
+  function markRowDone(f){
+    var li=nodes[f.id]; if(!li) return;
+    li.classList.add("is-done"); f.cleared=true;
+    var r=li.querySelector(".trg-rreason");
+    if(r) r.innerHTML='<span class="trg-dot" style="background:var(--mint-400)"></span>Actioned \u00b7 SLA met';
+  }
+  function buildBoard(){
+    var el=$("trgDests"); if(!el||el.firstChild) return;
+    el.innerHTML=ORDER.map(function(b){ var d=DEST[b];
+      return '<button type="button" class="trg-dest" id="dest-'+b+'" data-box="'+b+'" style="color:'+d.c+'">'+
+        '<span class="dtop"><span class="di">'+d.ic+'</span><span class="dl">'+d.n+'</span>'+
+        '<span class="dgo">'+CHEV+'</span></span>'+
+        '<span class="dv" id="dv-'+b+'">0</span>'+
+        '<span class="dlast" id="dl-'+b+'">&mdash;</span></button>';
+    }).join("");
+  }
+  function renderLedger(){
+    ORDER.forEach(function(b){
+      var list=inbox[b]||[]; ledger[b]=list.length;
+      var e=$("dv-"+b); if(e) e.textContent=list.length;
+      var pend=0; list.forEach(function(x){ if(!x.done) pend++; });
+      var c=$("dest-"+b); if(c) c.classList.toggle("pending", pend>0);
+      var l=$("dl-"+b);
+      if(l) l.textContent = pend ? (pend+" need"+(pend===1?"s":"")+" you")
+                          : (list.length ? list[list.length-1].label : "\u2014");
+    });
+    var t=ledger.filed+ledger.sign+ledger.out+ledger.task, el=$("trgBTotal");
+    if(el) el.textContent = t ? (t+" action"+(t===1?"":"s")+" taken"+(ledger.junk?" \u00b7 "+ledger.junk+" quarantined":""))
+                              : "nothing actioned yet";
+  }
+  // land an action in its box: file the task, tick the count, flash the card
+  function hitDest(b,item){
+    (inbox[b]=inbox[b]||[]).push(item); renderLedger();
+    var c=$("dest-"+b);
+    if(c){ c.classList.remove("hit"); void c.offsetWidth; c.classList.add("hit");
+      var v=$("dv-"+b); if(v){ v.classList.remove("pop"); void v.offsetWidth; v.classList.add("pop"); } }
+    if(openBox===b) renderBox(b);
+  }
+  // fly a chip from wherever the action was taken into the card it lands in
+  function flyFrom(rect,b,item){
+    showLedger();
+    var dest=$("dest-"+b);
+    if(reduce||!rect||!dest){ hitDest(b,item); return; }
+    var chip=document.createElement("div");
+    chip.className="trg-fly "+b; chip.textContent=item.label||DEST[b].n;
+    document.body.appendChild(chip);
+    if(!chip.animate){ chip.parentNode.removeChild(chip); hitDest(b,item); return; }
+    var r2=dest.getBoundingClientRect();
+    chip.style.left=(rect.left+rect.width/2)+"px";
+    chip.style.top=(rect.top+rect.height/2)+"px";
+    var dx=(r2.left+r2.width/2)-(rect.left+rect.width/2);
+    var dy=(r2.top+r2.height/2)-(rect.top+rect.height/2);
+    var an=chip.animate([
+      {transform:"translate(-50%,-50%) scale(.85)",opacity:0},
+      {transform:"translate(-50%,-50%) scale(1)",opacity:1,offset:.18},
+      {transform:"translate(-50%,-50%) translate("+dx+"px,"+dy+"px) scale(.66)",opacity:0}
+    ],{duration:620,easing:"cubic-bezier(.4,.08,.25,1)"});
+    var landed=false;
+    function land(){ if(landed)return; landed=true;
+      if(chip.parentNode) chip.parentNode.removeChild(chip); hitDest(b,item); }
+    an.onfinish=land; setTimeout(land,950);
+  }
+  function showLedger(){ var el=$("trgLedger"); if(el&&el.hasAttribute("hidden")) el.removeAttribute("hidden"); renderLedger(); }
+  function doAction(id,i,srcRect){
+    var f=data[id]; if(!f||f.reading) return;
+    var a=actsFor(f).acts[i]; if(!a) return;
+    f.acts=f.acts||{}; if(f.acts[i]) return;
+    f.acts[i]=true;
+    if(allDone(f)) markRowDone(f);
+    select(id,true);
+    flyFrom(srcRect,a.b,mkItem(f,a));   // the task files itself when the chip lands
+  }
+  function onActClick(ev){
+    var n=ev.target;
+    while(n && n!==detailEl && !(n.classList&&n.classList.contains("trg-act"))) n=n.parentNode;
+    if(!n||n===detailEl||n.disabled) return;
+    if(n.getAttribute("data-do")){ completeTask(n.getAttribute("data-do")); return; }
+    if(n.getAttribute("data-ai")===null||!selected) return;
+    doAction(selected, parseInt(n.getAttribute("data-ai"),10), n.getBoundingClientRect());
+  }
+  /* ---------- inside a box ---------- */
+  function openBoxView(b){
+    openBox=b; selTask=null;
+    ORDER.forEach(function(k){ var c=$("dest-"+k); if(c) c.classList.toggle("open", k===b); });
+    queueEl.setAttribute("hidden",""); $("trgBoxView").removeAttribute("hidden");
+    $("trgBack").removeAttribute("hidden");
+    renderBox(b);
+    detailEl.innerHTML='<div class="trg-dempty"><h3>'+esc(DEST[b].n)+'</h3>'+
+      '<p>Pick a task to see the action taken and the fax it came from.</p></div>';
+  }
+  function closeBoxView(){
+    openBox=null; selTask=null;
+    ORDER.forEach(function(k){ var c=$("dest-"+k); if(c) c.classList.remove("open"); });
+    $("trgBoxView").setAttribute("hidden",""); queueEl.removeAttribute("hidden");
+    $("trgBack").setAttribute("hidden","");
+    $("trgQTitle").textContent="Priority queue";
+    progEl.textContent=count.read?(count.read+" read \u00b7 "+count.P1+" critical up top"):"idle";
+    detailEl.innerHTML='<div class="trg-dempty"><h3>Nothing selected</h3>'+
+      '<p>Select a fax to see the original page beside the fields the agent pulled out.</p></div>';
+  }
+  function renderBox(b){
+    var list=inbox[b]||[], d=DEST[b], el=$("trgBoxView");
+    var pend=0; list.forEach(function(x){ if(!x.done) pend++; });
+    $("trgQTitle").textContent=d.n;
+    progEl.textContent=list.length ? (list.length+" item"+(list.length===1?"":"s")+
+        (pend?" \u00b7 "+pend+" need"+(pend===1?"s":"")+" you":" \u00b7 all handled")) : "empty";
+    if(!list.length){
+      el.innerHTML='<div class="trg-boxempty"><h3>Nothing in here yet</h3>'+
+        '<p>Approve an action on a fax and it lands in this box.</p></div>';
+      return;
+    }
+    var batch="";
+    if(b==="sign"){
+      var cleanN=0;
+      list.forEach(function(x){ if(!x.done && x.fax.work && x.fax.work.kind==="refill" && x.fax.work.clean) cleanN++; });
+      if(cleanN>1) batch='<div class="trg-batchbar"><span class="trg-bstxt"><b>'+cleanN+
+        '</b> protocol-clean refills are waiting. Every rule checked, evidence attached.</span>'+
+        '<button type="button" class="trg-btn-batch" data-batch="1">Approve all '+cleanN+
+        ' <span class="arw">&rarr;</span></button></div>';
+    }
+    el.innerHTML=batch+list.map(function(x){
+      return '<button type="button" class="trg-task'+(x.done?" is-done":"")+(selTask===x.tid?" sel":"")+
+        '" data-t="'+x.tid+'">'+
+        '<span class="tdot" style="background:'+d.c+'"></span>'+
+        '<span class="tmain"><span class="tt">'+esc(x.title)+'</span>'+
+        '<span class="ts">'+esc(x.label)+' \u00b7 '+esc(x.fax.patient||"\u2014")+' \u00b7 '+esc(x.at)+'</span></span>'+
+        '<span class="tgo">'+(x.done?CHECK:CHEV)+'</span></button>';
+    }).join("");
+  }
+  function selectTask(tid){
+    var x=findTask(tid); if(!x) return;
+    selTask=tid; selected=null;
+    if(openBox) renderBox(openBox);
+    var f=x.fax, d=DEST[x.b];
+    var fieldsHtml=(f.fields||[]).map(function(k){
+      return '<li><span class="k">'+esc(k[0])+'</span><span class="val">'+esc(k[1])+'</span></li>'; }).join("");
+    var w=f.work, cta="";
+    var signLabel="Sign &amp; release", signHint="\u2192 Outbound \u00b7 delivered on your signature";
+    if(w && w.kind==="appeal"){ signLabel="Sign &amp; submit the appeal";
+      signHint="\u2192 Outbound \u00b7 filed with "+esc(f.sender); }
+    else if(w && w.kind==="refill"){ signLabel="Approve &amp; send to "+esc(w.pharmacy);
+      signHint="\u2192 Outbound \u00b7 authorised on your signature"; }
+    if(!x.done && x.b==="sign")
+      cta='<button type="button" class="trg-act is-primary" data-do="'+x.tid+'" style="margin-top:14px">'+
+          '<span class="aic"></span><span><span class="al">'+signLabel+'</span>'+
+          '<span class="ak">'+signHint+'</span></span></button>';
+    else if(!x.done && x.b==="task")
+      cta='<button type="button" class="trg-act is-primary" data-do="'+x.tid+'" style="margin-top:14px">'+
+          '<span class="aic"></span><span><span class="al">Acknowledge</span>'+
+          '<span class="ak">Stops the clock \u00b7 stamped with your name</span></span></button>';
+    detailEl.innerHTML=
+      '<div class="trg-dhead"><div class="row1">'+
+        '<span class="trg-dbadge" style="color:'+d.c+'">'+esc(d.n)+'</span>'+
+        '<span class="trg-conf">'+esc(x.at)+'</span></div>'+
+        '<div class="trg-dfrom">'+(x.done?"Completed":"Waiting on a person")+'</div></div>'+
+      '<div class="trg-dbody">'+
+        '<div class="trg-dsec">The action</div>'+
+        '<div class="trg-why" style="margin-top:0"><div class="wk">'+esc(x.label)+'</div>'+
+          '<div class="wv">'+esc(x.title)+'</div>'+
+          '<div class="sla">'+esc(x.hint)+'</div></div>'+
+        cta+
+        workHtml(f,true)+
+        (fieldsHtml?'<div class="trg-dsec" style="margin-top:14px">What the agent extracted</div>'+
+          '<ul class="trg-fields" style="margin:0;padding:0;border-top:0">'+fieldsHtml+'</ul>':'')+
+        '<div class="trg-dsec" style="margin-top:14px">The fax it came from</div>'+
+        pageHtml(f.sender,f.recv,esc(f.body||"").replace(/\n/g,"<br>"),f.body)+
+      '</div>';
+  }
+  // one signature clears every protocol-clean refill in the queue
+  function batchSign(){
+    var list=(inbox.sign||[]).filter(function(x){
+      return !x.done && x.fax.work && x.fax.work.kind==="refill" && x.fax.work.clean; });
+    if(!list.length) return;
+    var btn=$("trgBoxView").querySelector("[data-batch]");
+    if(btn) btn.disabled=true;
+    var rect=btn?btn.getBoundingClientRect():null, i=0;
+    (function step(){
+      if(i>=list.length){ if(openBox) renderBox(openBox); if(selTask) selectTask(selTask); return; }
+      var x=list[i++];
+      x.done=true;
+      flyFrom(rect,"out",{tid:"t"+(seqT++),b:"out",label:x.label,
+        title:"Authorised in the batch \u2014 "+(x.fax.work.drug||x.label),
+        hint:"\u2192 Outbound \u00b7 sent to "+x.fax.work.pharmacy,
+        fax:x.fax,at:nowStamp(),done:true});
+      renderLedger();
+      setTimeout(step, reduce?8:90);
+    })();
+  }
+  function completeTask(tid){
+    var x=findTask(tid); if(!x||x.done) return;
+    var btn=detailEl.querySelector('[data-do="'+tid+'"]');
+    var rect=btn?btn.getBoundingClientRect():null;
+    x.done=true;
+    if(x.b==="sign"){
+      var it={tid:"t"+(seqT++),b:"out",label:x.label,
+              title:"Signed and released \u2014 "+x.label,
+              hint:"\u2192 Outbound \u00b7 delivered on your signature",
+              fax:x.fax,at:nowStamp(),done:true};
+      flyFrom(rect,"out",it);
+    }
+    renderLedger();
+    if(openBox) renderBox(openBox);
+    selectTask(tid);
+  }
+  function onBoxClick(ev){
+    var n=ev.target;
+    while(n&&!(n.getAttribute&&n.getAttribute("data-box"))) n=n.parentNode;
+    if(!n||!n.getAttribute) return;
+    var b=n.getAttribute("data-box");
+    if(openBox===b) closeBoxView(); else openBoxView(b);
+  }
+  function onTaskClick(ev){
+    var n=ev.target;
+    while(n&&n!==$("trgBoxView")&&!(n.getAttribute&&n.getAttribute("data-batch"))) n=n.parentNode;
+    if(n&&n.getAttribute&&n.getAttribute("data-batch")){ batchSign(); return; }
+    n=ev.target;
+    while(n&&n!==$("trgBoxView")&&!(n.getAttribute&&n.getAttribute("data-t"))) n=n.parentNode;
+    if(!n||!n.getAttribute||!n.getAttribute("data-t")) return;
+    selectTask(n.getAttribute("data-t"));
+  }
+
+  // hovering an action lights up the destination card it will land in
+  function onActHover(ev){
+    var b=null;
+    if(ev.type==="mouseover"||ev.type==="focusin"){
+      var n=ev.target;
+      while(n&&n!==detailEl&&!(n.classList&&n.classList.contains("trg-act"))) n=n.parentNode;
+      if(n&&n!==detailEl) b=n.getAttribute("data-b");
+    }
+    ORDER.forEach(function(k){ var c=$("dest-"+k); if(c) c.classList.toggle("aim", k===b); });
+  }
+  function afterChips(cb){
+    var tries=0;
+    (function chk(){
+      if(reduce||!document.querySelector(".trg-fly")||++tries>30){ cb(); return; }
+      setTimeout(chk,100);
+    })();
+  }
+  function clearPile(){
+    var ids=orderedIds().filter(function(id){ return data[id]&&!data[id].reading; });
+    if(!ids.length) return;
+    $("trgClear").disabled=true; var i=0, n=ids.length;
+    running=false; pending=[];   // stop the sim: anything mid-read is dropped on commit
+    (function step(){
+      if(i>=n){ // let the last chips land before totting up, or the summary undercounts
+        setTimeout(function(){ afterChips(function(){ finishClear(n); }); }, reduce?0:400); return; }
+      var id=ids[i++], f=data[id], li=nodes[id];
+      var rect=li?li.getBoundingClientRect():null;
+      if(f && f.cat!=="FILTER" && !allDone(f)){
+        f.acts=f.acts||{};
+        actsFor(f).acts.forEach(function(a,k){
+          if(f.acts[k]) return;
+          f.acts[k]=true;
+          (function(bucket,item,delay){ setTimeout(function(){ flyFrom(rect,bucket,item); }, delay); })(a.b, mkItem(f,a), k*135);
+        });
+      }
+      if(li){ li.classList.add("is-clearing");
+        setTimeout(function(){ if(li.parentNode) li.parentNode.removeChild(li); }, 300); }
+      delete nodes[id]; delete data[id];
+      setTimeout(step, reduce?8:105);
+    })();
+  }
+  function finishClear(n){
+    selected=null; running=false; active=0; pending=[];
+    $("trgSim").disabled=false; $("trgClear").disabled=false;
+    progEl.textContent="pile cleared";
+    var acted=ledger.filed+ledger.sign+ledger.out+ledger.task;
+    var parts=[];
+    if(ledger.filed) parts.push(ledger.filed+" filed to the chart");
+    if(ledger.out)   parts.push(ledger.out+" sent out");
+    if(ledger.task)  parts.push(ledger.task+" escalated");
+    if(ledger.sign)  parts.push(ledger.sign+" waiting on a single signature");
+    var sentence=parts.join(", "), lastComma=sentence.lastIndexOf(", ");
+    if(lastComma>-1) sentence=sentence.slice(0,lastComma)+" and "+sentence.slice(lastComma+2);
+    queueEl.innerHTML="";
+    var e=document.createElement("div"); e.className="trg-empty";
+    e.innerHTML='<div class="trg-empty-ico" style="color:var(--mint-400);border-color:rgba(94,224,168,.35)">'+
+        '<svg width="24" height="24" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4l2.8 2.8L11 4.4"/></svg></div>'+
+      '<h3>The pile is gone</h3>'+
+      '<p>'+acted+' action'+(acted===1?'':'s')+' across '+n+' document'+(n===1?'':'s')+
+      (parts.length?' \u2014 '+sentence:'')+'.'+
+      (ledger.junk?(ledger.junk===1?' One more never reached anyone in the practice at all.':' Another '+ledger.junk+' never reached anyone in the practice at all.'):'')+'</p>'+
+      '<p class="trg-clearnote">Open any box above to see the tasks that landed in it.</p>';
+    queueEl.appendChild(e); emptyEl=e;
+    detailEl.innerHTML='<div class="trg-dempty"><h3>Nothing left to review</h3><p>Run the simulation again to watch a fresh morning arrive \u2014 or paste your own fax.</p></div>';
+  }
+
+
+  function instance(ti){
+    var t=T[ti], pt=pick(FIRST)+" "+pick(LAST), d=dob(), m=mrn(), mk=t.mk;
+    function inj(s){return s.replace(/{{PT}}/g,pt).replace(/{{DOB}}/g,d).replace(/{{MRN}}/g,m).replace(/{{MK}}/g,mk);}
+    var fields=t.fields.map(function(f){return [f[0],inj(f[1])];});
+    if(t.cat!=="FILTER"){ fields.unshift(["DOB",d]); fields.unshift(["Patient",pt]); }
+    var work=null;
+    if(t.work){ work={}; for(var k in t.work) if(t.work.hasOwnProperty(k)) work[k]=t.work[k];
+      if(work.letter) work.letter=inj(work.letter); }
+    return {id:"fx"+(seq++),cat:t.cat,score:BASE[t.cat]+Math.random()*3,type:t.type,sender:t.sender,conf:t.conf,
+      reason:t.reason,patient:(t.cat==="FILTER"?"—":pt),body:inj(t.body),mk:mk,fields:fields,sla:SLA[t.cat],
+      work:work,recv:recvTime()};
+  }
+
+  /* ---- paste: real backend (Cloudflare Workers AI via the shared Worker) + local fallback ---- */
+  function field(raw,re){var m=raw.match(re);return m?m[1].trim():"";}
+  function classifyLocal(raw){
+    var t=raw.toLowerCase();
+    function has(){for(var i=0;i<arguments.length;i++){if(t.indexOf(arguments[i])>-1)return true;}return false;}
+    var cat="P3",type="Clinical document",reason="Document received — routed for review",conf=.72;
+    if(has("stat","panic","critical value","code stroke","code stemi")||(/\bcritical\b/.test(t)&&has("result","value","lab","high"))){cat="P1";type="Critical result";reason="Critical / STAT language detected";conf=.9;}
+    else if(has("positive for malignan","malignant","carcinoma","acute intracran")){cat="P1";type="Critical result";reason="Positive / acute finding detected";conf=.9;}
+    else if(has("discharge summary","discharged","disposition: home")){cat="P1";type="Hospital discharge";reason="Hospital discharge — timely follow-up";conf=.86;}
+    else if(has("denied","denial","not medically necessary","adverse determination","upheld")){cat="P2";type="Prior-auth denial";reason="Authorization denial / appeal deadline";conf=.88;}
+    else if(has("prior authorization","prior auth","pre-authorization","request for information","information request","pended","rfi")){cat="P2";type="Prior-auth reply";reason="Prior-authorization reply — time-boxed";conf=.84;}
+    else if(has("refill","prescription refill","pharmacy")){cat="P4";type="Prescription refill";reason="Refill authorization request";conf=.88;}
+    else if(has("explanation of benefits","remittance","not a bill")||/\beob\b/.test(t)){cat="P4";type="Insurance / EOB";reason="Insurance / billing document — file";conf=.8;}
+    else if(has("release of information","records request","medical records")||/\broi\b/.test(t)){cat="P3";type="Records / ROI request";reason="Records request — verify authorization";conf=.8;}
+    else if(has("referral","consult","refer to")){var u=has("urgent","expedite","asap","stat","chest pain","2-week","two week");cat=u?"P2":"P3";type=(u?"Urgent":"Routine")+" referral";reason=(u?"Urgent":"Routine")+" referral / consult request";conf=.82;}
+    else if(has("abnormal","elevated","a1c","positive")){cat="P2";type="Abnormal result";reason="Abnormal result flagged";conf=.78;}
+    else if(has("special offer","advertis","unsubscribe","promotion","reply stop")){cat="FILTER";type="Marketing fax";reason="Unsolicited advertisement — quarantined";conf=.95;}
+    else if(has("cover sheet","cover page")&&raw.length<220){cat="FILTER";type="Cover page only";reason="Cover sheet — no content";conf=.8;}
+    var pt=""; raw.split(/\n/).some(function(line){
+      var m=line.match(/^\s*(?:patient|member|name|re)\b\s*[:#\-]*\s*(.+)$/i);
+      if(m){ var nm=m[1].split(/\s{2,}|\bID\b|\bDOB\b|\bMRN\b|,|#/i)[0].trim();
+        if(nm && /[A-Za-z]{2,}/.test(nm) && nm.length<=40){ pt=nm; return true; } }
+      return false;
+    });
+    var d=(raw.match(/\b(0?[1-9]|1[0-2])[\/\-.](0?[1-9]|[12]\d|3[01])[\/\-.](\d{2,4})\b/)||[])[0]||"";
+    return normalize({priority:cat,docType:type,sender:"Your pasted fax",patient:pt||"—",dob:d,reason:reason,urgencyMarker:"",confidence:conf,fields:[]}, raw);
+  }
+  // shape a triage result (from API or local) into a queue instance
+  function normalize(d, raw){
+    var cat=(["P1","P2","P3","P4","FILTER"].indexOf(d.priority)>-1)?d.priority:"P3";
+    var fields=[], seenKeys={};
+    function addField(k,v){
+      var key=String(k||"").trim(); if(!key) return;
+      var norm=key.toLowerCase().replace(/[^a-z0-9]/g,"");
+      if(seenKeys[norm]) return;            // the model returns Patient/DOB too
+      seenKeys[norm]=1; fields.push([key,String(v==null?"":v)]);
+    }
+    if(cat!=="FILTER"){ addField("Patient",d.patient||"—"); if(d.dob) addField("DOB",d.dob); }
+    (d.fields||[]).forEach(function(x){ if(x&&x.key) addField(x.key,x.value); });
+    addField("Detected type",d.docType||"Document");
+    addField("Priority",cat==="FILTER"?"Filtered":cat);
+    var conf=(typeof d.confidence==="number")?Math.max(0,Math.min(1,d.confidence)):.85;
+    return {id:"fx"+(seq++),cat:cat,score:BASE[cat]+Math.random()*3,type:d.docType||"Clinical document",
+      sender:(d.sender&&d.sender.toLowerCase()!=="unknown")?d.sender:"Your pasted fax",conf:conf,
+      reason:d.reason||"Classified",patient:(cat==="FILTER"?"—":(d.patient||"—")),
+      body:raw.slice(0,1200),mk:d.urgencyMarker||"",fields:fields,sla:SLA[cat],recv:recvTime(),mine:true};
+  }
+  function classifyRemote(raw){
+    return fetch(TRIAGE_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({fax:raw})})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){ if(!d||!d.priority) throw 0; return normalize(d, raw); })
+      .catch(function(){ return classifyLocal(raw); });
+  }
+
+  function makeReadingNode(f){
+    var li=document.createElement("li");
+    li.className="trg-row reading enter"; li.setAttribute("data-id",f.id);
+    li.innerHTML='<div class="trg-band reading">reading</div>'+
+      '<div class="trg-rmain"><div class="trg-rtitle">'+(f.mine?'Your fax <span class="trg-you">You</span>':'Incoming fax')+' <span class="who">· '+esc(f.sender)+'</span></div>'+
+      '<div class="trg-rreason reading trg-status">'+STAGES[0]+'</div>'+
+      '<div class="trg-pbar"><i></i></div></div>'+
+      '<div class="trg-rmeta"><div class="pt">&nbsp;</div><div class="sub">'+f.recv+'</div></div>'+
+      '<div class="trg-scan" aria-hidden="true"></div>';
+    li.addEventListener("click",function(){ if(data[f.id]&&!data[f.id].reading) select(f.id); });
+    return li;
+  }
+  function fillNode(li,f){
+    li.classList.remove("reading");
+    if(f.mine) li.classList.add("mine");
+    if(!reduce){ li.classList.add("settle"); setTimeout(function(){li.classList.remove("settle");},520); }
+    var patient=f.cat==="FILTER"?'<span style="color:var(--text-quaternary)">no patient</span>':esc(f.patient);
+    var you=f.mine?'<span class="trg-you">You</span>':'';
+    li.innerHTML='<div class="trg-band '+f.cat+'">'+(f.cat==="FILTER"?"junk":f.cat)+'</div>'+
+      '<div class="trg-rmain"><div class="trg-rtitle"><span class="trg-ico" style="color:'+DOT[f.cat]+'">'+ICONS[kindFor(f.type)]+'</span>'+esc(f.type)+' <span class="who">· '+esc(f.sender)+'</span>'+you+'</div>'+
+      '<div class="trg-rreason"><span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.reason)+'</div></div>'+
+      '<div class="trg-rmeta"><div class="pt">'+patient+'</div><div class="sub">'+Math.round(f.conf*100)+'% · '+f.recv+'</div></div>';
+    li.addEventListener("click",function(){ select(f.id); });
+    if(selected===f.id) li.classList.add("sel");
+  }
+  function orderedIds(){
+    return Object.keys(data).sort(function(a,b){
+      var A=data[a],B=data[b];
+      if(RANK[B.cat]!==RANK[A.cat]) return RANK[B.cat]-RANK[A.cat];
+      return B.score-A.score;
+    });
+  }
+  function reorder(){
+    var ids=orderedIds(), firstTops={};
+    if(!reduce) ids.forEach(function(id){var n=nodes[id];if(n)firstTops[id]=n.getBoundingClientRect().top;});
+    ids.forEach(function(id){ queueEl.appendChild(nodes[id]); });
+    if(!reduce) ids.forEach(function(id){
+      var n=nodes[id], f=firstTops[id]; if(f==null)return;
+      var last=n.getBoundingClientRect().top, dy=f-last;
+      if(dy && n.animate){ n.animate([{transform:"translateY("+dy+"px)"},{transform:"none"}],{duration:440,easing:"cubic-bezier(.2,.75,.2,1)"}); }
+    });
+  }
+  function updateStats(flashP1){
+    $("trgVRead").textContent=count.read; $("trgVP1").textContent=count.P1;
+    $("trgVP2").textContent=count.P2; $("trgVFilt").textContent=count.FILTER;
+    var hrs=count.read*15/60;
+    $("trgVTime").textContent=(hrs<10?hrs.toFixed(1):Math.round(hrs))+"h";
+    if(flashP1){var s=$("trgVP1").parentNode;s.classList.remove("trg-flash");void s.offsetWidth;s.classList.add("trg-flash");}
+  }
+
+  // shared: create a reading row + return its parts. Used by both sim and paste.
+  function spawnReading(f){
+    if(emptyEl){emptyEl.parentNode&&emptyEl.parentNode.removeChild(emptyEl);emptyEl=null;}
+    var li=makeReadingNode(f); nodes[f.id]=li; data[f.id]={reading:true};
+    queueEl.insertBefore(li, queueEl.firstChild);
+    return {li:li, status:li.querySelector(".trg-status"), bar:li.querySelector(".trg-pbar>i")};
+  }
+  function cycleStages(status, dur){ // simulated staged status for the sim path
+    for(var i=1;i<STAGES.length;i++){ (function(idx){ setTimeout(function(){ if(status&&status.parentNode&&status.classList.contains("reading")) status.textContent=STAGES[idx]; }, dur*idx/STAGES.length); })(i); }
+  }
+  function commit(f, li, flashOk){
+    if(!li || !li.parentNode){ delete nodes[f.id]; delete data[f.id]; return; } // row was cleared mid-read
+    data[f.id]=f; count.read++; count[f.cat]++; doneCount++;
+    showLedger();
+    if(f.cat==="FILTER") flyFrom(li.getBoundingClientRect(),"junk",
+      {tid:"t"+(seqT++),b:"junk",label:f.type,title:"Quarantined \u2014 "+f.type,
+       hint:"\u2192 Quarantine \u00b7 recoverable for 30 days",fax:f,at:nowStamp(),done:true});
+    fillNode(li,f); reorder(); updateStats(f.cat==="P1");
+    if(f.mine){ select(f.id); try{ li.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"}); }catch(e){} }
+    else if(selected===null && f.cat==="P1"){ select(f.id); }
+  }
+
+  // ---- SIM path: synthetic, simulated read time ----
+  function startReading(f){
+    active++;
+    var r=spawnReading(f);
+    var dur=reduce?300:(1500+Math.random()*1100);
+    if(r.bar){ requestAnimationFrame(function(){ r.bar.style.transition="width "+dur+"ms cubic-bezier(.3,.6,.3,1)"; r.bar.style.width="100%"; }); }
+    cycleStages(r.status, dur);
+    setTimeout(function(){
+      commit(f, r.li, true); active--; pump();
+      if(running){
+        if(produced>=simN && pending.length===0 && active===0){
+          running=false; $("trgSim").disabled=false;
+          progEl.textContent=count.read+" read · "+count.P1+" critical up top";
+        } else { progEl.textContent=doneCount+" / "+simN+" read · "+active+" reading"; }
+      }
+    }, dur);
+  }
+  function pump(){ while(active<MAXR && pending.length){ startReading(pending.shift()); } }
+  function simulate(){
+    if(running)return; running=true; doneCount=0; produced=0;
+    $("trgSim").disabled=true;
+    for(var i=0;i<simN;i++){ pending.push(instance(pick(BAG))); produced++; }
+    progEl.textContent="0 / "+simN+" read";
+    pump();
+  }
+
+  // ---- PASTE path: real backend latency drives the read animation ----
+  function submitPaste(raw){
+    var placeholder={id:"fx"+(seq++), mine:true, sender:"Your pasted fax", recv:recvTime()};
+    var r=spawnReading(placeholder);
+    var si=0;
+    if(r.bar){ requestAnimationFrame(function(){ r.bar.style.transition="width 4000ms cubic-bezier(.2,.6,.15,1)"; r.bar.style.width="90%"; }); }
+    var iv=setInterval(function(){ si++; if(r.status && si<STAGES.length) r.status.textContent=STAGES[si]; }, 750);
+    classifyRemote(raw).then(function(f){
+      clearInterval(iv);
+      f.id=placeholder.id; f.recv=placeholder.recv; f.mine=true; // keep the node's id
+      if(r.bar){ r.bar.style.transition="width 220ms linear"; r.bar.style.width="100%"; }
+      setTimeout(function(){ commit(f, r.li, true); }, 200);
+    });
+  }
+
+  function select(id,keepScroll){
+    var f=data[id]; if(!f||f.reading)return; selected=id;
+    var pdb=detailEl.querySelector(".trg-dbody"), prevScroll=pdb?pdb.scrollTop:0;
+    Array.prototype.forEach.call(queueEl.querySelectorAll(".trg-row"),function(n){n.classList.toggle("sel",n.getAttribute("data-id")===id);});
+    var markBody=esc(f.body).replace(/\n/g,"<br>");
+    if(f.mk){var mk=esc(f.mk);if(markBody.indexOf(mk)>-1)markBody=markBody.replace(mk,'<span class="trg-mk">'+mk+'</span>');}
+    var fieldsHtml=f.fields.map(function(x){return '<li><span class="k">'+esc(x[0])+'</span><span class="val">'+esc(x[1])+'</span></li>';}).join("");
+    var bandLabel=f.cat==="FILTER"?"JUNK":f.cat;
+    var youTag=f.mine?' <span class="trg-you">Your fax</span>':'';
+    detailEl.innerHTML=
+      '<div class="trg-dhead"><div class="row1">'+
+        '<span class="trg-band '+f.cat+'" style="padding:5px 10px">'+bandLabel+'</span>'+
+        '<span class="trg-dtype">'+esc(f.type)+'</span>'+
+        '<span class="trg-conf">'+Math.round(f.conf*100)+'% conf.</span></div>'+
+        '<div class="trg-dfrom">From '+esc(f.sender)+' · received '+f.recv+youTag+'</div></div>'+
+      '<div class="trg-dbody">'+
+        (f.work ? workHtml(f,false,true)
+                : '<div class="trg-why" style="margin-top:0"><div class="wk">Why this priority</div><div class="wv">'+esc(f.reason)+'</div>'+
+                  '<div class="sla'+(f.cleared?" done":"")+'">'+(f.cleared
+                    ? '<span class="trg-dot" style="background:var(--mint-400)"></span>SLA met \u00b7 cleared'
+                    : '<span class="trg-dot" style="background:'+DOT[f.cat]+'"></span>'+esc(f.sla))+'</div></div>')+
+        actsHtml(f)+
+        '<div class="trg-dsec" style="margin-top:14px">What the agent extracted</div>'+
+        '<ul class="trg-fields" style="margin:0;padding:0;border-top:0">'+fieldsHtml+'</ul>'+
+        '<div class="trg-dsec" style="margin-top:14px">The fax, as received</div>'+
+        pageHtml(f.sender,f.recv,markBody,f.body)+
+      '</div>';
+    if(keepScroll){ var nb=detailEl.querySelector(".trg-dbody"); if(nb) nb.scrollTop=prevScroll; }
+  }
+
+  function reset(){
+    pending=[]; active=0; running=false; produced=0; doneCount=0;
+    queueEl.innerHTML='';
+    var e=document.createElement("div"); e.className="trg-empty";
+    e.innerHTML='<div class="trg-empty-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/></svg></div><h3>Queue cleared</h3><p>Run the simulation again — or paste your own fax — to watch it fill and sort.</p>';
+    queueEl.appendChild(e); emptyEl=e;
+    nodes={};data={};count={read:0,P1:0,P2:0,P3:0,P4:0,FILTER:0};selected=null;
+    inbox={filed:[],sign:[],out:[],task:[],junk:[]}; seqT=0;
+    if(openBox) closeBoxView();
+    ledger={filed:0,sign:0,out:0,task:0,junk:0}; renderLedger();
+    ORDER.forEach(function(b){ var l=$("dl-"+b); if(l) l.innerHTML="&mdash;";
+      var c=$("dest-"+b); if(c) c.classList.remove("hit"); });
+    var ld=$("trgLedger"); if(ld) ld.setAttribute("hidden",""); $("trgClear").disabled=false;
+    detailEl.innerHTML='<div class="trg-dempty"><h3>Nothing selected</h3><p>Select a fax to see the original page beside the fields the agent pulled out.</p></div>';
+    updateStats(false); progEl.textContent="idle"; $("trgSim").disabled=false;
+  }
+
+  var SAMPLES=[
+    "PRIOR AUTHORIZATION DETERMINATION\nMember: Jane Doe   ID: 55831092   DOB: 04/12/1968\nRequested service: MRI lumbar spine (72148)\n\nDETERMINATION: DENIED — not medically necessary per policy MSK-14.\nYou may file an appeal within 5 business days of this notice.\nBlueCross Payer Services",
+    "STAT CHEMISTRY PANEL — CRITICAL RESULT\nPatient: Robert Nguyen   DOB: 09/03/1975   MRN-448201\nOrdering provider: Dr. Kim\n\nPotassium ......... 6.8 mmol/L (CRITICAL HIGH)\nCreatinine ........ 2.1 mg/dL (H)\n\n** Critical value phoned to lab. Please acknowledge immediately. **\nQuest Diagnostics",
+    "REFERRAL / CONSULT REQUEST\nPatient: Maria Alvarez   DOB: 02/14/1980\nRefer to: CARDIOLOGY (URGENT)\nReason: new-onset exertional chest pain, abnormal ECG.\nRequesting expedited appointment within 1 week.\nReferring: Dr. Walsh, Northside Family Medicine",
+    "REFILL AUTHORIZATION REQUEST\nPatient: David Johnson   DOB: 11/22/1959\nDrug: Atorvastatin 20mg, #90, refills x3\nPharmacy: CVS #337\nPlease approve or deny at your convenience.",
+    "RELEASE OF INFORMATION REQUEST\nRe: Linda Thompson   DOB: 06/30/1971\nRequesting: office visit notes 2024–2025.\nSigned patient authorization enclosed.\nHarbor Law LLP",
+    "HOSPITAL DISCHARGE SUMMARY\nPatient: Omar Haddad   DOB: 07/19/1962\nAdmit dx: acute CHF exacerbation. Disposition: home today.\nFOLLOW-UP: PCP visit within 48 hours. Medication changes x3 — please reconcile.\nSt. Mary's Medical Center",
+    "*** SPECIAL OFFER — MEDICAL SUPPLIES ***\nSave 25% on nitrile exam gloves and paper products!\nCall now or reply STOP to opt out.\nThis is a promotional fax. No patient information.\nMedSupply Direct"
+  ];
+  var sampleIdx=0, pasteUnlocked=false;
+
+  function showPasteStage(){
+    $("trgLead").style.display = pasteUnlocked ? "none" : "block";
+    $("trgPasteEditor").style.display = pasteUnlocked ? "block" : "none";
+    setTimeout(function(){ var el = pasteUnlocked ? $("trgPasteText") : $("trgLName"); if(el) el.focus(); }, 70);
+  }
+  function submitLead(e){
+    e.preventDefault();
+    var f=$("trgLeadForm"), btn=$("trgLeadBtn");
+    var name=$("trgLName").value.trim(), email=$("trgLEmail").value.trim(), phone=$("trgLPhone").value.trim();
+    if(name.length<2){ alert("Please enter your full name."); return false; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert("Enter a valid email."); return false; }
+    if(phone.replace(/\D/g,"").length<10){ alert("Enter a valid phone number."); return false; }
+    btn.disabled=true; btn.innerHTML="Sending\u2026";
+    fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:new FormData(f)})
+      .then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d};});})
+      .then(function(res){
+        if(res.ok && res.data && res.data.success){
+          pasteUnlocked=true; showPasteStage();
+          var te=$("trgPasteText"); if(te && !te.value) te.value=SAMPLES[0];
+        } else { alert((res.data&&res.data.message)||"Something went wrong."); btn.disabled=false; btn.innerHTML='Unlock the tool <span class="arw">&rarr;</span>'; }
+      }).catch(function(){ alert("Network error. Please try again."); btn.disabled=false; btn.innerHTML='Unlock the tool <span class="arw">&rarr;</span>'; });
+    return false;
+  }
+
+  function bind(){
+    $("trgSim").addEventListener("click",simulate);
+    $("trgReset").addEventListener("click",reset);
+    buildBoard();
+    $("trgDests").addEventListener("click",onBoxClick);
+    $("trgBoxView").addEventListener("click",onTaskClick);
+    $("trgBack").addEventListener("click",closeBoxView);
+    $("trgClear").addEventListener("click",clearPile);
+    detailEl.addEventListener("click",onActClick);
+    detailEl.addEventListener("click",onPageMore);
+    detailEl.addEventListener("mouseover",onActHover);
+    detailEl.addEventListener("mouseout",onActHover);
+    detailEl.addEventListener("focusin",onActHover);
+    detailEl.addEventListener("focusout",onActHover);
+    var pasteBox=$("trgPaste"), toggle=$("trgPasteToggle");
+    toggle.addEventListener("click",function(){
+      var open=pasteBox.classList.toggle("open"); toggle.classList.toggle("active",open);
+      if(open) showPasteStage();
+    });
+    var lf=$("trgLeadForm"); if(lf) lf.addEventListener("submit",submitLead);
+    $("trgPasteSample").addEventListener("click",function(){ $("trgPasteText").value=SAMPLES[sampleIdx % SAMPLES.length]; sampleIdx++; $("trgPasteText").focus(); });
+    $("trgPasteRun").addEventListener("click",function(){
+      var txt=$("trgPasteText").value.trim(); if(!txt){ $("trgPasteText").focus(); return; }
+      submitPaste(txt);
+      $("trgPasteText").value=""; pasteBox.classList.remove("open"); toggle.classList.remove("active");
+    });
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bind);
+  else bind();
+})();
+</script>
+
+<!--
+  SILSTONE.AI - SECTION 12 - FINAL CTA
+  Hostinger: Embed code block, FULL WIDTH. Suggested height 480px.
+-->
+<div class="sil-root">
+<section class="sil-section has-tint has-top sil-finalcta">
+  <div class="sil-mesh" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="sil-gridlines" aria-hidden="true"></div>
+  <div class="sil-cursorglow" aria-hidden="true"></div>
+
+  <div class="sil-container is-narrow sil-center">
+    <h2 class="sil-display-l sil-reveal">
+      The AI partner who<br><span class="sil-gt">already speaks your language.</span>
+    </h2>
+    <p class="sil-body-l sil-mt-6 sil-reveal" style="--d:80ms;">
+      Book a 20 minute scoping call. We will find where the time and money is leaking, and tell you
+      honestly whether we can help. No integration, no obligation.
+    </p>
+    <div class="sil-finalcta-row sil-reveal" style="--d:160ms;">
+      <a href="https://www.silstone.ai/contact" target="_top" class="sil-btn sil-btn-gradient sil-btn-lg">Book a scoping call</a>
+    </div>
+    <p class="sil-mono sil-mt-6 sil-reveal" style="--d:220ms;">
+      We work from your data. We do not integrate with your EMR.
+    </p>
+  </div>
+</section>
+</div>
+
+<style>
+.sil-finalcta { padding-top: var(--space-20); padding-bottom: var(--space-20); }
+.sil-finalcta-row { display: flex; justify-content: center; margin-top: var(--space-10); }
+@media (max-width: 760px) { .sil-finalcta-row .sil-btn { width: 100%; } }
+</style>
+
+<!--
+  SILSTONE.AI - SECTION 13 - FOOTER
+  Hostinger: Embed code block, FULL WIDTH, last block on the page.
+  Suggested height 420px.
+
+  LOGO: inlined as a data URI so it works with zero setup. Replace the src with
+  your Hostinger media-library URL once uploaded.
+  Contact details are taken from the design system readme; update if they change.
+-->
+<div class="sil-root">
+<footer class="sil-section is-alt has-top sil-footer">
+  <div class="sil-container">
+
+    <div class="sil-footer-top">
+
+      <div class="sil-footer-brand">
+        <img class="sil-footer-logo" src="/assets/logo-mark.950ffdaa.png" alt="Silstone.AI" width="375" height="97">
+        <div class="sil-footer-direct">
+          <ul class="sil-footer-contact">
+            <li>
+              <a href="mailto:sales@silstonegroup.com">
+                <svg class="sil-contact-ic sil-ic-mail" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>sales@silstonegroup.com</span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:+16135585913">
+                <svg class="sil-contact-ic sil-ic-phone" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6.5 4h3l1.5 4-2 1.5a11 11 0 005 5l1.5-2 4 1.5v3a2 2 0 01-2.2 2A16 16 0 014.5 6.2 2 2 0 016.5 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                </svg>
+                <span>+1 613 558 5913</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <nav class="sil-footer-nav" aria-label="Footer">
+        <div>
+          <h3 class="sil-footer-h">Solutions</h3>
+          <!-- GENERATED from PAGES_META group "solutions" by build-site.py; the
+               links below are only the embed-paste fallback. -->
+          <ul data-sil-links="solutions">
+            <li><a href="https://www.silstone.ai/what-we-build" target="_top">What we build</a></li>
+            <li><a href="https://www.silstone.ai/dental-automation" target="_top">Dental automation</a></li>
+            <li><a href="https://www.silstone.ai/aesthetics-automation" target="_top">Aesthetics automation</a></li>
+            <li><a href="https://www.silstone.ai/physical-therapy-automation" target="_top">Physical therapy automation</a></li>
+            <li><a href="https://www.silstone.ai/rheumatology-automation" target="_top">Rheumatology automation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="sil-footer-h">Site</h3>
+          <ul>
+            <li><a href="https://www.silstone.ai/" target="_top">Home</a></li>
+            <li><a href="https://www.silstone.ai/live-demos" target="_top">Live demos</a></li>
+            <li><a href="https://www.silstone.ai/why-silstone" target="_top">Why Silstone</a></li>
+            <li><a href="https://www.silstone.ai/trust-and-security" target="_top">Trust and Security</a></li>
+            <li><a href="https://www.silstone.ai/pricing" target="_top">Pricing</a></li>
+            <li><a href="https://www.silstone.ai/blog" target="_top">Blog</a></li>
+          </ul>
+        </div>
+        <div class="sil-footer-get">
+          <h3 class="sil-footer-h">Getting started</h3>
+          <p class="sil-lead-copy">Book a scoping call. Drop your email and our team gets in touch, usually within one business day.</p>
+
+          <form class="sil-lead" id="silLead" novalidate>
+            <div class="sil-lead-field">
+              <input class="sil-lead-input" type="email" id="silLeadEmail" name="email"
+                     placeholder="you@yourclinic.com" autocomplete="email" required
+                     aria-label="Your work email">
+              <button class="sil-lead-btn" type="submit" aria-label="Book a scoping call">
+                <span class="sil-lead-spinner" aria-hidden="true"></span>
+                <svg class="sil-lead-arw" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <p class="sil-lead-hint" id="silLeadHint" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="sil-lead-done" id="silLeadDone" hidden>
+            <span class="sil-lead-check" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <p><strong>You're on the list.</strong> We'll reach out to <span id="silLeadWho">you</span> shortly.</p>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+
+    <div class="sil-footer-bottom">
+      <p class="sil-mono">&copy; <span id="silYear">2026</span> Silstone.AI. All rights reserved.</p>
+      <p class="sil-mono">We work from your data. We do not integrate with your EMR.</p>
+    </div>
+
+  </div>
+</footer>
+</div>
+
+<style>
+.sil-footer { padding-top: var(--space-16); padding-bottom: var(--space-8); }
+.sil-footer-top { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-12); }
+/* Deliberately below the nav's --nav-logo-h: the footer wordmark is a sign-off,
+   not the primary mark, so it reads as related without competing. Source PNG is
+   375x97, so this is still downscaling. */
+.sil-footer-logo { height: 40px; width: auto; }
+.sil-footer-brand .sil-body-s { max-width: 42ch; }
+.sil-footer-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.sil-footer-badges li {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: var(--radius-pill);
+  background: var(--sec-softer); border: 1px solid var(--sec-border); color: var(--sec-text);
+}
+/* Solutions | Site | Getting started. The two link columns size to their
+   content so a longer vertical name widens its own column rather than
+   squeezing the sign-up form beside it. */
+.sil-footer-nav { display: grid; grid-template-columns: max-content max-content 1fr; gap: var(--space-10); }
+.sil-footer-h {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--text-quaternary);
+  margin-bottom: var(--space-4);
+}
+.sil-footer-nav ul { display: flex; flex-direction: column; gap: var(--space-3); }
+.sil-footer-nav a { font-size: var(--text-body-s-size); color: var(--text-secondary); white-space: nowrap; }
+.sil-footer-nav a:hover { color: var(--teal-300); }
+
+/* ---- Getting started column: email-capture form ---------------------- */
+.sil-footer-get .sil-lead-copy {
+  font-size: var(--text-body-s-size); line-height: 1.5;
+  color: var(--text-tertiary); max-width: 34ch; margin-bottom: var(--space-4);
+}
+
+.sil-lead-field {
+  display: flex; align-items: center; gap: var(--space-2);
+  background: var(--bg-surface); border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill); padding: 4px 4px 4px 4px;
+  max-width: 320px;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+.sil-lead-field:focus-within {
+  border-color: var(--violet-400);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.sil-lead.is-invalid .sil-lead-field {
+  border-color: var(--coral-400);
+  box-shadow: 0 0 0 3px rgba(255,158,122,0.14);
+  animation: silLeadShake 0.4s var(--ease-standard);
+}
+@keyframes silLeadShake {
+  0%,100%{transform:translateX(0);} 20%{transform:translateX(-5px);}
+  40%{transform:translateX(4px);} 60%{transform:translateX(-3px);} 80%{transform:translateX(2px);}
+}
+
+.sil-root .sil-lead-input {
+  flex: 1 1 auto; width: auto; min-width: 0;
+  background: transparent; border: 0; border-radius: 0;
+  padding: 8px 6px 8px 14px; font-size: var(--text-body-s-size);
+  color: var(--text-primary);
+}
+.sil-root .sil-lead-input:focus { border: 0; box-shadow: none; }
+
+.sil-lead-btn {
+  flex: none; position: relative;
+  width: 38px; height: 38px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-on-accent);
+  background: var(--grad-primary); background-size: 160% 160%;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-base) var(--ease-standard),
+              transform var(--duration-base) var(--ease-standard);
+}
+.sil-lead-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(124,107,240,0.34); }
+.sil-lead-btn:active { transform: translateY(0); }
+.sil-lead-btn .sil-lead-arw { transition: transform var(--duration-base) var(--ease-out); }
+.sil-lead-btn:hover .sil-lead-arw { transform: translateX(2px); }
+
+.sil-lead-spinner {
+  position: absolute; width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff;
+  opacity: 0; animation: silLeadSpin 0.7s linear infinite;
+}
+@keyframes silLeadSpin { to { transform: rotate(360deg); } }
+.sil-lead.is-sending .sil-lead-arw { opacity: 0; }
+.sil-lead.is-sending .sil-lead-spinner { opacity: 1; }
+.sil-lead.is-sending .sil-lead-btn { pointer-events: none; }
+
+.sil-lead-hint {
+  font-size: var(--text-caption-size); line-height: 1.4;
+  color: var(--coral-300); min-height: 1.1em;
+  margin-top: var(--space-2); opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+.sil-lead.is-invalid .sil-lead-hint { opacity: 1; }
+
+/* Success state */
+.sil-lead-done {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  max-width: 320px;
+  opacity: 0; transform: translateY(8px);
+}
+.sil-lead-done.is-in {
+  opacity: 1; transform: none;
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+.sil-lead-done p { font-size: var(--text-body-s-size); line-height: 1.5; color: var(--text-secondary); }
+.sil-lead-done strong { color: var(--text-primary); }
+.sil-lead-check {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--mint-300); background: rgba(94,224,168,0.12);
+  border: 1px solid rgba(94,224,168,0.3);
+}
+.sil-lead-check path {
+  stroke-dasharray: 30; stroke-dashoffset: 30;
+}
+.sil-lead-done.is-in .sil-lead-check path {
+  animation: silLeadDraw 0.5s var(--ease-out) 0.15s forwards;
+}
+@keyframes silLeadDraw { to { stroke-dashoffset: 0; } }
+
+.sil-footer-direct {
+  margin-top: var(--space-6);
+  max-width: 340px;
+}
+.sil-footer-h-sub { margin-bottom: var(--space-3); }
+.sil-footer-contact {
+  display: flex; flex-direction: column; gap: var(--space-1);
+}
+.sil-footer-contact a {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  font-size: var(--text-body-s-size); color: var(--text-secondary);
+  padding: var(--space-1) 0;
+}
+.sil-footer-contact a:hover { color: var(--teal-300); }
+.sil-contact-ic { flex: none; }
+.sil-ic-mail  { color: var(--violet-300); }
+.sil-ic-phone { color: var(--coral-300); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sil-lead.is-invalid .sil-lead-field { animation: none; }
+  .sil-lead-done.is-in .sil-lead-check path { animation: none; stroke-dashoffset: 0; }
+}
+
+.sil-footer-bottom {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-10); padding-top: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 1080px) {
+  .sil-footer-top { grid-template-columns: 1fr; gap: var(--space-12); }
+}
+@media (max-width: 620px) {
+  .sil-footer-nav { grid-template-columns: 1fr; gap: var(--space-8); }
+  .sil-footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+}
+</style>
+
+<script>
+(function () {
+  var y = document.getElementById('silYear');
+  if (y) y.textContent = new Date().getFullYear();
+
+  /* ---- Lead-capture form -------------------------------------------------
+     Submissions go to Web3Forms, which emails them to the address tied to the
+     access key (sales@silstonegroup.com). If the network call fails, it falls
+     back to a pre-filled mailto so a lead is never lost. */
+  var W3F_ENDPOINT = 'https://api.web3forms.com/submit';
+  var W3F_KEY = '94814fe7-9502-4b6a-b862-44da6cbe1576';
+
+  var form  = document.getElementById('silLead');
+  if (!form) return;
+  var input = document.getElementById('silLeadEmail');
+  var hint  = document.getElementById('silLeadHint');
+  var done  = document.getElementById('silLeadDone');
+  var who   = document.getElementById('silLeadWho');
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function fail(msg) {
+    hint.textContent = msg;
+    form.classList.add('is-invalid');
+    input.focus();
+  }
+  form.addEventListener('input', function () { form.classList.remove('is-invalid'); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = (input.value || '').trim();
+    if (!EMAIL.test(email)) { fail('Please enter a valid email address.'); return; }
+
+    form.classList.remove('is-invalid');
+    form.classList.add('is-sending');
+
+    function succeed() {
+      form.hidden = true;
+      if (who) who.textContent = email;
+      done.hidden = false;
+      // next frame so the transition runs
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { done.classList.add('is-in'); });
+      });
+    }
+
+    fetch(W3F_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: W3F_KEY,
+        subject: 'New scoping-call request from the website',
+        from_name: 'Silstone.AI website',
+        email: email,
+        message: 'Scoping-call request. Please reach out to: ' + email,
+        source: 'footer-scoping-call'
+      })
+    }).then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.success) { succeed(); }
+        else { fail('Something went wrong. Please email us directly.'); form.classList.remove('is-sending'); }
+      })
+      .catch(function () {
+        // network failed: fall back to mailto so the lead is never lost
+        window.location.href = mailto(email);
+        succeed();
+      });
+  });
+
+  function mailto(email) {
+    return 'mailto:sales@silstonegroup.com'
+      + '?subject=' + encodeURIComponent('Scoping call request')
+      + '&body=' + encodeURIComponent('Please book me a scoping call. My email: ' + email);
+  }
+})();
+</script>
+<script src="/assets/silstone.8cd8180e.js" defer></script>
+</body>
+</html>
