@@ -70,6 +70,13 @@ END = "<!-- SIL:GLOBAL END -->"
 # that group, in table order -- so adding a solutions page here is all it takes
 # to get it into the footer, alongside the sitemap and llms.txt entries it
 # already produces. See fill_link_lists() below.
+#
+# Optional "hidden": True builds the page (real URL, real HTML) but leaves it
+# out of the sitemap, llms.txt and every generated link list, and defaults
+# robots to noindex -- unlisted, reachable only by whoever has the link. Pair
+# with "blocks": [...] to render an explicit list of files from "dir" instead
+# of every *.html in it, e.g. to publish one existing page section as its own
+# standalone URL without duplicating the source.
 # ---------------------------------------------------------------------------
 PAGES_META = [
     {
@@ -118,6 +125,31 @@ PAGES_META = [
         "title": "Live Demos | Try Healthcare AI Agents | Silstone.AI",
         "desc": "Try free, interactive healthcare AI demos in your browser, no signup: recover revenue from denied claims, turn a pile of inbound faxes into finished work, and verify CPT 95165 allergy immunotherapy benefits before the vial is mixed. Built on Claude, no EMR integration.",
         "priority": "0.8",
+    },
+    # ---- Sales-share demo pages ----------------------------------------
+    # Same three demo blocks as /live-demos, each split onto its own URL so a
+    # single demo can be sent to a prospect instead of the whole page. "blocks"
+    # points straight at the existing pages/live-demos/*.html source (no copy
+    # to keep in sync) and "hidden": True keeps them out of the sitemap,
+    # llms.txt and nav/footer link lists, with a noindex robots tag so they
+    # never surface publicly -- reachable only by whoever has the direct link.
+    {
+        "slug": "demo/denial-recovery", "dir": "live-demos", "blocks": ["61-content.html"],
+        "title": "Denial Recovery Demo | Silstone.AI",
+        "desc": "Try the denial recovery AI agent: paste an EOB and watch denied and underpaid claims get classified, prioritized and readied for appeal in seconds.",
+        "hidden": True, "robots": "noindex, nofollow",
+    },
+    {
+        "slug": "demo/fax-triage", "dir": "live-demos", "blocks": ["62-triage.html"],
+        "title": "Fax Triage Demo | Silstone.AI",
+        "desc": "Try the fax triage AI agent: watch an inbound fax get read, classified and routed into finished work automatically.",
+        "hidden": True, "robots": "noindex, nofollow",
+    },
+    {
+        "slug": "demo/benefit-check", "dir": "live-demos", "blocks": ["63-benefits.html"],
+        "title": "Benefit Check Demo | Silstone.AI",
+        "desc": "Try the pre-visit benefit check AI agent for CPT 95165 allergy immunotherapy: verify a patient's coverage before the vial is mixed.",
+        "hidden": True, "robots": "noindex, nofollow",
     },
     {
         "slug": "why-silstone", "dir": "why-silstone",
@@ -287,6 +319,7 @@ def head(meta: dict) -> str:
     og_type = meta.get("og_type", "website")
     og_w = meta.get("og_w", 1920)
     og_h = meta.get("og_h", 1080)
+    robots = meta.get("robots", "index, follow, max-image-preview:large")
     ld = [org_jsonld()]
     if slug == "":
         ld.append(website_jsonld())
@@ -304,7 +337,7 @@ def head(meta: dict) -> str:
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="{robots}">
 <meta name="theme-color" content="#08080B">
 
 <!-- Open Graph -->
@@ -735,8 +768,13 @@ def build() -> None:
             body = "\n\n".join([nav, hero, blog_cards_html(posts), cta, footer])
         else:
             page_dir = PAGES / meta["dir"]
-            skip = PAGE_SKIP.get(meta["dir"], set())
-            blocks = [p for p in sorted(page_dir.glob("*.html")) if p.name not in skip]
+            if "blocks" in meta:
+                # explicit file list -- reuse another page's source blocks
+                # instead of globbing the whole dir (see demo/* pages above)
+                blocks = [page_dir / name for name in meta["blocks"]]
+            else:
+                skip = PAGE_SKIP.get(meta["dir"], set())
+                blocks = [p for p in sorted(page_dir.glob("*.html")) if p.name not in skip]
             if not blocks:
                 print(f"  ! skip {meta['slug']} (no blocks)")
                 continue
@@ -764,6 +802,8 @@ def build() -> None:
 def write_sitemap(posts=None) -> None:
     urls = []
     for meta in PAGES_META:
+        if meta.get("hidden"):
+            continue
         urls.append(
             f"  <url><loc>{canonical(meta['slug'])}</loc>"
             f"<lastmod>{TODAY}</lastmod>"
@@ -811,6 +851,8 @@ def write_llms() -> None:
         "## Pages",
     ]
     for meta in PAGES_META:
+        if meta.get("hidden"):
+            continue
         name = meta["title"].split("|")[0].strip()
         lines.append(f"- [{name}]({canonical(meta['slug'])}): {meta['desc']}")
     lines += [
